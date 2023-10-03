@@ -1,0 +1,11 @@
+dict := NewDictionary( [ 2, 1 ], true );
+AddDictionary( dict, [93, 230], [[93, 230], [64, 64, 96], 192, "Action reflexible [m]", "[ x * y * z, z^-1 * x^-2 * y^-1 * x, z^-1 * y * x^-1 * y^-2, z^-3 * x^-1 * z^2 * y^-1, y^-1 * z * y^-2 * x^-1 * z^3, y^-1 * x^5 * y^-1 * x * y^-1 * x ]"] );
+AddDictionary( dict, [93, 231], [[93, 231], [64, 64, 96], 192, "Action reflexible [m]", "[ x * y * z, z^-1 * x^-2 * y^-1 * x, z^-1 * y * x^-1 * y^-2, y * x^-1 * y * x^-1 * y * z^-1 * y, x^3 * z^-2 * x^5 * z^-2 ]"] );
+AddDictionary( dict, [93, 232], [[93, 232], [64, 64, 96], 192, "Action reflexible [m]", "[ x * y * z, z * y * x^-1 * z, z^-1 * x^-2 * y^-1 * x, y^-10 * z * y^-3 * x * y^-1 * x * y^-6 ]"] );
+AddDictionary( dict, [93, 233], [[93, 233], [64, 64, 96], 192, "Action reflexible [m]", "[ x * y * z, z^-1 * x^-2 * y^-1 * x, z^-1 * y * x^-1 * y^-2, z^-1 * x^3 * z^-1 * x, z^-3 * x^-1 * z^2 * y^-1, y^-7 * x * y^-2 * z^2 ]"] );
+AddDictionary( dict, [93, 234], [[93, 234], [64, 64, 96], 192, "Action reflexible [m]", "[ x * y * z, z^-1 * x^-2 * y^-1 * x, z^-1 * y * x^-1 * y^-2, z^-3 * x^-1 * z^2 * y^-1, y^-4 * x * z^2 * y^-1, z^-2 * x^4 * z^-4 ]"] );
+AddDictionary( dict, [93, 235], [[93, 235], [64, 64, 96], 192, "Action reflexible [m]", "[ x * y * z, z^-1 * x^-2 * y^-1 * x, z * x^-2 * z^2, z^-1 * y * x^-1 * y^-2, y^-2 * z^2 * y^-3 * x^3 * y^-1 * x * y^-2 * x * y^-1 ]"] );
+AddDictionary( dict, [93, 236], [[93, 236], [64, 64, 96], 192, "Action reflexible [m]", "[ x * y * z, z^-1 * x^-2 * y^-1 * x, z^-1 * y * x^-1 * y^-2, z^-3 * x^-1 * z^2 * y^-1, y^-1 * x^4 * y^-3, y^-1 * z^2 * y^-2 * x^-1 * z^4 ]"] );
+AddDictionary( dict, [93, 237], [[93, 237], [64, 64, 96], 192, "Action reflexible [m,n]", "[ x * y * z, y^-1 * x^2 * y^-1, z^-3 * x^-1 * z^2 * y^-1, z^-1 * x * z^-1 * x * z^-1 * x * z^-1 * x * z^-4 * y^2 * z^-5 ]"] );
+AddDictionary( dict, [93, 238], [[93, 238], [64, 64, 96], 192, "Action reflexible [m,n]", "[ x * y * z, y^-1 * x^2 * y^-1, y^-1 * z^-1 * x * z, z^14 * x^-1 * z^2 * x^-1 * z^4 * x^-1 * z * x^-1 * z^4 * x^-1 * z * x^-1 * z * x^-1 * z * x^-1 ]"] );
+AddDictionary( TGQUOTS@, [ 64, 64, 96 ], dict );

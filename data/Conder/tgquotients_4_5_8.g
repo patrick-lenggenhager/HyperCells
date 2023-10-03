@@ -1,0 +1,13 @@
+dict := NewDictionary( [ 2, 1 ], true );
+AddDictionary( dict, [52, 38], [[52, 38], [4, 5, 8], 240, "Action reflexible [m]", "[ x * y * z, x^4, y * x^-2 * z * x^-1, z^-2 * x^-1 * y * z^-1, y^-5, y * x^-1 * z * y * x^-1 * y^-1 * z^-1 * x^-1 * z ]"] );
+AddDictionary( dict, [69, 92], [[69, 92], [4, 5, 8], 320, "Action chiral", "[ x * y * z, x^4, (x * z^-1)^2, y^-5, y^2 * x * y^-1 * x * y^-1 * z^2 ]"] );
+AddDictionary( dict, [69, 93], [[69, 93], [4, 5, 8], 320, "Action chiral", "[ x * y * z, x^4, y^-5, (y * z^-2)^2, z * y^2 * x^-1 * z * x^-1 * y^-1 ]"] );
+AddDictionary( dict, [69, 94], [[69, 94], [4, 5, 8], 320, "Action chiral", "[ x * y * z, x^4, y^-5, (x^-1 * z * y)^2, z^-1 * x^-1 * y * x^-1 * y^2 * z^-1, (x * y^-1 * z * y^-1)^2 ]"] );
+AddDictionary( dict, [69, 95], [[69, 95], [4, 5, 8], 320, "Action chiral", "[ x * y * z, x^4, y^-5, y^2 * x^-2 * z * y * x^-1, z * y^-1 * z^-1 * x^-1 * z^2  * x^-1 ]"] );
+AddDictionary( dict, [69, 96], [[69, 96], [4, 5, 8], 320, "Action reflexible [m]", "[ x * y * z, x^4, y * x^-2 * z * x^-1, z^-2 * x^-1 * y * z^-1, y^-5, z^-1 * y * z^-1 * y * x^-1 * y^2 * z^-1 * y ]"] );
+AddDictionary( dict, [69, 97], [[69, 97], [4, 5, 8], 320, "Action reflexible [m]", "[ x * y * z, x^4, y * x^-2 * z * x^-1, z^-2 * x^-1 * y * z^-1, y^-5, (y * z^-1)^4 ]"] );
+AddDictionary( dict, [69, 98], [[69, 98], [4, 5, 8], 320, "Action reflexible [m]", "[ x * y * z, x^4, y^-5, (x * z * y^-1)^2, x^-1 * y * x^-2 * z^3, z^-1 * x^-1 * y * x^-1 * y^-1 * x * y^-1 ]"] );
+AddDictionary( dict, [69, 99], [[69, 99], [4, 5, 8], 320, "Action reflexible [m]", "[ x * y * z, x^4, (x * y^-1)^2, y^-5, z^8, y * z^-1 * y * z^-1 * x^-1 * z^2 * y  * z^-1 ]"] );
+AddDictionary( dict, [69, 100], [[69, 100], [4, 5, 8], 320, "Action reflexible [m]", "[ x * y * z, x^4, y * z^-1 * x^-1 * z^2, y^-5, y^-1 * z * y * x^-1 * y^-1 * z * x^-1 ]"] );
+AddDictionary( dict, [69, 101], [[69, 101], [4, 5, 8], 320, "Action reflexible [m]", "[ x * y * z, x^4, (y * z^-1)^2, y^-5, (x * z^-2)^2 ]"] );
+AddDictionary( TGQUOTS@, [ 4, 5, 8 ], dict );

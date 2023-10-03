@@ -1,0 +1,11 @@
+dict := NewDictionary( [ 2, 1 ], true );
+AddDictionary( dict, [42, 105], [[42, 105], [44, 44, 44], 88, "Action reflexible [m,n]", "[ x * y * z, z^-1 * x^2 * z^-1, z^-1 * y * x^-1 * y^-2, y^-1 * z * y^-1 * z^2 * y^-3 * x * y^-4 ]"] );
+AddDictionary( dict, [42, 106], [[42, 106], [44, 44, 44], 88, "Action reflexible [m]", "[ x * y * z, z^-1 * x^-2 * y^-1 * x, z^-1 * y * x^-1 * y^-2, z^-2 * x^-1 * z * y^-1, z^-1 * x * z^-1 * x * z^-2, y^-3 * x^2 * y^-3 ]"] );
+AddDictionary( dict, [83, 97], [[83, 97], [44, 44, 44], 176, "Action reflexible [m]", "[ x * y * z, z^-1 * x^-2 * y^-1 * x, z^-1 * y * x^-1 * y^-2, z^-2 * x^-1 * z * y^-1, z^-1 * x^4 * z^-3, y^-1 * z^3 * y^-2 * x * y^-2 * z * y^-2 * x * y^-1 ]"] );
+AddDictionary( dict, [83, 98], [[83, 98], [44, 44, 44], 176, "Action reflexible [m]", "[ x * y * z, z^-1 * x^-2 * y^-1 * x, z^-1 * y * x^-1 * y^-2, z^-2 * x^-1 * z * y^-1, z^-1 * x * z^-1 * x * z^-2, x^-2 * y * x^-1 * y^3 * x^-1 * y * x^-1 * y^3  * z^-1 * y^3 ]"] );
+AddDictionary( dict, [83, 99], [[83, 99], [44, 44, 44], 176, "Action reflexible [m]", "[ x * y * z, z^-1 * x^-2 * y^-1 * x, z^-1 * y * x^-1 * y^-2, z^-2 * x^-1 * z * y^-1, y^-1 * x^5 * y^-1 * x * y^-2, z^-3 * x * z^-1 * x * z^-4 ]"] );
+AddDictionary( dict, [83, 100], [[83, 100], [44, 44, 44], 176, "Action reflexible [m]", "[ x * y * z, z^-1 * x^-2 * y^-1 * x, z^-1 * y * x^-1 * y^-2, z^-2 * x^-1 * z * y^-1, y^6 * z^-2, x^2 * z^-2 * x^6 * z^-2 ]"] );
+AddDictionary( dict, [83, 101], [[83, 101], [44, 44, 44], 176, "Action reflexible [m,n]", "[ x * y * z, z^-1 * y^2 * z^-1, z^-1 * x^-2 * y^-1 * x, x^-2 * z * x^-4 * y * x^-1 * y * x^-7 * z * x^-1 * z * x^-1 * z * x^-1 * z * x^-1 * z ]"] );
+AddDictionary( dict, [83, 102], [[83, 102], [44, 44, 44], 176, "Action reflexible [m,n]", "[ x * y * z, x * z * y, z^-1 * x^4 * z^-3, y^9 * z^-2 * y^6 * z^-2 * y^5 ]"] );
+AddDictionary( dict, [83, 103], [[83, 103], [44, 44, 44], 176, "Action reflexible [m]", "[ x * y * z, x * z * y, (x^2 * z^-4)^2, y^-4 * x^4 * y^-8 ]"] );
+AddDictionary( TGQUOTS@, [ 44, 44, 44 ], dict );

@@ -1,0 +1,13 @@
+dict := NewDictionary( [ 2, 1 ], true );
+AddDictionary( dict, [14, 29], [[14, 29], [6, 6, 21], 42, "Action reflexible [m,n]", "[ x * y * z, y^-1 * x^2 * y^-1, (x * z^-1)^2, z^3 * y^-1 * x * z^3 ]"] );
+AddDictionary( dict, [40, 87], [[40, 87], [6, 6, 21], 126, "Action reflexible [n]", "[ x * y * z, z * x^-2 * y^-2, x^6, z * x^-1 * y^-1 * x * z * x^-1, z^2 * y * x * z^2 ]"] );
+AddDictionary( dict, [40, 88], [[40, 88], [6, 6, 21], 126, "Action reflexible [n]", "[ x * y * z, y^-1 * z^-1 * x^-1 * z, x^6, (y^-1 * x)^3 ]"] );
+AddDictionary( dict, [40, 89], [[40, 89], [6, 6, 21], 126, "Action reflexible [n]", "[ x * y * z, x * z^-1 * y * z^-1, x^6, (y^-1 * x)^3 ]"] );
+AddDictionary( dict, [40, 90], [[40, 90], [6, 6, 21], 126, "Action reflexible [n]", "[ x * y * z, z * y * x^-1 * y^-1 * x, x^6, (x * y^-1 * x)^2, z^-2 * y * x * z^-2 ]"] );
+AddDictionary( dict, [40, 91], [[40, 91], [6, 6, 21], 126, "Action reflexible [m,n]", "[ x * y * z, z^-1 * x^-2 * y^-1 * x, z^-1 * y * x^-1 * y^-2, x^6, y^6, z^2 * y * z^-1 * x * z^3 ]"] );
+AddDictionary( dict, [40, 92], [[40, 92], [6, 6, 21], 126, "Action reflexible [m,n]", "[ x * y * z, z * x^-1 * y^-1, x^6, z^10 * y^-1 * x * y * x^-1 * z^9 ]"] );
+AddDictionary( dict, [40, 93], [[40, 93], [6, 6, 21], 126, "Action reflexible [m,n]", "[ x * y * z, y^-1 * x^2 * y^-1, (x * z^-1)^2, z^9 * y * x * y^-1 * z^-3 * x * z^7 ]"] );
+AddDictionary( dict, [53, 120], [[53, 120], [6, 6, 21], 168, "Action reflexible [m,n]", "[ x * y * z, (x * z^-1)^2, (y * z^-1)^2, x^6, y^-1 * x * y^-1 * x^2 * y^-1 * x * y^-1, z^-1 * x^-1 * y^-1 * z^-1 * x^-1 * y^-1 * z^-3 ]"] );
+AddDictionary( dict, [92, 69], [[92, 69], [6, 6, 21], 294, "Action chiral", "[ x * y * z, x^6, y * z^-1 * x^2 * y^-1 * z^-1, z * x^-1 * y^-1 * x * y^-1 * z, y * z^-1 * x^-1 * y * x^-1 * z^4 ]"] );
+AddDictionary( dict, [92, 70], [[92, 70], [6, 6, 21], 294, "Action chiral", "[ x * y * z, (x * z^-1)^2, (y * z^-1)^2, x^6, x * y^-1 * z^-1 * x^-1 * y^-1 * x  * y^-1 * z^-3 ]"] );
+AddDictionary( TGQUOTS@, [ 6, 6, 21 ], dict );

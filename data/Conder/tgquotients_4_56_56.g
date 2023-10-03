@@ -1,0 +1,14 @@
+dict := NewDictionary( [ 2, 1 ], true );
+AddDictionary( dict, [21, 99], [[21, 99], [4, 56, 56], 56, "Action reflexible [m,n]", "[ x * y * z, x * z * y, x^4, y^6 * z^-4 * y * z^-1 * y^2 ]"] );
+AddDictionary( dict, [21, 100], [[21, 100], [4, 56, 56], 56, "Action reflexible [m,n]", "[ x * y * z, x * z * y, x^4, z^-1 * y^5 * z^-4 * y * z^-1 * y * z^-1 ]"] );
+AddDictionary( dict, [41, 227], [[41, 227], [4, 56, 56], 112, "Action reflexible [m,n]", "[ x * y * z, y * x^-1 * z, x^4, y^-24 * z * y^-1 * z * y^-1 ]"] );
+AddDictionary( dict, [41, 228], [[41, 228], [4, 56, 56], 112, "Action reflexible [m,n]", "[ x * y * z, x * z * y, x^4, y^10 * z^-2 * y^7 * z^-1 * y * z^-1 * y * z^-1 * y  * z^-1 * y^2 ]"] );
+AddDictionary( dict, [81, 571], [[81, 571], [4, 56, 56], 224, "Action reflexible [m,n]", "[ x * y * z, x^4, y * x^-2 * z * x^-1, z^-1 * y * x^-1 * y^-2, z^-2 * x^-1 * z * y^-1, y * z^-4 * y^2 * z^-5 * y^3 * z^-1 * y * z^-2 * y^7 * z^-2 ]"] );
+AddDictionary( dict, [81, 572], [[81, 572], [4, 56, 56], 224, "Action reflexible [m,n]", "[ x * y * z, x^4, y * x^-2 * z * x^-1, y^2 * x^-1 * y^-1 * z, y * z^-1 * x^-1 * z^2, y^3 * z^-2 * y * z^-1 * y^5 * z^-1 * y^5 * z^-1 * y^8 * z^-1 ]"] );
+AddDictionary( dict, [81, 573], [[81, 573], [4, 56, 56], 224, "Action reflexible [m,n]", "[ x * y * z, x * z * y, x^4, z^-1 * y^24 * z^-1 * y^2 * z^-1 * y * z^-1 * y * z^-1 * y^11 * z^-1 * y * z^-1 * y * z^-1 * y * z^-1 * y * z^-1 * y * z^-2 ]"] );
+AddDictionary( dict, [81, 574], [[81, 574], [4, 56, 56], 224, "Action reflexible [m,n]", "[ x * y * z, y * x^-1 * z, x^4, y^24 * z^-2 * y * z^-1 * y^7 * z^-1 * y^5 * z^-1 * y * z^-1 * y^12 ]"] );
+AddDictionary( dict, [81, 575], [[81, 575], [4, 56, 56], 224, "Action reflexible [m,n]", "[ x * y * z, x^4, y * x^-2 * z * x^-1, z^-1 * y * x^-1 * y^-2, z^-2 * x^-1 * z * y^-1, y * z^-4 * y^2 * z^-5 * y^3 * z^-1 * y * z^-2 * y^9 ]"] );
+AddDictionary( dict, [81, 576], [[81, 576], [4, 56, 56], 224, "Action reflexible [m,n]", "[ x * y * z, x^4, y * x^-2 * z * x^-1, z^-1 * y * x^-1 * y^-2, z^-2 * x^-1 * z * y^-1, y * z^-4 * y^2 * z^-5 * y^6 * z^-1 * y^9 ]"] );
+AddDictionary( dict, [101, 222], [[101, 222], [4, 56, 56], 280, "Action chiral", "[ x * y * z, x^4, y * x^-2 * z * x^-1, y^3 * x^-1 * z^3, z^-2 * y * x^-1 * y^-1  * z * y^-1, z^4 * y^-1 * z * y^-3 * z^3 * y^-1 * z ]"] );
+AddDictionary( dict, [101, 223], [[101, 223], [4, 56, 56], 280, "Action chiral", "[ x * y * z, x^4, y * x^-2 * z * x^-1, y^3 * x^-1 * z^3, z^-1 * y * z^-1 * x^-1  * z * y^-2, y^-1 * z * y^-2 * z^3 * y^-2 * z^3 * y^-2 ]"] );
+AddDictionary( TGQUOTS@, [ 4, 56, 56 ], dict );

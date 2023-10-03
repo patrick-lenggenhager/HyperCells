@@ -1,0 +1,18 @@
+dict := NewDictionary( [ 2, 1 ], true );
+AddDictionary( dict, [94, 208], [[94, 208], [64, 96, 192], 192, "Action reflexible [m]", "[ x * y * z, x * z * y, y^-2 * x^-1 * z, x^-44 * y * x^-1 * y * x^-9 * y * x^-8 ]"] );
+AddDictionary( dict, [94, 209], [[94, 209], [64, 96, 192], 192, "Action reflexible [m]", "[ x * y * z, x * z * y, z^-2 * y^2 * z^-2, x^2 * y^-7 * x * y^-2 * x * y^-1 * x  * y^-1 * x * y^-1 * x * y^-1 * x^11 * y^-1 * x * y^-1 * x^3 ]"] );
+AddDictionary( dict, [94, 210], [[94, 210], [64, 96, 192], 192, "Action reflexible [m]", "[ x * y * z, x * z * y, y * z^-5 * y^3 * z^-3, x^-2 * y * x^-1 * y^6 * x^-1 * z^4 * x^-6 ]"] );
+AddDictionary( dict, [94, 211], [[94, 211], [64, 96, 192], 192, "Action reflexible [m]", "[ x * y * z, x * z * y, y * z^-5 * y^3 * z^-3, x * y^-1 * x * y^-1 * x^6 * y^-6  * x * y^-1 * x ]"] );
+AddDictionary( dict, [94, 212], [[94, 212], [64, 96, 192], 192, "Action reflexible [m]", "[ x * y * z, x * z * y, x^-6 * y^3, z^4 * y^-1 * z * y^-4 * z^5 * y^-1 * z * y^-1 * z * y^-1 * z^4 ]"] );
+AddDictionary( dict, [94, 213], [[94, 213], [64, 96, 192], 192, "Action reflexible [m]", "[ x * y * z, x * z * y, x^2 * z^-1 * x * z^-4 * x^2 * z^-4, y^-9 * z^2 * y^-4 ]"] );
+AddDictionary( dict, [94, 214], [[94, 214], [64, 96, 192], 192, "Action reflexible [m]", "[ x * y * z, x * z * y, x^7 * z^-3, y^-9 * z^5 * y^-1 * z * y^-5 ]"] );
+AddDictionary( dict, [94, 215], [[94, 215], [64, 96, 192], 192, "Action reflexible [m]", "[ x * y * z, x * z * y, x^-1 * y^5 * x^-1 * y^4, x^4 * z^-1 * x * z^-1 * x * z^-4 * x^8 ]"] );
+AddDictionary( dict, [94, 216], [[94, 216], [64, 96, 192], 192, "Action reflexible [m]", "[ x * y * z, x * z * y, y^-1 * z * y^-6 * z, z * x^-1 * z * x^-7 * z^4 * x^-1 * z * x^-1 * z * x^-1 * z * x^-1 * z^3 ]"] );
+AddDictionary( dict, [94, 217], [[94, 217], [64, 96, 192], 192, "Action reflexible [m]", "[ x * y * z, x * z * y, x^-2 * y^5 * x^-3 * z^2 * x^-3, z^-10 * y * z^-4 ]"] );
+AddDictionary( dict, [94, 218], [[94, 218], [64, 96, 192], 192, "Action reflexible [m]", "[ x * y * z, x * z * y, z^-1 * x^3 * z^-2, y^-17 * z * y^-7 * z * y^-7 ]"] );
+AddDictionary( dict, [94, 219], [[94, 219], [64, 96, 192], 192, "Action reflexible [m]", "[ x * y * z, x * z * y, x^2 * z^-4 * x^4 * z^-2, y^-13 * x * y^-1 * x * y^-1 ]"] );
+AddDictionary( dict, [94, 220], [[94, 220], [64, 96, 192], 192, "Action reflexible [m]", "[ x * y * z, x * z * y, z^-5 * x * z^-4, y^-4 * x^6 * y^-6 * x * y^-1 * x * y^-1 ]"] );
+AddDictionary( dict, [94, 221], [[94, 221], [64, 96, 192], 192, "Action reflexible [m]", "[ x * y * z, x * z * y, y^2 * z^-1 * y * z^-5 * y^6, x^4 * z^-3 * x^7 ]"] );
+AddDictionary( dict, [94, 222], [[94, 222], [64, 96, 192], 192, "Action reflexible [m]", "[ x * y * z, x * z * y, y * x^-2 * y^2, z^-16 * x * z^-3 * x * z^-1 * x * z^-1 * x * z^-1 * x * z^-1 * x * z^-4 * x^2 * z^-4 * x * z^-2 ]"] );
+AddDictionary( dict, [94, 223], [[94, 223], [64, 96, 192], 192, "Action reflexible [m]", "[ x * y * z, x * z * y, y^-2 * x^4 * y^-4, z^4 * x^-5 * z^4 * x^-1 * z * x^-1 * z^6 ]"] );
+AddDictionary( TGQUOTS@, [ 64, 96, 192 ], dict );

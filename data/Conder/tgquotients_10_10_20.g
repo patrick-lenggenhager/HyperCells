@@ -1,0 +1,12 @@
+dict := NewDictionary( [ 2, 1 ], true );
+AddDictionary( dict, [16, 62], [[16, 62], [10, 10, 20], 40, "Action reflexible [m]", "[ x * y * z, (x * z^-1)^2, x^-3 * y^-1 * z, z * y * x^-1 * z^2, y^-2 * x^2 * y^-2 ]"] );
+AddDictionary( dict, [16, 63], [[16, 63], [10, 10, 20], 40, "Action reflexible [m,n]", "[ x * y * z, y^-1 * x^2 * y^-1, z^-2 * x^-1 * z * y^-1, z^-2 * x^2 * z^-2 ]"] );
+AddDictionary( dict, [76, 147], [[76, 147], [10, 10, 20], 200, "Action reflexible [m]", "[ x * y * z, (x * z^-1)^2, z^-1 * y * x^-1 * y^-2, z * y * x^-1 * z^2, x^10 ]"] );
+AddDictionary( dict, [76, 148], [[76, 148], [10, 10, 20], 200, "Action reflexible [m]", "[ x * y * z, z^-1 * y * x^-1 * y^-2, z^-2 * x^-1 * z * y^-1, z^-2 * y^2 * z^-2, (x * z^-1 * x^2)^2, x^10 ]"] );
+AddDictionary( dict, [76, 149], [[76, 149], [10, 10, 20], 200, "Action reflexible [m]", "[ x * y * z, z^-1 * y * x^-1 * y^-2, z^-2 * x^-1 * z * y^-1, (x * y^-1 * x)^2, z^-1 * y^4 * z^-3, x^10 ]"] );
+AddDictionary( dict, [76, 150], [[76, 150], [10, 10, 20], 200, "Action reflexible [m]", "[ x * y * z, y * x^-2 * z * x^-1, z^-1 * y * x^-1 * y^-2, z^-2 * x^-1 * z * y^-1, y^10, x^10 ]"] );
+AddDictionary( dict, [76, 151], [[76, 151], [10, 10, 20], 200, "Action reflexible [m,n]", "[ x * y * z, z * x^-1 * y^-1, x^10, z^-4 * x * z * y^-1 * x * y^-1 * x^-1 * z^4  * y * z^-1 * x^-1 * z * y * z^-5 ]"] );
+AddDictionary( dict, [76, 152], [[76, 152], [10, 10, 20], 200, "Action reflexible [m]", "[ x * y * z, (x * z^-1)^2, x^-3 * y^-1 * z, y^-2 * x^2 * y^-2, z^-2 * x * z^6 * y * x * z^2 * y^-1 * z^-8 ]"] );
+AddDictionary( dict, [76, 153], [[76, 153], [10, 10, 20], 200, "Action reflexible [m,n]", "[ x * y * z, y^-1 * x^2 * y^-1, (x * z^-2)^2, z^5 * y * z^-1 * x * z^2 * y * z^-1 * x^-1 * y * x * z^2 * y^-1 * z^-1 * x * z * y^-1 * z^-1 * x * z ]"] );
+AddDictionary( dict, [76, 154], [[76, 154], [10, 10, 20], 200, "Action reflexible [m,n]", "[ x * y * z, z^-1 * x^-2 * y^-1 * x, z^-1 * y * x^-1 * y^-2, z^-2 * x^-1 * z * y^-1, y^10, x^10 ]"] );
+AddDictionary( TGQUOTS@, [ 10, 10, 20 ], dict );

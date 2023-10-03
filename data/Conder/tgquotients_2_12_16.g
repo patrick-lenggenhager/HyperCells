@@ -1,0 +1,12 @@
+dict := NewDictionary( [ 2, 1 ], true );
+AddDictionary( dict, [18, 8], [[18, 8], [2, 12, 16], 96, "Action reflexible [m]", "[ x^2, x * y * z, (y * z^-1)^2, z^3 * y * x * y^-1 * z^-1 * x * y^-1 * z^-1 * x ]"] );
+AddDictionary( dict, [35, 16], [[35, 16], [2, 12, 16], 192, "Action reflexible [m]", "[ x^2, x * y * z, (y * z^-1)^2, y^12, z^7 * y * x * z * y * x * y * x * y^-1 * z^-3 * x * z ]"] );
+AddDictionary( dict, [35, 17], [[35, 17], [2, 12, 16], 192, "Action reflexible [m]", "[ x^2, x * y * z, x * z * y^-2 * z^-2 * y, (y * z^-1 * y^2)^2, z^-2 * x * z * y^-1 * z^-4, y^12 ]"] );
+AddDictionary( dict, [52, 12], [[52, 12], [2, 12, 16], 288, "Action reflexible [m]", "[ x^2, x * y * z, z^2 * y^-2 * z^-1 * x * y^-1, x * z * y * z^-1 * x * z * y^-2  * z * y^-1 * z^-2 ]"] );
+AddDictionary( dict, [69, 37], [[69, 37], [2, 12, 16], 384, "Action reflexible [m]", "[ x^2, x * y * z, (y * z^-1)^4, (y * z^-3)^2, x * z * y^-3 * z * y^-1 * z^-1 * y, y^12, z * y * x * z * y^3 * z^-2 * x * z^2 ]"] );
+AddDictionary( dict, [69, 38], [[69, 38], [2, 12, 16], 384, "Action reflexible [m]", "[ x^2, x * y * z, y * x * z * y^2 * x * y^-1 * z^-1, (y * z^-3)^2, x * z^2 * y * z^-1 * x * z * y^-1 * z^-2 ]"] );
+AddDictionary( dict, [69, 39], [[69, 39], [2, 12, 16], 384, "Action reflexible [m]", "[ x^2, x * y * z, (y * z^-1 * y)^2, x * z * y * x * y^-1 * z^-2 * y * z^-1, y^12, y^-1 * z * y * x * y^-1 * z * y * z^-4 * x ]"] );
+AddDictionary( dict, [69, 40], [[69, 40], [2, 12, 16], 384, "Action reflexible [m]", "[ x^2, x * y * z, (y * z^-1 * y)^2, (z * y^-1 * z)^3, y^12, y^-1 * z * y * x * y^-1 * z * y * z^-4 * x ]"] );
+AddDictionary( dict, [69, 41], [[69, 41], [2, 12, 16], 384, "Action reflexible [m]", "[ x^2, x * y * z, x * z * y^-2 * z^-2 * y, (y * z^-1 * y^2)^2, y^12, x * z^5 * y * z^-1 * x * z^2 * y^-1 * z^-6 ]"] );
+AddDictionary( dict, [69, 42], [[69, 42], [2, 12, 16], 384, "Action reflexible [m]", "[ x^2, x * y * z, (y * z^-1 * y^2)^2, (y * z^-1)^4, (y * z^-3)^2, z^2 * y * z^-1 * x * y^-1 * z^-2 * x * z, y^12 ]"] );
+AddDictionary( TGQUOTS@, [ 2, 12, 16 ], dict );

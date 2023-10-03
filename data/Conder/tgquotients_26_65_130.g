@@ -1,0 +1,13 @@
+dict := NewDictionary( [ 2, 1 ], true );
+AddDictionary( dict, [62, 54], [[62, 54], [26, 65, 130], 130, "Action reflexible [m]", "[ x * y * z, x * z * y, z^-1 * x^5 * z^-4, y * z^-1 * y * z^-1 * y * z^-1 * y^7  * z^-1 * y ]"] );
+AddDictionary( dict, [62, 55], [[62, 55], [26, 65, 130], 130, "Action reflexible [m]", "[ x * y * z, x * z * y, y^8 * z^-2, x^-8 * z^4 * x^-1 * z ]"] );
+AddDictionary( dict, [62, 56], [[62, 56], [26, 65, 130], 130, "Action reflexible [m]", "[ x * y * z, x * z * y, y^2 * x^-2 * y^3, x^-2 * z * x^-1 * z^5 * y^-1 * x^-1 * z^4 * x^-1 * z * x^-1 * z^3 ]"] );
+AddDictionary( dict, [62, 57], [[62, 57], [26, 65, 130], 130, "Action reflexible [m]", "[ x * y * z, x * z * y, z^-2 * y^4 * z^-4, x * z^-1 * x^5 * y^-5 * x * y^-1 * x^2 ]"] );
+AddDictionary( dict, [62, 58], [[62, 58], [26, 65, 130], 130, "Action reflexible [m]", "[ x * y * z, x * z * y, z^-3 * x * z^-2, x^-1 * y * x^-1 * y * x^-1 * y * x^-1 * y * x^-1 * y^5 * x^-1 * y^6 * x^-2 ]"] );
+AddDictionary( dict, [62, 59], [[62, 59], [26, 65, 130], 130, "Action reflexible [m]", "[ x * y * z, x * z * y, z^-2 * x^3 * z^-3, x * y^-1 * z^2 * y^-3 * x * y^-5 * x  * y^-1 * x * y^-3 ]"] );
+AddDictionary( dict, [62, 60], [[62, 60], [26, 65, 130], 130, "Action reflexible [m]", "[ x * y * z, x * z * y, y^-3 * z^2, x^-13 * y^2 * x^-6 * z^2 * x^-5 ]"] );
+AddDictionary( dict, [62, 61], [[62, 61], [26, 65, 130], 130, "Action reflexible [m]", "[ x * y * z, x * z * y, z * y^-2 * x^-1 * z^2, x^-1 * y^2 * x^-8 * y * x^-12 * y * x^-1 * y ]"] );
+AddDictionary( dict, [62, 62], [[62, 62], [26, 65, 130], 130, "Action reflexible [m]", "[ x * y * z, x * z * y, x^-1 * y^4 * x^-5 * y, z^-2 * y * z^-1 * y * z^-1 * y^5  * z^-4 ]"] );
+AddDictionary( dict, [62, 63], [[62, 63], [26, 65, 130], 130, "Action reflexible [m]", "[ x * y * z, x * z * y, (x^-1 * y^5)^2, x^-7 * z^5 ]"] );
+AddDictionary( dict, [62, 64], [[62, 64], [26, 65, 130], 130, "Action reflexible [m]", "[ x * y * z, x * z * y, y * x^-4 * y^4, z^5 * y^-3 * x^-1 * z^4 * x^-1 * z^3 ]"] );
+AddDictionary( TGQUOTS@, [ 26, 65, 130 ], dict );

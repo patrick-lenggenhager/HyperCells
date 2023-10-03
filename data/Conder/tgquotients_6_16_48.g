@@ -1,0 +1,12 @@
+dict := NewDictionary( [ 2, 1 ], true );
+AddDictionary( dict, [19, 95], [[19, 95], [6, 16, 48], 48, "Action reflexible [m]", "[ x * y * z, x * z * y, x^6, y^5 * z^-3 ]"] );
+AddDictionary( dict, [37, 188], [[37, 188], [6, 16, 48], 96, "Action reflexible [m]", "[ x * y * z, x * z * y, x^6, y^-2 * z^5 * x^-1 * z^5 * y^-1 * z * y^-2 ]"] );
+AddDictionary( dict, [37, 189], [[37, 189], [6, 16, 48], 96, "Action reflexible [m]", "[ x * y * z, z^-1 * x^-2 * y^-1 * x, z^-1 * y * x^-1 * y^-2, z^-2 * x^-1 * z * y^-1, x^6, z^-3 * y^2 * z^-3 ]"] );
+AddDictionary( dict, [55, 200], [[55, 200], [6, 16, 48], 144, "Action reflexible [m]", "[ x * y * z, z^-1 * y * x^-1 * y^-2, z^-2 * x^-1 * z * y^-1, x^6, y * x^-3 * z * x^-2, y * z^-1 * y^3 * z^-1 * y * z^-1 ]"] );
+AddDictionary( dict, [73, 530], [[73, 530], [6, 16, 48], 192, "Action reflexible [m]", "[ x * y * z, z^-1 * y * x^-1 * y^-2, x^6, z^-1 * x^-1 * y^-1 * x * z * y, y * x^-3 * z * x^-2, y * z^-1 * y^3 * z^-1 * y * z^-1 ]"] );
+AddDictionary( dict, [73, 531], [[73, 531], [6, 16, 48], 192, "Action reflexible [m]", "[ x * y * z, z^-1 * y * x^-1 * y^-2, x^6, z^-1 * x * z^-1 * x * z * y^-1, y * z^-1 * y^3 * z^-1 * y * z^-1 ]"] );
+AddDictionary( dict, [73, 532], [[73, 532], [6, 16, 48], 192, "Action reflexible [m]", "[ x * y * z, z^-1 * x^-2 * y^-1 * x, z^-1 * y * x^-1 * y^-2, x^6, z^-2 * y * z^-1 * y * z^-3 ]"] );
+AddDictionary( dict, [73, 533], [[73, 533], [6, 16, 48], 192, "Action reflexible [m]", "[ x * y * z, z^-1 * x^-2 * y^-1 * x, z^-1 * y * x^-1 * y^-2, z^-2 * x^-1 * z * y^-1, x^6, y^8 * z^-3 * y * z^-1 * y * z^-2 ]"] );
+AddDictionary( dict, [73, 534], [[73, 534], [6, 16, 48], 192, "Action reflexible [m]", "[ x * y * z, z^-1 * x^-2 * y^-1 * x, z^-2 * x^-1 * z * y^-1, x^6, y^2 * z^-1 * y * x^-1 * y^4 ]"] );
+AddDictionary( dict, [73, 535], [[73, 535], [6, 16, 48], 192, "Action reflexible [m]", "[ x * y * z, z^-1 * x^-2 * y^-1 * x, x^6, x^-1 * z * y * x * y^-1 * z^-1, z^-2 * y * x^-1 * z * y^-2, z^-2 * y * z^-1 * y * z^-3 ]"] );
+AddDictionary( TGQUOTS@, [ 6, 16, 48 ], dict );

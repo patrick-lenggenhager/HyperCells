@@ -1,0 +1,4 @@
+dict := NewDictionary( [ 2, 1 ], true );
+AddDictionary( dict, [91, 105], [[91, 105], [3, 3, 63], 567, "Action reflexible [n]", "[ x^3, x * y * z, y^3, z * x^-1 * y^-1 * x * y^-1 * x, z^7 * y^-1 * x^-1 * z * y * z^-2 * x * z^3 ]"] );
+AddDictionary( dict, [91, 106], [[91, 106], [3, 3, 63], 567, "Action chiral", "[ x^3, x * y * z, y^3, (y * x^-1 * z)^3, z^-1 * x^-1 * y * z^-1 * x^-1 * y * z^-1 * x * z^-1, y^-1 * z^-2 * x * y^-1 * x * z^2 * y^-1 * x, z^-1 * x^-1 * y * x^-1 * y * x^-1 * y^-1 * x * y^-1 * x * y^-1, z^-1 * x^-1 * z * y^-1 * z^-1 * x^-1 * z^3 * y^-1 * z^-1 ]"] );
+AddDictionary( TGQUOTS@, [ 3, 3, 63 ], dict );

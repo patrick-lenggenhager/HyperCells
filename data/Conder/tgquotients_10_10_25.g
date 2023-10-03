@@ -1,0 +1,11 @@
+dict := NewDictionary( [ 2, 1 ], true );
+AddDictionary( dict, [96, 110], [[96, 110], [10, 10, 25], 250, "Action chiral", "[ x * y * z, (y * z^-1)^2, (x * y^-1 * x)^2, y^2 * x^-2 * z * x^-1 * y, z^-1 * x^-1 * y * x^-1 * z * y * z^-1 ]"] );
+AddDictionary( dict, [96, 111], [[96, 111], [10, 10, 25], 250, "Action chiral", "[ x * y * z, (y * z^-1)^2, (x * y^-1 * x)^2, y^2 * x^-2 * z * x^-1 * y, x * z * y * x^-1 * z^2 * y ]"] );
+AddDictionary( dict, [96, 112], [[96, 112], [10, 10, 25], 250, "Action chiral", "[ x * y * z, (x * z^-2)^2, (y * z^-2)^2, z^-1 * y * x^-2 * y^-2 * x, y^-1 * z^-1 * x^-2 * y * x * y^-1, z^-1 * x^-1 * y * x^-1 * z * y^-1 * z^-1 ]"] );
+AddDictionary( dict, [96, 113], [[96, 113], [10, 10, 25], 250, "Action chiral", "[ x * y * z, (x * z^-2)^2, (y * z^-2)^2, z^-1 * y * x^-2 * y^-2 * x, y^-1 * z^-1 * x^-2 * y * x * y^-1, x^-1 * z * y * x^-1 * y^-1 * z^-2 ]"] );
+AddDictionary( dict, [96, 114], [[96, 114], [10, 10, 25], 250, "Action reflexible [n]", "[ x * y * z, z^-1 * y * x^2 * z^-1 * y, z^-1 * y^2 * x * z^-1 * x, z^2 * y * x * z^2, x^10 ]"] );
+AddDictionary( dict, [96, 115], [[96, 115], [10, 10, 25], 250, "Action reflexible [n]", "[ x * y * z, z^-1 * y * x^2 * z^-1 * y, z^-1 * y^2 * x * z^-1 * x, y^-1 * z^-2 * x^-1 * z^2, x^10 ]"] );
+AddDictionary( dict, [96, 116], [[96, 116], [10, 10, 25], 250, "Action reflexible [m]", "[ x * y * z, (y * z^-1)^2, z^-1 * x^-2 * y^-1 * x, z^-1 * y * x^-1 * y^-2, x^4 * y^-2, z^-7 * x^-1 * z * y * z^-5 * x^-1 * z^10 * y ]"] );
+AddDictionary( dict, [96, 117], [[96, 117], [10, 10, 25], 250, "Action reflexible [m,n]", "[ x * y * z, y^-1 * x^2 * y^-1, (x * z^-2)^2, z^4 * y^-1 * z^-1 * x * z * y^-1 * z^-1 * x * z * y^-1 * z^-1 * x * z * y * z^-4 * x^-1 * z^3 * y * z^-3 * x^-1 ]"] );
+AddDictionary( dict, [96, 118], [[96, 118], [10, 10, 25], 250, "Action reflexible [m,n]", "[ x * y * z, z * x^-1 * y^-1, x^10, z^-10 * x * y^-1 * x * y^-1 * x * y^-1 * x * y^-1 * x * z * y^-1 * z^-9 ]"] );
+AddDictionary( TGQUOTS@, [ 10, 10, 25 ], dict );

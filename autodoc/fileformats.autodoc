@@ -1,0 +1,400 @@
+@Chapter File Formats
+
+The following file formats are introduced by the HyperCells package:
+- **HyperCell cell graph** (`*.hcc`) for storing the cell graphs, i.e., `TGCellGraph`
+   objects (see <Ref Sect='Section_TGCellGraph'/>)
+- **HyperCell model graph** (`*.hcm`) for storing the model graphs, i.e.,
+   `TGCellModelGraph` objects (see <Ref Sect='Section_TGCellModelGraph'/>)
+- **HyperCell supercell graph** (`*.hcs`) for storing the supercell model graphs, i.e.,
+   `TGSuperCellModelGraph` objects (see <Ref Sect='Section_TGSuperCellModelGraph'/>)
+
+These file formats are described in detail below.
+
+@Section Cell Graphs and (Supercell) Model Graphs
+
+@Subsection HyperCell cell graph (*.hcc)
+
+The basic file structure of a HyperCell cell graph file is as follows (with placeholders
+marked by `&lt;...&gt;`):
+
+@BeginLogSession
+[ <r>, <q>, <p> ]
+[ <relators> , <center> ]
+[ g1, g2, ... ] -> <generators>
+<TDGAMMA>
+[ <TGGx>, <TGGy>, <TGGz> ]
+<vertices>
+<edges>
+<edge translations>
+<faces>
+<boundary>
+@EndLogSession
+
+The first line gives the signature $(r,q,p)$ of the underlying triangle group
+$\Delta(r,q,p)$ and the second line specifies the triangle-group quotient
+$\Delta^+(r,q,p)/\Gamma$ by the list of relators `&lt;relators&gt;` given as elements of
+the proper triangle group $\Delta^+$ with generators $x$, $y$, $z$ and the center
+of the cell given as the integer `&lt;center&gt;` with `1`, `2`, `3` corresponding to the
+center lying at the vertex $x$, $y$, $z$ of the fundamental Schwarz triangle,
+respectively.
+
+The third line specifies the generators of the translation group $\Gamma$. To the left
+of `-&gt;` are the generators of the finitely presented group and to the right the list
+`&lt;generators&gt;` of their images in the proper triangle group $\Delta^+$ in terms
+of the generators $x$, $y$, $z$.
+
+The fourth line gives the transversal $T_{\Delta^+}(\Gamma)$ as a list `&lt;TDGAMMA&gt;`
+of elements of the proper triangle group $\Delta^+$ and the fifth line specifies the
+transversals $T_{G^+}(G_w^+)$ as lists `&lt;TGGw&gt;` with $w=x,y,z$ (`w=x,y,z`) of
+preimages of elements of the qutient group $G^+\cong\Delta^+/\Gamma$ under the quotient
+homomorphism $\Delta^+\to G^+$, i.e., in terms of the generators $x$, $y$, $z$.
+
+Lines six to nine specify the vertices, edges, edge translations and faces of the cell:
+- The vertices are given as a list `&lt;vertices&gt;` with entries of the form
+  `[ w, gi ]`, where `w` is `1`, `2`, `3` corresponding to the vertex $x$, $y$, $z$
+  of the fundamental Schwarz triangle and `gi` is the position of the element in
+  the transversal $T_{G^+}(G_w^+)$.
+- The edges are given as a list `&lt;edges&gt;` with entries of the form
+  `[ v1, v2, s ]`, where `v1` and `v2` are the positions of the vertices
+  in `&lt;vertices&gt;` connected by the edge, `s` is the position of the element in
+  $T_{\Delta^+}(\Gamma)$ labeling the Schwarz triangle this edge is a part of.
+- The edge translations, i.e., the translations relating the unit cell containing
+  the first vertex (`v1`) to the unit cell containing the second (`v2`) are given
+  as a list `&lt;edge translations&gt;` of elements of the finitely presented group,
+  i.e., in terms of the generators given to the left of `-&gt;` in the third line.
+  If `v1` corresponds to the vertex $(w, [g_{u_w}]_w)$ and `v2` to the vertex
+  $(w', [g_{\tilde{u}_{w'}}]_{w'})$, then `gam` corresponds to the translation
+  $\gamma$ such that
+  $$g_{\tilde{u}_{w'}} = g_{u_w}\gamma.$$
+- The faces are given as a list `&lt;faces&gt;` with entries of the form
+  `[ edge, orientation ]`, where `edge` is the position of the edge in `&lt;edges&gt;`
+  and `orientation` is `1` or `-1` depending on whether the edge is traversed in
+  the same or opposite direction as the edge given in `&lt;edges&gt;`.
+
+Finally, the tenth line specifies the boundary identifications of the cell as a list
+`&lt;boundary&gt;` with entries of the form `[ d1, d2, e, b, m, gam ]`, where `d1`,
+`d2` are elements of $T_{\Delta^+}(\Gamma)\subset\Delta^+$ labeling the Schwarz
+triangles this edge is a part of, `e` the position in `&lt;edges&gt;`, `b` a running
+integer index of the boundary (identical for identified boundaries), `m` either `0`
+or `1` indicating the orientation of the triangle associated with this instance of
+the boundary (0 for gray and 1 for white Schwarz triangle), and `gam` the translation
+relating the given to the identified boundary, as an element of the finitely presented
+group, i.e., in terms of the generators given to the left of `-&gt;` in the third line.
+
+The full file structure of a HyperCell cell graph file thus is as follows:
+
+@BeginLogSession
+[ <r>, <q>, <p> ]
+[ [ <rel1>, <rel2>, ... ], <center> ]
+[ g1, g2, ... ] -> [ <generator1>, <generator2>, ... ]
+[ <d1>, <d2>, ... ]
+[ [ <gx1>, <gx2>, ... ], [ <gy1>, <gy2>, ... ], [ <gz1>, <gz2>, ... ] ]
+[ [ w, gi ], ... ]
+[ [ v1, v2, s ], ... ]
+[ [ gam1, gam2, ... ], ... ]
+[ [ edge, orientation ], ... ]
+[ [ d1, d2, e, b, m, gam ], ... ]
+@EndLogSession
+
+A complete example for the cell graph of the quotient T2.6 of $\Delta(2,8,8)$ is
+given below:
+@BeginLogSession
+[ 2, 8, 8 ]
+[ [ x^2, x*y*z, x*z*y, y^3*z^-1 ], 3 ]
+[ g1, g2, g3, g4 ] -> [ z^-1*x^-1*y*z^-1*y*z*y*x^-1, z^-1*x^-1*y*z^-1*y*z*y*
+  x^-1*y*x*z, z*y*(x^-1*z^-1)^2*y^3*x*z, y^-1*z*y^-1*x*z ]
+[ 1, y^-1*x^-1, (y^-1*x^-1)^2, (y^-1*x^-1)^3, (y^-1*x^-1)^4, (y^-1*x^-1)^5,
+  (y^-1*x^-1)^6, (y^-1*x^-1)^7 ]
+[ [ 1, (y^-1*x^-1)^3, y^-1*x^-1, (y^-1*x^-1)^2 ], [ 1 ], [ 1 ] ]
+[ [ 1, 1 ], [ 1, 2 ], [ 1, 3 ], [ 1, 4 ], [ 2, 1 ], [ 3, 1 ] ]
+[ [ 1, 6, 1 ], [ 5, 1, 1 ], [ 6, 5, 1 ], [ 3, 6, 2 ], [ 5, 3, 2 ], [ 6, 5, 2 ],
+  [ 4, 6, 3 ], [ 5, 4, 3 ], [ 6, 5, 3 ], [ 2, 6, 4 ], [ 5, 2, 4 ], [ 6, 5, 4 ],
+  [ 1, 6, 5 ], [ 5, 1, 5 ], [ 6, 5, 5 ], [ 3, 6, 6 ], [ 5, 3, 6 ], [ 6, 5, 6 ],
+  [ 4, 6, 7 ], [ 5, 4, 7 ], [ 6, 5, 7 ], [ 2, 6, 8 ], [ 5, 2, 8 ], [ 6, 5, 8 ] ]
+[ 1, 1, 1, 1, g2^-1*g3*g4^-1, g4*g3^-1*g2, 1, g2^-1*g1, g1^-1*g2, 1, g4^-1, g4,
+  g1, g2^-1*g3*g4^-1, g1^-1*g2*g3^-1*g4, g2, g2^-1*g1, g1^-1, g3, g4^-1,
+  g4*g3^-1, g4, g4^-1*g3*g2^-1*g1, g1^-1*g2*g3^-1 ]
+[ [ [ [ 1, 1 ], [ 3, 1 ], [ 18, -1 ], [ 13, -1 ] ], [ [ 4, 1 ], [ 6, 1 ],
+  [ 21, -1 ], [ 16, -1 ] ], [ [ 7, 1 ], [ 9, 1 ], [ 24, -1 ], [ 19, -1 ] ],
+  [ [ 10, 1 ], [ 12, 1 ], [ 3, -1 ], [ 22, -1 ] ], [ [ 13, 1 ], [ 15, 1 ],
+  [ 6, -1 ], [ 1, -1 ] ], [ [ 16, 1 ], [ 18, 1 ], [ 9, -1 ], [ 4, -1 ] ],
+  [ [ 19, 1 ], [ 21, 1 ], [ 12, -1 ], [ 7, -1 ] ], [ [ 22, 1 ], [ 24, 1 ],
+  [ 15, -1 ], [ 10, -1 ] ] ], [ [ [ 2, 1 ], [ 1, 1 ], [ 22, -1 ], [ 11, -1 ] ],
+  [ [ 5, 1 ], [ 4, 1 ], [ 1, -1 ], [ 14, -1 ] ], [ [ 8, 1 ], [ 7, 1 ], [ 4, -1 ],
+  [ 17, -1 ] ], [ [ 11, 1 ], [ 10, 1 ], [ 7, -1 ], [ 20, -1 ] ], [ [ 14, 1 ],
+  [ 13, 1 ], [ 10, -1 ], [ 23, -1 ] ], [ [ 17, 1 ], [ 16, 1 ], [ 13, -1 ],
+  [ 2, -1 ] ], [ [ 20, 1 ], [ 19, 1 ], [ 16, -1 ], [ 5, -1 ] ], [ [ 23, 1 ],
+  [ 22, 1 ], [ 19, -1 ], [ 8, -1 ] ] ], [ [ [ 3, 1 ], [ 2, 1 ], [ 14, -1 ],
+  [ 6, -1 ] ], [ [ 6, 1 ], [ 5, 1 ], [ 17, -1 ], [ 9, -1 ] ], [ [ 9, 1 ],
+  [ 8, 1 ], [ 20, -1 ], [ 12, -1 ] ], [ [ 12, 1 ], [ 11, 1 ], [ 23, -1 ],
+  [ 15, -1 ] ], [ [ 15, 1 ], [ 14, 1 ], [ 2, -1 ], [ 18, -1 ] ], [ [ 18, 1 ],
+  [ 17, 1 ], [ 5, -1 ], [ 21, -1 ] ], [ [ 21, 1 ], [ 20, 1 ], [ 8, -1 ],
+  [ 24, -1 ] ], [ [ 24, 1 ], [ 23, 1 ], [ 11, -1 ], [ 3, -1 ] ] ] ]
+[ [ 1, 1, 2, 1, 0, g1 ], [ (y*x)^3*y, (y*x)^3*y, 2, 1, 1, g1^-1 ], [ y^-1*x^-1,
+  y^-1*x^-1, 5, 2, 0, g2 ], [ (y*x)^2*y, (y*x)^2*y, 5, 2, 1, g2^-1 ],
+  [ (y^-1*x^-1)^2, (y^-1*x^-1)^2, 8, 3, 0, g3 ], [ y*x*y, y*x*y, 8, 3, 1, g3^-1 ],
+  [ (y^-1*x^-1)^3, (y^-1*x^-1)^3, 11, 4, 0, g4 ], [ y, y, 11, 4, 1, g4^-1 ],
+  [ (y^-1*x^-1)^4, (y^-1*x^-1)^4, 14, 1, 0, g1^-1 ], [ x^-1, x^-1, 14, 1, 1, g1 ],
+  [ (y^-1*x^-1)^5, (y^-1*x^-1)^5, 17, 2, 0, g2^-1 ], [ (y*x)^6*y, (y*x)^6*y, 17,
+  2, 1, g2 ], [ (y^-1*x^-1)^6, (y^-1*x^-1)^6, 20, 3, 0, g3^-1 ], [ (y*x)^5*y,
+  (y*x)^5*y, 20, 3, 1, g3 ], [ (y^-1*x^-1)^7, (y^-1*x^-1)^7, 23, 4, 0, g4^-1 ],
+  [ (y*x)^4*y, (y*x)^4*y, 23, 4, 1, g4 ] ]
+@EndLogSession
+
+@Subsection HyperCell model graph (*.hcm)
+
+The basic file structure of a HyperCell model graph file is as follows (with placeholders
+marked by `&lt;...&gt;`):
+
+@BeginLogSession
+[ <r>, <q>, <p> ]
+[ <relators> , <center> ]
+[ g1, g2, ... ] -> <generators>
+<TDGAMMA>
+[ <TGGx>, <TGGy>, <TGGz> ]
+<model type>
+<vertices>
+<edges>
+<edge translations>
+<faces>
+@EndLogSession
+
+The first line gives the signature $(r,q,p)$ of the underlying triangle group
+$\Delta(r,q,p)$ and the second line specifies the triangle-group quotient
+$\Delta^+(r,q,p)/\Gamma$ by the list of relators `&lt;relators&gt;` given as elements of
+the proper triangle group $\Delta^+$ with generators $x$, $y$, $z$ and the center
+of the cell given as the integer `&lt;center&gt;` with `1`, `2`, `3` corresponding to the
+center lying at the vertex $x$, $y$, $z$ of the fundamental Schwarz triangle,
+respectively.
+
+The third line specifies the generators of the translation group $\Gamma$. To the left
+of `-&gt;` are the generators of the finitely presented group and to the right the list
+`&lt;generators&gt;` of their images in the proper triangle group $\Delta^+$ in terms
+of the generators $x$, $y$, $z$.
+
+The fourth line gives the transversal $T_{\Delta^+}(\Gamma)$ as a list `&lt;TDGAMMA&gt;`
+of elements of the proper triangle group $\Delta^+$ and the fifth line specifies the
+transversals $T_{G^+}(G_w^+)$ as lists `&lt;TGGw&gt;` with $w=x,y,z$ (`w=x,y,z`) of
+preimages of elements of the qutient group $G^+\cong\Delta^+/\Gamma$ under the quotient
+homomorphism $\Delta^+\to G^+$, i.e., in terms of the generators $x$, $y$, $z$.
+
+The sixth line specifies the model type.
+The following model types are currently implemented:
+- **Derived graph**: general model graph with vertices, edges, and faces derived from
+  the cell graph. The model type is given as `[ "VEF", [ vfs, efs, ffs ] ]`,
+  where `vfs`, `efs`, and `ffs` are lists of integers between 1 and 3
+  indicating the vertex types, edge types, and face types, respectively.
+  See <Ref Func='TGCellModelGraph'/> for details.
+- **Tessellation graph**: tessellation model graph derived from a cell graph of a triangle
+  group. The model type is given as
+  `[ "TESS", [ p, q ], [ "VEF", [ [ 2 ], [ 1 ], [ 3 ] ] ] ]` for the $\{p,q\}$
+  tessellation and as `[ "TESS", [ p, q ], [ "VEF", [ [ 3 ], [ 1 ], [ 2 ] ] ] ]`
+  for the (dual) $\{q,p\}$ tessellation.
+  See <Ref Func='TessellationModelGraph'/> for details.
+- **Kagome graph**: kagome model graph derived from a cell graph of a triangle
+  group. The model type is given as
+  `[ "KAGOME", p, [ "VEF", [ [ 1 ], [ 2 ], [ 2, 3 ] ] ] ]`.
+  See <Ref Func='KagomeModelGraph'/> for details.
+
+Lines seven to ten specify the vertices, edges, edge translations and faces of the cell:
+- The vertices are given as a list `&lt;vertices&gt;` with entries of the form
+  `[ w, gi ]`, where `w` is `1`, `2`, `3` corresponding to the vertex $x$, $y$, $z$
+  of the fundamental Schwarz triangle and `gi` is the position of the element in
+  the transversal $T_{G^+}(G_w^+)$.
+- The edges are given as a list `&lt;edges&gt;` with entries of the form
+  `[ v1, v2, s ]`, where `v1` and `v2` are the positions of the vertices
+  in `&lt;vertices&gt;` connected by the edge, `s` is the position of the element in
+  $T_{\Delta^+}(\Gamma)$ labeling the Schwarz triangle this edge is a part of.
+- The edge translations, i.e., the translations relating the unit cell containing
+  the first vertex (`v1`) to the unit cell containing the second (`v2`) are given
+  as a list `&lt;edge translations&gt;` of elements of the finitely presented group,
+  i.e., in terms of the generators given to the left of `-&gt;` in the third line.
+  If `v1` corresponds to the vertex $(w, [g_{u_w}]_w)$ and `v2` to the vertex
+  $(w', [g_{\tilde{u}_{w'}}]_{w'})$, then `gam` corresponds to the translation
+  $\gamma$ such that
+  $$g_{\tilde{u}_{w'}} = g_{u_w}\gamma.$$
+- The faces are given as a list `&lt;faces&gt;` with entries of the form
+  `[ edge, orientation ]`, where `edge` is the position of the edge in `&lt;edges&gt;`
+  and `orientation` is `1` or `-1` depending on whether the edge is traversed in
+  the same or opposite direction as the edge given in `&lt;edges&gt;`.
+
+The full file structure of a HyperCell cell graph file thus is as follows:
+
+@BeginLogSession
+[ <r>, <q>, <p> ]
+[ [ <rel1>, <rel2>, ... ], <center> ]
+[ g1, g2, ... ] -> [ <generator1>, <generator2>, ... ]
+[ <d1>, <d2>, ... ]
+[ [ <gx1>, <gx2>, ... ], [ <gy1>, <gy2>, ... ], [ <gz1>, <gz2>, ... ] ]
+<model type>
+[ [ w, gi ], ... ]
+[ [ v1, v2, s ], ... ]
+[ [ gam1, gam2, ... ], ... ]
+[ [ edge, orientation ], ... ]
+@EndLogSession
+
+A complete example for the ${8,8}$ tessellation graph centered at the $z$ vertex 
+on the cell defined by the quotient T2.6 of $\Delta(2,8,8)$ is given below:
+@BeginLogSession
+[ 2, 8, 8 ]
+[ [ x^2, x*y*z, x*z*y, y^3*z^-1 ], 3 ]
+[ g1, g2, g3, g4 ] -> [ z^-1*x^-1*y*z^-1*y*z*y*x^-1,
+  z^-1*x^-1*y*z^-1*y*z*y*x^-1*y*x*z, z*y*(x^-1*z^-1)^2*y^3*x*z, y^-1*z*y^-1*x*z ]
+[ 1, y^-1*x^-1, (y^-1*x^-1)^2, (y^-1*x^-1)^3, (y^-1*x^-1)^4, (y^-1*x^-1)^5,
+  (y^-1*x^-1)^6, (y^-1*x^-1)^7 ]
+[ [ 1, (y^-1*x^-1)^3, y^-1*x^-1, (y^-1*x^-1)^2 ], [ 1 ], [ 1 ] ]
+[ "TESS", [ 8, 8 ], [ "VEF", [ [ 3 ], [ 1 ], [ 2 ] ] ] ]
+[ [ 3, 1 ] ]
+[ [ 1, 1, [ 1, [ 1, 1, 5 ] ] ], [ 1, 1, [ 1, [ 2, 4, 8 ] ] ], [ 1, 1, [ 1, [ 3,
+  2, 6 ] ] ], [ 1, 1, [ 1, [ 4, 3, 7 ] ] ] ]
+[ g1, g4, g2, g3 ]
+[ [ [ 1, -1 ], [ 2, -1 ], [ 4, 1 ], [ 3, -1 ], [ 1, 1 ], [ 2, 1 ], [ 4, -1 ],
+  [ 3, 1 ] ] ]
+@EndLogSession
+
+@Subsection HyperCell supercell graph (*.hcs)
+
+The basic file structure of a HyperCell supercell model graph file is as follows
+(with placeholders marked by `&lt;...&gt;`):
+
+@BeginLogSession
+[ <r>, <q>, <p> ]
+[ <primitive cell relators> , <supercell relators>, <center> ]
+[ g1, g2, ... ] -> <pc generators>
+<TDGAMMApc>
+[ <TGpcGx>, <TGpcGy>, <TGpcGz> ]
+[ g1, g2, ... ] -> <sc generators>
+[ g1, g2, ... ] -> <sc generators in terms of pc generators>
+<TGAMMApcGAMMAsc>
+<TDGAMMAsc>
+[ <TGscGx>, <TGscGy>, <TGscGz> ]
+<model type>
+<vertices>
+<edges>
+<edge translations>
+<faces>
+@EndLogSession
+
+The first line gives the signature $(r,q,p)$ of the underlying triangle group
+$\Delta(r,q,p)$ and the second line specifies the triangle-group quotient
+$\Delta^+(r,q,p)/\Gamma_\mathrm{pc}$ and $\Delta^+(r,q,p)/\Gamma_\mathrm{sc}$ by
+the list of relators `&lt;primitive cell relators&gt;` and
+`&lt;supercell relators&gt;`, respectively, given as elements of the proper triangle
+group $\Delta^+$ with generators $x$, $y$, $z$ and the center of the cell given
+as the integer `&lt;center&gt;` with `1`, `2`, `3` corresponding to the center
+lying at the vertex $x$, $y$, $z$ of the fundamental Schwarz triangle, respectively.
+
+The third line specifies the generators of the translation group $\Gamma_\mathrm{pc}$
+of the primitive cell. To the left of `-&gt;` are the generators of the finitely
+presented group and to the right the list `&lt;generators&gt;` of their images in
+the proper triangle group $\Delta^+$ in terms of the generators $x$, $y$, $z$.
+
+The fourth line gives the transversal $T_{\Delta^+}(\Gamma_\mathrm{pc})$ as a list
+`&lt;TDGAMMApc&gt;` of elements of the proper triangle group $\Delta^+$ and the
+fifth line specifies the transversals $T_{G^+_\mathrm{pc}}(G_w^+)$ as lists
+`&lt;TGpcGw&gt;` with $w=x,y,z$ (`w=x,y,z`) of preimages of elements of the quotient
+group $G^+_\mathrm{pc}\cong\Delta^+/\Gamma_\mathrm{pc}$ under the quotient
+homomorphism $\Delta^+\to G^+_\mathrm{pc}$, i.e., in terms of the generators $x$,
+$y$, $z$.
+
+Lines six, nine, and ten give the same information as lines three, four, and five,
+respectively, but for the supercell ($G^+_\mathrm{sc}$, $\Gamma_\mathrm{sc}$)
+instead of the primitive cell.
+The seventh line specifies the homomorphism embedding the normal subgroup
+$\Gamma_\mathrm{sc}$ in $\Gamma_\mathrm{pc}$ with the generators of the finitely
+presented group $\Gamma_\mathrm{sc}$ to the left of `-&gt;` and their images in
+the finitely presented group $\Gamma_\mathrm{pc}$ to the right.
+The eighth line gives the corresponding transversal $T_{\Gamma_\mathrm{pc}}
+(\Gamma_\mathrm{sc})$ as a list `&lt;TGAMMApcGAMMAsc&gt;` of elements of the
+triangle group $\Delta^+$.
+
+The eleventh line specifies the model type.
+The following model types are currently implemented:
+- **Derived graph**: general model graph with vertices, edges, and faces derived from
+  the cell graph. The model type is given as `[ "VEF", [ vfs, efs, ffs ] ]`,
+  where `vfs`, `efs`, and `ffs` are lists of integers between 1 and 3
+  indicating the vertex types, edge types, and face types, respectively.
+  See <Ref Func='TGCellModelGraph'/> for details.
+- **Tessellation graph**: tessellation model graph derived from a cell graph of a triangle
+  group. The model type is given as
+  `[ "TESS", [ p, q ], [ "VEF", [ [ 2 ], [ 1 ], [ 3 ] ] ] ]` for the $\{p,q\}$
+  tessellation and as `[ "TESS", [ p, q ], [ "VEF", [ [ 3 ], [ 1 ], [ 2 ] ] ] ]`
+  for the (dual) $\{q,p\}$ tessellation.
+  See <Ref Func='TessellationModelGraph'/> for details.
+- **Kagome graph**: kagome model graph derived from a cell graph of a triangle
+  group. The model type is given as
+  `[ "KAGOME", p, [ "VEF", [ [ 1 ], [ 2 ], [ 2, 3 ] ] ] ]`.
+  See <Ref Func='KagomeModelGraph'/> for details.
+
+Lines twelve to fifteen specify the vertices, edges, edge translations and faces of the cell:
+- The vertices are given as a list `&lt;vertices&gt;` with entries of the form
+  `[ w, gi ]`, where `w` is `1`, `2`, `3` corresponding to the vertex $x$, $y$, $z$
+  of the fundamental Schwarz triangle and `gi` is the position of the element in
+  the transversal $T_{G^+}(G_w^+)$.
+- The edges are given as a list `&lt;edges&gt;` with entries of the form
+  `[ v1, v2, s ]`, where `v1` and `v2` are the positions of the vertices
+  in `&lt;vertices&gt;` connected by the edge, `s` is the position of the element in
+  $T_{\Delta^+}(\Gamma)$ labeling the Schwarz triangle this edge is a part of.
+- The edge translations, i.e., the translations relating the unit cell containing
+  the first vertex (`v1`) to the unit cell containing the second (`v2`) are given
+  as a list `&lt;edge translations&gt;` of elements of the finitely presented group,
+  i.e., in terms of the generators given to the left of `-&gt;` in the third line.
+  If `v1` corresponds to the vertex $(w, [g_{u_w}]_w)$ and `v2` to the vertex
+  $(w', [g_{\tilde{u}_{w'}}]_{w'})$, then `gam` corresponds to the translation
+  $\gamma$ such that
+  $$g_{\tilde{u}_{w'}} = g_{u_w}\gamma.$$
+- The faces are given as a list `&lt;faces&gt;` with entries of the form
+  `[ edge, orientation ]`, where `edge` is the position of the edge in `&lt;edges&gt;`
+  and `orientation` is `1` or `-1` depending on whether the edge is traversed in
+  the same or opposite direction as the edge given in `&lt;edges&gt;`.
+
+The full file structure of a HyperCell cell graph file thus is as follows:
+
+@BeginLogSession
+[ <r>, <q>, <p> ]
+[ [ <rel1>, <rel2>, ... ], [ <rel1>, <rel2>, ... ], <center> ]
+[ g1, g2, ... ] -> [ <pc generator1>, <pc generator2>, ... ]
+[ <d1>, <d2>, ... ]
+[ [ <gx1>, <gx2>, ... ], [ <gy1>, <gy2>, ... ], [ <gz1>, <gz2>, ... ] ]
+[ g1, g2, ... ] -> [ <sc generator1>, <sc generator2>, ... ]
+[ eta1, eta2, ... ]
+[ <dsc1>, <dsc2>, ... ]
+[ [ <gscx1>, <gscx2>, ... ], [ <gscy1>, <gscy2>, ... ], [ <gscz1>, <gscz2>, ... ] ]
+<model type>
+[ [ w, gi ], ... ]
+[ [ v1, v2, s ], ... ]
+[ [ gam1, gam2, ... ], ... ]
+[ [ edge, orientation ], ... ]
+@EndLogSession
+
+A complete example for the ${8,8}$ tessellation graph centered at the $z$ vertex 
+on the cell defined by the quotient T2.6 of $\Delta(2,8,8)$ extended to the supercell
+defined by the quotient T3.11 is given below:
+@BeginLogSession
+[ 2, 8, 8 ]
+[ [ x^2, x*y*z, x*z*y, y^3*z^-1 ], [ x^2, x*y*z, x*z*y, y^-8 ], 3 ]
+[ g1, g2, g3, g4 ] -> [ z^-1*x^-1*y*z^-1*y*z*y*x^-1,
+  z^-1*x^-1*y*z^-1*y*z*y*x^-1*y*x*z, z*y*(x^-1*z^-1)^2*y^3*x*z, y^-1*z*y^-1*x*z ]
+[ 1, y^-1*x^-1, (y^-1*x^-1)^2, (y^-1*x^-1)^3, (y^-1*x^-1)^4, (y^-1*x^-1)^5,
+  (y^-1*x^-1)^6, (y^-1*x^-1)^7 ]
+[ [ 1, (y^-1*x^-1)^3, y^-1*x^-1, (y^-1*x^-1)^2 ], [ 1 ], [ 1 ] ]
+[ g1, g2, g3, g4, g5, g6 ] -> [ x*y^-1*z^-1, y*x*z, z*y^-1*z^-1*y, y^2*x*z*y^-1,
+  y^-1*z*y^-1*z^-1*y^2, y^3*x*z*y^-2 ]
+[ g1, g2, g3, g4, g5, g6 ] -> [ g1^-1*g4^-1, g1^-1*g2, g3*g4^-1,
+  g1^-1*g2*g4^-1*g1^-1*g2*g3^-1*g4*g1*g2^-1*g1, g4*g1^-1*g4^-1*g3*g2^-1*g1,
+  g1^-1*g2*g3^-1*g4*g2^-1*g1 ]
+[ 1, y^3*z^-1 ]
+[ 1, x, y, y^-1, z, z^-1, y^2, y*z^-1, y^-2, y^-1*z, y^3, y^2*z^-1, y^-3, y^-2*z,
+  y^4, y^3*z^-1 ]
+[ [ 1, y, y^-1, y^2, y^-2, y^3, y^-3, y^4 ], [ 1, x ], [ 1, x ] ]
+[ "TESS", [ 8, 8 ], [ "VEF", [ [ 3 ], [ 1 ], [ 2 ] ] ] ]
+[ [ 3, 1, 1 ], [ 3, 1, 2 ] ]
+[ 1, x ]
+[ [ 1, 2, [ 1, 1, [ 1, [ 1, 1, 5 ] ] ] ], [ 1, 2, [ 1, 1, [ 1, [ 2, 4, 8 ] ] ] ],
+  [ 1, 2, [ 1, 1, [ 1, [ 3, 2, 6 ] ] ] ], [ 1, 2, [ 1, 1, [ 1, [ 4, 3, 7 ] ] ] ],
+  [ 2, 1, [ 1, 1, [ 1, [ 1, 1, 5 ] ] ] ], [ 2, 1, [ 1, 1, [ 1, [ 2, 4, 8 ] ] ] ],
+  [ 2, 1, [ 1, 1, [ 1, [ 3, 2, 6 ] ] ] ], [ 2, 1, [ 1, 1, [ 1, [ 4, 3, 7 ] ] ] ] ]
+[ 1, g4^-1*g6*g2, g2, g4^-1*g2, g3*g5^-1*g3^-1*g1^-1*g2^-1*g4^-1*g6^-1*g4, g1^-1,
+  g3*g5^-1*g1^-1, g3*g1^-1 ]
+[ ]
+@EndLogSession

@@ -1,0 +1,11 @@
+dict := NewDictionary( [ 2, 1 ], true );
+AddDictionary( dict, [90, 163], [[90, 163], [38, 38, 95], 190, "Action reflexible [m]", "[ x * y * z, (x * z^-1)^2, x^-3 * y^-1 * z, z^-2 * x^-1 * y * x^-1 * y * x^-1 * y^5 ]"] );
+AddDictionary( dict, [90, 164], [[90, 164], [38, 38, 95], 190, "Action reflexible [m]", "[ x * y * z, z^-1 * x^-2 * y^-1 * x, z^-1 * y * x^-1 * y^-2, (x * z^-2)^2, x^-1  * y * x^-1 * y * x^-1 * y * x^-1 * z * y ]"] );
+AddDictionary( dict, [90, 165], [[90, 165], [38, 38, 95], 190, "Action reflexible [m]", "[ x * y * z, z^-1 * x^-2 * y^-1 * x, z^-1 * y * x^-1 * y^-2, x * y^-1 * x * y^-1 * x * y^-1 * z^-2, z * y^-3 * x * z^3 ]"] );
+AddDictionary( dict, [90, 166], [[90, 166], [38, 38, 95], 190, "Action reflexible [m]", "[ x * y * z, z^-1 * x^-2 * y^-1 * x, z^-1 * y * x^-1 * y^-2, z^-1 * x^-1 * y * x^-1 * z * y * z^-1, x * z^-2 * x * z^-2 * x * z^-2 * y * z^-1 ]"] );
+AddDictionary( dict, [90, 167], [[90, 167], [38, 38, 95], 190, "Action reflexible [m]", "[ x * y * z, z^-1 * x^-2 * y^-1 * x, z^-1 * y * x^-1 * y^-2, y * x^-1 * y * x^-1 * z^3, y^5 * z^-1 * y * z^-1 ]"] );
+AddDictionary( dict, [90, 168], [[90, 168], [38, 38, 95], 190, "Action reflexible [m]", "[ x * y * z, z^-1 * x^-2 * y^-1 * x, z^-1 * y * x^-1 * y^-2, x^4 * y^-2, z * y^-3 * x^-1 * z^3 ]"] );
+AddDictionary( dict, [90, 169], [[90, 169], [38, 38, 95], 190, "Action reflexible [m]", "[ x * y * z, z^-1 * x^-2 * y^-1 * x, z^-1 * y * x^-1 * y^-2, z^2 * y^-1 * x * z^2, z^-1 * x^5 * z^-2 * x * z^-1 ]"] );
+AddDictionary( dict, [90, 170], [[90, 170], [38, 38, 95], 190, "Action reflexible [m]", "[ x * y * z, z^-1 * x^-2 * y^-1 * x, z^-1 * y * x^-1 * y^-2, z^-1 * y^3 * z^-1 * y, z * y^-1 * z^-1 * x * z^2, z * x^-1 * z * x^-5 * z^2 * x^-2 * z^3 ]"] );
+AddDictionary( dict, [90, 171], [[90, 171], [38, 38, 95], 190, "Action reflexible [m,n]", "[ x * y * z, y^-1 * x^2 * y^-1, y^-1 * z^-2 * x * z^2, y * z^-1 * y * z^-1 * y * z^-1 * y * z^-6 * x^2 * z^-4 * x * z^-1 * y * z^-1 ]"] );
+AddDictionary( TGQUOTS@, [ 38, 38, 95 ], dict );

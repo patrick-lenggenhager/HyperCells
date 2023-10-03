@@ -1,0 +1,12 @@
+dict := NewDictionary( [ 2, 1 ], true );
+AddDictionary( dict, [28, 59], [[28, 59], [3, 4, 24], 144, "Action reflexible [m]", "[ x^3, x * y * z, y^4, z^-1 * y * x^-1 * y^2, x^-1 * y^-1 * z^-1 * x^-1 * y^-1 * x * z * y^-1 * z^-1, z^-4 * x^-1 * z^3 * y^-1 ]"] );
+AddDictionary( dict, [55, 90], [[55, 90], [3, 4, 24], 288, "Action reflexible [m]", "[ x^3, x * y * z, y^4, z^-2 * x^-1 * z * y^-1 ]"] );
+AddDictionary( dict, [55, 91], [[55, 91], [3, 4, 24], 288, "Action reflexible [m]", "[ x^3, x * y * z, y^4, (z^-1 * y)^3, z^-2 * y * x^-1 * z * y^2, z^-1 * x^-1 * y^-1 * z^-1 * x^-1 * y * x * z * y, z^-4 * x^-1 * z^3 * y ]"] );
+AddDictionary( dict, [55, 92], [[55, 92], [3, 4, 24], 288, "Action reflexible [m]", "[ x^3, x * y * z, y^4, z^-1 * y * x^-1 * y^2, z^-4 * x^-1 * z^3 * y^-1 ]"] );
+AddDictionary( dict, [73, 161], [[73, 161], [3, 4, 24], 384, "Action reflexible [m]", "[ x^3, x * y * z, y^4, (z^-1 * y)^3, z^-3 * x^-1 * z^2 * y^-1 ]"] );
+AddDictionary( dict, [73, 162], [[73, 162], [3, 4, 24], 384, "Action reflexible [m]", "[ x^3, x * y * z, y^4, z^-3 * x^-1 * z^2 * y^-1, y^-1 * z * x^-1 * y^-1 * x * y^-1 * z^2 ]"] );
+AddDictionary( dict, [73, 163], [[73, 163], [3, 4, 24], 384, "Action reflexible [m]", "[ x^3, x * y * z, y^4, z^-1 * y * x^-1 * y^2, x^-1 * y * z^-1 * x^-1 * y^-1 * z^-1 * x * z^-1 * x * z * y^-1 * z^-1, z^-1 * x * z^2 * y * z^-1 * x^-1 * z * x^-1 * z^-2 * x * z * y^-1 ]"] );
+AddDictionary( dict, [82, 125], [[82, 125], [3, 4, 24], 432, "Action reflexible [m]", "[ x^3, x * y * z, y^4, z^-1 * y * x^-1 * y^2, z^-1 * x^-1 * y^-1 * z^-1 * x^-1 * y * x * z * y, z^-6 * x * y^-1 * z^-5 ]"] );
+AddDictionary( dict, [91, 110], [[91, 110], [3, 4, 24], 480, "Action reflexible [m]", "[ x^3, x * y * z, y^4, y * z^-2 * x^-1 * z^3, z^-1 * x^-1 * z * y * x^-1 * y^-1  * z^-1 * x * y^-1 ]"] );
+AddDictionary( dict, [91, 111], [[91, 111], [3, 4, 24], 480, "Action reflexible [m]", "[ x^3, x * y * z, y^4, (y * z^-1)^2, x^-1 * y * x * z^2 * y^-1 * z^-2 * x * y^-1 * x * z * y * z^-1 ]"] );
+AddDictionary( TGQUOTS@, [ 3, 4, 24 ], dict );

@@ -1,0 +1,13 @@
+dict := NewDictionary( [ 2, 1 ], true );
+AddDictionary( dict, [31, 75], [[31, 75], [5, 5, 10], 120, "Action reflexible [m,n]", "[ x * y * z, x^-5, z * y * x^-1 * y^-1 * x, (z^-1 * x)^3 ]"] );
+AddDictionary( dict, [41, 229], [[41, 229], [5, 5, 10], 160, "Action reflexible [m]", "[ x * y * z, x^-5, y^-5, (x * z * y)^2, z * y^-1 * z^-1 * x * z^2 ]"] );
+AddDictionary( dict, [41, 230], [[41, 230], [5, 5, 10], 160, "Action reflexible [m]", "[ x * y * z, (x * z^-1)^2, x^-5, y^-5, z^-1 * y * x^-2 * y^2 * z^-1 ]"] );
+AddDictionary( dict, [41, 231], [[41, 231], [5, 5, 10], 160, "Action reflexible [m,n]", "[ x * y * z, x^-5, y^-5, (x * z * y)^2, y^-1 * z^-2 * x * z^2 ]"] );
+AddDictionary( dict, [41, 232], [[41, 232], [5, 5, 10], 160, "Action reflexible [m,n]", "[ x * y * z, (x * y^-1)^2, x^-5, y^-5, y^-1 * z^-2 * x * z^2 ]"] );
+AddDictionary( dict, [76, 93], [[76, 93], [5, 5, 10], 300, "Action reflexible [m]", "[ x * y * z, x^-5, z^-2 * x^-1 * z * y^-1, y^-5, y * x^-1 * y * x^-1 * y^2 * z^-1 ]"] );
+AddDictionary( dict, [76, 94], [[76, 94], [5, 5, 10], 300, "Action reflexible [m]", "[ x * y * z, x^-5, z^-2 * x^-1 * z * y^-1, y^-5, x^-2 * y^-1 * x^2 * z * x^-1 * y, (x * y^-1 * z^-1 * y)^2 ]"] );
+AddDictionary( dict, [76, 95], [[76, 95], [5, 5, 10], 300, "Action reflexible [m,n]", "[ x * y * z, x^-5, z^-2 * x^-1 * z * y^-1, (y^-1 * x)^3, y^-5, x^-1 * y^-2 * x^2 * y^-1 * z * x^-1 ]"] );
+AddDictionary( dict, [81, 580], [[81, 580], [5, 5, 10], 320, "Action reflexible [m]", "[ x * y * z, x^-5, y^-5, z^-2 * x^-2 * y^-1 * z^-1 * y, y^-1 * x * z^-1 * x^-1 * y^-1 * z^2 ]"] );
+AddDictionary( dict, [81, 581], [[81, 581], [5, 5, 10], 320, "Action reflexible [m,n]", "[ x * y * z, x^-5, y^-5, y^-1 * z^-2 * x * z^2, z^-1 * x^-1 * y * x^-1 * y^-1 * x * y^-1 ]"] );
+AddDictionary( dict, [101, 227], [[101, 227], [5, 5, 10], 400, "Action reflexible [m,n]", "[ x * y * z, x^-5, z^-2 * x^-1 * z * y^-1, y^-5, y^-1 * z^-1 * y * x * z * x^-1, z * x^-2 * y^-1 * x^2 * y^-2 * x * y^-1 ]"] );
+AddDictionary( TGQUOTS@, [ 5, 5, 10 ], dict );

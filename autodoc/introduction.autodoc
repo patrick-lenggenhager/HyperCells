@@ -1,0 +1,15 @@
+@Chapter Introduction
+
+HyperCells is a package that allows constructing primitive cells and supercells
+of hyperbolic lattices based on triangle groups and quotients with normal subgroups.
+An introduction to the underlying concepts can be found in the following preprint
+
+- P. M. Lenggenhager, J. Maciejko, and T. Bzdušek,
+  **Non-Abelian hyperbolic band theory from supercells**, arXiv:2305.04945 (2023)
+  <Cite Key='Lenggenhager:HSC'/>
+
+and the doctoral thesis
+
+- P. M. Lenggenhager,
+  **Emerging avenues in band theory: multigap topology and hyperbolic lattices**,
+  PhD thesis, ETH Zürich (2023) <Cite Key='Lenggenhager:PhDThesis'/>

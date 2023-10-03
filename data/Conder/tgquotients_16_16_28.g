@@ -1,0 +1,5 @@
+dict := NewDictionary( [ 2, 1 ], true );
+AddDictionary( dict, [48, 78], [[48, 78], [16, 16, 28], 112, "Action reflexible [m]", "[ x * y * z, z^-1 * x^-2 * y^-1 * x, z^-1 * y * x^-1 * y^-2, z^2 * x^-1 * z * y^-1, x^6 * y^-2, z * y * x^-1 * y * x^-1 * z^4 ]"] );
+AddDictionary( dict, [95, 82], [[95, 82], [16, 16, 28], 224, "Action reflexible [m,n]", "[ x * y * z, z^-1 * x^-2 * y^-1 * x, z^-1 * y * x^-1 * y^-2, z^2 * x^-1 * z * y^-1, x^6 * y^-2, z^-2 * x * z^3 * y^-1 * z^-1 * x^-1 * z * y * z^-5 ]"] );
+AddDictionary( dict, [95, 83], [[95, 83], [16, 16, 28], 224, "Action reflexible [m,n]", "[ x * y * z, z * x^-1 * y^-1, x^-1 * y^2 * x^-1 * y * x^-1 * y * x^-2 * y * x^-1 * y * x^-1 * y^2 * x^-1, z^-2 * x * y^-1 * x * y^-1 * x * z^5 * y^-1 * z^-1 * x  * z * y^-1 * z^-1 ]"] );
+AddDictionary( TGQUOTS@, [ 16, 16, 28 ], dict );

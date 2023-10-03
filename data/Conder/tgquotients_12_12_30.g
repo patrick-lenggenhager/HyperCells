@@ -1,0 +1,12 @@
+dict := NewDictionary( [ 2, 1 ], true );
+AddDictionary( dict, [25, 152], [[25, 152], [12, 12, 30], 60, "Action reflexible [m,n]", "[ x * y * z, y^-1 * x^2 * y^-1, y^-1 * z^-2 * x * z^2, z^2 * x^-2 * z^3 ]"] );
+AddDictionary( dict, [49, 388], [[49, 388], [12, 12, 30], 120, "Action reflexible [n]", "[ x * y * z, (x * y^-1)^2, x^-1 * z * y^-1 * x * z^-1 * y, y^-1 * z^-1 * y * x * z * x^-1, y^-1 * z^2 * x^-1 * z^3 ]"] );
+AddDictionary( dict, [49, 389], [[49, 389], [12, 12, 30], 120, "Action reflexible [m,n]", "[ x * y * z, y^-1 * x^2 * y^-1, z^3 * x^-1 * z^2 * y^-1, z^3 * y^-1 * z^-2 * x^-1 * z^4 ]"] );
+AddDictionary( dict, [73, 612], [[73, 612], [12, 12, 30], 180, "Action reflexible [m,n]", "[ x * y * z, z^-1 * x^-2 * y^-1 * x, z^-1 * y * x^-1 * y^-2, z^3 * x^-1 * z^2 * y^-1, x * y^-1 * x * y^-1 * x * z * y^-1 * z^-1 ]"] );
+AddDictionary( dict, [73, 613], [[73, 613], [12, 12, 30], 180, "Action reflexible [m,n]", "[ x * y * z, y^-1 * x^2 * y^-1, z^3 * x^-1 * z^2 * y^-1, z^-1 * x * z * y^-1 * z^-1 * x * z^4 * y^-1 * z^-1 * x^-1 * z * y * z^-3 ]"] );
+AddDictionary( dict, [73, 614], [[73, 614], [12, 12, 30], 180, "Action reflexible [m,n]", "[ x * y * z, z * x^-1 * y^-1, x * y^-1 * x * y^-1 * x * y^-2 * x * y^-1 * x * y^-1 * x, z * y * z^-1 * x^-1 * z * y * z^-1 * x^-1 * z^4 * y * x^-1 * z^4 ]"] );
+AddDictionary( dict, [97, 926], [[97, 926], [12, 12, 30], 240, "Action reflexible [n]", "[ x * y * z, (x * y^-1)^2, y^-1 * z^-1 * y * x * z * x^-1, y^-1 * z^2 * x^-1 * z^3, y * z^-1 * y * x^2 * z^3 ]"] );
+AddDictionary( dict, [97, 927], [[97, 927], [12, 12, 30], 240, "Action reflexible [m,n]", "[ x * y * z, y^-1 * z^-1 * x^2 * z * y^-1, y^-1 * z * y^-1 * x * z^-1 * x, x^-4  * y * x * z^-1, z^-1 * x^-1 * y * x^-1 * z * y^-1 * z^-1, z^3 * x^-1 * z^2 * y^-1 ]"] );
+AddDictionary( dict, [97, 928], [[97, 928], [12, 12, 30], 240, "Action reflexible [m,n]", "[ x * y * z, (x * z^-1)^2, (y * z^-1)^2, y * x^-1 * y * x^-1 * z^3 ]"] );
+AddDictionary( dict, [97, 929], [[97, 929], [12, 12, 30], 240, "Action reflexible [m,n]", "[ x * y * z, z^-1 * x^-2 * y^-1 * x, z^-1 * y * x^-1 * y^-2, y^-1 * x^4 * y^-3, z^-2 * x^3 * z^-2 * x, z^-3 * x^-1 * z * y * x^-1 * z^3 * y * z^-1 ]"] );
+AddDictionary( TGQUOTS@, [ 12, 12, 30 ], dict );
