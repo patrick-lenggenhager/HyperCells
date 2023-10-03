@@ -40,6 +40,7 @@ be used to reproduce the results of the above preprint.
 - `TGCellGraph` objects and symmetric `TGCell` objects cannot be produced for
   cells without mirror symmetries, i.e., for quotients that act "chirally" on
   the surface.
+- Tests currently only succeed with GAP version 4.11.
 
 ## Contact
 
