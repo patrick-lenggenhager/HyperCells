@@ -10,9 +10,8 @@ The following file formats are introduced by the HyperCells package:
 
 These file formats are described in detail below.
 
-@Section Cell Graphs and (Supercell) Model Graphs
-
-@Subsection HyperCell cell graph (*.hcc)
+@Section HyperCell cell graph (*.hcc)
+@SectionLabel FileFormatTGCellGraph
 
 The basic file structure of a HyperCell cell graph file is as follows (with placeholders
 marked by `&lt;...&gt;`):
@@ -141,7 +140,8 @@ given below:
   [ (y*x)^4*y, (y*x)^4*y, 23, 4, 1, g4 ] ]
 @EndLogSession
 
-@Subsection HyperCell model graph (*.hcm)
+@Section HyperCell model graph (*.hcm)
+@SectionLabel FileFormatTGCellModelGraph
 
 The basic file structure of a HyperCell model graph file is as follows (with placeholders
 marked by `&lt;...&gt;`):
@@ -252,7 +252,8 @@ on the cell defined by the quotient T2.6 of $\Delta(2,8,8)$ is given below:
   [ 3, 1 ] ] ]
 @EndLogSession
 
-@Subsection HyperCell supercell graph (*.hcs)
+@Section HyperCell supercell graph (*.hcs)
+@SectionLabel FileFormatTGSuperCellModelGraph
 
 The basic file structure of a HyperCell supercell model graph file is as follows
 (with placeholders marked by `&lt;...&gt;`):

@@ -13,3 +13,139 @@ and the doctoral thesis
 - P. M. Lenggenhager,
   **Emerging avenues in band theory: multigap topology and hyperbolic lattices**,
   PhD thesis, ETH Zürich (2023) <Cite Key='Lenggenhager:PhDThesis'/>
+
+@Section Example
+
+In this section, some basic examples illustrating the use are shown.
+For more details, please refer to the documentation of the individual types,
+operators, and functions.
+
+A typical workflow starts by setting up the (proper) triangle group, here we choose
+$\Delta^+(2,8,8)$:
+@BeginExampleSession
+gap> tg := ProperTriangleGroup( [ 2, 8, 8 ] );
+ProperTriangleGroup(2, 8, 8)
+@EndExampleSession
+The returned object is of category `ProperTriangleGroup`
+(see <Ref Sect='Section_TriangleGroups'/>).
+Next, we specify a unit cell of the lattice in terms of the quotient of $\Delta^+$
+with a translation group $\Gamma\triangleleft\Delta^+$.
+For that we can query the included database based on the work of Marston Conder
+<Cite Key='Conder:2007'/>:
+@BeginExampleSession
+gap> ListTGQuotients( [ 2, 8, 8 ] );
+[ [ 2, 6 ], [ 3, 10 ], [ 3, 11 ], [ 5, 12 ], [ 5, 13 ], [ 9, 19 ], ... ]
+@EndExampleSession
+which allows us to select one of them, here the one denoted by `T2.6`, where
+2 is the genus of the surface on which the quotient group acts, and 6 the position
+in the list of all quotients with the same genus.
+@BeginExampleSession
+gap> q := TGQuotient( [ 2, 6 ] );
+TGQuotient([ 2, 6 ], [ 2, 8, 8 ], 8, 2, Action reflexible [m,n],
+    [ x^2, x * y * z, x * z * y, y^3 * z^-1 ])
+@EndExampleSession
+as an object of category `TGQuotient` (see <Ref Sect='Section_TGQuotient'/>).
+Alternatively, we can access the first entry appearing for $\Delta^+(2,8,8)$ using
+@BeginExampleSession
+gap> q := TGQuotient( 1, [ 2, 8, 8 ] );
+TGQuotient([ 2, 6 ], [ 2, 8, 8 ], 8, 2, Action reflexible [m,n],
+    [ x^2, x * y * z, x * z * y, y^3 * z^-1 ])
+@EndExampleSession
+Once we have the triangle group and the `TGQuotient` object, we can obtain the
+quotient group $G^+\cong\Delta^+/\Gamma$
+@BeginExampleSession
+gap> G := TGQuotientGroup( tg, q );
+<fp group on the generators [ x, y, z ]>
+@EndExampleSession
+or the associated translation group $\Gamma$
+@BeginExampleSession
+gap> Gamma := TGTranslationGroup( tg, q );
+TranslationGroup( < g1, g2, g3, g4 | g4*g3*g2*g1*g2^-1*g4^-1*g1^-1*g3^-1 > )
+@EndExampleSession
+
+The next step is to construct the graph representing primitive cell. This graph
+corresponds to a triangular tessellation of the compactified cell and is stored
+as an object of category `TGCellGraph` (see <Ref Sect='Section_TGCellGraph'/>).
+In addition to the triangle group and quotient, we also need to specify the vertex
+at which the cell should be centered (here we choose `3` corresponding to the $z$
+vertex of the fundamental Schwarz triangle):
+@BeginExampleSession
+gap> cg := TGCellGraph( tg, q, 3 : simplify := 5 );
+TGCellGraph(
+    TGCell( ProperTriangleGroup(2, 8, 8), [ x^2, x*y*z, x*z*y, y^3*z^-1 ] ),
+    center = 3,
+    vertices = [ [ 1, 1 ], [ 1, 2 ], [ 1, 3 ], [ 1, 4 ], [ 2, 1 ], [ 3, 1 ] ],
+    edges = [ [ 1, 6, 1, <identity ...> ], ..., [ 6, 5, 8, g1^-1*g2*g3^-1 ] ],
+    faces = [ [ [ 3, 1 ], [ 2, 1 ], [ 14, -1 ], [ 6, -1 ] ], ... ],
+    boundary = [ [ <identity ...>, <identity ...>, 2, 1, 0, g1 ], ... ]
+)
+@EndExampleSession
+The option `simplify` specifies the maximum wordlength that should be checked
+for simplifying expressions in terms of the translation generators `g1`, `g2`, etc.
+The default value is `0` which means that no simplification is performed.
+While the graph itself represents the compactified cell, potential translations
+associated with the edges crossing from one copy of the cell to another are stored
+as well. See <Ref Sect='Section_TGCellGraph'/> for more details the format of the
+vertices, edges, faces, and the boundary.
+
+The cell graph can be exported using the <Ref Oper='Export' Label='for TGCellGraph, String'/>
+operation, see <Ref Sect='Section_FileFormatTGCellGraph'/> for more details on the produced
+file format to import it using other software.
+
+With the cell graph at hand, we can derive a model graph, such as a tessellation
+graph, i.e., the nearest-neighbor graph of the $\{8,8\}$ tessellation of the
+hyperbolic plane restricted to the primitive cell:
+@BeginExampleSession
+gap> model := TessellationModelGraph( cg, true : simplify := 0 );
+TGCellModelGraph(
+    TGCell( ProperTriangleGroup(2, 8, 8), [ x^2, x*y*z, x*z*y, y^3*z^-1 ] ),
+    center = 3,
+    type = [ "TESS", [ 8, 8 ], [ "VEF", [ [ 3 ], [ 1 ], [ 2 ] ] ] ],
+    vertices = [ [ 3, 1 ] ],
+    edges = [ [ 1, 1, [ 1, [ 1, 1, 5 ] ], g1 ], [ 1, 1, [ 1, [ 2, 4, 8 ] ], g4 ],
+        [ 1, 1, [ 1, [ 3, 2, 6 ] ], g2 ], [ 1, 1, [ 1, [ 4, 3, 7 ] ], g3 ] ],
+    faces = [ [ [ 1, -1 ], [ 2, -1 ], [ 4, 1 ], [ 3, -1 ], [ 1, 1 ], [ 2, 1 ],
+        [ 4, -1 ], [ 3, 1 ] ] ]
+)
+@EndExampleSession
+The result is an object of category `TGCellModelGraph`
+(see <Ref Sect='Section_TGCellModelGraph'/>), which can be exported using the
+<Ref Oper='Export' Label='for TGCellModelGraph, String'/> operation, producing
+a file in the format described in <Ref Sect='Section_FileFormatTGCellModelGraph'/>.
+
+Finally, the model graph defined on the primitive cell can be **extended** to a
+**supercell**, i.e., a cell specified by a translation subgroup
+$\Gamma'\triangleleft\Gamma$ of the original translation group $\Gamma$.
+Here, we consider the one given by the quotient `T3.11` and first construct the
+**symmetric** cell (but without simplifying the translation generators):
+@BeginExampleSession
+gap> sc := TGCellSymmetric( tg, TGQuotient( [ 3, 11 ] ), 3 );
+TGCell( ProperTriangleGroup(2, 8, 8), [ x^2, x*y*z, x*z*y, y^-8 ] )
+@EndExampleSession
+and then construct the supercell model graph:
+@BeginExampleSession
+gap> scmodel := TGSuperCellModelGraph( model, sc : simplify := 0 );
+TGSuperCellModelGraph(
+    primitive cell = TGCell( ProperTriangleGroup(2, 8, 8),
+        [ x^2, x*y*z, x*z*y, y^3*z^-1 ] ),
+    supercell = TGCell( ProperTriangleGroup(2, 8, 8),
+        [ x^2, x*y*z, x*z*y, y^-8 ] ),
+    cell embedding = TGCellEmbedding(
+        primitive cell = TGCellTranslationGroup( < g1, g2, g3, g4 |
+            g2*g1^-1*g4^-1*g3*g2^-1*g1*g4*g3^-1 > ),
+        supercell = TGCellTranslationGroup( < g1, g2, g3, g4, g5, g6 |
+            g6*g4*g2*g1*g3*g5*g3^-1*g2^-1*g6^-1*g5^-1*g1^-1*g4^-1 > ),
+        transversal = [ <identity ...>, (x^-1*y^-1)^4*x^-1 ],
+        embedding = [ g1, g2, g3, g4, g5, g6 ] -> [ g1^-1*g4^-1, ... ]
+    ),
+    center = 3,
+    type = [ "TESS", [ 8, 8 ], [ "VEF", [ [ 3 ], [ 1 ], [ 2 ] ] ] ],
+    vertices = [ [ 3, 1, 1 ], [ 3, 1, 2 ] ],
+    edges = [ [ 1, 2, [ 1, 1, [ 1, [ 1, 1, 5 ] ] ], <identity ...> ], ... ],
+    faces = [ ]
+)
+@EndExampleSession
+which is returned as an object of category `TGSuperCellModelGraph`
+(see <Ref Sect='Section_TGSuperCellModelGraph'/>) and can be exported using the
+<Ref Oper='Export' Label='for TGSuperCellModelGraph, String'/> operation, producing
+a file in the format described in <Ref Sect='Section_FileFormatTGSuperCellModelGraph'/>.
