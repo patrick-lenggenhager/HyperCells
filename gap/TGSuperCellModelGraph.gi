@@ -33,7 +33,7 @@ end );
 
 InstallMethod( PrintString, [ IsTGSuperCellModelGraphObj and IsTGSuperCellModelGraphComponentRep ],
 function(model)
-	return Concatenation("TGSuperCellGraph( ",
+	return Concatenation("TGSuperCellModelGraph( ",
 		"primitive cell = ", PrintString(GetTGPrimitiveCell(model)), ", ",
 		"supercell = ", PrintString(GetTGSuperCell(model)), ", ",
 		"cell embedding = ", PrintString(CellEmbedding(model)), ", ",

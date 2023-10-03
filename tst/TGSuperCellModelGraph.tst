@@ -8,7 +8,7 @@ gap> cg := TGCellGraph(tg, q, 3 : simplify := 5);;
 gap> model := TessellationModelGraph(cg, true : simplify := 0);;
 gap> sc := TGCellSymmetric(tg, TGQuotient([ 3, 11 ]), 3);;
 gap> scmodel := TGSuperCellModelGraph(model, sc : simplify := 0);
-TGSuperCellGraph( primitive cell = TGCell( ProperTriangleGroup(2, 8, 8), [ x^2, x*y*z, x*z*y, y^3*z^-1 ] ), supercell = TGCell( ProperTriangleGroup(2, 8, 8), [ x^2, x*y*z, x*z*y, y^-8 ] ), cell embedding = TGCellEmbedding( primiti\
+TGSuperCellModelGraph( primitive cell = TGCell( ProperTriangleGroup(2, 8, 8), [ x^2, x*y*z, x*z*y, y^3*z^-1 ] ), supercell = TGCell( ProperTriangleGroup(2, 8, 8), [ x^2, x*y*z, x*z*y, y^-8 ] ), cell embedding = TGCellEmbedding( primiti\
 ve cell = TGCellTranslationGroup( < g1, g2, g3, g4 | g2*g1^-1*g4^-1*g3*g2^-1*g1*g4*g3^-1 > ), supercell = TGCellTranslationGroup( < g1, g2, g3, g4, g5, g6 | g6*g4*g2*g1*g3*g5*g3^-1*g2^-1*g6^-1*g5^-1*g1^-1*g4^-1 > ), transversal = \
 [ <identity ...>, (x^-1*y^-1)^4*x^-1 ], embedding = [ g1, g2, g3, g4, g5, g6 ] -> [ g1^-1*g4^-1, g1^-1*g2, g3*g4^-1, g1^-1*g2*g4^-1*g1^-1*g2*g3^-1*g4*g1*g2^-1*g1, g4*g1^-1*g4^-1*g3*g2^-1*g1, g1^-1*g2*g3^-1*g4*g2^-1*g1 ] ), center \
 = 3, type = [ "TESS", [ 8, 8 ], [ "VEF", [ [ 3 ], [ 1 ], [ 2 ] ] ] ], vertices = [ [ 3, 1, 1 ], [ 3, 1, 2 ] ], edges = [ [ 1, 2, [ 1, 1, [ 1, [ 1, 1, 5 ] ] ], <identity ...> ], [ 1, 2, [ 1, 1, [ 1, [ 2, 4, 8 ] ] ], g4^-1*g6*g2 ], \
@@ -61,7 +61,7 @@ y^-1)^6*x^-1, (x^-1*y^-1)^7*x^-1 ]\n[ [ 1, (y^-1*x^-1)^7, y^-1*x^-1, (y^-1*x^-1)
 , [ 1, [ 1, 1, 5 ] ] ] ], [ 2, 1, [ 1, 1, [ 1, [ 2, 4, 8 ] ] ] ], [ 2, 1, [ 1, 1, [ 1, [ 3, 2, 6 ] ] ] ], [ 2, 1, [ 1, 1, [ 1, [ 4, 3, 7 ] ] ] ] ]\n[ 1, g4^-1*g6*g2, g2, g4^-1*g6*g2*g3*g5^-1*g3^-1*g1^-1*g2^-1*g4^-1*g6^-1*g4*g1*g5*\
 g2, g3*g5^-1*g3^-1*g1^-1*g2^-1*g4^-1*g6^-1*g4, g1^-1, g3*g5^-1*g1^-1, g3*g1^-1 ]\n[ ]"
 gap> scmodel2 := ImportTGSuperCellModelGraphFromString(str, tg);
-TGSuperCellGraph( primitive cell = TGCell( ProperTriangleGroup(2, 8, 8), [ x^2, x*y*z, x*z*y, y^3*z^-1 ] ), supercell = TGCell( ProperTriangleGroup(2, 8, 8), [ x^2, x*y*z, x*z*y, y^-8 ] ), cell embedding = TGCellEmbedding( primiti\
+TGSuperCellModelGraph( primitive cell = TGCell( ProperTriangleGroup(2, 8, 8), [ x^2, x*y*z, x*z*y, y^3*z^-1 ] ), supercell = TGCell( ProperTriangleGroup(2, 8, 8), [ x^2, x*y*z, x*z*y, y^-8 ] ), cell embedding = TGCellEmbedding( primiti\
 ve cell = TGCellTranslationGroup( < g1, g2, g3, g4 | g4*g1*g2^-1*g3*g4^-1*g1^-1*g2*g3^-1 > ), supercell = TGCellTranslationGroup( < g1, g2, g3, g4, g5, g6 | g6*g4*g2*g1*g3*g5*g3^-1*g2^-1*g6^-1*g5^-1*g1^-1*g4^-1 > ), transversal = \
 [ <identity ...>, (x^-1*y^-1)^4*x^-1 ], embedding = [ g1, g2, g3, g4, g5, g6 ] -> [ g1^-1*g4^-1, g1^-1*g2, g3*g4^-1, g1^-1*g2*g4^-1*g1^-1*g2*g3^-1*g4*g1*g2^-1*g1, g4*g1^-1*g4^-1*g3*g2^-1*g1, g1^-1*g2*g3^-1*g4*g2^-1*g1 ] ), center \
 = 3, type = [ "TESS", [ 8, 8 ], [ "VEF", [ [ 3 ], [ 1 ], [ 2 ] ] ] ], vertices = [ [ 3, 1, 1 ], [ 3, 1, 2 ] ], edges = [ [ 1, 2, [ 1, 1, [ 1, [ 1, 1, 5 ] ] ], <identity ...> ], [ 1, 2, [ 1, 1, [ 1, [ 2, 4, 8 ] ] ], g4^-1*g6*g2 ], \
@@ -71,7 +71,7 @@ gap> scmodel = scmodel2;
 true
 
 gap> scmodelrand := RandomTGSuperCellModelGraph(model, TGQuotientRelators(tg, TGQuotient([3, 11])) : simplify := 0);
-TGSuperCellGraph( primitive cell = TGCell( ProperTriangleGroup(2, 8, 8), [ x^2, x*y*z, x*z*y, y^3*z^-1 ] ), supercell = TGCell( ProperTriangleGroup(2, 8, 8), [ x^2, x*y*z, x*z*y, y^-8 ] ), cell embedding = TGCellEmbedding( primiti\
+TGSuperCellModelGraph( primitive cell = TGCell( ProperTriangleGroup(2, 8, 8), [ x^2, x*y*z, x*z*y, y^3*z^-1 ] ), supercell = TGCell( ProperTriangleGroup(2, 8, 8), [ x^2, x*y*z, x*z*y, y^-8 ] ), cell embedding = TGCellEmbedding( primiti\
 ve cell = TGCellTranslationGroup( < g1, g2, g3, g4 | g2*g1^-1*g4^-1*g3*g2^-1*g1*g4*g3^-1 > ), supercell = TGCellTranslationGroup( < g1, g2, g3, g4, g5, g6 | g6*g4*g2*g1*g3*g5*g3^-1*g2^-1*g6^-1*g5^-1*g1^-1*g4^-1 > ), transversal = \
 [ <identity ...>, y^3*z^-1 ], embedding = [ g1, g2, g3, g4, g5, g6 ] -> [ g1^-1*g4^-1, g1^-1*g2, g3*g4^-1, g1^-1*g2*g4^-1*g1^-1*g2*g3^-1*g4*g1*g2^-1*g1, g4*g1^-1*g4^-1*g3*g2^-1*g1, g1^-1*g2*g3^-1*g4*g2^-1*g1 ] ), center = 3, type \
 = [ "TESS", [ 8, 8 ], [ "VEF", [ [ 3 ], [ 1 ], [ 2 ] ] ] ], vertices = [ [ 3, 1, 1 ], [ 3, 1, 2 ] ], edges = [ [ 1, 2, [ 1, 1, [ 1, [ 1, 1, 5 ] ] ], g1^-1*g2^-1*g4^-1*g6^-1*g4 ], [ 1, 2, [ 1, 1, [ 1, [ 2, 4, 8 ] ] ], g1^-1*g2^-1*g\
@@ -87,7 +87,7 @@ gap> str := ExportString(scmodelrand);
  [ 2, 1, [ 1, 1, [ 1, [ 3, 2, 6 ] ] ] ], [ 2, 1, [ 1, 1, [ 1, [ 4, 3, 7 ] ] ] ] ]\n[ g1^-1*g2^-1*g4^-1*g6^-1*g4, g1^-1*g2^-1*g4^-1*g2, g1^-1*g2^-1*g4^-1*g6^-1*g4*g2, g1^-1*g2^-1*g4^-1*g2*g3*g5^-1*g3^-1*g1^-1*g2^-1*g4^-1*g6^-1*g4*g\
 1*g5*g2, g3*g5^-1*g3^-1, g1^-1*g4^-1*g6*g4*g2*g1, g3*g5^-1*g1^-1*g4^-1*g6*g4*g2*g1, g3*g1^-1*g4^-1*g6*g4*g2*g1 ]\n[ ]"
 gap> scmodelrand2 := ImportTGSuperCellModelGraphFromString(str, tg);
-TGSuperCellGraph( primitive cell = TGCell( ProperTriangleGroup(2, 8, 8), [ x^2, x*y*z, x*z*y, y^3*z^-1 ] ), supercell = TGCell( ProperTriangleGroup(2, 8, 8), [ x^2, x*y*z, x*z*y, y^-8 ] ), cell embedding = TGCellEmbedding( primiti\
+TGSuperCellModelGraph( primitive cell = TGCell( ProperTriangleGroup(2, 8, 8), [ x^2, x*y*z, x*z*y, y^3*z^-1 ] ), supercell = TGCell( ProperTriangleGroup(2, 8, 8), [ x^2, x*y*z, x*z*y, y^-8 ] ), cell embedding = TGCellEmbedding( primiti\
 ve cell = TGCellTranslationGroup( < g1, g2, g3, g4 | g4*g1*g2^-1*g3*g4^-1*g1^-1*g2*g3^-1 > ), supercell = TGCellTranslationGroup( < g1, g2, g3, g4, g5, g6 | g6*g4*g2*g1*g3*g5*g3^-1*g2^-1*g6^-1*g5^-1*g1^-1*g4^-1 > ), transversal = \
 [ <identity ...>, y^3*z^-1 ], embedding = [ g1, g2, g3, g4, g5, g6 ] -> [ g1^-1*g4^-1, g1^-1*g2, g3*g4^-1, g1^-1*g2*g4^-1*g1^-1*g2*g3^-1*g4*g1*g2^-1*g1, g4*g1^-1*g4^-1*g3*g2^-1*g1, g1^-1*g2*g3^-1*g4*g2^-1*g1 ] ), center = 3, type \
 = [ "TESS", [ 8, 8 ], [ "VEF", [ [ 3 ], [ 1 ], [ 2 ] ] ] ], vertices = [ [ 3, 1, 1 ], [ 3, 1, 2 ] ], edges = [ [ 1, 2, [ 1, 1, [ 1, [ 1, 1, 5 ] ] ], g1^-1*g2^-1*g4^-1*g6^-1*g4 ], [ 1, 2, [ 1, 1, [ 1, [ 2, 4, 8 ] ] ], g1^-1*g2^-1*g\
