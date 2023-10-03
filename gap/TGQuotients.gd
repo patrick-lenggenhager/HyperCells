@@ -157,6 +157,7 @@ DeclareGlobalFunction( "ListTGQuotients" );
 #! @Description
 #!   returns a string appropriate for export to a text file.
 #! @Arguments tgquotient
+#! @Label for TGQuotient
 DeclareOperation( "ExportString", [ IsTGQuotientObj ] );
 #!
 #! @Description

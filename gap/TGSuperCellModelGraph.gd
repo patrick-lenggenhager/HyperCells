@@ -208,9 +208,10 @@ DeclareOperation( "CellEmbedding", [ IsTGSuperCellModelGraphObj ] );
 #! @Section Embedding of the Primitive Cell in the Supercell
 #! @SectionLabel TGCellEmbedding
 #!
-DeclareCategory( "IsTGCellEmbeddingObj", IsObject );
-#!
 
+DeclareCategory( "IsTGCellEmbeddingObj", IsObject );
+
+#!
 #! @Description
 #!   returns the primitive cell translation group as a `TGCellTranslationGroup` object
 #!   (see <Ref Sect="Section_TGCellTranslationGroup"/>).
@@ -239,9 +240,13 @@ DeclareOperation( "AsQuotient", [ IsTGCellEmbeddingObj ] );
 DeclareOperation( "GetRightTransversal", [ IsTGCellEmbeddingObj ] );
 #! @Description
 #!   Constructs an embedding homomorphism from the supercell translation group
-#!   (as an abstract finitely-presented group) to the primitive-cell translation group (also as an abstract finitely-presented group).
+#!   (as an abstract finitely-presented group) to the primitive-cell translation
+#!   group (also as an abstract finitely-presented group).
 #! @Arguments supercell-model
-#! @Returns group homomorphism from `FpGroup(TGCellTranslationGroup(GetTGSuperCell(`supercell-model`)))` to `FpGroup(TGCellTranslationGroup(GetTGPrimitiveCell(`supercell-model`)))`.
+#! @Returns group homomorphism from
+#! `FpGroup(TGCellTranslationGroup(GetTGSuperCell(`supercell-model`)))` to
+#! `FpGroup(TGCellTranslationGroup(GetTGPrimitiveCell(`supercell-model`)))`.
+#! @Label for TGCellEmbedding
 DeclareOperation( "TranslationGroupEmbedding", [ IsTGCellEmbeddingObj ] );
 
 #!
