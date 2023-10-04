@@ -18,7 +18,7 @@ Persons := [
   rec(
     FirstNames := "Patrick M.",
     LastName := "Lenggenhager",
-    WWWHome := "https://patrick-lenggenhager.github.io/",
+    WWWHome := "https://patrick-lenggenhager.github.io",
     Email := "patrick.m.lenggenhager@gmail.com",
     IsAuthor := true,
     IsMaintainer := true,
