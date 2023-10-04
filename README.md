@@ -35,7 +35,7 @@ addition to the package itself:
 Main developer:\
 &ensp;&ensp;**Patrick M. Lenggenhager**\
 &ensp;&ensp;Email: patrick.m.lenggenhager@gmail.com\
-&ensp;&ensp;Homepage: https://patrick-lenggenhager.github.io/
+&ensp;&ensp;Homepage: https://patrick-lenggenhager.github.io
 
 Coauthors:\
 &ensp;&ensp;**Joseph Maciejko** (maciejko@ualberta.ca)\
@@ -74,31 +74,31 @@ be used to reproduce the results of the above preprint.
 If you use this package, please cite the package repository
 ```BibTeX
 @misc{HyperCells,
-  title = {{\textsc{HyperCells}}: A {\textsc{GAP}} package for constructing primitive cells and spercells of hyperbolic lattices},
-  author = {Lenggenhager, Patrick M. and Maciejko, Joseph and Bzdu\v{s}ek, Tom\'{a}\v{s}},
-  year = {2023},
-  howpublished = {\url{https://github.com/patrick-lenggenhager/HyperCells}}
+  title           = {{\textsc{HyperCells}}: {A} {\textsc{GAP}} package for constructing primitive cells and spercells of hyperbolic lattices},
+  author          = {Lenggenhager, Patrick M. and Maciejko, Joseph and Bzdu\v{s}ek, Tom\'{a}\v{s}},
+  year            = {2023},
+  howpublished    = {\url{https://github.com/patrick-lenggenhager/HyperCells}}
 }
 ```
 and at least one of the following references:
 ```BibTeX
 @article{Lenggenhager:2023,
-  title               = {Non-{A}belian hyperbolic band theory from supercells}, 
-  author              = {Lenggenhager, Patrick M. and Maciejko, Joseph and Bzdu\v{s}ek, Tom\'{a}\v{s}},
-  journal             = {arXiv preprint},
-  year                = {2023},
-  doi                 = {10.48550/arXiv.2305.04945},
-  url                 = {https://arxiv.org/abs/2305.04945}
-  eprint              = {2305.04945},
-  eprintType          = {arXiv},
-  archivePrefix       = {arXiv}
+  title           = {Non-{A}belian hyperbolic band theory from supercells}, 
+  author          = {Lenggenhager, Patrick M. and Maciejko, Joseph and Bzdu\v{s}ek, Tom\'{a}\v{s}},
+  year            = {2023},
+  journal         = {arXiv preprint},
+  eprint          = {2305.04945},
+  eprintType      = {arXiv},
+  archivePrefix   = {arXiv},
+  doi             = {10.48550/arXiv.2305.04945},
+  url             = {https://arxiv.org/abs/2305.04945}
 }
 
 @phdthesis{Lenggenhager:PhDThesis,
-	author          = {Lenggenhager, Patrick M.}, 
-	title           = {Emerging avenues in band theory: multigap topology and hyperbolic lattices},
-	school          = {ETH Zürich},
-	year            = {2023}
+  title           = {Emerging avenues in band theory: multigap topology and hyperbolic lattices},
+  author          = {Lenggenhager, Patrick M.}, 
+  year            = {2023},
+  school          = {ETH Zürich}
 }
 ```
 
@@ -110,7 +110,7 @@ https://github.com/patrick-lenggenhager/HyperCells/issues.
 Maintainer:\
 &ensp;&ensp;**Patrick M. Lenggenhager**\
 &ensp;&ensp;Email: patrick.m.lenggenhager@gmail.com\
-&ensp;&ensp;Homepage: https://patrick-lenggenhager.github.io/
+&ensp;&ensp;Homepage: https://patrick-lenggenhager.github.io
 
 ## License and copyright
 
