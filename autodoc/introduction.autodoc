@@ -14,6 +14,14 @@ and the doctoral thesis
   **Emerging avenues in band theory: multigap topology and hyperbolic lattices**,
   PhD thesis, ETH Zürich (2023) <Cite Key='Lenggenhager:PhDThesis'/>
 
+If you use this package, please cite at least one of the above references in
+addition to the package itself:
+- P. M. Lenggenhager, J. Maciejko, and T. Bzdušek,
+  **HyperCells: A GAP package for constructing primitive cells and supercells of
+  hyperbolic lattices**, <URL>https://github.com/patrick-lenggenhager/HyperCells</URL> (2023)
+More information on how to cite, including BibTeX entries, can be found in the
+Readme file of the package repository given above.
+
 @Section Example
 
 In this section, some basic examples illustrating the use are shown.
