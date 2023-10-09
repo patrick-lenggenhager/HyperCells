@@ -261,7 +261,7 @@ gap> CellEdges(tmg);
 
 # Additional models
 gap> ExportString(TessellationModelGraph(TGCellGraph(ProperTriangleGroup([ 2, 8, 8 ]), TGQuotient([ 3, 11 ]), 3 : simplify := 0), true : simplify := 0));
-"[ 2, 8, 8 ]\n[ [ x^2, x*y*z, x*z*y, y^-8 ], 3 ]\n[ g1, g2, g3, g4, g5, g6 ] -> [ z*y*x^-1, y*x*z, (z^-1*x^-1)^2*y^-1*x*z, z^-1*x^-1*y^2*x*z*y^-1*x*z, z^-1*x^-1*y*(x*z)^2*x*y^-\
+"HyperCells HCM version 1.0\n[ 2, 8, 8 ]\n[ [ x^2, x*y*z, x*z*y, y^-8 ], 3 ]\n[ g1, g2, g3, g4, g5, g6 ] -> [ z*y*x^-1, y*x*z, (z^-1*x^-1)^2*y^-1*x*z, z^-1*x^-1*y^2*x*z*y^-1*x*z, z^-1*x^-1*y*(x*z)^2*x*y^-\
 3*z^-1*y*z*y*z^-1, z^-1*x^-1*y*z^-1*x^-1*y^-4*z*y*z^-1 ]\n[ 1, y^-1*x^-1, (y^-1*x^-1)^2, (y^-1*x^-1)^3, (y^-1*x^-1)^4, (y^-1*x^-1)^5, (y^-1*x^-1)^6, (y^-1*x^-1)^7, x^-1, x^-1*y\
 ^-1*x^-1, (x^-1*y^-1)^2*x^-1, (x^-1*y^-1)^3*x^-1, (x^-1*y^-1)^4*x^-1, (x^-1*y^-1)^5*x^-1, (x^-1*y^-1)^6*x^-1, (x^-1*y^-1)^7*x^-1 ]\n[ [ 1, (y^-1*x^-1)^7, y^-1*x^-1, (y^-1*x^-1)\
 ^6, (y^-1*x^-1)^2, (y^-1*x^-1)^5, (y^-1*x^-1)^3, (y^-1*x^-1)^4 ], [ 1, y^-1*x^-1 ], [ 1, x^-1 ] ]\n[ \"TESS\", [ 8, 8 ], [ \"VEF\", [ [ 3 ], [ 1 ], [ 2 ] ] ] ]\n[ [ 3, 1 ], [ 3\
@@ -271,7 +271,7 @@ gap> ExportString(TessellationModelGraph(TGCellGraph(ProperTriangleGroup([ 2, 8,
 [ 6, -1 ], [ 8, 1 ], [ 7, -1 ], [ 5, 1 ] ] ]"
 
 gap> ExportString(TessellationModelGraph(TGCellGraph(ProperTriangleGroup([ 2, 8, 8 ]), TGQuotient([ 5, 13 ]), 3 : simplify := 0), true : simplify := 0));
-"[ 2, 8, 8 ]\n[ [ x^2, x*y*z, x*y^-2*z^-1*y, x*z*y^-1*z^-2, y^8 ], 3 ]\n[ g1, g2, g3, g4, g5, g6, g7, g8, g9, g10 ] -> [ z^-2*x^-1*z*y^-1, z^-2*x^-1*y*x^-1*y^-1*x*y^-1*z, z^-2*\
+"HyperCells HCM version 1.0\n[ 2, 8, 8 ]\n[ [ x^2, x*y*z, x*y^-2*z^-1*y, x*z*y^-1*z^-2, y^8 ], 3 ]\n[ g1, g2, g3, g4, g5, g6, g7, g8, g9, g10 ] -> [ z^-2*x^-1*z*y^-1, z^-2*x^-1*y*x^-1*y^-1*x*y^-1*z, z^-2*\
 x^-1*y*x^-1*y^-5*z*y^2*z*y*z^-1*x^-1*y*z^-1*x*z^2, z^2*y^-1*z^-4*(x^-1*y)^2*x*y^-1*x*z^2, z*y^-2*z^-1*y^5*x*y^-1*x*z^2, y^-1*z^2*y*z^-2, z^2*y^-1*z^-1*y^2*x^-1, z^2*y*(z^-1*y^-\
 1*z^-1)^2*x^-1*z, y^-1*z^-1*y*x^-1*z^-1*x*z^2, y^3*x*y^-1*x*z^2 ]\n[ 1, y^-1*x^-1, (y^-1*x^-1)^2, (y^-1*x^-1)^3, (y^-1*x^-1)^4, (y^-1*x^-1)^5, (y^-1*x^-1)^6, (y^-1*x^-1)^7, x^-\
 1, x^-1*y^-1*x^-1, (x^-1*y^-1)^2*x^-1, (x^-1*y^-1)^3*x^-1, (x^-1*y^-1)^4*x^-1, (x^-1*y^-1)^5*x^-1, (x^-1*y^-1)^6*x^-1, (x^-1*y^-1)^7*x^-1, y^-1, y^-2*x^-1, y^-1*(y^-1*x^-1)^2, \
@@ -289,7 +289,7 @@ y^-1*(y^-1*x^-1)^3, y^-1*(y^-1*x^-1)^4, y^-1*(y^-1*x^-1)^5, y^-1*(y^-1*x^-1)^6, 
 , -1 ], [ 12, 1 ], [ 16, 1 ], [ 14, -1 ] ] ]"
 
 gap> ExportString(TessellationModelGraph(TGCellGraph(ProperTriangleGroup([ 2, 3, 8 ]), TGQuotient([ 3, 2 ]), 3 : simplify := 0), false : simplify := 0));
-"[ 2, 3, 8 ]\n[ [ x^2, y^3, x*y*z, z^-4*x*y*z^-3, z*y*x*(z*y^-1)^2*z^-1*x ], 3 ]\n[ g1, g2, g3, g4, g5, g6 ] -> [ z*y^-1*z^-1*x*z*y*x^-1*z*y^-1, y^-1*z^-1*x*(z*y*x^-1)^2, y*x*y\
+"HyperCells HCM version 1.0\n[ 2, 3, 8 ]\n[ [ x^2, y^3, x*y*z, z^-4*x*y*z^-3, z*y*x*(z*y^-1)^2*z^-1*x ], 3 ]\n[ g1, g2, g3, g4, g5, g6 ] -> [ z*y^-1*z^-1*x*z*y*x^-1*z*y^-1, y^-1*z^-1*x*(z*y*x^-1)^2, y*x*y\
 ^-1*z^-1*x*z*y*x^-1*z, x*z*y^-1*z^-1*x*z*y*x^-1*z^2, z^-1*x*y^-1*z^-1*x^-1*z*y*x^-1*z^-1*x*y^-1*z^-1*x^-1*z^-2*x*z^2*y*z^-1*y^-1*z^-1*x*z*y*x^-1*z^2, z^-1*x*y^-1*z^-1*x^-1*z*y*\
 z*y^-1*z^-1*x*z*y*x^-1*z*x*y^-1*z^-1*x^-1*z*y*z^-1 ]\n[ 1, y^-1*x^-1, (y^-1*x^-1)^2, (y^-1*x^-1)^3, (y^-1*x^-1)^4, (y^-1*x^-1)^5, (y^-1*x^-1)^6, (y^-1*x^-1)^7, x^-1, x^-1*y^-1*\
 x^-1, (x^-1*y^-1)^2*x^-1, (x^-1*y^-1)^3*x^-1, (x^-1*y^-1)^4*x^-1, (x^-1*y^-1)^5*x^-1, (x^-1*y^-1)^6*x^-1, (x^-1*y^-1)^7*x^-1, y^-1, y^-2*x^-1, y^-1*(y^-1*x^-1)^2, y^-1*(y^-1*x^\
@@ -339,7 +339,7 @@ y*x*y*(x^-1*y^-1)^7*x^-1, x*y*x^-1*y^-1*x^-1, (x*y)^2*x^-1, (y^-1*x^-1)^5, x*y*x
 1 ], [ 34, -1 ], [ 39, -1 ], [ 37, -1 ], [ 47, -1 ], [ 43, -1 ], [ 45, -1 ], [ 41, -1 ] ] ]"
 
 gap> ExportString(TessellationModelGraph(TGCellGraph(ProperTriangleGroup([ 2, 3, 8 ]), TGQuotient([ 5, 1 ]), 3 : simplify := 0), false : simplify := 0));
-"[ 2, 3, 8 ]\n[ [ x^2, y^3, x*y*z, z^8, z^3*y*z^-1*x*z*y^-1*x*y^-1*z^-2*x ], 3 ]\n[ g1, g2, g3, g4, g5, g6, g7, g8, g9, g10 ] -> [ z^-3*x*z*y^-1*z^-3*x^-1*z*y^-1, z^2*y^-1*z^-2\
+"HyperCells HCM version 1.0\n[ 2, 3, 8 ]\n[ [ x^2, y^3, x*y*z, z^8, z^3*y*z^-1*x*z*y^-1*x*y^-1*z^-2*x ], 3 ]\n[ g1, g2, g3, g4, g5, g6, g7, g8, g9, g10 ] -> [ z^-3*x*z*y^-1*z^-3*x^-1*z*y^-1, z^2*y^-1*z^-2\
 *x*z^3*y*z^-1*x^-1, z*y^-1*z^-2*x*z^3*y*z^-1*x^-1*z, y^-1*z^-2*x*z^3*y*z^-1*x^-1*z^2, z*y^-1*z^-3*x*z^2*y*z^-2*x^-1, y^-1*z^-3*x*z^2*y*z^-2*x^-1*z, y*z^-2*x*z^2*y*z^-2*x^-1*z^2\
 , x*y^-1*z^-2*x*z*(z^2*y)^2*z^-1*x^-1*z^3, z^-2*x*z^2*y^-1*z^-2*x^-1*z^2*y^-1*x*z^2*y^-1*z^-2*x^-1*z^3*y*z^-1*y^-1*z^-1*x*z*y^-1*z^-3*x^-1*z^2*y*x^-1*z^-1*x*z^3*y*z^-1*x^-1*z^3\
 , z^-3*x*z*(y^-1*z^-2)^2*z^-1*x^-1*z^2*y*x^-1*z^-1*x*z^2*y^-1*z^-2*x^-1*z^3*y^2*x*z*y^-1*z^-2*(z^-1*x^-1)^2*z^2*y*z^-2 ]\n[ 1, y^-1*x^-1, (y^-1*x^-1)^2, (y^-1*x^-1)^3, (y^-1*x^\
@@ -447,7 +447,7 @@ x^-1*y^-1)^2*x^-1, x^-1*y^-1*x^-1*y^-1*(y^-1*x^-1)^5, x*y*x^-1*y^-1*(x*y)^2*(x^-
 , [ 77, -1 ], [ 81, -1 ], [ 94, -1 ], [ 96, -1 ], [ 89, -1 ], [ 86, -1 ] ] ]"
 
 gap> ExportString(KagomeModelGraph(TGCellGraph(ProperTriangleGroup([ 2, 3, 8 ]), TGQuotient([ 3, 2 ]), 3 : simplify := 0) : simplify := 0));
-"[ 2, 3, 8 ]\n[ [ x^2, y^3, x*y*z, z^-4*x*y*z^-3, z*y*x*(z*y^-1)^2*z^-1*x ], 3 ]\n[ g1, g2, g3, g4, g5, g6 ] -> [ z*y^-1*z^-1*x*z*y*x^-1*z*y^-1, y^-1*z^-1*x*(z*y*x^-1)^2, y*x*y\
+"HyperCells HCM version 1.0\n[ 2, 3, 8 ]\n[ [ x^2, y^3, x*y*z, z^-4*x*y*z^-3, z*y*x*(z*y^-1)^2*z^-1*x ], 3 ]\n[ g1, g2, g3, g4, g5, g6 ] -> [ z*y^-1*z^-1*x*z*y*x^-1*z*y^-1, y^-1*z^-1*x*(z*y*x^-1)^2, y*x*y\
 ^-1*z^-1*x*z*y*x^-1*z, x*z*y^-1*z^-1*x*z*y*x^-1*z^2, z^-1*x*y^-1*z^-1*x^-1*z*y*x^-1*z^-1*x*y^-1*z^-1*x^-1*z^-2*x*z^2*y*z^-1*y^-1*z^-1*x*z*y*x^-1*z^2, z^-1*x*y^-1*z^-1*x^-1*z*y*\
 z*y^-1*z^-1*x*z*y*x^-1*z*x*y^-1*z^-1*x^-1*z*y*z^-1 ]\n[ 1, y^-1*x^-1, (y^-1*x^-1)^2, (y^-1*x^-1)^3, (y^-1*x^-1)^4, (y^-1*x^-1)^5, (y^-1*x^-1)^6, (y^-1*x^-1)^7, x^-1, x^-1*y^-1*\
 x^-1, (x^-1*y^-1)^2*x^-1, (x^-1*y^-1)^3*x^-1, (x^-1*y^-1)^4*x^-1, (x^-1*y^-1)^5*x^-1, (x^-1*y^-1)^6*x^-1, (x^-1*y^-1)^7*x^-1, y^-1, y^-2*x^-1, y^-1*(y^-1*x^-1)^2, y^-1*(y^-1*x^\
@@ -516,7 +516,7 @@ y*x*y*(x^-1*y^-1)^7*x^-1, x*y*x^-1*y^-1*x^-1, (x*y)^2*x^-1, (y^-1*x^-1)^5, x*y*x
  ], [ 96, 1 ] ] ]"
 
 gap> ExportString(KagomeModelGraph(TGCellGraph(ProperTriangleGroup([ 2, 3, 8 ]), TGQuotient([ 5, 1 ]), 3 : simplify := 0) : simplify := 0));
-"[ 2, 3, 8 ]\n[ [ x^2, y^3, x*y*z, z^8, z^3*y*z^-1*x*z*y^-1*x*y^-1*z^-2*x ], 3 ]\n[ g1, g2, g3, g4, g5, g6, g7, g8, g9, g10 ] -> [ z^-3*x*z*y^-1*z^-3*x^-1*z*y^-1, z^2*y^-1*z^-2\
+"HyperCells HCM version 1.0\n[ 2, 3, 8 ]\n[ [ x^2, y^3, x*y*z, z^8, z^3*y*z^-1*x*z*y^-1*x*y^-1*z^-2*x ], 3 ]\n[ g1, g2, g3, g4, g5, g6, g7, g8, g9, g10 ] -> [ z^-3*x*z*y^-1*z^-3*x^-1*z*y^-1, z^2*y^-1*z^-2\
 *x*z^3*y*z^-1*x^-1, z*y^-1*z^-2*x*z^3*y*z^-1*x^-1*z, y^-1*z^-2*x*z^3*y*z^-1*x^-1*z^2, z*y^-1*z^-3*x*z^2*y*z^-2*x^-1, y^-1*z^-3*x*z^2*y*z^-2*x^-1*z, y*z^-2*x*z^2*y*z^-2*x^-1*z^2\
 , x*y^-1*z^-2*x*z*(z^2*y)^2*z^-1*x^-1*z^3, z^-2*x*z^2*y^-1*z^-2*x^-1*z^2*y^-1*x*z^2*y^-1*z^-2*x^-1*z^3*y*z^-1*y^-1*z^-1*x*z*y^-1*z^-3*x^-1*z^2*y*x^-1*z^-1*x*z^3*y*z^-1*x^-1*z^3\
 , z^-3*x*z*(y^-1*z^-2)^2*z^-1*x^-1*z^2*y*x^-1*z^-1*x*z^2*y^-1*z^-2*x^-1*z^3*y^2*x*z*y^-1*z^-2*(z^-1*x^-1)^2*z^2*y*z^-2 ]\n[ 1, y^-1*x^-1, (y^-1*x^-1)^2, (y^-1*x^-1)^3, (y^-1*x^\
@@ -669,7 +669,7 @@ gap> q := TGQuotient( [ 2, 1 ] );;
 gap> cg := TGCellGraph(tg, q, 3 : simplify := 0);;
 gap> tmg := TessellationModelGraph(cg, true : simplify := 0);;
 gap> ExportString(tmg);
-"[ 2, 3, 8 ]\n[ [ x^2, y^3, x*y*z, z*y*x*z*y^-1*z^-1*x*z ], 3 ]\n[ g1, g2, g3, g4 ] -> [ z^2*y^-1*z^-1*x^-1*z^2*y^-1, z*y^-1*z^-1*x*z^2*y*x^-1, y^-1*z^-1*x*z^2*y*x^-1*z, y*z^-2\
+"HyperCells HCM version 1.0\n[ 2, 3, 8 ]\n[ [ x^2, y^3, x*y*z, z*y*x*z*y^-1*z^-1*x*z ], 3 ]\n[ g1, g2, g3, g4 ] -> [ z^2*y^-1*z^-1*x^-1*z^2*y^-1, z*y^-1*z^-1*x*z^2*y*x^-1, y^-1*z^-1*x*z^2*y*x^-1*z, y*z^-2\
 *x*z*y*z^-1*y^-1*z^-1*x*z^2*y*x^-1*z^-1*x*y^-1*z^-2*x^-1*z^-1*x*z*y*z^-1*y^-1*z^-2*x^-1*z*y*z^-1*y^-1*z^-1*x*z^2*y*x^-1*z ]\n[ 1, y^-1*x^-1, (y^-1*x^-1)^2, (y^-1*x^-1)^3, (y^-1\
 *x^-1)^4, (y^-1*x^-1)^5, (y^-1*x^-1)^6, (y^-1*x^-1)^7, x^-1, x^-1*y^-1*x^-1, (x^-1*y^-1)^2*x^-1, (x^-1*y^-1)^3*x^-1, (x^-1*y^-1)^4*x^-1, (x^-1*y^-1)^5*x^-1, (x^-1*y^-1)^6*x^-1,\
  (x^-1*y^-1)^7*x^-1, y^-1, y^-2*x^-1, y^-1*(y^-1*x^-1)^2, y^-1*(y^-1*x^-1)^3, y^-1*(y^-1*x^-1)^4, y^-1*(y^-1*x^-1)^5, y^-1*(y^-1*x^-1)^6, y^-1*(y^-1*x^-1)^7, x*y*x^-1, x*y*x^-1\
@@ -697,7 +697,7 @@ gap> q := TGQuotient( [ 5, 1 ] );;
 gap> cg := TGCellGraph(tg, q, 3 : simplify := 0);;
 gap> tmg := TessellationModelGraph(cg, true : simplify := 0);;
 gap> ExportString(tmg);
-"[ 2, 3, 8 ]\n[ [ x^2, y^3, x*y*z, z^8, z^3*y*z^-1*x*z*y^-1*x*y^-1*z^-2*x ], 3 ]\n[ g1, g2, g3, g4, g5, g6, g7, g8, g9, g10 ] -> [ z^-3*x*z*y^-1*z^-3*x^-1*z*y^-1, z^2*y^-1*z^-2\
+"HyperCells HCM version 1.0\n[ 2, 3, 8 ]\n[ [ x^2, y^3, x*y*z, z^8, z^3*y*z^-1*x*z*y^-1*x*y^-1*z^-2*x ], 3 ]\n[ g1, g2, g3, g4, g5, g6, g7, g8, g9, g10 ] -> [ z^-3*x*z*y^-1*z^-3*x^-1*z*y^-1, z^2*y^-1*z^-2\
 *x*z^3*y*z^-1*x^-1, z*y^-1*z^-2*x*z^3*y*z^-1*x^-1*z, y^-1*z^-2*x*z^3*y*z^-1*x^-1*z^2, z*y^-1*z^-3*x*z^2*y*z^-2*x^-1, y^-1*z^-3*x*z^2*y*z^-2*x^-1*z, y*z^-2*x*z^2*y*z^-2*x^-1*z^2\
 , x*y^-1*z^-2*x*z*(z^2*y)^2*z^-1*x^-1*z^3, z^-2*x*z^2*y^-1*z^-2*x^-1*z^2*y^-1*x*z^2*y^-1*z^-2*x^-1*z^3*y*z^-1*y^-1*z^-1*x*z*y^-1*z^-3*x^-1*z^2*y*x^-1*z^-1*x*z^3*y*z^-1*x^-1*z^3\
 , z^-3*x*z*(y^-1*z^-2)^2*z^-1*x^-1*z^2*y*x^-1*z^-1*x*z^2*y^-1*z^-2*x^-1*z^3*y^2*x*z*y^-1*z^-2*(z^-1*x^-1)^2*z^2*y*z^-2 ]\n[ 1, y^-1*x^-1, (y^-1*x^-1)^2, (y^-1*x^-1)^3, (y^-1*x^\
@@ -810,7 +810,7 @@ gap> q := TGQuotient( [ 2, 2 ] );;
 gap> cg := TGCellGraph(tg, q, 3 : simplify := 0);;
 gap> tmg := TessellationModelGraph(cg, true : simplify := 0);;
 gap> ExportString(tmg);
-"[ 2, 4, 6 ]\n[ [ x^2, x*y*z, y^4, (y*z^-1)^2, z^6 ], 3 ]\n[ g1, g2, g3, g4 ] -> [ (z*y^-1)^2, (y^-1*z)^2, x*z*y^-1*z^2, (z^-1*y*z^-2)^2 ]\n[ 1, y^-1*x^-1, (y^-1*x^-1)^2, (y^-1\
+"HyperCells HCM version 1.0\n[ 2, 4, 6 ]\n[ [ x^2, x*y*z, y^4, (y*z^-1)^2, z^6 ], 3 ]\n[ g1, g2, g3, g4 ] -> [ (z*y^-1)^2, (y^-1*z)^2, x*z*y^-1*z^2, (z^-1*y*z^-2)^2 ]\n[ 1, y^-1*x^-1, (y^-1*x^-1)^2, (y^-1\
 *x^-1)^3, (y^-1*x^-1)^4, (y^-1*x^-1)^5, x^-1, x^-1*y^-1*x^-1, (x^-1*y^-1)^2*x^-1, (x^-1*y^-1)^3*x^-1, (x^-1*y^-1)^4*x^-1, (x^-1*y^-1)^5*x^-1, y^-1, y^-2*x^-1, y^-1*(y^-1*x^-1)^\
 2, y^-1*(y^-1*x^-1)^3, y^-1*(y^-1*x^-1)^4, y^-1*(y^-1*x^-1)^5, y*x^-1, y*x^-1*y^-1*x^-1, y*(x^-1*y^-1)^2*x^-1, y*(x^-1*y^-1)^3*x^-1, y*(x^-1*y^-1)^4*x^-1, y*(x^-1*y^-1)^5*x^-1 \
 ]\n[ [ 1, (y^-1*x^-1)^5, y^-1, y^-1*x^-1, y^-1*(y^-1*x^-1)^2, y^-2*x^-1, (y^-1*x^-1)^4, y^-1*(y^-1*x^-1)^5, (y^-1*x^-1)^2, y^-1*(y^-1*x^-1)^3, (y^-1*x^-1)^3, y^-1*(y^-1*x^-1)^4\
@@ -829,7 +829,7 @@ gap> q := TGQuotient( [ 2, 1 ] );;
 gap> cg := TGCellGraph(tg, q, 2 : simplify := 0);;
 gap> tmg := TessellationModelGraph(cg, false : simplify := 0);;
 gap> ExportString(tmg);
-"[ 2, 3, 8 ]\n[ [ x^2, y^3, x*y*z, z*y*x*z*y^-1*z^-1*x*z ], 2 ]\n[ g1, g2, g3, g4 ] -> [ y*z^-2*x*z*y*z^-1*y^-1*z^-1*x*z^2*y*x^-1, z^-1*x*y^-1*z^-2*x^-1*z*y, y*z^-2*x*z*y*z^-1*\
+"HyperCells HCM version 1.0\n[ 2, 3, 8 ]\n[ [ x^2, y^3, x*y*z, z*y*x*z*y^-1*z^-1*x*z ], 2 ]\n[ g1, g2, g3, g4 ] -> [ y*z^-2*x*z*y*z^-1*y^-1*z^-1*x*z^2*y*x^-1, z^-1*x*y^-1*z^-2*x^-1*z*y, y*z^-2*x*z*y*z^-1*\
 y^-1*z^-1*x*z^2*y*x^-1*z^-1*x*y^-1*z^-2*x^-1*z^-1*x*z*y*z^-1*y^-1*z^-2*x^-1*z*y*z^-1*y^-1*z^-1*x*z^2*y*x^-1*z, x*z*y^-1*z^-1*x^-1*z^2*y ]\n[ 1, y, y^2, x*y, x*y^2, x*y^3, y^-1*\
 x^-1, y^-1*x^-1*y, y^-1*x^-1*y^2, (x*y)^2, (x*y)^2*y, (x*y)^2*y^2, y*x*y, y*x*y^2, y*x*y^3, x^-1*y^-1*x^-1, x^-1*y^-1*x^-1*y, x^-1*y^-1*x^-1*y^2, (y^-1*x^-1)^2, (y^-1*x^-1)^2*y\
 , (y^-1*x^-1)^2*y^2, y^-1*(x*y)^2, y^-1*(x*y)^2*y, y^-1*(x*y)^2*y^2, (x*y)^3, (x*y)^3*y, (x*y)^3*y^2, (y*x)^2*y, (y*x)^2*y^2, (y*x)^2*y^3, x*y*x^-1*y^-1*x^-1, x*y*x^-1*y^-1*x^-\
@@ -850,7 +850,7 @@ g3, 1, 1, 1, 1, g2^-1*g3^-1*g1*g2*g4^-1, 1, g4, g2^-1*g3^-1*g1*g2*g4^-1*g1^-1, g
  -1 ], [ 21, -1 ], [ 9, -1 ], [ 11, -1 ], [ 19, 1 ], [ 7, -1 ] ], [ [ 10, -1 ], [ 24, 1 ], [ 14, -1 ], [ 12, -1 ], [ 16, -1 ], [ 19, -1 ], [ 20, 1 ], [ 8, -1 ] ] ]"
 gap> tmg := TessellationModelGraph(cg, true : simplify := 0);;
 gap> ExportString(tmg);
-"[ 2, 3, 8 ]\n[ [ x^2, y^3, x*y*z, z*y*x*z*y^-1*z^-1*x*z ], 2 ]\n[ g1, g2, g3, g4 ] -> [ y*z^-2*x*z*y*z^-1*y^-1*z^-1*x*z^2*y*x^-1, z^-1*x*y^-1*z^-2*x^-1*z*y, y*z^-2*x*z*y*z^-1*\
+"HyperCells HCM version 1.0\n[ 2, 3, 8 ]\n[ [ x^2, y^3, x*y*z, z*y*x*z*y^-1*z^-1*x*z ], 2 ]\n[ g1, g2, g3, g4 ] -> [ y*z^-2*x*z*y*z^-1*y^-1*z^-1*x*z^2*y*x^-1, z^-1*x*y^-1*z^-2*x^-1*z*y, y*z^-2*x*z*y*z^-1*\
 y^-1*z^-1*x*z^2*y*x^-1*z^-1*x*y^-1*z^-2*x^-1*z^-1*x*z*y*z^-1*y^-1*z^-2*x^-1*z*y*z^-1*y^-1*z^-1*x*z^2*y*x^-1*z, x*z*y^-1*z^-1*x^-1*z^2*y ]\n[ 1, y, y^2, x*y, x*y^2, x*y^3, y^-1*\
 x^-1, y^-1*x^-1*y, y^-1*x^-1*y^2, (x*y)^2, (x*y)^2*y, (x*y)^2*y^2, y*x*y, y*x*y^2, y*x*y^3, x^-1*y^-1*x^-1, x^-1*y^-1*x^-1*y, x^-1*y^-1*x^-1*y^2, (y^-1*x^-1)^2, (y^-1*x^-1)^2*y\
 , (y^-1*x^-1)^2*y^2, y^-1*(x*y)^2, y^-1*(x*y)^2*y, y^-1*(x*y)^2*y^2, (x*y)^3, (x*y)^3*y, (x*y)^3*y^2, (y*x)^2*y, (y*x)^2*y^2, (y*x)^2*y^3, x*y*x^-1*y^-1*x^-1, x*y*x^-1*y^-1*x^-\
@@ -871,7 +871,7 @@ x^-1*y^-1*x^-1*y, x^-1*y^-1*x^-1*y^2, (x*y)^3*y, (x*y)^2*y, x*y*x^-1*y^-1*x^-1, 
 [ 16, 1 ] ], [ [ 13, -1 ], [ 23, -1 ], [ 17, 1 ] ], [ [ 15, 1 ], [ 14, 1 ], [ 24, 1 ] ], [ [ 23, 1 ], [ 18, 1 ], [ 22, 1 ] ] ]"
 gap> tmg := TessellationModelGraph(cg, true : simplify := 0);;
 gap> ExportString(tmg);
-"[ 2, 3, 8 ]\n[ [ x^2, y^3, x*y*z, z*y*x*z*y^-1*z^-1*x*z ], 2 ]\n[ g1, g2, g3, g4 ] -> [ y*z^-2*x*z*y*z^-1*y^-1*z^-1*x*z^2*y*x^-1, z^-1*x*y^-1*z^-2*x^-1*z*y, y*z^-2*x*z*y*z^-1*\
+"HyperCells HCM version 1.0\n[ 2, 3, 8 ]\n[ [ x^2, y^3, x*y*z, z*y*x*z*y^-1*z^-1*x*z ], 2 ]\n[ g1, g2, g3, g4 ] -> [ y*z^-2*x*z*y*z^-1*y^-1*z^-1*x*z^2*y*x^-1, z^-1*x*y^-1*z^-2*x^-1*z*y, y*z^-2*x*z*y*z^-1*\
 y^-1*z^-1*x*z^2*y*x^-1*z^-1*x*y^-1*z^-2*x^-1*z^-1*x*z*y*z^-1*y^-1*z^-2*x^-1*z*y*z^-1*y^-1*z^-1*x*z^2*y*x^-1*z, x*z*y^-1*z^-1*x^-1*z^2*y ]\n[ 1, y, y^2, x*y, x*y^2, x*y^3, y^-1*\
 x^-1, y^-1*x^-1*y, y^-1*x^-1*y^2, (x*y)^2, (x*y)^2*y, (x*y)^2*y^2, y*x*y, y*x*y^2, y*x*y^3, x^-1*y^-1*x^-1, x^-1*y^-1*x^-1*y, x^-1*y^-1*x^-1*y^2, (y^-1*x^-1)^2, (y^-1*x^-1)^2*y\
 , (y^-1*x^-1)^2*y^2, y^-1*(x*y)^2, y^-1*(x*y)^2*y, y^-1*(x*y)^2*y^2, (x*y)^3, (x*y)^3*y, (x*y)^3*y^2, (y*x)^2*y, (y*x)^2*y^2, (y*x)^2*y^3, x*y*x^-1*y^-1*x^-1, x*y*x^-1*y^-1*x^-\

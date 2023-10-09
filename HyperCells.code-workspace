@@ -4,5 +4,14 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"cSpell.words": [
+			"Kagome",
+			"preimages",
+			"relators",
+			"Schwarz",
+			"supercell",
+			"transversals"
+		]
+	}
 }

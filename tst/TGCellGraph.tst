@@ -65,6 +65,7 @@ gap> output := OutputTextString(str, false);;
 gap> Export(cg, output);;
 gap> CloseStream(output);;
 gap> Print(str);
+HyperCells HCC version 1.0
 [ 2, 8, 8 ]
 [ [ x^2, x*y*z, x*z*y, y^3*z^-1 ], 3 ]
 [ g1, g2, g3, g4 ] -> [ z*y*(x^-1*z^-1)^2*y^4*z^-1*y^-1*z*y^-1, z*y*(x^-1*z^-1)^2*y^4*z^-1*y^-1*z*x*z, z*y*(x^-1*z^-1)^2*y^3*x*z, y^-1*z*y^-1*x*z ]
@@ -166,6 +167,7 @@ gap> output := OutputTextString(str, false);;
 gap> Export(cg, output);;
 gap> CloseStream(output);;
 gap> Print(str);
+HyperCells HCC version 1.0
 [ 2, 8, 8 ]
 [ [ x^2, x*y*z, x*z*y, y^3*z^-1 ], 3 ]
 [ g1, g2, g3, g4 ] -> [ z^-1*x^-1*y*z^-1*y*z*y*x^-1, z^-1*x^-1*y*z^-1*y*z*y*x^-1*y*x*z, z*y*(x^-1*z^-1)^2*y^3*x*z, y^-1*z*y^-1*x*z ]
@@ -401,6 +403,7 @@ gap> output := OutputTextString(str, false);;
 gap> Export(cg, output);;
 gap> CloseStream(output);;
 gap> Print(str);
+HyperCells HCC version 1.0
 [ 2, 3, 8 ]
 [ [ x^2, y^3, x*y*z, z*y*x*z*y^-1*z^-1*x*z ], 3 ]
 [ g1, g2, g3, g4 ] -> [ z^2*y^-1*z^-1*x^-1*z^2*y^-1, z*y^-1*z^-1*x*z^2*y*x^-1, y^-1*z^-1*x*z^2*y*x^-1*z, y^-1*z^-2*x*z*y*z^-1*x^-1*y*z^-2*x*z*y*z^-2 ]
@@ -473,7 +476,7 @@ true
 
 # Additional cells
 gap> ExportString(TGCellGraph(ProperTriangleGroup([ 2, 8, 8 ]), TGQuotient([ 3, 11 ]), 3 : simplify := 0));
-"[ 2, 8, 8 ]\n[ [ x^2, x*y*z, x*z*y, y^-8 ], 3 ]\n[ g1, g2, g3, g4, g5, g6 ] -> [ z*y*x^-1, y*x*z, (z^-1*x^-1)^2*y^-1*x*z, z^-1*x^-1*y^2*x*z*y^-1*x*z, z^-1*x^-1*y*(x*z)^2*x*y^-\
+"HyperCells HCC version 1.0\n[ 2, 8, 8 ]\n[ [ x^2, x*y*z, x*z*y, y^-8 ], 3 ]\n[ g1, g2, g3, g4, g5, g6 ] -> [ z*y*x^-1, y*x*z, (z^-1*x^-1)^2*y^-1*x*z, z^-1*x^-1*y^2*x*z*y^-1*x*z, z^-1*x^-1*y*(x*z)^2*x*y^-\
 3*z^-1*y*z*y*z^-1, z^-1*x^-1*y*z^-1*x^-1*y^-4*z*y*z^-1 ]\n[ 1, y^-1*x^-1, (y^-1*x^-1)^2, (y^-1*x^-1)^3, (y^-1*x^-1)^4, (y^-1*x^-1)^5, (y^-1*x^-1)^6, (y^-1*x^-1)^7, x^-1, x^-1*y\
 ^-1*x^-1, (x^-1*y^-1)^2*x^-1, (x^-1*y^-1)^3*x^-1, (x^-1*y^-1)^4*x^-1, (x^-1*y^-1)^5*x^-1, (x^-1*y^-1)^6*x^-1, (x^-1*y^-1)^7*x^-1 ]\n[ [ 1, (y^-1*x^-1)^7, y^-1*x^-1, (y^-1*x^-1)\
 ^6, (y^-1*x^-1)^2, (y^-1*x^-1)^5, (y^-1*x^-1)^3, (y^-1*x^-1)^4 ], [ 1, y^-1*x^-1 ], [ 1, x^-1 ] ]\n[ [ 1, 1 ], [ 1, 2 ], [ 1, 3 ], [ 1, 4 ], [ 1, 5 ], [ 1, 6 ], [ 1, 7 ], [ 1, \
@@ -506,7 +509,7 @@ g2*g3*g4*g5*g4^-1*g2^-1, g2*g4*g5^-1*g4^-1*g3^-1*g2^-1*g1^-1*g2*g4*g6*g1*g3*g5, 
 g2^-1*g6^-1*g5^-1*g4^-1*g3^-1*g2^-1*g1^-1*g2*g4*g6*g1*g3*g5 ], [ y^-1*(x*y)^2, y^-1*(x*y)^2, 48, 8, 1, g5^-1*g3^-1*g1^-1*g6^-1*g4^-1*g2^-1*g1*g2*g3*g4*g5*g6*g2*g4*g6 ] ]"
 
 gap> ExportString(TGCellGraph(ProperTriangleGroup([ 2, 8, 8 ]), TGQuotient([ 5, 13 ]), 3 : simplify := 0));
-"[ 2, 8, 8 ]\n[ [ x^2, x*y*z, x*y^-2*z^-1*y, x*z*y^-1*z^-2, y^8 ], 3 ]\n[ g1, g2, g3, g4, g5, g6, g7, g8, g9, g10 ] -> [ z^-2*x^-1*z*y^-1, z^-2*x^-1*y*x^-1*y^-1*x*y^-1*z, z^-2*\
+"HyperCells HCC version 1.0\n[ 2, 8, 8 ]\n[ [ x^2, x*y*z, x*y^-2*z^-1*y, x*z*y^-1*z^-2, y^8 ], 3 ]\n[ g1, g2, g3, g4, g5, g6, g7, g8, g9, g10 ] -> [ z^-2*x^-1*z*y^-1, z^-2*x^-1*y*x^-1*y^-1*x*y^-1*z, z^-2*\
 x^-1*y*x^-1*y^-5*z*y^2*z*y*z^-1*x^-1*y*z^-1*x*z^2, z^2*y^-1*z^-4*(x^-1*y)^2*x*y^-1*x*z^2, z*y^-2*z^-1*y^5*x*y^-1*x*z^2, y^-1*z^2*y*z^-2, z^2*y^-1*z^-1*y^2*x^-1, z^2*y*(z^-1*y^-\
 1*z^-1)^2*x^-1*z, y^-1*z^-1*y*x^-1*z^-1*x*z^2, y^3*x*y^-1*x*z^2 ]\n[ 1, y^-1*x^-1, (y^-1*x^-1)^2, (y^-1*x^-1)^3, (y^-1*x^-1)^4, (y^-1*x^-1)^5, (y^-1*x^-1)^6, (y^-1*x^-1)^7, x^-\
 1, x^-1*y^-1*x^-1, (x^-1*y^-1)^2*x^-1, (x^-1*y^-1)^3*x^-1, (x^-1*y^-1)^4*x^-1, (x^-1*y^-1)^5*x^-1, (x^-1*y^-1)^6*x^-1, (x^-1*y^-1)^7*x^-1, y^-1, y^-2*x^-1, y^-1*(y^-1*x^-1)^2, \
@@ -574,7 +577,7 @@ y^-1)^6*x^-1, y*(x^-1*y^-1)^6*x^-1, 93, 11, 0, g9^-1 ], [ y^-2*(x*y)^5, y^-2*(x*
 *(x*y)^3, x*y^-1*(x*y)^3, 94, 6, 1, g6 ], [ y*(x^-1*y^-1)^7*x^-1, y*(x^-1*y^-1)^7*x^-1, 96, 12, 0, g10^-1 ], [ y^-2*(x*y)^4, y^-2*(x*y)^4, 96, 12, 1, g10 ] ]"
 
 gap> ExportString(TGCellGraph(ProperTriangleGroup([ 2, 3, 8 ]), TGQuotient([ 3, 2 ]), 3 : simplify := 0));
-"[ 2, 3, 8 ]\n[ [ x^2, y^3, x*y*z, z^-4*x*y*z^-3, z*y*x*(z*y^-1)^2*z^-1*x ], 3 ]\n[ g1, g2, g3, g4, g5, g6 ] -> [ z*y^-1*z^-1*x*z*y*x^-1*z*y^-1, y^-1*z^-1*x*(z*y*x^-1)^2, y*x*y\
+"HyperCells HCC version 1.0\n[ 2, 3, 8 ]\n[ [ x^2, y^3, x*y*z, z^-4*x*y*z^-3, z*y*x*(z*y^-1)^2*z^-1*x ], 3 ]\n[ g1, g2, g3, g4, g5, g6 ] -> [ z*y^-1*z^-1*x*z*y*x^-1*z*y^-1, y^-1*z^-1*x*(z*y*x^-1)^2, y*x*y\
 ^-1*z^-1*x*z*y*x^-1*z, x*z*y^-1*z^-1*x*z*y*x^-1*z^2, z^-1*x*y^-1*z^-1*x^-1*z*y*x^-1*z^-1*x*y^-1*z^-1*x^-1*z^-2*x*z^2*y*z^-1*y^-1*z^-1*x*z*y*x^-1*z^2, z^-1*x*y^-1*z^-1*x^-1*z*y*\
 z*y^-1*z^-1*x*z*y*x^-1*z*x*y^-1*z^-1*x^-1*z*y*z^-1 ]\n[ 1, y^-1*x^-1, (y^-1*x^-1)^2, (y^-1*x^-1)^3, (y^-1*x^-1)^4, (y^-1*x^-1)^5, (y^-1*x^-1)^6, (y^-1*x^-1)^7, x^-1, x^-1*y^-1*\
 x^-1, (x^-1*y^-1)^2*x^-1, (x^-1*y^-1)^3*x^-1, (x^-1*y^-1)^4*x^-1, (x^-1*y^-1)^5*x^-1, (x^-1*y^-1)^6*x^-1, (x^-1*y^-1)^7*x^-1, y^-1, y^-2*x^-1, y^-1*(y^-1*x^-1)^2, y^-1*(y^-1*x^\
@@ -758,7 +761,7 @@ x*y)^3, y^-1*(y^-1*x^-1)^3*y^-1*(x*y)^3, 273, 6, 1, g6 ], [ (y*x)^3*y*(x^-1*y^-1
 x*y)^6, 288, 3, 1, g3 ] ]"
 
 gap> ExportString(TGCellGraph(ProperTriangleGroup([ 2, 3, 8 ]), TGQuotient([ 5, 1 ]), 3 : simplify := 0));
-"[ 2, 3, 8 ]\n[ [ x^2, y^3, x*y*z, z^8, z^3*y*z^-1*x*z*y^-1*x*y^-1*z^-2*x ], 3 ]\n[ g1, g2, g3, g4, g5, g6, g7, g8, g9, g10 ] -> [ z^-3*x*z*y^-1*z^-3*x^-1*z*y^-1, z^2*y^-1*z^-2\
+"HyperCells HCC version 1.0\n[ 2, 3, 8 ]\n[ [ x^2, y^3, x*y*z, z^8, z^3*y*z^-1*x*z*y^-1*x*y^-1*z^-2*x ], 3 ]\n[ g1, g2, g3, g4, g5, g6, g7, g8, g9, g10 ] -> [ z^-3*x*z*y^-1*z^-3*x^-1*z*y^-1, z^2*y^-1*z^-2\
 *x*z^3*y*z^-1*x^-1, z*y^-1*z^-2*x*z^3*y*z^-1*x^-1*z, y^-1*z^-2*x*z^3*y*z^-1*x^-1*z^2, z*y^-1*z^-3*x*z^2*y*z^-2*x^-1, y^-1*z^-3*x*z^2*y*z^-2*x^-1*z, y*z^-2*x*z^2*y*z^-2*x^-1*z^2\
 , x*y^-1*z^-2*x*z*(z^2*y)^2*z^-1*x^-1*z^3, z^-2*x*z^2*y^-1*z^-2*x^-1*z^2*y^-1*x*z^2*y^-1*z^-2*x^-1*z^3*y*z^-1*y^-1*z^-1*x*z*y^-1*z^-3*x^-1*z^2*y*x^-1*z^-1*x*z^3*y*z^-1*x^-1*z^3\
 , z^-3*x*z*(y^-1*z^-2)^2*z^-1*x^-1*z^2*y*x^-1*z^-1*x*z^2*y^-1*z^-2*x^-1*z^3*y^2*x*z*y^-1*z^-2*(z^-1*x^-1)^2*z^2*y*z^-2 ]\n[ 1, y^-1*x^-1, (y^-1*x^-1)^2, (y^-1*x^-1)^3, (y^-1*x^\
@@ -1160,7 +1163,7 @@ gap> tg := ProperTriangleGroup(sign);;
 gap> q := TGQuotient( [ 2, 1 ] );;
 gap> cg := TGCellGraph(tg, q, 2 : simplify := 0);;
 gap> ExportString(cg);
-"[ 2, 3, 8 ]\n[ [ x^2, y^3, x*y*z, z*y*x*z*y^-1*z^-1*x*z ], 2 ]\n[ g1, g2, g3, g4 ] -> [ y*z^-2*x*z*y*z^-1*y^-1*z^-1*x*z^2*y*x^-1, z^-1*x*y^-1*z^-2*x^-1*z*y, y*z^-2*x*z*y*z^-1*\
+"HyperCells HCC version 1.0\n[ 2, 3, 8 ]\n[ [ x^2, y^3, x*y*z, z*y*x*z*y^-1*z^-1*x*z ], 2 ]\n[ g1, g2, g3, g4 ] -> [ y*z^-2*x*z*y*z^-1*y^-1*z^-1*x*z^2*y*x^-1, z^-1*x*y^-1*z^-2*x^-1*z*y, y*z^-2*x*z*y*z^-1*\
 y^-1*z^-1*x*z^2*y*x^-1*z^-1*x*y^-1*z^-2*x^-1*z^-1*x*z*y*z^-1*y^-1*z^-2*x^-1*z*y*z^-1*y^-1*z^-1*x*z^2*y*x^-1*z, x*z*y^-1*z^-1*x^-1*z^2*y ]\n[ 1, y, y^2, x*y, x*y^2, x*y^3, y^-1*\
 x^-1, y^-1*x^-1*y, y^-1*x^-1*y^2, (x*y)^2, (x*y)^2*y, (x*y)^2*y^2, y*x*y, y*x*y^2, y*x*y^3, x^-1*y^-1*x^-1, x^-1*y^-1*x^-1*y, x^-1*y^-1*x^-1*y^2, (y^-1*x^-1)^2, (y^-1*x^-1)^2*y\
 , (y^-1*x^-1)^2*y^2, y^-1*(x*y)^2, y^-1*(x*y)^2*y, y^-1*(x*y)^2*y^2, (x*y)^3, (x*y)^3*y, (x*y)^3*y^2, (y*x)^2*y, (y*x)^2*y^2, (y*x)^2*y^3, x*y*x^-1*y^-1*x^-1, x*y*x^-1*y^-1*x^-\
@@ -1246,7 +1249,7 @@ g2^-1*g3^-1*g1*g2*g4^-1*g1^-1 ], [ (x*y)^4*y, (x*y)^4*y, 140, 4, 0, g3^-1 ], [ (
 
 gap> cg := TGCellGraph(tg, q, 1 : simplify := 0);;
 gap> ExportString(cg);
-"[ 2, 3, 8 ]\n[ [ x^2, y^3, x*y*z, z*y*x*z*y^-1*z^-1*x*z ], 1 ]\n[ g1, g2, g3, g4 ] -> [ x*y^-1*z^-2*x^-1*z*y*z^-1, y^-1*z^-2*x*z*y*z^-1*x^-1, y^-1*z^-1*x*z^2*y*x^-1*z, x*z*y^-\
+"HyperCells HCC version 1.0\n[ 2, 3, 8 ]\n[ [ x^2, y^3, x*y*z, z*y*x*z*y^-1*z^-1*x*z ], 1 ]\n[ g1, g2, g3, g4 ] -> [ x*y^-1*z^-2*x^-1*z*y*z^-1, y^-1*z^-2*x*z*y*z^-1*x^-1, y^-1*z^-1*x*z^2*y*x^-1*z, x*z*y^-\
 1*z^-1*x^-1*z*x*z^2*y*x^-1*z*x*y^-1*z^-2*x^-1*z*y*z*y^-1*z^-1*x^-1*z^2*y^-1 ]\n[ 1, x, y^-1*x^-1, y^-1, x*y, x*y*x, y, y*x, x^-1*y^-1*x^-1, x^-1*y^-1, (y^-1*x^-1)^2, y^-1*x^-1*\
 y^-1, y^-1*x*y, y^-1*x*y*x, (x*y)^2, (x*y)^2*x, y*x*y, (y*x)^2, x*y*x^-1*y^-1*x^-1, x*y*x^-1*y^-1, y*x^-1*y^-1*x^-1, y*x^-1*y^-1, (x^-1*y^-1)^2*x^-1, (x^-1*y^-1)^2, (y^-1*x^-1)\
 ^3, (y^-1*x^-1)^2*y^-1, x^-1*y^-1*x*y, x^-1*y^-1*x*y*x, y^-1*x^-1*y^-1*x*y, y^-1*x^-1*y^-1*x*y*x, y^-1*(x*y)^2, y^-1*(x*y)^2*x, (x*y)^3, (x*y)^3*x, (y*x)^2*y, (y*x)^3, y^-1*x*y\

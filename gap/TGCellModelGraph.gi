@@ -574,6 +574,10 @@ function(model, output)
     local cell, GAM;
 
     SetPrintFormattingStatus(output, false);
+    
+	# version
+	AppendTo(output, "HyperCells HCM version 1.0");
+	AppendTo(output, "\n");
 
     # write defining information: triangle group, relators, center
 	AppendTo(output, Signature(GetProperTriangleGroup(model)));
@@ -653,9 +657,12 @@ end );
 
 InstallGlobalFunction( ImportTGCellModelGraph,
 function(input, args...)
-    local sign, tg, D, info, rels, center,
+    local version, sign, tg, D, info, rels, center,
         GAMgens, TDGAM, TGGw, cell, type,
         verts, edges, t, transls, i, faces;
+
+	# version
+	version := ReadAllLine(input);
 
     sign := EvalString(ReadAllLine(input));
 

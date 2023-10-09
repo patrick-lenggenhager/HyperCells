@@ -573,6 +573,10 @@ function(model, output)
 
     # set formatting
     SetPrintFormattingStatus(output, false);
+	
+	# version
+	AppendTo(output, "HyperCells HCS version 1.0");
+	AppendTo(output, "\n");
 
     # write defining information: triangle group, relators, center
 	AppendTo(output, Signature(GetProperTriangleGroup(model)));
@@ -681,12 +685,15 @@ end );
 
 InstallGlobalFunction( ImportTGSuperCellModelGraph,
 function(input, args...)
-    local sign, tg, D, info, pcrels, screls, center,
+    local version, sign, tg, D, info, pcrels, screls, center,
         pcGAMgens, pcTDGAM, pcTGGw, pc,
 		scGAMgens, scTDGAM, scTGGw, sc,
 		GAMembdimgs, GAMembd, TGAM0GAM, type,
         verts, pos, vertexpos, edges, t, transls, i, faces,
 		cellembed;
+
+	# version
+	version := ReadAllLine(input);
 
     sign := EvalString(ReadAllLine(input));
 

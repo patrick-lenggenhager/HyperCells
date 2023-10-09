@@ -593,6 +593,10 @@ function(cgraph, output)
 	
 	SetPrintFormattingStatus(output, false);
 
+	# version
+	AppendTo(output, "HyperCells HCC version 1.0");
+	AppendTo(output, "\n");
+
 	# write defining information: triangle group, relators, center
 	AppendTo(output, Signature(GetProperTriangleGroup(cgraph)));
 	AppendTo(output, "\n");
@@ -671,9 +675,12 @@ end );
 
 InstallGlobalFunction( ImportTGCellGraph,
 function(input, args...)
-	local sign, tg, D, info, rels, center,
+	local version, sign, tg, D, info, rels, center,
 		GAMgens, TDGAM, TGGw, cell,
 		vertices, pos, edges, translations, faces, t, boundary, F, i;
+
+	# version
+	version := ReadAllLine(input);
 
 	sign := EvalString(ReadAllLine(input));
 

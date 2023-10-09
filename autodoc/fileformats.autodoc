@@ -17,6 +17,7 @@ The basic file structure of a HyperCell cell graph file is as follows (with plac
 marked by `&lt;...&gt;`):
 
 @BeginLogSession
+HyperCells HCC version 1.0
 [ <r>, <q>, <p> ]
 [ <relators> , <center> ]
 [ g1, g2, ... ] -> <generators>
@@ -29,26 +30,28 @@ marked by `&lt;...&gt;`):
 <boundary>
 @EndLogSession
 
-The first line gives the signature $(r,q,p)$ of the underlying triangle group
-$\Delta(r,q,p)$ and the second line specifies the triangle-group quotient
+The first line specifies the file format and its version.
+
+The second line gives the signature $(r,q,p)$ of the underlying triangle group
+$\Delta(r,q,p)$ and the third line specifies the triangle-group quotient
 $\Delta^+(r,q,p)/\Gamma$ by the list of relators `&lt;relators&gt;` given as elements of
 the proper triangle group $\Delta^+$ with generators $x$, $y$, $z$ and the center
 of the cell given as the integer `&lt;center&gt;` with `1`, `2`, `3` corresponding to the
 center lying at the vertex $x$, $y$, $z$ of the fundamental Schwarz triangle,
 respectively.
 
-The third line specifies the generators of the translation group $\Gamma$. To the left
+The fourth line specifies the generators of the translation group $\Gamma$. To the left
 of `-&gt;` are the generators of the finitely presented group and to the right the list
 `&lt;generators&gt;` of their images in the proper triangle group $\Delta^+$ in terms
 of the generators $x$, $y$, $z$.
 
-The fourth line gives the transversal $T_{\Delta^+}(\Gamma)$ as a list `&lt;TDGAMMA&gt;`
-of elements of the proper triangle group $\Delta^+$ and the fifth line specifies the
+The fifth line gives the transversal $T_{\Delta^+}(\Gamma)$ as a list `&lt;TDGAMMA&gt;`
+of elements of the proper triangle group $\Delta^+$ and the sixth line specifies the
 transversals $T_{G^+}(G_w^+)$ as lists `&lt;TGGw&gt;` with $w=x,y,z$ (`w=x,y,z`) of
-preimages of elements of the qutient group $G^+\cong\Delta^+/\Gamma$ under the quotient
+preimages of elements of the quotient group $G^+\cong\Delta^+/\Gamma$ under the quotient
 homomorphism $\Delta^+\to G^+$, i.e., in terms of the generators $x$, $y$, $z$.
 
-Lines six to nine specify the vertices, edges, edge translations and faces of the cell:
+Lines seven to ten specify the vertices, edges, edge translations and faces of the cell:
 - The vertices are given as a list `&lt;vertices&gt;` with entries of the form
   `[ w, gi ]`, where `w` is `1`, `2`, `3` corresponding to the vertex $x$, $y$, $z$
   of the fundamental Schwarz triangle and `gi` is the position of the element in
@@ -70,7 +73,7 @@ Lines six to nine specify the vertices, edges, edge translations and faces of th
   and `orientation` is `1` or `-1` depending on whether the edge is traversed in
   the same or opposite direction as the edge given in `&lt;edges&gt;`.
 
-Finally, the tenth line specifies the boundary identifications of the cell as a list
+Finally, the eleventh line specifies the boundary identifications of the cell as a list
 `&lt;boundary&gt;` with entries of the form `[ d1, d2, e, b, m, gam ]`, where `d1`,
 `d2` are elements of $T_{\Delta^+}(\Gamma)\subset\Delta^+$ labeling the Schwarz
 triangles this edge is a part of, `e` the position in `&lt;edges&gt;`, `b` a running
@@ -83,6 +86,7 @@ group, i.e., in terms of the generators given to the left of `-&gt;` in the thir
 The full file structure of a HyperCell cell graph file thus is as follows:
 
 @BeginLogSession
+HyperCells HCC version 1.0
 [ <r>, <q>, <p> ]
 [ [ <rel1>, <rel2>, ... ], <center> ]
 [ g1, g2, ... ] -> [ <generator1>, <generator2>, ... ]
@@ -98,6 +102,7 @@ The full file structure of a HyperCell cell graph file thus is as follows:
 A complete example for the cell graph of the quotient T2.6 of $\Delta(2,8,8)$ is
 given below:
 @BeginLogSession
+HyperCells HCC version 1.0
 [ 2, 8, 8 ]
 [ [ x^2, x*y*z, x*z*y, y^3*z^-1 ], 3 ]
 [ g1, g2, g3, g4 ] -> [ z^-1*x^-1*y*z^-1*y*z*y*x^-1, z^-1*x^-1*y*z^-1*y*z*y*
@@ -147,6 +152,7 @@ The basic file structure of a HyperCell model graph file is as follows (with pla
 marked by `&lt;...&gt;`):
 
 @BeginLogSession
+HyperCells HCM version 1.0
 [ <r>, <q>, <p> ]
 [ <relators> , <center> ]
 [ g1, g2, ... ] -> <generators>
@@ -159,26 +165,28 @@ marked by `&lt;...&gt;`):
 <faces>
 @EndLogSession
 
-The first line gives the signature $(r,q,p)$ of the underlying triangle group
-$\Delta(r,q,p)$ and the second line specifies the triangle-group quotient
+The first line specifies the file format and its version.
+
+The second line gives the signature $(r,q,p)$ of the underlying triangle group
+$\Delta(r,q,p)$ and the third line specifies the triangle-group quotient
 $\Delta^+(r,q,p)/\Gamma$ by the list of relators `&lt;relators&gt;` given as elements of
 the proper triangle group $\Delta^+$ with generators $x$, $y$, $z$ and the center
 of the cell given as the integer `&lt;center&gt;` with `1`, `2`, `3` corresponding to the
 center lying at the vertex $x$, $y$, $z$ of the fundamental Schwarz triangle,
 respectively.
 
-The third line specifies the generators of the translation group $\Gamma$. To the left
+The fourth line specifies the generators of the translation group $\Gamma$. To the left
 of `-&gt;` are the generators of the finitely presented group and to the right the list
 `&lt;generators&gt;` of their images in the proper triangle group $\Delta^+$ in terms
 of the generators $x$, $y$, $z$.
 
-The fourth line gives the transversal $T_{\Delta^+}(\Gamma)$ as a list `&lt;TDGAMMA&gt;`
-of elements of the proper triangle group $\Delta^+$ and the fifth line specifies the
+The fifth line gives the transversal $T_{\Delta^+}(\Gamma)$ as a list `&lt;TDGAMMA&gt;`
+of elements of the proper triangle group $\Delta^+$ and the sixth line specifies the
 transversals $T_{G^+}(G_w^+)$ as lists `&lt;TGGw&gt;` with $w=x,y,z$ (`w=x,y,z`) of
-preimages of elements of the qutient group $G^+\cong\Delta^+/\Gamma$ under the quotient
+preimages of elements of the quotient group $G^+\cong\Delta^+/\Gamma$ under the quotient
 homomorphism $\Delta^+\to G^+$, i.e., in terms of the generators $x$, $y$, $z$.
 
-The sixth line specifies the model type.
+The seventh line specifies the model type.
 The following model types are currently implemented:
 - **Derived graph**: general model graph with vertices, edges, and faces derived from
   the cell graph. The model type is given as `[ "VEF", [ vfs, efs, ffs ] ]`,
@@ -196,7 +204,7 @@ The following model types are currently implemented:
   `[ "KAGOME", p, [ "VEF", [ [ 1 ], [ 2 ], [ 2, 3 ] ] ] ]`.
   See <Ref Func='KagomeModelGraph'/> for details.
 
-Lines seven to ten specify the vertices, edges, edge translations and faces of the cell:
+Lines eight to eleven specify the vertices, edges, edge translations and faces of the cell:
 - The vertices are given as a list `&lt;vertices&gt;` with entries of the form
   `[ w, gi ]`, where `w` is `1`, `2`, `3` corresponding to the vertex $x$, $y$, $z$
   of the fundamental Schwarz triangle and `gi` is the position of the element in
@@ -221,6 +229,7 @@ Lines seven to ten specify the vertices, edges, edge translations and faces of t
 The full file structure of a HyperCell cell graph file thus is as follows:
 
 @BeginLogSession
+HyperCells HCM version 1.0
 [ <r>, <q>, <p> ]
 [ [ <rel1>, <rel2>, ... ], <center> ]
 [ g1, g2, ... ] -> [ <generator1>, <generator2>, ... ]
@@ -236,6 +245,7 @@ The full file structure of a HyperCell cell graph file thus is as follows:
 A complete example for the ${8,8}$ tessellation graph centered at the $z$ vertex 
 on the cell defined by the quotient T2.6 of $\Delta(2,8,8)$ is given below:
 @BeginLogSession
+HyperCells HCM version 1.0
 [ 2, 8, 8 ]
 [ [ x^2, x*y*z, x*z*y, y^3*z^-1 ], 3 ]
 [ g1, g2, g3, g4 ] -> [ z^-1*x^-1*y*z^-1*y*z*y*x^-1,
@@ -259,6 +269,7 @@ The basic file structure of a HyperCell supercell model graph file is as follows
 (with placeholders marked by `&lt;...&gt;`):
 
 @BeginLogSession
+HyperCells HCS version 1.0
 [ <r>, <q>, <p> ]
 [ <primitive cell relators> , <supercell relators>, <center> ]
 [ g1, g2, ... ] -> <pc generators>
@@ -276,8 +287,10 @@ The basic file structure of a HyperCell supercell model graph file is as follows
 <faces>
 @EndLogSession
 
-The first line gives the signature $(r,q,p)$ of the underlying triangle group
-$\Delta(r,q,p)$ and the second line specifies the triangle-group quotient
+The first line specifies the file format and its version.
+
+The second line gives the signature $(r,q,p)$ of the underlying triangle group
+$\Delta(r,q,p)$ and the third line specifies the triangle-group quotient
 $\Delta^+(r,q,p)/\Gamma_\mathrm{pc}$ and $\Delta^+(r,q,p)/\Gamma_\mathrm{sc}$ by
 the list of relators `&lt;primitive cell relators&gt;` and
 `&lt;supercell relators&gt;`, respectively, given as elements of the proper triangle
@@ -285,31 +298,31 @@ group $\Delta^+$ with generators $x$, $y$, $z$ and the center of the cell given
 as the integer `&lt;center&gt;` with `1`, `2`, `3` corresponding to the center
 lying at the vertex $x$, $y$, $z$ of the fundamental Schwarz triangle, respectively.
 
-The third line specifies the generators of the translation group $\Gamma_\mathrm{pc}$
+The fourth line specifies the generators of the translation group $\Gamma_\mathrm{pc}$
 of the primitive cell. To the left of `-&gt;` are the generators of the finitely
 presented group and to the right the list `&lt;generators&gt;` of their images in
 the proper triangle group $\Delta^+$ in terms of the generators $x$, $y$, $z$.
 
-The fourth line gives the transversal $T_{\Delta^+}(\Gamma_\mathrm{pc})$ as a list
+The fifth line gives the transversal $T_{\Delta^+}(\Gamma_\mathrm{pc})$ as a list
 `&lt;TDGAMMApc&gt;` of elements of the proper triangle group $\Delta^+$ and the
-fifth line specifies the transversals $T_{G^+_\mathrm{pc}}(G_w^+)$ as lists
+sixth line specifies the transversals $T_{G^+_\mathrm{pc}}(G_w^+)$ as lists
 `&lt;TGpcGw&gt;` with $w=x,y,z$ (`w=x,y,z`) of preimages of elements of the quotient
 group $G^+_\mathrm{pc}\cong\Delta^+/\Gamma_\mathrm{pc}$ under the quotient
 homomorphism $\Delta^+\to G^+_\mathrm{pc}$, i.e., in terms of the generators $x$,
 $y$, $z$.
 
-Lines six, nine, and ten give the same information as lines three, four, and five,
+Lines seven, ten, and eleven give the same information as lines three, four, and five,
 respectively, but for the supercell ($G^+_\mathrm{sc}$, $\Gamma_\mathrm{sc}$)
 instead of the primitive cell.
-The seventh line specifies the homomorphism embedding the normal subgroup
+The eighth line specifies the homomorphism embedding the normal subgroup
 $\Gamma_\mathrm{sc}$ in $\Gamma_\mathrm{pc}$ with the generators of the finitely
 presented group $\Gamma_\mathrm{sc}$ to the left of `-&gt;` and their images in
 the finitely presented group $\Gamma_\mathrm{pc}$ to the right.
-The eighth line gives the corresponding transversal $T_{\Gamma_\mathrm{pc}}
+The ninth line gives the corresponding transversal $T_{\Gamma_\mathrm{pc}}
 (\Gamma_\mathrm{sc})$ as a list `&lt;TGAMMApcGAMMAsc&gt;` of elements of the
 triangle group $\Delta^+$.
 
-The eleventh line specifies the model type.
+The twelfth line specifies the model type.
 The following model types are currently implemented:
 - **Derived graph**: general model graph with vertices, edges, and faces derived from
   the cell graph. The model type is given as `[ "VEF", [ vfs, efs, ffs ] ]`,
@@ -327,7 +340,7 @@ The following model types are currently implemented:
   `[ "KAGOME", p, [ "VEF", [ [ 1 ], [ 2 ], [ 2, 3 ] ] ] ]`.
   See <Ref Func='KagomeModelGraph'/> for details.
 
-Lines twelve to fifteen specify the vertices, edges, edge translations and faces of the cell:
+Lines thirteen to sixteen specify the vertices, edges, edge translations and faces of the cell:
 - The vertices are given as a list `&lt;vertices&gt;` with entries of the form
   `[ w, gi ]`, where `w` is `1`, `2`, `3` corresponding to the vertex $x$, $y$, $z$
   of the fundamental Schwarz triangle and `gi` is the position of the element in
@@ -352,6 +365,7 @@ Lines twelve to fifteen specify the vertices, edges, edge translations and faces
 The full file structure of a HyperCell cell graph file thus is as follows:
 
 @BeginLogSession
+HyperCells HCS version 1.0
 [ <r>, <q>, <p> ]
 [ [ <rel1>, <rel2>, ... ], [ <rel1>, <rel2>, ... ], <center> ]
 [ g1, g2, ... ] -> [ <pc generator1>, <pc generator2>, ... ]
@@ -372,6 +386,7 @@ A complete example for the ${8,8}$ tessellation graph centered at the $z$ vertex
 on the cell defined by the quotient T2.6 of $\Delta(2,8,8)$ extended to the supercell
 defined by the quotient T3.11 is given below:
 @BeginLogSession
+HyperCells HCS version 1.0
 [ 2, 8, 8 ]
 [ [ x^2, x*y*z, x*z*y, y^3*z^-1 ], [ x^2, x*y*z, x*z*y, y^-8 ], 3 ]
 [ g1, g2, g3, g4 ] -> [ z^-1*x^-1*y*z^-1*y*z*y*x^-1,
