@@ -210,9 +210,11 @@ Lines eight to eleven specify the vertices, edges, edge translations and faces o
   of the fundamental Schwarz triangle and `gi` is the position of the element in
   the transversal $T_{G^+}(G_w^+)$.
 - The edges are given as a list `&lt;edges&gt;` with entries of the form
-  `[ v1, v2, s ]`, where `v1` and `v2` are the positions of the vertices
-  in `&lt;vertices&gt;` connected by the edge, `s` is the position of the element in
-  $T_{\Delta^+}(\Gamma)$ labeling the Schwarz triangle this edge is a part of.
+  `[ v1, v2, tag ]`, where `v1` and `v2` are the positions of the vertices
+  in `&lt;vertices&gt;` connected by the edge, and `tag` is a unique identifier
+  of the edge.
+  More details on the tags are given in the methods for constructing different
+  models, see <Ref Sect='Section_ConstructingModels'/>.
 - The edge translations, i.e., the translations relating the unit cell containing
   the first vertex (`v1`) to the unit cell containing the second (`v2`) are given
   as a list `&lt;edge translations&gt;` of elements of the finitely presented group,
@@ -237,7 +239,7 @@ HyperCells HCM version 1.0
 [ [ <gx1>, <gx2>, ... ], [ <gy1>, <gy2>, ... ], [ <gz1>, <gz2>, ... ] ]
 <model type>
 [ [ w, gi ], ... ]
-[ [ v1, v2, s ], ... ]
+[ [ v1, v2, tag ], ... ]
 [ [ gam1, gam2, ... ], ... ]
 [ [ edge, orientation ], ... ]
 @EndLogSession
@@ -346,9 +348,13 @@ Lines thirteen to sixteen specify the vertices, edges, edge translations and fac
   of the fundamental Schwarz triangle and `gi` is the position of the element in
   the transversal $T_{G^+}(G_w^+)$.
 - The edges are given as a list `&lt;edges&gt;` with entries of the form
-  `[ v1, v2, s ]`, where `v1` and `v2` are the positions of the vertices
-  in `&lt;vertices&gt;` connected by the edge, `s` is the position of the element in
-  $T_{\Delta^+}(\Gamma)$ labeling the Schwarz triangle this edge is a part of.
+  `[ v1, v2, tag ]`, where `v1` and `v2` are the positions of the vertices
+  in `&lt;vertices&gt;` connected by the edge, and `tag` is a unique identifier
+  of the edge.
+  The tag `tag` is of the form `[ v1pc, v2pc, tagpc ]` with `v1pc`, `v2pc` the
+  positions of the vertices in the primitive cell, and `tagpc` the tag of the
+  edge in the primitive cell (see <Ref Sect='Section_ConstructingModels'/>).
+  Thus, `tag` specifies (up to the translation) the edge in the primitive cell.
 - The edge translations, i.e., the translations relating the unit cell containing
   the first vertex (`v1`) to the unit cell containing the second (`v2`) are given
   as a list `&lt;edge translations&gt;` of elements of the finitely presented group,

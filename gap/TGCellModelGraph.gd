@@ -87,7 +87,7 @@ DeclareCategory( "IsTGCellModelGraphObj", IsObject );
 #! [ 1, [ ve, s1, s2 ] ]
 #!   @EndLog
 #!   where the first entry, `1`, indicates a nearest-neighbor edge, `ve` is the position
-#!   of the Schwarz triangle assocaited with the cell-graph edge vertex in
+#!   of the Schwarz triangle associated with the cell-graph edge vertex in
 #!   $T_{\Delta^+}(\Gamma)$, and `s1`, `s2` are the positions of the Schwarz triangles
 #!   associated with the cell-graph edges in $T_{\Delta^+}(\Gamma)$.
 #! @Arguments cellgraph,vfs,efs,ffs
