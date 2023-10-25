@@ -296,14 +296,15 @@ end );
 # Constructors
 
 InstallGlobalFunction( TGCell,
-function(tg, rels, args...)
-	local D, Gplus, TDGAM, homDG, GAMMA, GAMgens, isofpGAM, fpGAM,
+function(tg, quotient, args...)
+	local D, rels, Gplus, TDGAM, homDG, GAMMA, GAMgens, isofpGAM, fpGAM,
 		schwarz, GwGens, GwElems, QGGw, w, TGGw, itriangle, i, GGw, F;
 
 	# triangle group
 	D := FpGroup(tg);
 
     # point group
+	rels := TGQuotientRelators(tg, quotient);
     Gplus := D / rels;
 
     # homomorphism D -> G

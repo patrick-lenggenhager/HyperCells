@@ -658,7 +658,7 @@ end );
 InstallGlobalFunction( ImportTGCellModelGraph,
 function(input, args...)
     local version, sign, tg, D, info, rels, center,
-        GAMgens, TDGAM, TGGw, cell, type,
+        GAMgens, TDGAM, TGGw, quotient, cell, type,
         verts, edges, t, transls, i, faces;
 
 	# version
@@ -691,7 +691,20 @@ function(input, args...)
 	TGGw := EvalDString@(ReadAllLine(input), D);
 
     # construct triangle-group cell
-	cell := TGCell(tg, rels, GAMgens, TDGAM, TGGw);
+    # TODO: check if correct
+	quotient := Objectify( NewType(
+		NewFamily( "TGQuotient", IsTGQuotientObj ),
+		IsTGQuotientObj and IsTGQuotientComponentRep),
+		rec(
+			name := MakeImmutable(""),
+            triangle := MakeImmutable(sign), 
+            order := Length(TDGAM),
+            genus := Length(GAMgens)/2,
+            action := MakeImmutable(""),
+            relators := rels
+		)
+	);
+	cell := TGCell(tg, quotient, GAMgens, TDGAM, TGGw);
 
     # type
     type := EvalString(ReadAllLine(input));
