@@ -442,7 +442,7 @@ function(cg, vfs, efs, ffs)
                     fi;
                 od;
             else # original edges
-                fes := List(Filtered(fces, e -> CellVertices(cg)[e[1][1]][1] in vfs and CellVertices(cg)[e[1][2]][1] in vfs), e -> [ Position(gedges, e[1]), e[2] ]);
+                fes := List(Filtered(fces, e -> CellVertices(cg)[e[1][1]][1] in vfs and CellVertices(cg)[e[1][2]][1] in vfs), e -> [ Position(gedges, [ e[1][1], e[1][2], [ 1, e[1][3] ] ]), e[2] ]);
             fi;
 
             Append(faces, [ fes ]);
