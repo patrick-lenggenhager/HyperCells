@@ -3,8 +3,8 @@ DeclareRepresentation("IsTGTranslationGroupComponentRep", IsComponentObjectRep,
 	[ "D", "qhom", "group", "isofp", "fpgroup" ]
 );
 InstallGlobalFunction( TGTranslationGroupFromQuotient,
-function(D, G)
-    local homDG, GAMMA, isofpGAMMA, fpGAMMA, F;
+function(D, G, args...)
+    local homDG, GAMMA, isofpGAMMA, fpGAMMA, genus, GAMgens, fpsimplify, isosimp, F;
 
     # homomorphism D -> G
     homDG := GroupHomomorphismByImages(D, G);
@@ -15,6 +15,36 @@ function(D, G)
     # isomorphism between GAMMA and its represenation as a finitely presented group
     isofpGAMMA := IsomorphismFpGroupByGenerators(GAMMA, GeneratorsOfGroup(GAMMA), "g"); # isomorphism GAMMA -> fpGAMMA
     fpGAMMA := Image(isofpGAMMA, GAMMA);
+
+	# if genus is given, make sure number of generators is correct
+	if Length(args) > 0 then
+		genus := args[1];
+		GAMgens := GeneratorsOfGroup(GAMMA);
+    	fpsimplify := ValueOption("fpsimplify"); # options
+		if fpsimplify = fail or not IsBool(fpsimplify) then
+			fpsimplify := false;
+		fi;
+
+		# check if number of generators matches 2 * genus
+		if fpsimplify or not (Length(GeneratorsOfGroup(fpGAMMA)) = 2 * genus and Length(GAMgens) = 2 * genus) then
+			isosimp := IsomorphismSimplifiedFpGroup(fpGAMMA);
+			fpGAMMA := Range(isosimp);
+			isofpGAMMA := isofpGAMMA * isosimp;
+
+			if not Length(GeneratorsOfGroup(fpGAMMA)) = 2 * genus then
+				Error(StringFormatted(
+					"The translation group has {} generators, which is not twice the genus {}.",
+					Length(GeneratorsOfGroup(fpGAMMA)), genus
+				));
+				return fail;
+			fi;
+
+			GAMgens := List(GeneratorsOfGroup(fpGAMMA), fpgam -> PreImagesRepresentative(isofpGAMMA, fpgam));
+			GAMMA := Subgroup(D, GAMgens);
+			isofpGAMMA := IsomorphismFpGroupByGenerators(GAMMA, GAMgens, "g");
+			fpGAMMA := Image(isofpGAMMA, GAMMA);
+		fi;
+	fi;
 
 	F := NewFamily( "TGTranslationGroup", IsTGTranslationGroupObj );
     return Objectify( NewType( F, IsTGTranslationGroupObj and IsTGTranslationGroupComponentRep ), rec(

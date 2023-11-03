@@ -733,7 +733,7 @@ function(input, args...)
             order := Length(pcTDGAM),
             genus := Length(pcGAMgens)/2,
             action := MakeImmutable(""),
-            relators := pcrels
+            relators := PrintString(pcrels)
 		)
 	);
 	pc := TGCell(tg, pcquotient, pcGAMgens, pcTDGAM, pcTGGw);
@@ -771,7 +771,7 @@ function(input, args...)
             order := Length(scTDGAM),
             genus := Length(scGAMgens)/2,
             action := MakeImmutable(""),
-            relators := screls
+            relators := PrintString(screls)
 		)
 	);;
 	sc := TGCell(tg, scquotient, scGAMgens, scTDGAM, scTGGw);

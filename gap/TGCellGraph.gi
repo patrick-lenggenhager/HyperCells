@@ -142,7 +142,7 @@ function(tg, quotient, center)
 	# proper triangle group and proper point group
 	D := FpGroup(tg);
 	Gplus := D / rels;
-	GAMMA := TGTranslationGroupFromQuotient(D, Gplus);
+	GAMMA := TGTranslationGroupFromQuotient(D, Gplus, TGQuotientGenus(quotient));
 
 	# full triangle group
 	DELTA := FpGroup(TriangleGroup(Signature(tg)));
@@ -719,7 +719,7 @@ function(input, args...)
             order := Length(TDGAM),
             genus := Length(GAMgens)/2,
             action := MakeImmutable(""),
-            relators := rels
+            relators := PrintString(rels)
 		)
 	);
 	cell := TGCell(tg, quotient, GAMgens, TDGAM, TGGw);

@@ -701,7 +701,7 @@ function(input, args...)
             order := Length(TDGAM),
             genus := Length(GAMgens)/2,
             action := MakeImmutable(""),
-            relators := rels
+            relators := PrintString(rels)
 		)
 	);
 	cell := TGCell(tg, quotient, GAMgens, TDGAM, TGGw);
