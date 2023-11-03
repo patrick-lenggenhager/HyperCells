@@ -142,7 +142,7 @@ function(tg, quotient, center)
 	# proper triangle group and proper point group
 	D := FpGroup(tg);
 	Gplus := D / rels;
-	GAMMA := TGTranslationGroupFromQuotient(D, Gplus);
+	GAMMA := TGTranslationGroupFromQuotient(D, Gplus, TGQuotientGenus(quotient));
 
 	# full triangle group
 	DELTA := FpGroup(TriangleGroup(Signature(tg)));
@@ -676,7 +676,7 @@ end );
 InstallGlobalFunction( ImportTGCellGraph,
 function(input, args...)
 	local version, sign, tg, D, info, rels, center,
-		GAMgens, TDGAM, TGGw, cell,
+		GAMgens, TDGAM, TGGw, quotient, cell,
 		vertices, pos, edges, translations, faces, t, boundary, F, i;
 
 	# version
@@ -709,7 +709,20 @@ function(input, args...)
 	TGGw := EvalDString@(ReadAllLine(input), D);
 
 	# construct triangle-group cell
-	cell := TGCell(tg, rels, GAMgens, TDGAM, TGGw);
+	# TODO: check if correct
+	quotient := Objectify( NewType(
+		NewFamily( "TGQuotient", IsTGQuotientObj ),
+		IsTGQuotientObj and IsTGQuotientComponentRep),
+		rec(
+			name := MakeImmutable(""),
+            triangle := MakeImmutable(sign), 
+            order := Length(TDGAM),
+            genus := Length(GAMgens)/2,
+            action := MakeImmutable(""),
+            relators := PrintString(rels)
+		)
+	);
+	cell := TGCell(tg, quotient, GAMgens, TDGAM, TGGw);
 
 	# vertices
 	vertices := EvalString(ReadAllLine(input));

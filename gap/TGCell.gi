@@ -296,14 +296,16 @@ end );
 # Constructors
 
 InstallGlobalFunction( TGCell,
-function(tg, rels, args...)
-	local D, Gplus, TDGAM, homDG, GAMMA, GAMgens, isofpGAM, fpGAM,
+function(tg, quotient, args...)
+	local D, rels, Gplus, TDGAM, homDG, GAMMA, GAMgens, isofpGAM, fpGAM,
+		fpsimplify, isosimp,
 		schwarz, GwGens, GwElems, QGGw, w, TGGw, itriangle, i, GGw, F;
 
 	# triangle group
 	D := FpGroup(tg);
 
     # point group
+	rels := TGQuotientRelators(tg, quotient);
     Gplus := D / rels;
 
     # homomorphism D -> G
@@ -323,6 +325,31 @@ function(tg, rels, args...)
 	# isomorphism GAM -> fpGAM
     isofpGAM := IsomorphismFpGroupByGenerators(GAMMA, GeneratorsOfGroup(GAMMA), "g");
     fpGAM := Image(isofpGAM, GAMMA);
+
+	fpsimplify := ValueOption("fpsimplify"); # options
+	if fpsimplify = fail or not IsBool(fpsimplify) then
+		fpsimplify := false;
+	fi;
+
+	# check if number of generators matches 2 * genus
+	if fpsimplify or not (Length(GeneratorsOfGroup(fpGAM)) = 2 * TGQuotientGenus(quotient) and Length(GAMgens) = 2 * TGQuotientGenus(quotient)) then
+		isosimp := IsomorphismSimplifiedFpGroup(fpGAM);
+		fpGAM := Range(isosimp);
+		isofpGAM := isofpGAM * isosimp;
+
+		if not Length(GeneratorsOfGroup(fpGAM)) = 2 * TGQuotientGenus(quotient) then
+			Error(StringFormatted(
+				"The translation group associated with {} has {} generators, which is not twice the genus {}.",
+				quotient, Length(GeneratorsOfGroup(fpGAM)), TGQuotientGenus(quotient)
+			));
+			return fail;
+		fi;
+
+		GAMgens := List(GeneratorsOfGroup(fpGAM), fpgam -> PreImagesRepresentative(isofpGAM, fpgam));
+		GAMMA := Subgroup(D, GAMgens);
+		isofpGAM := IsomorphismFpGroupByGenerators(GAMMA, GAMgens, "g");
+    	fpGAM := Image(isofpGAM, GAMMA);
+	fi;
 
 	# transversal T_D(GAM)
 	if Length(args) > 1 then
@@ -420,7 +447,7 @@ function(tg, quotient, center)
 	# proper triangle group and proper point group
 	D := FpGroup(tg);
 	Gplus := D / rels;
-	GAMMA := TGTranslationGroupFromQuotient(D, Gplus);
+	GAMMA := TGTranslationGroupFromQuotient(D, Gplus, TGQuotientGenus(quotient));
 	QDGAM := RightTransversal(D, AsTGSubgroup(GAMMA));
 
 	# full triangle group

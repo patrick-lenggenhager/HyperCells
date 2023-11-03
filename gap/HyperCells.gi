@@ -9,9 +9,9 @@ ReadPackage( "HyperCells", "gap/Internal.g");
 
 ReadPackage( "HyperCells", "gap/TriangleGroups.gi");
 ReadPackage( "HyperCells", "gap/TGTranslationGroup.gi");
+ReadPackage( "HyperCells", "gap/TGQuotients.gi");
 ReadPackage( "HyperCells", "gap/TGCell.gi");
 ReadPackage( "HyperCells", "gap/TGCellGraph.gi");
 ReadPackage( "HyperCells", "gap/TGCellModelGraph.gi");
 ReadPackage( "HyperCells", "gap/TGSuperCellModelGraph.gi");
-ReadPackage( "HyperCells", "gap/TGQuotients.gi");
 ReadPackage( "HyperCells", "gap/TGQuotientSequences.gi");

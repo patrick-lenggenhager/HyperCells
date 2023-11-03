@@ -686,8 +686,8 @@ end );
 InstallGlobalFunction( ImportTGSuperCellModelGraph,
 function(input, args...)
     local version, sign, tg, D, info, pcrels, screls, center,
-        pcGAMgens, pcTDGAM, pcTGGw, pc,
-		scGAMgens, scTDGAM, scTGGw, sc,
+        pcGAMgens, pcTDGAM, pcTGGw, pcquotient, pc,
+		scGAMgens, scTDGAM, scTGGw, scquotient, sc,
 		GAMembdimgs, GAMembd, TGAM0GAM, type,
         verts, pos, vertexpos, edges, t, transls, i, faces,
 		cellembed;
@@ -723,7 +723,20 @@ function(input, args...)
 	pcTGGw := EvalDString@(ReadAllLine(input), D);
 
     # construct primitive cell
-	pc := TGCell(tg, pcrels, pcGAMgens, pcTDGAM, pcTGGw);
+	# TODO: check if correct
+	pcquotient := Objectify( NewType(
+		NewFamily( "TGQuotient", IsTGQuotientObj ),
+		IsTGQuotientObj and IsTGQuotientComponentRep),
+		rec(
+			name := MakeImmutable(""),
+            triangle := MakeImmutable(sign), 
+            order := Length(pcTDGAM),
+            genus := Length(pcGAMgens)/2,
+            action := MakeImmutable(""),
+            relators := PrintString(pcrels)
+		)
+	);
+	pc := TGCell(tg, pcquotient, pcGAMgens, pcTDGAM, pcTGGw);
 
 	# supercell: get translation group generators
 	scGAMgens := SplitString(ReplacedString(ReadAllLine(input), "->", ":"), ":")[2];
@@ -748,7 +761,20 @@ function(input, args...)
 	fi;
 
     # construct supercell
-	sc := TGCell(tg, screls, scGAMgens, scTDGAM, scTGGw);
+	# TODO: check if correct
+	scquotient := Objectify( NewType(
+		NewFamily( "TGQuotient", IsTGQuotientObj ),
+		IsTGQuotientObj and IsTGQuotientComponentRep),
+		rec(
+			name := MakeImmutable(""),
+            triangle := MakeImmutable(sign), 
+            order := Length(scTDGAM),
+            genus := Length(scGAMgens)/2,
+            action := MakeImmutable(""),
+            relators := PrintString(screls)
+		)
+	);;
+	sc := TGCell(tg, scquotient, scGAMgens, scTDGAM, scTGGw);
 
 	# embedding of supercell translation group: homomorphism
 	GAMembd := GroupHomomorphismByImages(FpGroup(TGCellTranslationGroup(sc)), FpGroup(TGCellTranslationGroup(pc)), GeneratorsOfGroup(FpGroup(TGCellTranslationGroup(sc))), GAMembdimgs);

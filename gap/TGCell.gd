@@ -29,10 +29,10 @@
 #!   the maximally symmetric Wyckoff positions in the cell
 #! and is printed in the form
 #! @BeginLog
-#! TGCell( ProperTriangleGroup(r, q, p), [ rel1, rel2, ... ] )
+#! TGCell( ProperTriangleGroup(r, q, p), quotient )
 #! @EndLog
 #! where $(r,q,p)$ is the signature of the underlying triangle group and
-#! `rel1`, `rel2`, ... are the relators defining the cell.
+#! `quotient` the `TGQuotient` object (see <Ref Sect="Section_TGQuotient"/>).
 
 
 #! @Description
