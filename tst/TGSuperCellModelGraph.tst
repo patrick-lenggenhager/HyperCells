@@ -70,7 +70,7 @@ ve cell = TGCellTranslationGroup( < g1, g2, g3, g4 | g4*g1*g2^-1*g3*g4^-1*g1^-1*
 gap> scmodel = scmodel2;
 true
 
-gap> scmodelrand := RandomTGSuperCellModelGraph(model, TGQuotientRelators(tg, TGQuotient([3, 11])) : simplify := 0);
+gap> scmodelrand := RandomTGSuperCellModelGraph(model, TGQuotient([3, 11]) : simplify := 0);
 TGSuperCellModelGraph( primitive cell = TGCell( ProperTriangleGroup(2, 8, 8), [ x^2, x*y*z, x*z*y, y^3*z^-1 ] ), supercell = TGCell( ProperTriangleGroup(2, 8, 8), [ x^2, x*y*z, x*z*y, y^-8 ] ), cell embedding = TGCellEmbedding( primiti\
 ve cell = TGCellTranslationGroup( < g1, g2, g3, g4 | g2*g1^-1*g4^-1*g3*g2^-1*g1*g4*g3^-1 > ), supercell = TGCellTranslationGroup( < g1, g2, g3, g4, g5, g6 | g6*g4*g2*g1*g3*g5*g3^-1*g2^-1*g6^-1*g5^-1*g1^-1*g4^-1 > ), transversal = \
 [ <identity ...>, y^3*z^-1 ], embedding = [ g1, g2, g3, g4, g5, g6 ] -> [ g1^-1*g4^-1, g1^-1*g2, g3*g4^-1, g1^-1*g2*g4^-1*g1^-1*g2*g3^-1*g4*g1*g2^-1*g1, g4*g1^-1*g4^-1*g3*g2^-1*g1, g1^-1*g2*g3^-1*g4*g2^-1*g1 ] ), center = 3, type \
@@ -143,7 +143,7 @@ y^-1*(y^-1*x^-1)^7, x*y*(x^-1*y^-1)^4*x^-1, (y^-1*x^-1)^3, x*y*(x^-1*y^-1)^2*x^-
 10^-1*g12^-1*g4^-1*g2^-1*g8^-1*g3, g17*g7^-1*g2*g10^-1*g12^-1*g4^-1*g2^-1*g8^-1*g3, g9*g5*g6*g16^-1, g16^-1, g6*g16^-1, g1*g16^-1 ]\n[ ]"
 
 # Additional supercells (non-symmetric)
-gap> ExportString(RandomTGSuperCellModelGraph(model, TGQuotientRelators(tg, TGQuotient([17, 29])) : simplify := 0));
+gap> ExportString(RandomTGSuperCellModelGraph(model, TGQuotient([17, 29]) : simplify := 0));
 "HyperCells HCS version 1.0\n[ 2, 8, 8 ]\n[ [ x^2, x*y*z, x*z*y, y^3*z^-1 ], [ x^2, x*y*z, x*z*y^-2*z^-2*y, y^8, (y*z^-1*y^2)^2, z^8 ], 3 ]\n[ g1, g2, g3, g4 ] -> [ z^-1*x^-1*y*z^-1*y*z*y*x^-1, z^-1*x^-1*y*z^-1*y*z*y*x^-1*y*x*z, z*y*(x^-1*z^-1)^2*y^3*x*z, y^\
 -1*z*y^-1*x*z ]\n[ 1, y^-1*x^-1, (y^-1*x^-1)^2, (y^-1*x^-1)^3, (y^-1*x^-1)^4, (y^-1*x^-1)^5, (y^-1*x^-1)^6, (y^-1*x^-1)^7 ]\n[ [ 1, (y^-1*x^-1)^3, y^-1*x^-1, (y^-1*x^-1)^2 ], [ 1 ], [ 1 ] ]\n[ g1, g2, g3, g4, g5, g6, g7, g8, g9, g\
 10, g11, g12, g13, g14, g15, g16, g17, g18, g19, g20, g21, g22, g23, g24, g25, g26, g27, g28, g29, g30, g31, g32, g33, g34 ] -> [ x*y^-1*z*y^-1*z^-1*y*z^-1, x*z*y^-2*z^-2*y, y*x*y^-1*z^2*y^2*x^-1, y*x*z*y^-1*z*y*z^-1, y^2*x*z*y^-1\
@@ -189,12 +189,24 @@ g5^-1*g11^-1, g14*g11^-1, g21*g2^-1*g5^-1*g11^-1, g12*g16^-1, g9*g28, g23*g7^-1*
 1*g26*g1*g16*g8*g13^-1*g14*g27*g4*g17*g32^-1, g10^-1*g11*g26*g1*g16*g8*g13^-1*g14*g27*g4*g17*g32^-1, g13*g21*g23^-1*g22*g34^-1*g24*g6*g10^-1*g11*g26*g1*g16*g8*g13^-1*g14*g27*g4*g17*g32^-1, g31*g18*g29*g27^-1*g20^-1*g24*g6*g10^-1*g\
 11*g26*g1*g16*g8*g13^-1*g14*g27*g4*g17*g32^-1, g31*g18*g29*g27^-1*g20^-1, g30^-1*g20^-1, g10^-1*g20^-1, g11*g26*g3^-1*g9^-1*g20^-1 ]\n[ ]"
 
-# NNN-{8,3}-tess
+# {8,3}-tess
 gap> sign := [ 2, 3, 8 ];;
 gap> tg := ProperTriangleGroup(sign);;
 gap> q := TGQuotient( [ 2, 1 ] );;
 gap> cg := TGCellGraph(tg, q, 3 : simplify := 3);;
 gap> model := TessellationModelGraph(cg, false : simplify := 0);;
+
+# Check number of generators
+gap> scq := TGQuotient([33, 1]);;
+gap> Length(GeneratorsOfGroup(FpGroup(TGCellTranslationGroup(GetTGSuperCell(RandomTGSuperCellModelGraph(model, scq : simplify := 0)))))) = 2 * TGQuotientGenus(scq);
+true
+gap> Length(GeneratorsOfGroup(FpGroup(TGCellTranslationGroup(GetTGSuperCell(TGSuperCellModelGraph(model, TGCell(tg, scq) : simplify := 0)))))) = 2 * TGQuotientGenus(scq);
+true
+gap> Length(GeneratorsOfGroup(FpGroup(TGCellTranslationGroup(GetTGSuperCell(TGSuperCellModelGraph(model, TGCellSymmetric(tg, scq, 3) : simplify := 0)))))) = 2 * TGQuotientGenus(scq);
+true
+
+
+# NNN-{8,3}-tess
 gap> AddOrientedNNNEdgesToTessellationModelGraph(model);
 gap> sc := TGCellSymmetric(tg, TGQuotient([ 5, 1 ]), 3);;
 gap> scmodel := TGSuperCellModelGraph(model, sc : simplify := 1);;
