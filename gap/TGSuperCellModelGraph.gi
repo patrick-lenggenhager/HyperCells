@@ -310,8 +310,7 @@ end );
 InstallGlobalFunction( RandomTGSuperCellModelGraph,
 function(model, scquotient, args...)
 	local simplify, tg, D, pc, GAMMA0, screls,
-		Gplus, homDG, GAMgens, GAMMA, isofpGAM, fpGAM,
-		fpsimplify, isosimp, TDGAM,
+		Gplus, GAM, GAMMA, homDG, fpGAM, isofpGAM, TDGAM,
 		ucverts, ucvertpos, ucedges, ucetransls, ucfaces,
         QGAMs, TGAMs,
         verts, pos, vertexpos, edges, faces,
@@ -340,51 +339,14 @@ function(model, scquotient, args...)
 	screls := TGQuotientRelators(tg, scquotient);
     Gplus := D / screls;
 
-    # homomorphism D -> G
-    homDG := GroupHomomorphismByImages(D, Gplus);
-
-    # translation group
-    if Length(args) > 0 then
-		# take given translation generators
-        GAMgens := args[1];
-        GAMMA := Subgroup(D, GAMgens);
-    else
-		GAMMA := Kernel(homDG);
-        GAMgens := GeneratorsOfGroup(GAMMA);
-    fi;
-
-	if not IsSubgroup(GAMMA0, GAMMA) then
-		Error(StringFormatted("Supercell translation group {} is not a subgroup of the primitive-cell translation group {}.", GAMMA, GAMMA0));
-	fi;
-
-	# write GAMMA as finitely presented group in terms of its generators
-    isofpGAM := IsomorphismFpGroupByGenerators(GAMMA, GAMgens, "g"); # isomorphism GAMMA -> fpGAM
-    fpGAM := Image(isofpGAM, GAMMA);
-
-	fpsimplify := ValueOption("fpsimplify"); # options
-	if fpsimplify = fail or not IsBool(fpsimplify) then
-		fpsimplify := false;
-	fi;
-
-	# check if number of generators matches 2 * genus
-	if fpsimplify or not (Length(GeneratorsOfGroup(fpGAM)) = 2 * TGQuotientGenus(scquotient) and Length(GAMgens) = 2 * TGQuotientGenus(scquotient)) then
-		isosimp := IsomorphismSimplifiedFpGroup(fpGAM);
-		fpGAM := Range(isosimp);
-		isofpGAM := isofpGAM * isosimp;
-
-		if not Length(GeneratorsOfGroup(fpGAM)) = 2 * TGQuotientGenus(scquotient) then
-			Error(StringFormatted(
-				"The translation group associated with {} has {} generators, which is not twice the genus {}.",
-				scquotient, Length(GeneratorsOfGroup(fpGAM)), TGQuotientGenus(scquotient)
-			));
-			return fail;
-		fi;
-
-		GAMgens := List(GeneratorsOfGroup(fpGAM), fpgam -> PreImagesRepresentative(isofpGAM, fpgam));
-		GAMMA := Subgroup(D, GAMgens);
-		isofpGAM := IsomorphismFpGroupByGenerators(GAMMA, GAMgens, "g");
-    	fpGAM := Image(isofpGAM, GAMMA);
-	fi;
+	# translation group
+	GAM := CallFuncList(TGTranslationGroupFromQuotient,
+		Concatenation([ D, Gplus, TGQuotientGenus(scquotient) ], args)
+	);
+	GAMMA := AsTGSubgroup(GAM);
+	homDG := QuotientHomomorphism(GAM);
+	fpGAM := FpGroup(GAM);
+	isofpGAM := FpIsomorphism(GAM);
 
 	# transversal T_D(GAMMA)
 	if Length(args) > 1 then
@@ -476,7 +438,7 @@ function(model, scquotient, args...)
 			IsTGCellTranslationGroupObj and IsTGCellTranslationGroupComponentRep),
 			rec(
 				group := GAMMA,
-				generators := MakeImmutable(GAMgens),
+				generators := MakeImmutable(GeneratorsOfGroup(GAMMA)),
 				isofpgroup := isofpGAM,
 				fpgroup := fpGAM
 			)
