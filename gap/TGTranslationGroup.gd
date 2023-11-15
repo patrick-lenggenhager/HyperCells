@@ -34,13 +34,24 @@ DeclareCategory( "IsTGTranslationGroupObj", IsObject );
 #! @Description
 #!   Construct the translation group as the kernel of the quotient homomorphism
 #!   from the proper triangle group <A>D</A> to the quotient group <A>G</A>.
+#!   The functions makes sure that a minimal number of translation generators
+#!   is used by ensuring the number matches <A>2*genus</A>.
+#!
+#!   Optionally, generators <A>GAMgens</A> of the translation group $\Gamma$ can be
+#!   explicitly given as elements of <A>tg</A>. If not given, they are computed
+#!   automatically.
+#!   Similarly, choices for the transversals $T_{\Delta^+}(\Gamma)$ and $T_{G^+}(G_w^+)$
+#!   can be given as <A>TDGAM</A> and <A>TGGw</A>, respectively. If not given, they
+#!   are computed automatically.
+#!   Here, <A>TDGAM</A> is a list of elements of <A>tg</A> and <A>TGGw</A> is a list
+#!   of three lists, one for $w=x,y,z$, respectively, of elements of <A>tg</A>.
 #! @Returns the translation group as a `TriangleTranslationGroup` object.
-#! @Arguments D, G
+#! @Arguments D,G,genus[,GAMgens[,TDGAM[,TGGw]]]
 DeclareGlobalFunction( "TGTranslationGroupFromQuotient" );
 
 #! @Description
 #!   Construct the translation group as the kernel of the quotient homomorphism
-#!   from the proper triangle group <A>tgD</A> given as a `ProperTriangleGroup`
+#!   from the proper triangle group <A>tg</A> given as a `ProperTriangleGroup`
 #!   object (see <Ref Sect='Section_TriangleGroups'/>) to the quotient group
 #!   <A>quotient</A> given as a `TGQuotient` object
 #!   (see <Ref Sect='Section_TGQuotient'/>).

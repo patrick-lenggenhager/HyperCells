@@ -87,15 +87,15 @@ DeclareGlobalFunction( "TGSuperCellModelGraph" );
 #! @Description
 #!   Constructs the supercell model graph obtained from extending the model <A>model</A>
 #!   given as a `TGCellModelGraph` object (see <Ref Sect='Section_TGCellModelGraph'/>)
-#!   to the supercell specified by the relators <A>screls</A> given as elements of
-#!   the proper triangle group `GetProperTriangleGroup(GetTGCell(`<A>model</A>`))`.
+#!   to the supercell specified by the `TGQuotient` <A>scquotient</A>
+#!   (see <Ref Sect='Section_TGQuotient'/>).
 #!   Generally, the resulting supercell is neither symmetric nor connected.
 #!
 #!   If desired, explicit, e.g., symmetric, choices for the generators of supercell
 #!   translation group $\Gamma_\mathrm{sc}$, $T_{\Delta^+}(\Gamma_\mathrm{sc})$,
 #!   and $T_{\Gamma_\mathrm{pc}}(\Gamma_\mathrm{sc})$ can be given as optional
 #!   arguments <A>GAMgens</A>, <A>TDGAM</A>, and <A>TGAMs</A>, respectively.
-#! @Arguments model,screls[,GAMgens[,TDGAM[,TGAMs]]]
+#! @Arguments model,scquotient[,GAMgens[,TDGAM[,TGAMs]]]
 #! @Returns cell graph as `Section_TGSuperCellModelGraph` object
 #! (see <Ref Sect='Section_TGSuperCellModelGraph'/>).
 DeclareGlobalFunction( "RandomTGSuperCellModelGraph" );

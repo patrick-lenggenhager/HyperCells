@@ -308,9 +308,9 @@ function(model, sc)
 end );
 
 InstallGlobalFunction( RandomTGSuperCellModelGraph,
-function(model, screls, args...)
-	local simplify, tg, D, pc, GAMMA0,
-		Gplus, homDG, GAMgens, GAMMA, isofpGAM, fpGAM, TDGAM,
+function(model, scquotient, args...)
+	local simplify, tg, D, pc, GAMMA0, screls,
+		Gplus, GAM, GAMMA, homDG, fpGAM, isofpGAM, TDGAM,
 		ucverts, ucvertpos, ucedges, ucetransls, ucfaces,
         QGAMs, TGAMs,
         verts, pos, vertexpos, edges, faces,
@@ -336,28 +336,17 @@ function(model, screls, args...)
 
 	## supercell ##
 	# point group
+	screls := TGQuotientRelators(tg, scquotient);
     Gplus := D / screls;
 
-    # homomorphism D -> G
-    homDG := GroupHomomorphismByImages(D, Gplus);
-
-    # translation group
-    if Length(args) > 0 then
-		# take given translation generators
-        GAMgens := args[1];
-        GAMMA := Subgroup(D, GAMgens);
-    else
-		GAMMA := Kernel(homDG);
-        GAMgens := GeneratorsOfGroup(GAMMA);
-    fi;
-
-	if not IsSubgroup(GAMMA0, GAMMA) then
-		Error(StringFormatted("Supercell translation group {} is not a subgroup of the primitive-cell translation group {}.", GAMMA, GAMMA0));
-	fi;
-
-	# write GAMMA as finitely presented group in terms of its generators
-    isofpGAM := IsomorphismFpGroupByGenerators(GAMMA, GAMgens, "g"); # isomorphism GAMMA -> fpGAM
-    fpGAM := Image(isofpGAM, GAMMA);
+	# translation group
+	GAM := CallFuncList(TGTranslationGroupFromQuotient,
+		Concatenation([ D, Gplus, TGQuotientGenus(scquotient) ], args)
+	);
+	GAMMA := AsTGSubgroup(GAM);
+	homDG := QuotientHomomorphism(GAM);
+	fpGAM := FpGroup(GAM);
+	isofpGAM := FpIsomorphism(GAM);
 
 	# transversal T_D(GAMMA)
 	if Length(args) > 1 then
@@ -449,7 +438,7 @@ function(model, screls, args...)
 			IsTGCellTranslationGroupObj and IsTGCellTranslationGroupComponentRep),
 			rec(
 				group := GAMMA,
-				generators := MakeImmutable(GAMgens),
+				generators := MakeImmutable(GeneratorsOfGroup(GAMMA)),
 				isofpgroup := isofpGAM,
 				fpgroup := fpGAM
 			)

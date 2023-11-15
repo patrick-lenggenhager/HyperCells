@@ -29,16 +29,17 @@
 #!   the maximally symmetric Wyckoff positions in the cell
 #! and is printed in the form
 #! @BeginLog
-#! TGCell( ProperTriangleGroup(r, q, p), quotient )
+#! TGCell( ProperTriangleGroup(r, q, p), rels )
 #! @EndLog
 #! where $(r,q,p)$ is the signature of the underlying triangle group and
-#! `quotient` the `TGQuotient` object (see <Ref Sect="Section_TGQuotient"/>).
-
+#! `rels` the relators defining the cell in terms of the generators $x$, $y$, $z$
+#! of the proper triangle group $\Delta^+$.
 
 #! @Description
 #!   Construct the cell for the triangle group <A>tg</A> ($\Delta^+$), given as
 #!   `ProperTriangleGroup` object (see <Ref Sect="Section_TriangleGroups"/>),
-#!   specified by the quotient relators <A>rels</A> given as elements of <A>tg</A>.
+#!   specified by the quotient <A>q</A> given as a `TGQuotient` object <A>quotient</A>
+#!   (see <Ref Sect="Section_TGQuotient"/>).
 #!
 #!   Optionally, generators <A>GAMgens</A> of the translation group $\Gamma$ can be
 #!   explicitly given as elements of <A>tg</A>. If not given, they are computed
@@ -48,7 +49,7 @@
 #!   are computed automatically.
 #!   Here, <A>TDGAM</A> is a list of elements of <A>tg</A> and <A>TGGw</A> is a list
 #!   of three lists, one for $w=x,y,z$, respectively, of elements of <A>tg</A>.
-#! @Arguments tg,rels[,GAMgens[,TDGAM[,TGGw]]]
+#! @Arguments tg,quotient[,GAMgens[,TDGAM[,TGGw]]]
 #! @Returns cell as `TGCell` object
 DeclareGlobalFunction( "TGCell" );
 

@@ -297,59 +297,21 @@ end );
 
 InstallGlobalFunction( TGCell,
 function(tg, quotient, args...)
-	local D, rels, Gplus, TDGAM, homDG, GAMMA, GAMgens, isofpGAM, fpGAM,
-		fpsimplify, isosimp,
+	local D, rels, Gplus, GAMMA, homDG, TDGAM,
 		schwarz, GwGens, GwElems, QGGw, w, TGGw, itriangle, i, GGw, F;
 
-	# triangle group
+	# proper triangle group
 	D := FpGroup(tg);
 
     # point group
 	rels := TGQuotientRelators(tg, quotient);
     Gplus := D / rels;
 
-    # homomorphism D -> G
-    homDG := GroupHomomorphismByImages(D, Gplus);
-
     # translation group
-    if Length(args) > 0 then
-		# take given translation generators
-        GAMgens := args[1];
-        GAMMA := Subgroup(D, GAMgens);
-    else
-		GAMMA := Kernel(homDG);
-        GAMgens := GeneratorsOfGroup(GAMMA);
-    fi;
-
-    # write GAM as finitely presented group in terms of its generators
-	# isomorphism GAM -> fpGAM
-    isofpGAM := IsomorphismFpGroupByGenerators(GAMMA, GeneratorsOfGroup(GAMMA), "g");
-    fpGAM := Image(isofpGAM, GAMMA);
-
-	fpsimplify := ValueOption("fpsimplify"); # options
-	if fpsimplify = fail or not IsBool(fpsimplify) then
-		fpsimplify := false;
-	fi;
-
-	# check if number of generators matches 2 * genus
-	if fpsimplify or not (Length(GeneratorsOfGroup(fpGAM)) = 2 * TGQuotientGenus(quotient) and Length(GAMgens) = 2 * TGQuotientGenus(quotient)) then
-		isosimp := IsomorphismSimplifiedFpGroup(fpGAM);
-		fpGAM := Range(isosimp);
-		isofpGAM := isofpGAM * isosimp;
-
-		if not Length(GeneratorsOfGroup(fpGAM)) = 2 * TGQuotientGenus(quotient) then
-			Error(StringFormatted(
-				"The translation group associated with {} has {} generators, which is not twice the genus {}.",
-				quotient, Length(GeneratorsOfGroup(fpGAM)), TGQuotientGenus(quotient)
-			));
-			return fail;
-		fi;
-
-		GAMgens := List(GeneratorsOfGroup(fpGAM), fpgam -> PreImagesRepresentative(isofpGAM, fpgam));
-		GAMMA := Subgroup(D, GAMgens);
-		isofpGAM := IsomorphismFpGroupByGenerators(GAMMA, GAMgens, "g");
-    	fpGAM := Image(isofpGAM, GAMMA);
-	fi;
+	GAMMA := CallFuncList(TGTranslationGroupFromQuotient,
+		Concatenation([D, Gplus, TGQuotientGenus(quotient)], args)
+	);
+	homDG := QuotientHomomorphism(GAMMA);
 
 	# transversal T_D(GAM)
 	if Length(args) > 1 then
@@ -410,10 +372,10 @@ function(tg, quotient, args...)
 			NewFamily( "TGCellTranslationGroup", IsTGCellTranslationGroupObj ),
 			IsTGCellTranslationGroupObj and IsTGCellTranslationGroupComponentRep),
 			rec(
-				group := GAMMA,
-				generators := MakeImmutable(GAMgens),
-				isofpgroup := isofpGAM,
-				fpgroup := fpGAM
+				group := AsTGSubgroup(GAMMA),
+				generators := MakeImmutable(GeneratorsOfGroup(AsTGSubgroup(GAMMA))),
+				isofpgroup := FpIsomorphism(GAMMA),
+				fpgroup := FpGroup(GAMMA)
 			)
 		),
         G := Objectify( NewType(
@@ -421,7 +383,7 @@ function(tg, quotient, args...)
 			IsTGCellPointGroupObj and IsTGCellPointGroupComponentRep),
 			rec(
 				group := Gplus,
-				Q := RightTransversal(D, GAMMA),
+				Q := RightTransversal(D, AsTGSubgroup(GAMMA)),
 				T := MakeImmutable(TDGAM),
 				qhom := homDG
 			)
@@ -441,12 +403,14 @@ function(tg, quotient, center)
 	####################### CONSTRUCT GROUPS ######################
 	###############################################################
 
-	# relators
-	rels := TGQuotientRelators(tg, quotient);
-
-	# proper triangle group and proper point group
+	# proper triangle group
 	D := FpGroup(tg);
-	Gplus := D / rels;
+
+    # point group
+	rels := TGQuotientRelators(tg, quotient);
+    Gplus := D / rels;
+
+	# translation group
 	GAMMA := TGTranslationGroupFromQuotient(D, Gplus, TGQuotientGenus(quotient));
 	QDGAM := RightTransversal(D, AsTGSubgroup(GAMMA));
 
