@@ -36,7 +36,9 @@ function(quotient, sequence)
 
     # last translation group of existing sequence
     Q0 := sequence[Length(sequence)];
-    GAM0 := AsTGSubgroup(TGTranslationGroupFromQuotient(D, D / TGQuotientRelators(tg, Q0)));
+    GAM0 := AsTGSubgroup(TGTranslationGroupFromQuotient(
+        D, D / TGQuotientRelators(tg, Q0), TGQuotientGenus(Q0)
+    ));
 
     # extend sequence of translation group
     extseq := [];
@@ -45,7 +47,9 @@ function(quotient, sequence)
             Error(StringFormatted("The quotient {} is not a quotient of the triangle group with signature {}.", TGQuotientName(Q), sgn));
         fi;
 
-        GAMtilde := AsTGSubgroup(TGTranslationGroupFromQuotient(D, D / TGQuotientRelators(tg, Q)));
+        GAMtilde := AsTGSubgroup(TGTranslationGroupFromQuotient(
+            D, D / TGQuotientRelators(tg, Q), TGQuotientGenus(Q)
+        ));
 
         GAM1 := Intersection(GAM0, GAMtilde);
         ind := Index(GAM0, GAM1);
@@ -91,7 +95,9 @@ function(quotient, Q0)
     D := FpGroup(tg);
 
     # last translation group of existing sequence
-    GAM0 := AsTGSubgroup(TGTranslationGroupFromQuotient(D, D / TGQuotientRelators(tg, Q0)));
+    GAM0 := AsTGSubgroup(TGTranslationGroupFromQuotient(
+        D, D / TGQuotientRelators(tg, Q0), TGQuotientGenus(Q0)
+    ));
 
     # iterate over options for extension
     opts := [];
@@ -100,7 +106,9 @@ function(quotient, Q0)
             Error(StringFormatted("The quotient {} is not a quotient of the triangle group with signature {}.", TGQuotientName(Q), sgn));
         fi;
 
-        GAMtilde := AsTGSubgroup(TGTranslationGroupFromQuotient(D, D / TGQuotientRelators(tg, Q)));
+        GAMtilde := AsTGSubgroup(TGTranslationGroupFromQuotient(
+            D, D / TGQuotientRelators(tg, Q), TGQuotientGenus(Q)
+        ));
 
         GAM1 := Intersection(GAM0, GAMtilde);
         ind := Index(GAM0, GAM1);
@@ -141,7 +149,10 @@ function(seqs, n)
         for k in [1..Length(sequences[j])] do
             if not sequences[j][k] in quotients then
                 Append(quotients, [ sequences[j][k] ]);
-                Append(GAMs, [ AsTGSubgroup(TGTranslationGroupFromQuotient(D, D / TGQuotientRelators(tg, sequences[j][k]))) ]);
+                Append(GAMs, [ AsTGSubgroup(TGTranslationGroupFromQuotient(
+                    D, D / TGQuotientRelators(tg, sequences[j][k]),
+                    TGQuotientGenus(sequences[j][k])
+                )) ]);
             fi;
         od;
     od;
@@ -179,7 +190,9 @@ function(seqs, n)
                 fi;
                 # Print("    Check index of ", Q, ": ");
                 if indmin <= 1 or  not TGQuotientOrder(Q)/TGQuotientOrder(sequence[Length(sequence)]) > indmin then
-                    GAMtilde := AsTGSubgroup(TGTranslationGroupFromQuotient(D, D / TGQuotientRelators(tg, Q)));
+                    GAMtilde := AsTGSubgroup(TGTranslationGroupFromQuotient(
+                        D, D / TGQuotientRelators(tg, Q), TGQuotientGenus(Q)
+                    ));
 
                     GAM1 := Intersection(GAM0, GAMtilde);
                     ind := Index(GAM0, GAM1);
@@ -372,7 +385,9 @@ function(sequence)
         fi;
 
         # translation group
-        GAM1 := AsTGSubgroup(TGTranslationGroupFromQuotient(D, D / TGQuotientRelators(tg, Q)));
+        GAM1 := AsTGSubgroup(TGTranslationGroupFromQuotient(
+            D, D / TGQuotientRelators(tg, Q), TGQuotientGenus(Q)
+        ));
 
         # check if (normal) subgroup
         if IsBound(GAM0) then

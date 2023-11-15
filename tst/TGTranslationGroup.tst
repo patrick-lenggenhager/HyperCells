@@ -9,7 +9,7 @@ gap> D := FpGroup(tg);
 <fp group on the generators [ x, y, z ]>
 gap> q := TGQuotient( [ 2, 6 ] );
 TGQuotient([ 2, 6 ], [ 2, 8, 8 ], 8, 2, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^3 * z^-1 ])
-gap> GAMMA := TGTranslationGroupFromQuotient(D, D / TGQuotientRelators(tg, q));
+gap> GAMMA := TGTranslationGroupFromQuotient(D, D / TGQuotientRelators(tg, q), TGQuotientGenus(q));
 TranslationGroup( < g1, g2, g3, g4 | g4*g3*g2*g1*g2^-1*g4^-1*g1^-1*g3^-1 > )
 gap> GAMMA = TGTranslationGroup(tg, q);
 true
@@ -56,7 +56,9 @@ gap> tg := ProperTriangleGroup( sign );;
 gap> D := FpGroup(tg);;
 gap> i := Random(1, Length(ListTGQuotients( sign )));;
 gap> q := TGQuotient(i, sign );;
-gap> GAMMA := TGTranslationGroupFromQuotient(D, D / TGQuotientRelators(tg, q));;
+gap> GAMMA := TGTranslationGroup(tg, q);;
+gap> Length(GeneratorsOfGroup(FpGroup(GAMMA))) = 2*TGQuotientGenus(q);
+true
 gap> GetProperTriangleGroup(GAMMA) = D;
 true
 gap> hom := QuotientHomomorphism(GAMMA);
