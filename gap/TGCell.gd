@@ -29,11 +29,11 @@
 #!   the maximally symmetric Wyckoff positions in the cell
 #! and is printed in the form
 #! @BeginLog
-#! TGCell( ProperTriangleGroup(r, q, p), quotient )
+#! TGCell( ProperTriangleGroup(r, q, p), rels )
 #! @EndLog
 #! where $(r,q,p)$ is the signature of the underlying triangle group and
-#! `quotient` the `TGQuotient` object (see <Ref Sect="Section_TGQuotient"/>).
-# TODO: correct
+#! `rels` the relators defining the cell in terms of the generators $x$, $y$, $z$
+#! of the proper triangle group $\Delta^+$.
 
 #! @Description
 #!   Construct the cell for the triangle group <A>tg</A> ($\Delta^+$), given as
