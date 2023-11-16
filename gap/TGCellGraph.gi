@@ -110,7 +110,7 @@ end );
 # Constructors
 
 InstallGlobalFunction( TGCellGraph,
-function(tg, quotient, center)
+function(tg, quotient, center, args...)
 	local simplify, swordlength, rels,
 		D, Gplus, GAMMA, DELTA, a, b, c, embDDELTA, DELTAplus, relsfull, G, homDELTAG,
 		StabCell, Gcell, GcellElems, n, m, Qfdom, Tfdom, prev, new, d1, d2, Tcell, d, Tfdomplus, Tcellplus,
@@ -142,7 +142,9 @@ function(tg, quotient, center)
 	# proper triangle group and proper point group
 	D := FpGroup(tg);
 	Gplus := D / rels;
-	GAMMA := TGTranslationGroupFromQuotient(D, Gplus, TGQuotientGenus(quotient));
+	GAMMA := CallFuncList(TGTranslationGroupFromQuotient,
+		Concatenation( [ D, Gplus, TGQuotientGenus(quotient) ], args )
+	);
 
 	# full triangle group
 	DELTA := FpGroup(TriangleGroup(Signature(tg)));
