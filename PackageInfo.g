@@ -10,9 +10,9 @@ SetPackageInfo( rec(
 
 PackageName := "HyperCells",
 Subtitle := "Primitive cells and supercells of hyperbolic lattices based on triangle groups",
-Version := "0.1",
-Date := "03/10/2023", # dd/mm/yyyy format
-License := "BSD-3-Clause",
+Version := "0.5",
+Date := "27/11/2023", # dd/mm/yyyy format
+License := "CC BY-SA 4.0",
 
 Persons := [
   rec(
@@ -22,7 +22,6 @@ Persons := [
     Email := "patrick.m.lenggenhager@gmail.com",
     IsAuthor := true,
     IsMaintainer := true,
-    #PostalAddress := TODO,
     Place := "Zurich, Switzerland",
     Institution := "ETH Zürich, Paul Scherrer Institut, University of Zurich",
   ),
@@ -93,7 +92,7 @@ AvailabilityTest := ReturnTrue,
 
 TestFile := "tst/testall.g",
 
-#Keywords := [ "TODO" ],
+Keywords := [ "hyperbolic lattices", "triangle groups" ],
 
 ));
 

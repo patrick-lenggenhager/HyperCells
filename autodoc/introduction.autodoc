@@ -5,8 +5,8 @@ of hyperbolic lattices based on triangle groups and quotients with normal subgro
 An introduction to the underlying concepts can be found in the following preprint
 
 - P. M. Lenggenhager, J. Maciejko, and T. Bzdušek,
-  **Non-Abelian hyperbolic band theory from supercells**, arXiv:2305.04945 (2023)
-  <Cite Key='Lenggenhager:HSC'/>
+  **Non-Abelian hyperbolic band theory from supercells**, Phys. Rev. Lett. (accepted),
+  arXiv:2305.04945 (2023) <Cite Key='Lenggenhager:HSC'/>
 
 and the doctoral thesis
 
@@ -19,6 +19,11 @@ addition to the package itself:
 - P. M. Lenggenhager, J. Maciejko, and T. Bzdušek,
   **HyperCells: A GAP package for constructing primitive cells and supercells of
   hyperbolic lattices**, <URL>https://github.com/patrick-lenggenhager/HyperCells</URL> (2023)
+
+and the list of quotient groups:
+- M. Conder, **Quotients of triangle groups acting on surfaces of genus 2 to 101** (2007)
+  <Cite Key='Conder:2007'/>
+
 More information on how to cite, including BibTeX entries, can be found in the
 Readme file of the package repository given above.
 
@@ -67,7 +72,7 @@ gap> G := TGQuotientGroup( tg, q );
 @EndExampleSession
 or the associated translation group $\Gamma$
 @BeginExampleSession
-gap> Gamma := TGTranslationGroup( tg, q );
+gap> TGTranslationGroup( tg, q );
 TranslationGroup( < g1, g2, g3, g4 | g4*g3*g2*g1*g2^-1*g4^-1*g1^-1*g3^-1 > )
 @EndExampleSession
 
