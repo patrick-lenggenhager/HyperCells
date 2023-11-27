@@ -95,8 +95,6 @@ DeclareCategory( "IsTGCellModelGraphObj", IsObject );
 #! (see <Ref Sect='Section_TGCellModelGraph'/>).
 DeclareGlobalFunction( "TGCellModelGraph" );
 
-DeclareGlobalFunction( "TGCellModelGraphOld" );
-
 #! @Description
 #!   Constructs the $\{p,q\}$-tessellation model graph derived from the `TGCellGraph`
 #!   (see <Ref Sect='Section_TGCellGraph'/>) <A>cellgraph</A> of the triangle group

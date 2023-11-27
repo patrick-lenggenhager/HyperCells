@@ -120,136 +120,6 @@ end );
 
 # Methods
 
-InstallGlobalFunction( TGCellModelGraphOld,
-function(cg, vfs, efs, ffs)
-    local simplify,
-        verts, pos, edges, transls, faces,
-        v, fedges, ve, eout, ein, eadj, tuple, e1, e2, gam1, gam2, gam,
-        vf, dvf, vv, dvv, vvs, g, dvv2, i2,
-        dve, ves, dve2, es, offset, i;
-
-    # options
-    simplify := ValueOption("simplify");
-    if simplify = fail then
-        simplify := 0;
-    fi;
-
-    # select vertices and their positions
-    verts := [];
-    pos := [];
-
-    for v in [1..Length(CellVertices(cg))] do
-        if CellVertices(cg)[v][1] = vfs then
-            Append(verts, [ CellVertices(cg)[v] ]);
-            Append(pos, [ CellVertexPositions(cg)[v] ]);
-        fi;
-    od;
-
-    # construct edges and determine translations
-    edges := [];
-    transls := [];
-
-    fedges := Filtered(CellEdges(cg), e -> CellVertices(cg)[e[1]][1] = efs or CellVertices(cg)[e[2]][1] = efs);
-
-    for ve in [1..Length(CellVertices(cg))] do
-        if CellVertices(cg)[ve][1] = efs then
-            # edges outgoing from the edge vertex, form [ vertex, -1, edgelabel, translation ]
-            eout := Filtered(fedges, e -> e[1] = ve and CellVertices(cg)[e[2]][1] = vfs);
-            eout := List(eout, e -> [ Position(verts, CellVertices(cg)[e[2]]), -1, e[3], CellEdgeTranslations(cg)[Position(CellEdges(cg), e)] ]);
-
-            # edges incoming to the edge vertex, form [ vertex, +1, edgelabel, translation ]
-            ein := Filtered(fedges, e -> e[2] = ve and CellVertices(cg)[e[1]][1] = vfs);
-            ein := List(ein, e -> [ Position(verts, CellVertices(cg)[e[1]]), 1, e[3], CellEdgeTranslations(cg)[Position(CellEdges(cg), e)] ]);
-
-            # all edges adjacent to the edge vertex ve
-            eadj := Concatenation(ein, eout);
-
-            # edges in tessellation
-            for tuple in Filtered(UnorderedTuples([1..Length(eadj)], 2), e -> not e[1] = e[2]) do
-                e1 := eadj[tuple[1]]; # position in verts
-                e2 := eadj[tuple[2]]; # position in verts
-
-                Append(edges, [[ e1[1], e2[1], [ 1, [ CellVertices(cg)[ve][2], e1[3], e2[3] ] ] ]]);
-
-                gam1 := e1[4]^e1[2]; # from vertex 1 to edge vertex, i.e., incoming
-                gam2 := e2[4]^(-e2[2]); # from edge vertex to vertex 2, i.e., outgoing
-                Append(transls, [ SimplifyWord@(FpGroup(TGCellTranslationGroup(GetTGCell(cg))), gam2 * gam1, simplify) ]);
-            od;
-        fi;
-    od;
-
-    # construct faces as ordered list of vertices
-    # TODO: deal with degenerate graphs
-    faces := [];
-
-    for vf in [1..Length(CellVertices(cg))] do
-        dvf := CellVertexPositions(cg)[vf];
-        if CellVertices(cg)[vf][1] in ffs then
-            # vertices
-            vv := Position(CellVertices(cg), [vfs, PositionCanonical(AsQuotient(TGCellMSWPs(GetTGCell(cg)))[vfs], Image(QuotientHomomorphism(TGCellPointGroup(GetTGCell(cg))), dvf))]);
-            dvv := CellVertexPositions(cg)[vv];
-            vvs := [];
-            for g in GetKernel(TGCellMSWPs(GetTGCell(cg)))[CellVertices(cg)[vf][1]] do
-                if IsOne(g) then
-                    i2 := Position(verts, CellVertices(cg)[vv]);
-                else
-                    dvv2 := dvv * dvf^-1 * PreImagesRepresentative(QuotientHomomorphism(TGCellPointGroup(GetTGCell(cg))), g) * dvf;
-                    i2 := Position(verts, [vfs, PositionCanonical(AsQuotient(TGCellMSWPs(GetTGCell(cg)))[vfs], Image(QuotientHomomorphism(TGCellPointGroup(GetTGCell(cg))), dvv2))]);
-                fi;
-
-                Append(vvs, [ i2 ]);
-            od;
-
-            # edges
-            ve := Position(CellVertices(cg), [efs, PositionCanonical(AsQuotient(TGCellMSWPs(GetTGCell(cg)))[efs], Image(QuotientHomomorphism(TGCellPointGroup(GetTGCell(cg))), dvf))]);
-            dve := CellVertexPositions(cg)[ve];
-            ves := [];
-            for g in GetKernel(TGCellMSWPs(GetTGCell(cg)))[CellVertices(cg)[vf][1]] do
-                if IsOne(g) then
-                    i2 := CellVertices(cg)[ve][2];
-                else
-                    dve2 := dve * dvf^-1 * PreImagesRepresentative(QuotientHomomorphism(TGCellPointGroup(GetTGCell(cg))), g) * dvf;
-                    # TODO: does not work for Kagome!
-                    # would need to find vertices as well, ideally construct full edge
-                    if not efs = 1 then
-                        Error("Only efs = 1 implmemented.");
-                        return 0;
-                    fi;
-                    i2 :=  PositionCanonical(AsQuotient(TGCellMSWPs(GetTGCell(cg)))[efs], Image(QuotientHomomorphism(TGCellPointGroup(GetTGCell(cg))), dve2));
-                fi;
-                es := Filtered(edges, e -> e[3][2][1] = i2);
-                if not Length(es) = 1 then
-                    Error("Multiple matching edges found for the given face-edge.");
-                    return 0;
-                fi;
-                i2 := Position(edges, es[1]);
-
-                Append(ves, [ i2 ]);
-            od;
-            # sort according to vvs
-            offset := Position(ves, Filtered(ves,
-                e -> edges[e]{[1,2]} = vvs{[1,2]} or edges[e]{[1,2]} = vvs{[2,1]}
-            )[1]);
-            ves := ves{List([1..Length(ves)], i -> ((i + offset - 2) mod Length(ves)) + 1)};
-
-            Append(faces, [ [ vvs, ves ] ]);
-        fi;
-    od;
-
-    for i in [1..Length(edges)] do
-		Append(edges[i], [transls[i]]);
-	od;
-
-	return Objectify( NewType( NewFamily( "TGCellModelGraph", IsTGCellModelGraphObj ), IsTGCellModelGraphObj and IsTGCellModelGraphComponentRep ), rec(
-		cell := GetTGCell(cg),
-		center := CellCenter(cg),
-        type := MakeImmutable([ "VEF", [ vfs, efs, ffs ] ]),
-		vertices := MakeImmutable(verts),
-		edges := MakeImmutable(edges),
-		faces := MakeImmutable(faces)
-	));
-end );
-
 InstallGlobalFunction( TGCellModelGraph,
 function(cg, vfs, efs, ffs)
     local simplify,
@@ -358,7 +228,7 @@ function(cg, vfs, efs, ffs)
             fes := [];
             cedges := List(CellEdges(cg), e -> e{[1..3]}); # cell edge without translations
             gedges := List(edges, e -> e{[1..3]}); # edges without translations
-            # TODO: think more about how this generalizes
+            # TODO: check if this generalizes beyond tessellation and kagome graphs
             if Length(efs) > 0 then # new edges
                 for ve in [1..Length(fcvs)] do # iterate over cell face boundary
                     # index of vertex in cell graph
@@ -443,6 +313,7 @@ function(cg, vfs, efs, ffs)
                 od;
             else # original edges
                 fes := List(Filtered(fces, e -> CellVertices(cg)[e[1][1]][1] in vfs and CellVertices(cg)[e[1][2]][1] in vfs), e -> [ Position(gedges, [ e[1][1], e[1][2], [ 1, e[1][3] ] ]), e[2] ]);
+                # TODO: correct orientation
             fi;
 
             Append(faces, [ fes ]);
@@ -691,7 +562,6 @@ function(input, args...)
 	TGGw := EvalDString@(ReadAllLine(input), D);
 
     # construct triangle-group cell
-    # TODO: check if correct
 	quotient := Objectify( NewType(
 		NewFamily( "TGQuotient", IsTGQuotientObj ),
 		IsTGQuotientObj and IsTGQuotientComponentRep),

@@ -275,7 +275,7 @@ function(model, sc)
 			gam := SimplifyWord@(FpGroup(TGCellTranslationGroup(sc)), gam2 * gam1^-1, simplify);
 
 			# edge
-			Append(edges, [ [ v1, v2, e{[1..3]}, gam ] ]); # TODO: store primitive cell edge translation in label?
+			Append(edges, [ [ v1, v2, e{[1..3]}, gam ] ]);
 		od;
 	od;
 
@@ -422,7 +422,7 @@ function(model, scquotient, args...)
 			gam := SimplifyWord@(fpGAM, Image(isofpGAM, TGAMs[i2]^-1*eta2), simplify);
 
 			# edge
-			Append(edges, [ [ v1, v2, e{[1..3]}, gam ] ]); # TODO: store primitive cell edge translation in label?
+			Append(edges, [ [ v1, v2, e{[1..3]}, gam ] ]);
 		od;
 	od;
 
@@ -453,7 +453,7 @@ function(model, scquotient, args...)
 				qhom := homDG
 			)
         ),
-        GGw := false # TODO: deal with this
+        GGw := false # TODO: implement GGw?
     ));
 
 	# embedding
@@ -712,7 +712,6 @@ function(input, args...)
 	pcTGGw := EvalDString@(ReadAllLine(input), D);
 
     # construct primitive cell
-	# TODO: check if correct
 	pcquotient := Objectify( NewType(
 		NewFamily( "TGQuotient", IsTGQuotientObj ),
 		IsTGQuotientObj and IsTGQuotientComponentRep),
@@ -750,7 +749,6 @@ function(input, args...)
 	fi;
 
     # construct supercell
-	# TODO: check if correct
 	scquotient := Objectify( NewType(
 		NewFamily( "TGQuotient", IsTGQuotientObj ),
 		IsTGQuotientObj and IsTGQuotientComponentRep),

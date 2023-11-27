@@ -711,7 +711,6 @@ function(input, args...)
 	TGGw := EvalDString@(ReadAllLine(input), D);
 
 	# construct triangle-group cell
-	# TODO: check if correct
 	quotient := Objectify( NewType(
 		NewFamily( "TGQuotient", IsTGQuotientObj ),
 		IsTGQuotientObj and IsTGQuotientComponentRep),
