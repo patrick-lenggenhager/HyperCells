@@ -7,7 +7,7 @@
 #! in reciprocal space <Cite Key='Lenggenhager:HSC'/>.
 #! They are constructed as quotients of the (proper) triangle group $\Delta^+$ by
 #! translation groups $\Gamma^{(n)}\triangleleft\Delta^+$ such that
-#! $$\Delta^+ = \Gamma^{(0)} \triangleright \Gamma^{(1)} \triangleright \Gamma^{(2)} \triangleright \dotsb$$
+#! $$\Delta^+ = \Gamma^{(0)} \triangleright \Gamma^{(1)} \triangleright \Gamma^{(2)} \triangleright \cdots$$
 #! and $\bigcap_{n\geq 0} \Gamma^{(n)} = {1}$.
 #!
 #! 

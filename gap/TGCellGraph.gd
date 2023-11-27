@@ -48,13 +48,22 @@ DeclareCategory( "IsTGCellGraphObj", IsObject );
 #!   - and is centered at <A>center</A>, an integer between $1$ and $3$ corresponding
 #!     to one of the three vertices $x$, $y$, $z$, of the fundamental Schwarz triangle.
 #!
+#!   Optionally, generators <A>GAMgens</A> of the translation group $\Gamma$ can be
+#!   explicitly given as elements of <A>tg</A>. If not given, they are computed
+#!   automatically.
+#!   Similarly, choices for the transversals $T_{\Delta^+}(\Gamma)$ and $T_{G^+}(G_w^+)$
+#!   can be given as <A>TDGAM</A> and <A>TGGw</A>, respectively. If not given, they
+#!   are computed automatically.
+#!   Here, <A>TDGAM</A> is a list of elements of <A>tg</A> and <A>TGGw</A> is a list
+#!   of three lists, one for $w=x,y,z$, respectively, of elements of <A>tg</A>.
+#!
 #!   The option `simplify`, which takes a non-negative integer as argument, can be
 #!   used to specify the level of simplification of words in the translation group,
 #!   both for the translation generators expressed in terms of generators of the
 #!   proper triangle group and for the translations expressed as elements of the
 #!   finitely presented group
 #!   `FpGroup(TGCellTranslationGroup(GetTGCell(`<A>cellgraph</A>`)))`.
-#! @Arguments tg,quotient,center
+#! @Arguments tg,quotient,center[,GAMgens[,TDGAM[,TGGw]]]
 #! @Returns cell graph as `TGCellGraph` object (see <Ref Sect='Section_TGCellGraph'/>).
 DeclareGlobalFunction( "TGCellGraph" );
 

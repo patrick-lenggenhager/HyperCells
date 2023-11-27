@@ -243,9 +243,10 @@ DeclareOperation( "GetRightTransversal", [ IsTGCellEmbeddingObj ] );
 #!   (as an abstract finitely-presented group) to the primitive-cell translation
 #!   group (also as an abstract finitely-presented group).
 #! @Arguments supercell-model
-#! @Returns group homomorphism from
-#! `FpGroup(TGCellTranslationGroup(GetTGSuperCell(`supercell-model`)))` to
-#! `FpGroup(TGCellTranslationGroup(GetTGPrimitiveCell(`supercell-model`)))`.
+#! @Returns group homomorphism from the translation group associated with
+#! `GetTGSuperCell(`supercell-model`)` to the translation group associated with
+#! `GetTGPrimitiveCell(`supercell-model`)`, each obtained from the cell using
+#! `FpGroup(TGCellTranslationGroup(`cell`))`.
 #! @Label for TGCellEmbedding
 DeclareOperation( "TranslationGroupEmbedding", [ IsTGCellEmbeddingObj ] );
 

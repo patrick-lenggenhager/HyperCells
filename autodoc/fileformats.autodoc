@@ -380,7 +380,7 @@ HyperCells HCS version 1.0
 [ g1, g2, ... ] -> [ <sc generator1>, <sc generator2>, ... ]
 [ eta1, eta2, ... ]
 [ <dsc1>, <dsc2>, ... ]
-[ [ <gscx1>, <gscx2>, ... ], [ <gscy1>, <gscy2>, ... ], [ <gscz1>, <gscz2>, ... ] ]
+[ [ <gscx1>, <gscx2>, ... ], [ <gscy1>, <gscy2>, ... ], ... ]
 <model type>
 [ [ w, gi ], ... ]
 [ [ v1, v2, s ], ... ]
