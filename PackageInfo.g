@@ -23,7 +23,7 @@ Persons := [
     IsAuthor := true,
     IsMaintainer := true,
     Place := "Zurich, Switzerland",
-    Institution := "ETH Zürich, Paul Scherrer Institut, University of Zurich",
+    Institution := "ETH Zurich, Paul Scherrer Institute, University of Zurich",
   ),
   rec(
     FirstNames := "Joseph",

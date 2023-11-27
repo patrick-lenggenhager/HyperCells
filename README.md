@@ -13,7 +13,7 @@ and the doctoral thesis
 
 > P. M. Lenggenhager,
   *Emerging avenues in band theory: multigap topology and hyperbolic lattices*,
-  PhD thesis, ETH Zürich (2023)
+  PhD thesis, ETH Zurich (2023)
 
 If you use this package, please cite at least one of the above references in
 addition to the package itself:
@@ -113,7 +113,7 @@ and at least one of the following references:
   title           = {Emerging avenues in band theory: multigap topology and hyperbolic lattices},
   author          = {Lenggenhager, Patrick M.}, 
   year            = {2023},
-  school          = {ETH Zürich}
+  school          = {ETH Zurich}
 }
 ```
 as well as the following reference for the database of quotients of triangle groups
