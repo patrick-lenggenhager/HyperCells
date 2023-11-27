@@ -38,7 +38,7 @@ and the list of quotient groups:
 
 Main developer:\
 &ensp;&ensp;**Patrick M. Lenggenhager**\
-&ensp;&ensp;Email: patrick.m.lenggenhager@gmail.com\
+&ensp;&ensp;Email: plengg@pks.mpg.de\
 &ensp;&ensp;Website: https://patrick-lenggenhager.github.io
 
 Coauthors:\
@@ -134,7 +134,7 @@ https://github.com/patrick-lenggenhager/HyperCells/issues.
 
 Maintainer:\
 &ensp;&ensp;**Patrick M. Lenggenhager**\
-&ensp;&ensp;Email: patrick.m.lenggenhager@gmail.com\
+&ensp;&ensp;Email: plengg@pks.mpg.de\
 &ensp;&ensp;Homepage: https://patrick-lenggenhager.github.io
 
 ## License and copyright

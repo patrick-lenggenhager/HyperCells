@@ -3,7 +3,7 @@
 ## Main developer
 Patrick M. Lenggenhager\
 https://orcid.org/0000-0001-6746-1387\
-patrick.m.lenggenhager@gmail.com
+plengg@pks.mpg.de
 
 ## Coauthors
 Joseph Maciejko\
