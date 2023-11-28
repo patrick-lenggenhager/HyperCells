@@ -63,13 +63,14 @@ of the publication mentioned above.
 ## How to cite
 
 If you use this package, please cite the package repository
-
+{% raw %}
 P. M. Lenggenhager, J. Maciejko, and T. Bzdušek,
 *HyperCells: A GAP package for constructing primitive cells and supercells of
 hyperbolic lattices*, https://github.com/patrick-lenggenhager/HyperCells (2023)
+
 ```BibTeX
 @misc{HyperCells,
-  title           = {HyperCells}: {A} {GAP} package for constructing primitive cells and supercells of hyperbolic lattices},
+  title           = {{H}yper{C}ells: {A} {GAP} package for constructing primitive cells and supercells of hyperbolic lattices},
   author          = {Lenggenhager, Patrick M. and Maciejko, Joseph and Bzdu\v{s}ek, Tom\'{a}\v{s}},
   year            = {2023},
   howpublished    = {\url{https://github.com/patrick-lenggenhager/HyperCells}}
@@ -119,7 +120,7 @@ https://www.math.auckland.ac.nz/~conder/TriangleGroupQuotients101.txt (2007)
   howpublished    = {\url{https://www.math.auckland.ac.nz/~conder/TriangleGroupQuotients101.txt}}
 }
 ```
-
+{% endraw %}
 
 {% if site.github.issues_url %}
 ## Feedback

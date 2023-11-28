@@ -19,10 +19,11 @@ If you use this package, please cite at least one of the above references in
 addition to the package itself:
 > P. M. Lenggenhager, J. Maciejko, and T. Bzdušek,
   *HyperCells: A GAP package for constructing primitive cells and supercells of
-  hyperbolic lattices*, https://github.com/patrick-lenggenhager/HyperCells (2023)
+  hyperbolic lattices*, [https://github.com/patrick-lenggenhager/HyperCells](https://github.com/patrick-lenggenhager/HyperCells) (2023)
+
 and the list of quotient groups:
 > M. Conder, *Quotients of triangle groups acting on surfaces of genus 2 to 101*,
-  https://www.math.auckland.ac.nz/~conder/TriangleGroupQuotients101.txt (2007)
+  [https://www.math.auckland.ac.nz/~conder/TriangleGroupQuotients101.txt](https://www.math.auckland.ac.nz/~conder/TriangleGroupQuotients101.txt) (2007)
 
 #### Table of Contents  
 - [Authors and developers](#authors-and-developers)
@@ -39,7 +40,7 @@ and the list of quotient groups:
 Main developer:\
 &ensp;&ensp;**Patrick M. Lenggenhager**\
 &ensp;&ensp;Email: plengg@pks.mpg.de\
-&ensp;&ensp;Website: https://patrick-lenggenhager.github.io
+&ensp;&ensp;Website: [https://patrick-lenggenhager.github.io](https://patrick-lenggenhager.github.io)
 
 Coauthors:\
 &ensp;&ensp;**Joseph Maciejko** (maciejko@ualberta.ca)\
@@ -82,7 +83,7 @@ The HyperBloch package is a companion package to HyperCells for Mathematica.
 It allows to study the band structure of hyperbolic lattices by applying hyperbolic
 band theory and the supercell method. Additionally, it provides many functions
 to visualize the output of HyperCells. It is available on Github at
-> https://github.com/patrick-lenggenhager/HyperBloch
+> [https://github.com/patrick-lenggenhager/HyperBloch](https://github.com/patrick-lenggenhager/HyperBloch)
 
 
 ## How to cite
@@ -90,7 +91,7 @@ to visualize the output of HyperCells. It is available on Github at
 If you use this package, please cite the package repository
 ```BibTeX
 @misc{HyperCells,
-  title           = {{\textsc{HyperCells}}: {A} {\textsc{GAP}} package for constructing primitive cells and supercells of hyperbolic lattices},
+  title           = {Hyper{C}ells: {A} {GAP} package for constructing primitive cells and supercells of hyperbolic lattices},
   author          = {Lenggenhager, Patrick M. and Maciejko, Joseph and Bzdu\v{s}ek, Tom\'{a}\v{s}},
   year            = {2023},
   howpublished    = {\url{https://github.com/patrick-lenggenhager/HyperCells}}
@@ -130,12 +131,12 @@ with normal subgroups:
 ## Contact
 
 To report issues, please use the issue tracker at
-https://github.com/patrick-lenggenhager/HyperCells/issues.
+[https://github.com/patrick-lenggenhager/HyperCells/issues](https://github.com/patrick-lenggenhager/HyperCells/issues).
 
 Maintainer:\
 &ensp;&ensp;**Patrick M. Lenggenhager**\
 &ensp;&ensp;Email: plengg@pks.mpg.de\
-&ensp;&ensp;Homepage: https://patrick-lenggenhager.github.io
+&ensp;&ensp;Homepage: [https://patrick-lenggenhager.github.io](https://patrick-lenggenhager.github.io)
 
 ## License and copyright
 
