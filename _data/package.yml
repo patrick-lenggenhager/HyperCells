@@ -1,9 +1,9 @@
 name: HyperCells
-version: "0.5"
+version: "0.9.0"
 license: "CC BY-SA 4.0"
 date: 2023-11-27
 description: |
-    Primitive cells and supercells of hyperbolic lattices based on triangle groups
+    A GAP package for constructing primitive cells and supercells of hyperbolic lattices
 
 authors:
     - name: Patrick M. Lenggenhager
@@ -25,7 +25,7 @@ packageinfo: https://patrick-lenggenhager.github.io/HyperCells/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/patrick-lenggenhager/HyperCells/releases/download/v0.5/HyperCells-0.5.tar.gz
+      url: https://github.com/patrick-lenggenhager/HyperCells/releases/download/v0.9.0/HyperCells-0.9.0.tar.gz
 
 abstract: |
 
@@ -37,8 +37,8 @@ keywords: |
 citeas: |
     <p class='BibEntry'>
     [<span class='BibKey'>LMB23</span>]   <b class='BibAuthor'>Lenggenhager, P. M., Maciejko, J. and Bzdušek, T.</b>,
-     <i class='BibTitle'>HyperCells, Primitive cells and supercells of hyperbolic lattices based on triangle groups,
-             Version 0.5</i>
+     <i class='BibTitle'>HyperCells, A GAP package for constructing primitive cells and supercells of hyperbolic lattices,
+             Version 0.9.0</i>
      (<span class='BibYear'>2023</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://patrick-lenggenhager.github.io/HyperCells/">https://patrick-lenggenhager.github.io/HyperCells/</a></span>.
@@ -46,9 +46,9 @@ citeas: |
     
 
 bibtex: |
-    @misc{ HyperCells0.5,
+    @misc{ HyperCells0.9.0,
       author =           {Lenggenhager, P. M. and Maciejko, J. and Bzdu{\v s}ek, T.},
-      title =            {{HyperCells}, Primitive cells and supercells of hyperbolic lattices based on triangle groups, {V}ersion 0.5},
+      title =            {{HyperCells}, A GAP package for constructing primitive cells and supercells of hyperbolic lattices, {V}ersion 0.9.0},
       month =            {Nov},
       year =             {2023},
       note =             {GAP package},

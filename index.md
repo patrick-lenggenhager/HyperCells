@@ -28,6 +28,23 @@ The following additional GAP packages are not required, but suggested:
 {% endfor %}
 {% endif %}
 
+## Limitations
+Note that at this point *HyperCells* is still under development and, because the
+limitations have not yet been fully determined, released only as a beta version.
+Further testing will be required before an official release. However, the package
+is already fully functional and documented and can be used to reproduce the results
+of the publication mentioned above.
+
+### Known limitations
+- `TGCellGraph` objects and symmetric `TGCell` objects cannot be produced for
+  cells without mirror symmetries, i.e., for quotients that act "chirally" on
+  the surface.
+- Tests currently only succeed with GAP version 4.11 due to different but equivalent
+  representation of certain groups elements as words in the generators.
+- Faces of `TGCellGraph` objects are currently not implemented for all cases, they
+  are only implemented for tessellation and kagome graphs obtained using the
+  `TGTessellationGraph` and `TGKagomeGraph` functions, respectively.
+
 
 ## Author{% if site.data.package.authors.size != 1 %}s{% endif %}
 {% for person in site.data.package.authors %}
@@ -43,18 +60,65 @@ The following additional GAP packages are not required, but suggested:
  {% endfor %}
 {% endif %}
 
-{% if site.data.package.citeas %}
-## Citing
+## How to cite
 
-Please, cite this package as
+If you use this package, please cite the package repository
 
-{{site.data.package.citeas}}
+P. M. Lenggenhager, J. Maciejko, and T. Bzdušek,
+*HyperCells: A GAP package for constructing primitive cells and supercells of
+hyperbolic lattices*, https://github.com/patrick-lenggenhager/HyperCells (2023)
+```BibTeX
+@misc{HyperCells,
+  title           = {HyperCells}: {A} {GAP} package for constructing primitive cells and supercells of hyperbolic lattices},
+  author          = {Lenggenhager, Patrick M. and Maciejko, Joseph and Bzdu\v{s}ek, Tom\'{a}\v{s}},
+  year            = {2023},
+  howpublished    = {\url{https://github.com/patrick-lenggenhager/HyperCells}}
+}
+```
 
-You can get more info by typing `Cite("{{ site.data.package.name }}");` in the gap prompt.
+and at least one of the following references:
 
-{% include button-bibtex.html %}
+P. M. Lenggenhager, J. Maciejko, and T. Bzdušek,
+*Non-Abelian hyperbolic band theory from supercells*, Phys. Rev. Lett. (accepted), 
+[arXiv:2305.04945](https://doi.org/10.48550/arXiv.2305.04945) (2023)
+```BibTeX
+@article{Lenggenhager:2023,
+  title           = {Non-{A}belian hyperbolic band theory from supercells}, 
+  author          = {Lenggenhager, Patrick M. and Maciejko, Joseph and Bzdu\v{s}ek, Tom\'{a}\v{s}},
+  year            = {2023},
+  journal         = {Phys. Rev. Lett. (accepted)},
+  eprint          = {2305.04945},
+  eprintType      = {arXiv},
+  archivePrefix   = {arXiv},
+  doi             = {10.48550/arXiv.2305.04945}
+}
+```
 
-{% endif %}
+P. M. Lenggenhager,
+*Emerging avenues in band theory: multigap topology and hyperbolic lattices*,
+PhD thesis, ETH Zurich (2023)
+```BibTeX
+@phdthesis{Lenggenhager:PhDThesis,
+  title           = {Emerging avenues in band theory: multigap topology and hyperbolic lattices},
+  author          = {Lenggenhager, Patrick M.}, 
+  year            = {2023},
+  school          = {ETH Zurich}
+}
+```
+
+as well as the following reference for the database of quotients of triangle groups
+with normal subgroups:
+
+M. Conder, *Quotients of triangle groups acting on surfaces of genus 2 to 101*,
+https://www.math.auckland.ac.nz/~conder/TriangleGroupQuotients101.txt (2007)
+```BibTeX
+@misc{Conder:2007,
+  title           = {Quotients of triangle groups acting on surfaces of genus 2 to 101},
+  author          = {Conder, Marston},
+  year            = {2007},
+  howpublished    = {\url{https://www.math.auckland.ac.nz/~conder/TriangleGroupQuotients101.txt}}
+}
+```
 
 
 {% if site.github.issues_url %}
