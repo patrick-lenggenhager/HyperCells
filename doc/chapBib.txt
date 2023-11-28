@@ -1,0 +1,15 @@
+  
+  
+  [1XReferences[101X
+  
+  [[20XCon07[120X] [16XConder, M.[116X, [17XQuotients of triangle groups acting on surfaces of genus 2 to 101[117X (2007), https://www.math.auckland.ac.nz/~conder/TriangleGroupQuotients101.txt.
+  
+  [[20XLen23[120X] [16XLenggenhager, P. M.[116X, [17XEmerging avenues in band theory: multigap topology and hyperbolic lattices[117X, Ph.D. thesis, ETH Zurich (2023).
+  
+  [[20XLMB23[120X] [16XLenggenhager, P. M., Maciejko, J. and Bzdušek, T.[116X, [17XNon-Abelian hyperbolic band theory from supercells[117X, [18XPhys. Rev. Lett. (accepted), arXiv:2305.04945[118X (2023).
+  
+  [[20XLP23[120X] [16XLux, F. R. and Prodan, E.[116X, [17XSpectral and Combinatorial Aspects of Cayley-Crystals[117X, [18XAnnals of Henri Poincaré[118X (2023).
+  
+  
+  
+  [32X

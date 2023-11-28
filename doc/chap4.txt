@@ -1,0 +1,340 @@
+  
+  [1X4 [33X[0;0YTight-binding Model Graphs[133X[101X
+  
+  
+  [1X4.1 [33X[0;0YCell Model Graphs[133X[101X
+  
+  [33X[0;0YTight-binding models are defined on top of a cell graph by selecting some of
+  the  vertices  of the cell graph and adding edges between them. The model is
+  thus defined on a [13Xcell[113X and forms itself a graph of the same structure as the
+  cell  graph. The vertices of the model graph are a subset of vertices of the
+  cell  graph,  while  the edges must not be a subset of the edges of the cell
+  graph. Faces are given as ordered lists of edges of the model graph.[133X
+  
+  [33X[0;0YModel  graphs  are  implemented as objects of category [10XTGCellModelGraph[110X with
+  the following components:[133X
+  
+  [30X    [33X[0;6Y[2XGetTGCell[102X ([14X4.3-4[114X): the associated [10XTGCell[110X object (see [14X3.1[114X)[133X
+  
+  [30X    [33X[0;6Y[2XCellCenter[102X ([14X4.3-3[114X): the cell center of the model graph[133X
+  
+  [30X    [33X[0;6Y[2XModelType[102X   ([14X4.3-5[114X):   identifier   of   the   type  of  model,  e.g.,
+        tessellation, kagome etc.[133X
+  
+  [30X    [33X[0;6Y[2XCellVertices[102X ([14X4.3-7[114X): the vertices of the model graph, i.e., the sites
+        of the tight-binding model[133X
+  
+  [30X    [33X[0;6Y[2XCellEdges[102X ([14X4.3-9[114X): the edges of the model graph, i.e., the hoppings of
+        the  tight-binding  model, including potential translations associated
+        with them[133X
+  
+  [30X    [33X[0;6Y[2XCellFaces[102X  ([14X4.3-11[114X):  the oriented faces of the model graph, i.e., the
+        plaquettes of the tight-binding model[133X
+  
+  [33X[0;0Yand is printed in the form[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28XTGCellModelGraph( cell,[128X[104X
+    [4X[28X  center = w,[128X[104X
+    [4X[28X  type = <type>,[128X[104X
+    [4X[28X  vertices = [ [ w1, gi1 ], [ w2, gi2 ], ... ],[128X[104X
+    [4X[28X  edges = [ [ v1, v2, s, gam ], ... ],[128X[104X
+    [4X[28X  faces = [ [ [ e1, o1 ], [ e2, o2 ], ... ], ... ],[128X[104X
+    [4X[28X  boundary = [ [ d1, d2, e, b, m, gam ], ... ][128X[104X
+    [4X[28X)[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YSee the corresponding references above for details.[133X
+  
+  
+  [1X4.2 [33X[0;0YConstructing Models[133X[101X
+  
+  [33X[0;0YThere are several functions for constructing specfic tight-binding models:[133X
+  
+  [30X    [33X[0;6Y[2XTGCellModelGraph[102X  ([14X4.2-1[114X):  constructs a model graph from a cell graph
+        and  a  specification  of  which cell-graph vertices are to be used as
+        vertices  of  the  model  graph,  which define edges, and which define
+        faces of the model graph.[133X
+  
+  [30X    [33X[0;6Y[2XTessellationModelGraph[102X ([14X4.2-2[114X): constructs a tessellation graph from a
+        cell graph of a triangle group.[133X
+  
+  [30X    [33X[0;6Y[2XKagomeModelGraph[102X  ([14X4.2-4[114X): constructs a kagome graph from a cell graph
+        of a triangle group.[133X
+  
+  [33X[0;0YIn  all  of those functions, the option [10Xsimplify[110X, which takes a non-negative
+  integer  as  argument, can be used to specify the level of simplification of
+  words  in  the  translation  group,  both  for  the  translation  generators
+  expressed  in  terms  of generators of the proper triangle group and for the
+  translations expressed as elements of the finitely presented group.[133X
+  
+  [1X4.2-1 TGCellModelGraph[101X
+  
+  [33X[1;0Y[29X[2XTGCellModelGraph[102X( [3Xcellgraph[103X, [3Xvfs[103X, [3Xefs[103X, [3Xffs[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ythe model graph as [10XTGCellModelGraph[110X object (see [14X4.1[114X).[133X
+  
+  [33X[0;0YConstructs  the model graph derived from the [10XTGCellGraph[110X (see [14X3.7[114X) [3Xcellgraph[103X
+  by  selecting the vertices of types given in the list [3Xvfs[103X as vertices of the
+  model  graph.  The  type  is given in terms of the cell graph's vertex type,
+  i.e.,  1,  2, or 3, corresponding to the vertices of the fundamental Schwarz
+  triangle  [23Xx[123X,  [23Xy[123X,  and  [23Xz[123X,  respectively.  The  edges  of the model graph are
+  determined  by adjacency to the cell-graph vertices of the type given in the
+  list [3Xefs[103X and the faces are determined by the cell-graph vertices of the type
+  given in the list [3Xffs[103X.[133X
+  
+  [33X[0;0YThe model type is set to[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[ "VEF", [ vfs, efs, ffs ] ][128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0Yand edge tags take the form[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[ 1, [ ve, s1, s2 ] ][128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0Ywhere  the  first  entry,  [10X1[110X,  indicates  a nearest-neighbor edge, [10Xve[110X is the
+  position  of the Schwarz triangle associated with the cell-graph edge vertex
+  in  [23XT_{\Delta^+}(\Gamma)[123X,  and  [10Xs1[110X,  [10Xs2[110X  are  the  positions  of the Schwarz
+  triangles associated with the cell-graph edges in [23XT_{\Delta^+}(\Gamma)[123X.[133X
+  
+  [1X4.2-2 TessellationModelGraph[101X
+  
+  [33X[1;0Y[29X[2XTessellationModelGraph[102X( [3Xcellgraph[103X[, [3Xdual[103X] ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ythe model graph as [10XTGCellModelGraph[110X object (see [14X4.1[114X).[133X
+  
+  [33X[0;0YConstructs the [23X\{p,q\}[123X-tessellation model graph derived from the [10XTGCellGraph[110X
+  (see [14X3.7[114X) [3Xcellgraph[103X of the triangle group [23X(2,q,p)[123X associated with [3Xcellgraph[103X.
+  If  the  optional  argument [3Xdual[103X is set to true, the [23X\{q,p\}[123X-tessellation is
+  constructed instead.[133X
+  
+  [33X[0;0YThe model type is set to[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[ "TESS", [ p, q ], [ "VEF", [ [ 2 ], [ 1 ], [ 3 ] ] ] ][128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0Yfor the [23X\{p,q\}[123X tessellation and to[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[ "TESS", [ p, q ], [ "VEF", [ [ 3 ], [ 1 ], [ 2 ] ] ] ][128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0Yfor  the [23X\{q,p\}[123X tessellation. The edge tags are given in the same format as
+  in [2XTGCellModelGraph[102X ([14X4.2-1[114X).[133X
+  
+  [1X4.2-3 AddOrientedNNNEdgesToTessellationModelGraph[101X
+  
+  [33X[1;0Y[29X[2XAddOrientedNNNEdgesToTessellationModelGraph[102X( [3Xmodel[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ythe model graph as [10XTGCellModelGraph[110X object (see [14X4.1[114X).[133X
+  
+  [33X[0;0YModifies  the  [23X\{p,q\}[123X-tessellation  model  graph  [3Xmodel[103X  by adding oriented
+  next-nearest  neighbor  edges  to  all  faces  with at least five edges. The
+  orientation   of  the  next-nearest  neighbor  edges  follows  the  positive
+  orientation  of  the  faces  of the [23X\{p,q\}[123X-tessellation. Faces with four or
+  less edges are ignored.[133X
+  
+  [33X[0;0YThe edge tags of the next-nearest neighbor edges take the form[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[ 2, [ f, e1, e2 ] ][128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0Ywhere  the  first entry, [10X2[110X, indicates a next-nearest-neighbor edge, [10Xf[110X is the
+  position  of  the  face  characterizing  the  edge  in  the  list  of  faces
+  [10XCellFaces([110X[3Xmodel[103X[10X)[110X, and [10Xe1[110X, [10Xe2[110X are the positions of the nearest-neighbor edges
+  that together connect the same vertices as the next-nearest-neighbor edge in
+  the list of edges [10XCellEdges([110X[3Xmodel[103X[10X)[110X. The model type remains unchanged.[133X
+  
+  [1X4.2-4 KagomeModelGraph[101X
+  
+  [33X[1;0Y[29X[2XKagomeModelGraph[102X( [3Xcellgraph[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ythe model graph as [10XTGCellModelGraph[110X object (see [14X4.1[114X).[133X
+  
+  [33X[0;0YConstructs  the  [23Xp[123X-kagome model graph derived from the [10XTGCellGraph[110X (see [14X3.7[114X)
+  [3Xcellgraph[103X of the triangle group [23X(2,3,p)[123X associated with [3Xcellgraph[103X.[133X
+  
+  [33X[0;0YThe model type is set to[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[ "KAGOME", p, [ "VEF", [ [ 1 ], [ 2 ], [ 2, 3 ] ] ] ][128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThe edge tags are given in the same format as in [2XTGCellModelGraph[102X ([14X4.2-1[114X).[133X
+  
+  
+  [1X4.3 [33X[0;0YModel Properties[133X[101X
+  
+  [1X4.3-1 GetProperTriangleGroup[101X
+  
+  [33X[1;0Y[29X[2XGetProperTriangleGroup[102X( [3Xmodel[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  the proper triangle group [23X\Delta^+[123X on which the model is based as a
+  [10XProperTriangleGroup[110X object (see [14X2.1[114X).[133X
+  
+  [1X4.3-2 CellRelators[101X
+  
+  [33X[1;0Y[29X[2XCellRelators[102X( [3Xmodel[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  the  relators in terms of elements of [10XGetProperTriangleGroup([110X[3Xmodel[103X[10X)[110X
+  specifying the cell on which the model is defined.[133X
+  
+  [1X4.3-3 CellCenter[101X
+  
+  [33X[1;0Y[29X[2XCellCenter[102X( [3Xmodel[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  the an integer between [23X1[123X and [23X3[123X indicating the type of vertex of the
+  triangle  tessellation  at  the  center  of  the  cell  graph  with  [23X1[123X, [23X2[123X, [23X3[123X
+  corresponding to the vertices [23Xx[123X, [23Xy[123X, [23Xz[123X, of the fundamental Schwarz triangle.[133X
+  
+  [1X4.3-4 GetTGCell[101X
+  
+  [33X[1;0Y[29X[2XGetTGCell[102X( [3Xmodel[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns the associated [10XTGCell[110X object (see [14X3.1[114X).[133X
+  
+  [1X4.3-5 ModelType[101X
+  
+  [33X[1;0Y[29X[2XModelType[102X( [3Xmodel[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns a the identifier of the model type.[133X
+  
+  [33X[0;0YThe following model types are currently implemented:[133X
+  
+  [30X    [33X[0;6Y[13XDerived  graph[113X:  general  model  graph with vertices, edges, and faces
+        derived from the cell graph. The model type is given as[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[ "VEF", [ vfs, efs, ffs ] ][128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0Ywhere [10Xvfs[110X, [10Xefs[110X, and [10Xffs[110X are lists of integers between 1 and 3 indicating the
+  vertex types, edge types, and face types, respectively. See [2XTGCellModelGraph[102X
+  ([14X4.2-1[114X) for details.[133X
+  
+  [30X    [33X[0;6Y[13XTessellation graph[113X: tessellation model graph derived from a cell graph
+        of a triangle group. The model type is given as[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[ "TESS", [ p, q ], [ "VEF", [ [ 2 ], [ 1 ], [ 3 ] ] ] ][128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0Yfor the [23X\{p,q\}[123X tessellation and as[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[ "TESS", [ p, q ], [ "VEF", [ [ 3 ], [ 1 ], [ 2 ] ] ] ][128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0Yfor  the (dual) [23X\{q,p\}[123X tessellation. See [2XTessellationModelGraph[102X ([14X4.2-2[114X) for
+  details.[133X
+  
+  [30X    [33X[0;6Y[13XKagome  graph[113X:  kagome  model  graph  derived  from  a cell graph of a
+        triangle group. The model type is given as[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[ "KAGOME", p, [ "VEF", [ [ 1 ], [ 2 ], [ 2, 3 ] ] ] ][128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YSee [2XKagomeModelGraph[102X ([14X4.2-4[114X) for details.[133X
+  
+  [1X4.3-6 ModelName[101X
+  
+  [33X[1;0Y[29X[2XModelName[102X( [3Xmodel[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  a friendly name of the model. The friendly name is constructed from
+  the model type and for the implemented model types is given as[133X
+  
+  [30X    [33X[0;6Y[13XDerived graph[113X: [10X"derived-model<[vfs,efs,ffs]>"[110X[133X
+  
+  [30X    [33X[0;6Y[13XTessellation graph[113X: [10X"{p,q}-tess"[110X[133X
+  
+  [30X    [33X[0;6Y[13XKagome graph[113X: [10X"p-kagome"[110X[133X
+  
+  [1X4.3-7 CellVertices[101X
+  
+  [33X[1;0Y[29X[2XCellVertices[102X( [3Xmodel[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns the vertices of the model graph as a list.[133X
+  
+  [33X[0;0YEach  vertex  is  of  the  form  [10X[ w, gi ][110X with [10Xw[110X an integer between 1 and 3
+  indicating  the  vertex  of  the  fundamental  Schwarz  triangle  and [10Xgi[110X the
+  position  of  the  element  in  the  transversal [23XT_{G^+}(G_w^+)[123X labeling the
+  vertex.[133X
+  
+  [1X4.3-8 CellVertexPositions[101X
+  
+  [33X[1;0Y[29X[2XCellVertexPositions[102X( [3Xmodel[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  the  positions  of  the vertices as elements of the proper triangle
+  group [23X\Delta^+[123X.[133X
+  
+  [1X4.3-9 CellEdges[101X
+  
+  [33X[1;0Y[29X[2XCellEdges[102X( [3Xmodel[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns the edges of the model graph as a list.[133X
+  
+  [33X[0;0YEach  edge  is of the form [10X[ v1, v2, tag, gam ][110X with [10Xv1[110X, [10Xv2[110X the positions of
+  the  vertices  in  [10XCellVertices([110X[3Xmodel[103X[10X)[110X  connected  by the edge, [10Xtag[110X uniquely
+  identifying  the  edge,  and  [10Xgam[110X  the  translation  relating  the unit cell
+  containing  [10Xv1[110X  to  the  unit cell containing [10Xv2[110X, as element of the finitely
+  presented  group  [10XFpGroup(TGCellTranslationGroup(GetTGCell([110X[3Xmodel[103X[10X)))[110X.  If  [10Xv1[110X
+  corresponds  to  the  vertex  [23X(w,  [g_{u_w}]_w)[123X  and  [10Xv2[110X  to the vertex [23X(w',
+  [g_{\tilde{u}_{w'}}]_{w'})[123X,  then  [10Xgam[110X corresponds to the translation [23X\gamma[123X
+  such that[133X
+  
+  
+  [24X[33X[0;6Yg_{\tilde{u}_{w'}} = g_{u_w}\gamma.[133X
+  
+  [124X
+  
+  [33X[0;0YMore details on the tags are given in the methods for constructing different
+  models, see [14X4.2[114X.[133X
+  
+  [1X4.3-10 CellEdgeTranslations[101X
+  
+  [33X[1;0Y[29X[2XCellEdgeTranslations[102X( [3Xmodel[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns only the list of translations associated with the edges of the model
+  in the same format as [2XCellEdges[102X ([14X4.3-9[114X).[133X
+  
+  [1X4.3-11 CellFaces[101X
+  
+  [33X[1;0Y[29X[2XCellFaces[102X( [3Xmodel[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns the faces of the model graph as a list.[133X
+  
+  [33X[0;0YEach face is an ordered list of tuples [10X[ edge, orientation ][110X, where [10Xedges[110X is
+  a  position  in  [10XCellEdges([110X[3Xmodel[103X[10X)[110X and [10Xorientation[110X is equal to +1 (-1) if the
+  orientation   is   the   same   (opposite)   compared   to   the   entry  in
+  [10XCellEdges([110X[3Xmodel[103X[10X)[110X.   The  edges  of  the  face  are  ordered  such  that  the
+  orientation of the face is positive.[133X
+  
+  
+  [1X4.4 [33X[0;0YExport and Import[133X[101X
+  
+  
+  [1X4.4-1 [33X[0;0YExporting TGCellModelGraph Objects[133X[101X
+  
+  [33X[1;0Y[29X[2XExport[102X( [3Xmodel[103X, [3Xoutput-stream[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XExport[102X( [3Xmodel[103X, [3Xpath[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XExportString[102X( [3Xmodel[103X ) [32X operation[133X
+  
+  [33X[0;0YExport the model graph [3Xmodel[103X to the [10XOutputTextStream[110X [3Xoutput-stream[103X or to the
+  file  at  the  path given by the string [3Xpath[103X. Alternatively, the model graph
+  can be exported to a string with [10XExportString[110X, which returns said string.[133X
+  
+  
+  [1X4.4-2 [33X[0;0YImporting TGCellModelGraph Objects[133X[101X
+  
+  [33X[1;0Y[29X[2XImportTGCellModelGraph[102X( [3Xinput-stream[103X[, [3Xtg[103X] ) [32X function[133X
+  [33X[1;0Y[29X[2XImportTGCellModelGraphFromFile[102X( [3Xpath[103X[, [3Xtg[103X] ) [32X function[133X
+  [33X[1;0Y[29X[2XImportTGCellModelGraphFromString[102X( [3Xstring[103X[, [3Xtg[103X] ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ymodel graph as [10XTGCellModelGraph[110X (see [14X4.1[114X).[133X
+  
+  [33X[0;0YImport  a model graph from the [10XInputTextStream[110X [3Xinput-stream[103X or from the file
+  at  the path given by the string [3Xpath[103X. Alterantively, the model graph can be
+  imported from the string [3Xstring[103X. Optionally, the triangle group can be given
+  as a [10XProperTriangleGroup[110X object [3Xtg[103X (see [14X2.1[114X).[133X
+  

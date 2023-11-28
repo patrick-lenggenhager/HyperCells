@@ -1,0 +1,503 @@
+  
+  [1X3 [33X[0;0YTriangle-Group Cells[133X[101X
+  
+  
+  [1X3.1 [33X[0;0YCells[133X[101X
+  
+  [33X[0;0YA  triangle-group cells is defined by the quotient group of a triangle group
+  [23X\Delta[123X  by  a  subgroup  of translations [23X\Gamma[123X, i.e., a torsion-free normal
+  subgroup of the proper triangle group [23X\Delta^+[123X. Geometrically, this includes
+  a  choice  of transversal [23XT_{\Delta^+}(\Gamma)[123X characterizing the cell and a
+  choice  of  transversal [23XT_{G^+}(G_w^+)[123X, where [23XG^+\cong\Delta^+/\Gamma[123X is the
+  (proper)  point group of the cell and [23XG_w^+[123X is the stabilizer of a maximally
+  symmetric Wyckoff position of type [23Xw[123X in the cell.[133X
+  
+  [33X[0;0YThe  cell  is  implemented  as  an  object  of  category  [10XTGCellObj[110X with the
+  following components:[133X
+  
+  [30X    [33X[0;6Y[2XGetProperTriangleGroup[102X ([14X3.2-1[114X): the proper triangle group [23X\Delta^+[123X[133X
+  
+  [30X    [33X[0;6Y[2XCellRelators[102X   ([14X3.2-2[114X):   the  relators  defining  [23X\Delta^+/\Gamma[123X  as
+        elements of [23X\Delta^+[123X[133X
+  
+  [30X    [33X[0;6Y[2XTGCellTranslationGroup[102X ([14X3.2-3[114X): the translation group [23X\Gamma[123X[133X
+  
+  [30X    [33X[0;6Y[2XTGCellPointGroup[102X     ([14X3.2-4[114X):     the     (proper)     point     group
+        [23XG^+\cong\Delta^+/\Gamma[123X[133X
+  
+  [30X    [33X[0;6Y[2XTGCellMSWPs[102X  ([14X3.2-6[114X): the maximally symmetric Wyckoff positions in the
+        cell[133X
+  
+  [33X[0;0Yand is printed in the form[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28XTGCell( ProperTriangleGroup(r, q, p), rels )[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0Ywhere [23X(r,q,p)[123X is the signature of the underlying triangle group and [10Xrels[110X the
+  relators  defining the cell in terms of the generators [23Xx[123X, [23Xy[123X, [23Xz[123X of the proper
+  triangle group [23X\Delta^+[123X.[133X
+  
+  [1X3.1-1 TGCell[101X
+  
+  [33X[1;0Y[29X[2XTGCell[102X( [3Xtg[103X, [3Xquotient[103X[, [3XGAMgens[103X[, [3XTDGAM[103X[, [3XTGGw[103X]]] ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ycell as [10XTGCell[110X object[133X
+  
+  [33X[0;0YConstruct   the  cell  for  the  triangle  group  [3Xtg[103X  ([23X\Delta^+[123X),  given  as
+  [10XProperTriangleGroup[110X object (see [14X2.1[114X), specified by the quotient [3Xq[103X given as a
+  [10XTGQuotient[110X object [3Xquotient[103X (see [14X2.3[114X).[133X
+  
+  [33X[0;0YOptionally,  generators  [3XGAMgens[103X  of  the  translation  group  [23X\Gamma[123X can be
+  explicitly  given  as  elements  of  [3Xtg[103X.  If  not  given,  they are computed
+  automatically.  Similarly, choices for the transversals [23XT_{\Delta^+}(\Gamma)[123X
+  and  [23XT_{G^+}(G_w^+)[123X  can  be  given  as [3XTDGAM[103X and [3XTGGw[103X, respectively. If not
+  given, they are computed automatically. Here, [3XTDGAM[103X is a list of elements of
+  [3Xtg[103X  and  [3XTGGw[103X  is  a  list of three lists, one for [23Xw=x,y,z[123X, respectively, of
+  elements of [3Xtg[103X.[133X
+  
+  [1X3.1-2 TGCellSymmetric[101X
+  
+  [33X[1;0Y[29X[2XTGCellSymmetric[102X( [3Xtg[103X, [3Xquotient[103X, [3Xcenter[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ycell as [10XTGCell[110X object[133X
+  
+  [33X[0;0YConstruct the [13Xsymmetric[113X and at [10Xcenter[110Xcentered cell for the triangle group [3Xtg[103X
+  ([23X\Delta^+[123X),  given as [10XProperTriangleGroup[110X object (see [14X2.1[114X), specified by the
+  quotient [3Xq[103X given as a [10XTGQuotient[110X object [3Xquotient[103X (see [14X2.3[114X).[133X
+  
+  
+  [1X3.2 [33X[0;0YCell Properties[133X[101X
+  
+  [1X3.2-1 GetProperTriangleGroup[101X
+  
+  [33X[1;0Y[29X[2XGetProperTriangleGroup[102X( [3Xcell[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  the  proper  triangle  group  on  which the cell [3Xcell[103X is based as a
+  [10XProperTriangleGroup[110X object (see [14X2.1[114X).[133X
+  
+  [1X3.2-2 CellRelators[101X
+  
+  [33X[1;0Y[29X[2XCellRelators[102X( [3Xcell[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns    the    relators    defining    the    cell    as    elements   of
+  [10XGetProperTriangleGroup([110X[3Xcell[103X[10X)[110X[133X
+  
+  [1X3.2-3 TGCellTranslationGroup[101X
+  
+  [33X[1;0Y[29X[2XTGCellTranslationGroup[102X( [3Xcell[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  the  translations  group  [23X\Gamma[123X as a [10XTGCellTranslationGroup[110X object
+  (see [14X3.4[114X).[133X
+  
+  [1X3.2-4 TGCellPointGroup[101X
+  
+  [33X[1;0Y[29X[2XTGCellPointGroup[102X( [3Xcell[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns    the   (proper)   point   group   [23XG^+\cong\Delta^+/\Gamma[123X   as   a
+  [10XTGCellPointGroup[110X object (see [14X3.5[114X).[133X
+  
+  [1X3.2-5 HasTGCellMSWPs[101X
+  
+  [33X[1;0Y[29X[2XHasTGCellMSWPs[102X( [3Xcell[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns   true   if   the  the  maximally  symmetry  Wyckoff  positions  are
+  precomputed, false otherwise.[133X
+  
+  [1X3.2-6 TGCellMSWPs[101X
+  
+  [33X[1;0Y[29X[2XTGCellMSWPs[102X( [3Xcell[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  the  maximally  symmetry  Wyckoff positions as a [10XTGCellMSWPs[110X object
+  (see [14X3.6[114X) and computes them if necessary.[133X
+  
+  [33X[0;0YCall [2XHasTGCellMSWPs[102X ([14X3.2-5[114X) first to check if they are already precomputed.[133X
+  
+  
+  [1X3.3 [33X[0;0YQuery Information from Cells[133X[101X
+  
+  [1X3.3-1 TGCellSchwarzTriangleRep[101X
+  
+  [33X[1;0Y[29X[2XTGCellSchwarzTriangleRep[102X( [3Xcell[103X, [3Xelem[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  the index of the Schwarz triangle representative in the cell, i.e.,
+  the  position  in  [10XGetRightTransversal(TGCellPointGroup([110X[3Xcell[103X[10X))[110X,  for a given
+  element [3Xelem[103X of the proper triangle group [10XGetProperTriangleGroup([110X[3Xcell[103X[10X)[110X.[133X
+  
+  
+  [1X3.4 [33X[0;0YCell Translation Group[133X[101X
+  
+  [33X[0;0YCell translation groups are characterized by the translation group [23X\Gamma[123X, a
+  normal  subgroup  of  the  proper  triangle  group [23X\Delta^+[123X, and an explicit
+  choice  of  generators.  This  is  implemented  as  an  object  of  category
+  [10XTGCellTranslationGroupObj[110X with the following components:[133X
+  
+  [30X    [33X[0;6Y[2XAsTGSubgroup[102X  ([14X3.4-1[114X):  the  translation group [23X\Gamma[123X as a subgroup of
+        the proper triangle group [23X\Delta^+[123X[133X
+  
+  [30X    [33X[0;6Y[2XGenerators[102X ([14X3.4-2[114X): the generators of [23X\Gamma[123X as elements of the proper
+        triangle group [23X\Delta^+[123X[133X
+  
+  [30X    [33X[0;6Y[2XFpGroup[102X  ([14X3.4-3[114X): the translation group [23X\Gamma[123X as a finitely presented
+        group[133X
+  
+  [30X    [33X[0;6Y[2XFpIsomorphism[102X  ([14X3.4-4[114X):  the  group  isomorphism  from  [23X\Gamma[123X  to the
+        finitely presented group[133X
+  
+  [33X[0;0Yand is printed in the form[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28XTGCellTranslationGroup( < g1, g2, ... > | rel1, rel2, ... > )[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0Ywhere  [10Xg1[110X, [10Xg2[110X, ... are the generators of [23X\Gamma[123X as finitely presented group,
+  [2XFpGroup[102X ([14X3.4-3[114X), and [10Xrel1[110X, [10Xrel2[110X, ... are the corresponding relators.[133X
+  
+  [1X3.4-1 AsTGSubgroup[101X
+  
+  [33X[1;0Y[29X[2XAsTGSubgroup[102X( [3XGamma[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  the  translation  group  [3XGamma[103X as a subgroup of the proper triangle
+  group [23X\Delta^+[123X.[133X
+  
+  [1X3.4-2 Generators[101X
+  
+  [33X[1;0Y[29X[2XGenerators[102X( [3XGamma[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  the  generators  of  the translation group [3XGamma[103X as elements of the
+  proper triangle group [23X\Delta^+[123X.[133X
+  
+  [1X3.4-3 FpGroup[101X
+  
+  [33X[1;0Y[29X[2XFpGroup[102X( [3XGamma[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  the  translation  group  Gamma  as  a finitely presented group with
+  generators [10Xg1[110X, [10Xg2[110X, ....[133X
+  
+  [1X3.4-4 FpIsomorphism[101X
+  
+  [33X[1;0Y[29X[2XFpIsomorphism[102X( [3XGamma[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  the  group  isomorphism  from  [10XAsTGSubgroup([110X[3XGamma[103X[10X)[110X, the translation
+  group  as  a  subgroup  of  proper  triangle group [23X\Delta^+[123X, to the finitely
+  presented group [10XFpGroup([110X[3XGamma[103X[10X)[110X.[133X
+  
+  
+  [1X3.5 [33X[0;0YCell Point Group[133X[101X
+  
+  [33X[0;0YThe  (proper) point group [23XG^+[123X of a triangle-group cell is ismomorphic to the
+  quotient  group [23X\Delta^+/\Gamma[123X of the proper triangle group [23X\Delta^+[123X by the
+  translation  group  [23X\Gamma[123X.  It  is  implemented  as  an  object of category
+  [10XTGCellPointGroupObj[110X with the following components:[133X
+  
+  [30X    [33X[0;6Y[2XAsQuotientGroup[102X ([14X3.5-1[114X): the quotient group [23XG^+\cong\Delta^+/\Gamma[123X as
+        a  quotient  group  of  the  proper  triangle  group  [23X\Delta^+[123X  by the
+        translation group [23X\Gamma[123X[133X
+  
+  [30X    [33X[0;6Y[2XAsQuotient[102X   ([14X3.5-2[114X):   the   quotient  [23XG^+\cong\Delta^+/\Gamma[123X  as  a
+        [10XRightTransversal[110X object[133X
+  
+  [30X    [33X[0;6Y[2XGetRightTransversal[102X    ([14X3.5-3[114X):    the    right    transversal    with
+        representatives  of  point  group  elements  as elements of the proper
+        triangle group [23X\Delta^+[123X[133X
+  
+  [30X    [33X[0;6Y[2XQuotientHomomorphism[102X  ([14X3.5-4[114X):  the group homomorphism from the proper
+        triangle group [23X\Delta^+[123X to the quotient group [23XG^+\cong\Delta^+/\Gamma[123X[133X
+  
+  [33X[0;0Yand is printed in the form[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28XTGCellPointGroup( < x, y, z > | rel1, rel2, ... > )[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0Ywhere  [10Xx[110X, [10Xy[110X, [10Xz[110X are the generators of the point group [23XG^+[123X and [10Xrel1[110X, [10Xrel2[110X, ...
+  are the corresponding relators.[133X
+  
+  [1X3.5-1 AsQuotientGroup[101X
+  
+  [33X[1;0Y[29X[2XAsQuotientGroup[102X( [3XG[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns the (proper) point group [23XG^+[123X as quotient group [23X\Delta^+/\Gamma[123X.[133X
+  
+  [1X3.5-2 AsQuotient[101X
+  
+  [33X[1;0Y[29X[2XAsQuotient[102X( [3XG[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns    the   (proper)   point   group   [23XG^+\cong\Delta^+/\Gamma[123X   as   a
+  [10XRightTransversal[110X object.[133X
+  
+  [1X3.5-3 GetRightTransversal[101X
+  
+  [33X[1;0Y[29X[2XGetRightTransversal[102X( [3XG[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  the  right transversal with representatives of point group elements
+  as elements of the proper triangle group [23X\Delta^+[123X.[133X
+  
+  [1X3.5-4 QuotientHomomorphism[101X
+  
+  [33X[1;0Y[29X[2XQuotientHomomorphism[102X( [3XG[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  the  group  homomorphism from the proper triangle group [23X\Delta^+[123X to
+  the quotient [10XAsQuotientGroup([110X[3XG[103X[10X)[110X corresponding to the point group [23XG^+[123X.[133X
+  
+  
+  [1X3.6 [33X[0;0YMaximally Symmetric Wyckoff Positions[133X[101X
+  
+  [33X[0;0YThe maximally symmetric Wyckoff positions in a triangle-group cell are given
+  by  the orbital stabilizer theorem as the coset representatives of the right
+  cosets of the stabilizer of a maximally symmetric Wyckoff position of type [23Xw[123X
+  in  the (proper) point group [23XG^+[123X, i.e., as elements of the right transversal
+  [23XT_{G^+}(G_w^+)[123X.  Here  the  types  of maximally symmetric Wyckoff positions,
+  [23Xw=x,y,z[123X,   are  distinguished  by  the  order  of  their  stabilizer  group:
+  [23X|G_x^+|=r[123X, [23X|G_y^+|=q[123X, and [23X|G_z^+|=p[123X.[133X
+  
+  [33X[0;0YThis  is  implemented  as  an  object  of  category  [10XTGCellMSWPsObj[110X with the
+  following components:[133X
+  
+  [30X    [33X[0;6Y[2XAsQuotient[102X  ([14X3.6-1[114X):  the  list  of  the  three  quotients  [23XG^+/G_w^+[123X,
+        [23Xw=x,y,z[123X, as [10XRightTransversal[110X objects[133X
+  
+  [30X    [33X[0;6Y[2XGetRightTransversal[102X  ([14X3.6-2[114X): the list of the three right transversals
+        [23XT_{G^+}(G_w^+)[123X,  [23Xw=x,y,z[123X,  with  representatives  as  elements  of the
+        proper triangle group [23X\Delta^+[123X[133X
+  
+  [30X    [33X[0;6Y[2XGetKernel[102X  ([14X3.6-3[114X):  the  list of the three kernels [23XG_w^+[123X, [23Xw=x,y,z[123X, as
+        ordered lists of elements of the proper point group [23XG^+[123X[133X
+  
+  [33X[0;0Yand is printed in the form[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28XTGCellMSWPs( [ TGGx, TGGy, TGGz ] )[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0Ywhere   [10XTGGx[110X,   [10XTGGy[110X,   [10XTGGz[110X  are  the  right  transversals  [23XT_{G^+}(G_x^+)[123X,
+  [23XT_{G^+}(G_y^+)[123X, [23XT_{G^+}(G_z^+)[123X, respectively.[133X
+  
+  [1X3.6-1 AsQuotient[101X
+  
+  [33X[1;0Y[29X[2XAsQuotient[102X( [3Xobj[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns the list of the three quotients [23XG^+/G_w^+[123X, [23Xw=x,y,z[123X, corresponding to
+  the list of maximally symmetric Wyckoff positions in the cell. Each quotient
+  is given as a [10XRightTransversal[110X object.[133X
+  
+  [1X3.6-2 GetRightTransversal[101X
+  
+  [33X[1;0Y[29X[2XGetRightTransversal[102X( [3Xobj[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  the  list  of the three right transversals [23XT_{G^+}(G_w^+)[123X, [23Xw=x,y,z[123X.
+  Each right transversal is given as a list of elements of the proper triangle
+  group  [23X\Delta^+[123X,  such  that  each elements represents a maximally symmetric
+  Wyckoff positions of type [23Xw[123X.[133X
+  
+  [1X3.6-3 GetKernel[101X
+  
+  [33X[1;0Y[29X[2XGetKernel[102X( [3Xobj[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  the  list  of  the three kernels, each corresponding to the list of
+  elements  of  the  on-site symmetry group of the maximally symmetric Wyckoff
+  position.  The  list entries are given as elements of the proper point group
+  [23XG^+[123X.[133X
+  
+  
+  [1X3.7 [33X[0;0YCell Graphs[133X[101X
+  
+  [33X[0;0YGiven  a  triangle-group  quotient  [23XG^+\cong\Delta^+/\Gamma[123X  and a choice of
+  center, the cell graph defines a maximally symmetric triangular tessellation
+  of the corresponding connected and compactified translation unit cell. It is
+  implemented as a [10XTGCellGraph[110X object with the following components:[133X
+  
+  [30X    [33X[0;6Y[2XGetTGCell[102X ([14X3.7-12[114X): the associated [10XTGCell[110X object (see [14X3.1[114X)[133X
+  
+  [30X    [33X[0;6Y[2XCellCenter[102X ([14X3.7-4[114X): the center of the cell graph[133X
+  
+  [30X    [33X[0;6Y[2XCellVertices[102X ([14X3.7-5[114X): the vertices of the cell graph[133X
+  
+  [30X    [33X[0;6Y[2XCellEdges[102X  ([14X3.7-7[114X):  the  edges  of the cell graph including potential
+        translations associated with them[133X
+  
+  [30X    [33X[0;6Y[2XCellFaces[102X ([14X3.7-9[114X): the oriented faces of the cell graph[133X
+  
+  [30X    [33X[0;6Y[2XCellBoundary[102X  ([14X3.7-11[114X):  the boundary specifications of the cell graph
+        giving the boundary identifications[133X
+  
+  [33X[0;0Yand is printed in the form[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28XTGCellGraph( cell,[128X[104X
+    [4X[28X  center = w,[128X[104X
+    [4X[28X  vertices = [ [ w1, gi1 ], [ w2, gi2 ], ... ],[128X[104X
+    [4X[28X  edges = [ [ v1, v2, s, gam ], ... ],[128X[104X
+    [4X[28X  faces = [ [ [ e1, o1 ], [ e2, o2 ], ... ], ... ],[128X[104X
+    [4X[28X  boundary = [ [ d1, d2, e, b, m, gam ], ... ][128X[104X
+    [4X[28X)[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YSee the corresponding references above for details.[133X
+  
+  [33X[0;0YCell  graphs  are  constructed  using  the  function  [2XTGCellGraph[102X ([14X3.7-1[114X) by
+  specifying the triangle group, its quotient and the center.[133X
+  
+  [1X3.7-1 TGCellGraph[101X
+  
+  [33X[1;0Y[29X[2XTGCellGraph[102X( [3Xtg[103X, [3Xquotient[103X, [3Xcenter[103X[, [3XGAMgens[103X[, [3XTDGAM[103X[, [3XTGGw[103X]]] ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ycell graph as [10XTGCellGraph[110X object (see [14X3.7[114X).[133X
+  
+  [33X[0;0YConstruct the cell graph representing a connected and symmetric cell that is
+  specified by[133X
+  
+  [30X    [33X[0;6Ythe [10XProperTriangleGroup[110X (see [14X2.1[114X) [3Xtg[103X,[133X
+  
+  [30X    [33X[0;6Ythe [10XTGQuotient[110X (see [14X2.3[114X) [3Xquotient[103X[133X
+  
+  [30X    [33X[0;6Yand is centered at [3Xcenter[103X, an integer between [23X1[123X and [23X3[123X corresponding to
+        one  of  the  three  vertices  [23Xx[123X,  [23Xy[123X,  [23Xz[123X,  of  the fundamental Schwarz
+        triangle.[133X
+  
+  [33X[0;0YOptionally,  generators  [3XGAMgens[103X  of  the  translation  group  [23X\Gamma[123X can be
+  explicitly  given  as  elements  of  [3Xtg[103X.  If  not  given,  they are computed
+  automatically.  Similarly, choices for the transversals [23XT_{\Delta^+}(\Gamma)[123X
+  and  [23XT_{G^+}(G_w^+)[123X  can  be  given  as [3XTDGAM[103X and [3XTGGw[103X, respectively. If not
+  given, they are computed automatically. Here, [3XTDGAM[103X is a list of elements of
+  [3Xtg[103X  and  [3XTGGw[103X  is  a  list of three lists, one for [23Xw=x,y,z[123X, respectively, of
+  elements of [3Xtg[103X.[133X
+  
+  [33X[0;0YThe  option [10Xsimplify[110X, which takes a non-negative integer as argument, can be
+  used  to  specify  the  level  of simplification of words in the translation
+  group,  both for the translation generators expressed in terms of generators
+  of  the proper triangle group and for the translations expressed as elements
+  of             the            finitely            presented            group
+  [10XFpGroup(TGCellTranslationGroup(GetTGCell([110X[3Xcellgraph[103X[10X)))[110X.[133X
+  
+  [1X3.7-2 GetProperTriangleGroup[101X
+  
+  [33X[1;0Y[29X[2XGetProperTriangleGroup[102X( [3Xcellgraph[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  the  proper triangle group [23X\Delta^+[123X on which the cell is based as a
+  [10XProperTriangleGroup[110X object (see [14X2.1[114X).[133X
+  
+  [1X3.7-3 CellRelators[101X
+  
+  [33X[1;0Y[29X[2XCellRelators[102X( [3Xcellgraph[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns      the      relators      in      terms     of     elements     of
+  [10XGetProperTriangleGroup([110X[3Xcellgraph[103X[10X)[110X defining the cell.[133X
+  
+  [1X3.7-4 CellCenter[101X
+  
+  [33X[1;0Y[29X[2XCellCenter[102X( [3Xcellgraph[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  the an integer between [23X1[123X and [23X3[123X indicating the type of vertex of the
+  triangle  tessellation  at  the  center  of  the  cell  graph  with  [23X1[123X, [23X2[123X, [23X3[123X
+  corresponding to the vertices [23Xx[123X, [23Xy[123X, [23Xz[123X, of the fundamental Schwarz triangle.[133X
+  
+  [1X3.7-5 CellVertices[101X
+  
+  [33X[1;0Y[29X[2XCellVertices[102X( [3Xcellgraph[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns the vertices of the cell graph as a list.[133X
+  
+  [33X[0;0YEach  vertex  is  of  the  form  [10X[ w, gi ][110X with [10Xw[110X an integer between 1 and 3
+  indicating  the  vertex  of  the  fundamental  Schwarz  triangle  and [10Xgi[110X the
+  position  of  the  element  in  the  transversal [23XT_{G^+}(G_w^+)[123X labeling the
+  vertex.[133X
+  
+  [1X3.7-6 CellVertexPositions[101X
+  
+  [33X[1;0Y[29X[2XCellVertexPositions[102X( [3Xcellgraph[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  the  positions  of  the vertices as elements of the proper triangle
+  group [23X\Delta^+[123X.[133X
+  
+  [1X3.7-7 CellEdges[101X
+  
+  [33X[1;0Y[29X[2XCellEdges[102X( [3Xcellgraph[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns the edges of the cell graph as a list.[133X
+  
+  [33X[0;0YEach edge is of the form [10X[ v1, v2, s, gam ][110X with [10Xv1[110X, [10Xv2[110X the positions of the
+  vertices in [10XCellVertices([110X[3Xcellgraph[103X[10X)[110X connected by the edge, [10Xs[110X the position of
+  the  element of [23XT_{\Delta^+}(\Gamma)[123X labeling the Schwarz triangle this edge
+  is  a  part of, and [10Xgam[110X the translation relating the unit cell containing [10Xv1[110X
+  to  the  unit cell containing [10Xv2[110X, as element of the finitely presented group
+  [10XFpGroup(TGCellTranslationGroup(GetTGCell([110X[3Xcellgraph[103X[10X)))[110X.  If [10Xv1[110X corresponds to
+  the    vertex    [23X(w,    [g_{u_w}]_w)[123X    and    [10Xv2[110X   to   the   vertex   [23X(w',
+  [g_{\tilde{u}_{w'}}]_{w'})[123X,  then  [10Xgam[110X corresponds to the translation [23X\gamma[123X
+  such that[133X
+  
+  
+  [24X[33X[0;6Yg_{\tilde{u}_{w'}} = g_{u_w}\gamma.[133X
+  
+  [124X
+  
+  [1X3.7-8 CellEdgeTranslations[101X
+  
+  [33X[1;0Y[29X[2XCellEdgeTranslations[102X( [3Xcellgraph[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  only the list of translations associated with the edges of the cell
+  graph in the same format as [2XCellEdges[102X ([14X3.7-7[114X).[133X
+  
+  [1X3.7-9 CellFaces[101X
+  
+  [33X[1;0Y[29X[2XCellFaces[102X( [3Xcellgraph[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns the faces of the cell graph as a list.[133X
+  
+  [33X[0;0YEach face is an ordered list of tuples [10X[ edge, orientation ][110X, where [10Xedges[110X is
+  a  position  in  [10XCellEdges([110X[3Xcellgraph[103X[10X)[110X and [10Xorientation[110X is equal to +1 (-1) if
+  the   orientation   is   the  same  (opposite)  compared  to  the  entry  in
+  [10XCellEdges([110X[3Xcellgraph[103X[10X)[110X.  The  edges  of  the  face  are  ordered such that the
+  orientation of the face is positive.[133X
+  
+  [1X3.7-10 CellFacesWithCenter[101X
+  
+  [33X[1;0Y[29X[2XCellFacesWithCenter[102X( [3Xcellgraph[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  a list of three lists with faces of the cell graph with the [23Xx[123X, [23Xy[123X, [23Xz[123X
+  vertex  of  the  fundamental  Schwarz  triangle as center, respectively. The
+  format of the faces is the same as [2XCellFaces[102X ([14X3.7-9[114X).[133X
+  
+  [1X3.7-11 CellBoundary[101X
+  
+  [33X[1;0Y[29X[2XCellBoundary[102X( [3Xcellgraph[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns a list of boundary specifications of the cell.[133X
+  
+  [33X[0;0YEach  boundary  is described by a list of the form [10X[ d1, d2, e, b, m, gam ][110X,
+  where  [10Xd1[110X,  [10Xd2[110X  are elements of [23XT_{\Delta^+}(\Gamma)\subset\Delta^+[123X labeling
+  the  Schwarz triangles this edge is a part of, [10Xe[110X the position in the list of
+  edges  [10XCellEdges([110X[3Xcelgraph[103X[10X)[110X,  [10Xb[110X  the  index  of  the  boundary (identical for
+  identified  boundaries),  [10Xm[110X  either 0 or 1 indicating the orientation of the
+  triangle associated with this instance of the boundary (0 for gray and 1 for
+  white),  and  [10Xgam[110X  the  translation  relating  the  given  to the identified
+  boundary,    as    an    element    of    the   finitely   presented   group
+  [10XFpGroup(TGCellTranslationGroup(GetTGCell([110X[3Xcellgraph[103X[10X)))[110X.[133X
+  
+  [1X3.7-12 GetTGCell[101X
+  
+  [33X[1;0Y[29X[2XGetTGCell[102X( [3Xcellgraph[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns the associated [10XTGCell[110X object (see [14X3.1[114X).[133X
+  
+  
+  [1X3.7-13 [33X[0;0YExporting TGCellGraph Objects[133X[101X
+  
+  [33X[1;0Y[29X[2XExport[102X( [3Xcellgraph[103X, [3Xoutput-stream[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XExport[102X( [3Xcellgraph[103X, [3Xpath[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XExportString[102X( [3Xcellgraph[103X ) [32X operation[133X
+  
+  [33X[0;0YExport  the cell graph [3Xcellgraph[103X to the [10XOutputTextStream[110X [3Xoutput-stream[103X or to
+  the file at the path given by the string [3Xpath[103X. Alterantively, the cell graph
+  can be exported to a string with [10XExportString[110X, which returns said string.[133X
+  
+  
+  [1X3.7-14 [33X[0;0YImporting TGCellGraph Objects[133X[101X
+  
+  [33X[1;0Y[29X[2XImportTGCellGraph[102X( [3Xinput-stream[103X[, [3Xtg[103X] ) [32X function[133X
+  [33X[1;0Y[29X[2XImportTGCellGraphFromFile[102X( [3Xpath[103X[, [3Xtg[103X] ) [32X function[133X
+  [33X[1;0Y[29X[2XImportTGCellGraphFromString[102X( [3Xstring[103X[, [3Xtg[103X] ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ycell graph as [10XTGCellGraph[110X (see [14X3.7[114X).[133X
+  
+  [33X[0;0YImport  a  cell graph from the [10XInputTextStream[110X [3Xinput-stream[103X or from the file
+  at  the  path given by the string [3Xpath[103X. Alterantively, the cell graph can be
+  imported from the string [3Xstring[103X. Optionally, the triangle group can be given
+  as a [10XProperTriangleGroup[110X object [3Xtg[103X (see [14X2.1[114X).[133X
+  

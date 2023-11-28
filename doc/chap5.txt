@@ -1,0 +1,294 @@
+  
+  [1X5 [33X[0;0YSupercells[133X[101X
+  
+  
+  [1X5.1 [33X[0;0YSupercell Model Graphs[133X[101X
+  
+  [33X[0;0YSupercell  model  graphs  are used to describe the extension of a cell model
+  graph  defined on a primitive cell to a supercell. The vertices and edges of
+  the supercell model graph retain information about the vertices and edges of
+  the  primitive  cell  model  graph  and  the  elements of the quotient group
+  [23X\Gamma_\mathrm{pc}/\Gamma_\mathrm{sc}[123X distinguishing the different copies of
+  the primitive cell in the supercell.[133X
+  
+  [33X[0;0YSupercell   model   graphs   are   implemented   as   objects   of  category
+  [10XTGSuperCellModelGraph[110X with the following components:[133X
+  
+  [30X    [33X[0;6Y[2XGetTGPrimitiveCell[102X ([14X5.3-5[114X): the associated [10XTGCell[110X object (see [14X3.1[114X) for
+        the primitive cell[133X
+  
+  [30X    [33X[0;6Y[2XGetTGSuperCell[102X ([14X5.3-6[114X): the associated [10XTGCell[110X object (see [14X3.1[114X) for the
+        supercell[133X
+  
+  [30X    [33X[0;6Y[2XCellCenter[102X ([14X5.3-4[114X): the cell center of the supercell model graph[133X
+  
+  [30X    [33X[0;6Y[2XCellEmbedding[102X  ([14X5.3-13[114X):  the  embedding  of the primitive cell in the
+        supercell as a [10XTGCellEmbedding[110X object (see [14X5.4[114X)[133X
+  
+  [30X    [33X[0;6Y[2XModelType[102X   ([14X5.3-7[114X):   identifier   of   the   type  of  model,  e.g.,
+        tessellation, kagome etc.[133X
+  
+  [30X    [33X[0;6Y[2XCellVertices[102X ([14X5.3-8[114X): the vertices of the supercell model graph, i.e.,
+        the sites of the tight-binding model[133X
+  
+  [30X    [33X[0;6Y[2XCellVertexPositions[102X  ([14X5.3-9[114X):  the  positions  of  the vertices of the
+        supercell model graph as elements of the proper triangle group[133X
+  
+  [30X    [33X[0;6Y[2XCellEdges[102X  ([14X5.3-10[114X): the edges of the supercell model graph, i.e., the
+        hoppings  of the tight-binding model, including potential translations
+        associated with them[133X
+  
+  [30X    [33X[0;6Y[2XCellFaces[102X  ([14X5.3-12[114X): the faces of the supercell model graph, i.e., the
+        plaquettes of the tight-binding model[133X
+  
+  [33X[0;0Yand is printed in the form[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28XTGSuperCellModelGraph([128X[104X
+    [4X[28X  primitive cell = TGCell( ... ),[128X[104X
+    [4X[28X  supercell = TGCell( ... ),[128X[104X
+    [4X[28X  center = w,[128X[104X
+    [4X[28X  type = <type>,[128X[104X
+    [4X[28X  vertices = [ [ w1, gi1 ], [ w2, gi2 ], ... ],[128X[104X
+    [4X[28X  edges = [ [ v1, v2, s, gam ], ... ],[128X[104X
+    [4X[28X  faces = [ [ [ e1, o1 ], [ e2, o2 ], ... ], ... ][128X[104X
+    [4X[28X)[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YSee the corresponding references above for details.[133X
+  
+  
+  [1X5.2 [33X[0;0YConstructing Supercell Models[133X[101X
+  
+  [33X[0;0YThere  are  two functions for constructing supercell models based on a given
+  model graph:[133X
+  
+  [30X    [33X[0;6Y[2XTGSuperCellModelGraph[102X ([14X5.2-1[114X): constructs a supercell model graph from
+        a  model  graph and a supercell choosing representatives such that the
+        resulting supercell is a symmetric connected cell.[133X
+  
+  [30X    [33X[0;6Y[2XRandomTGSuperCellModelGraph[102X  ([14X5.2-2[114X):  constructs  a  supercell  model
+        graph  from  a model graph and relators specifying the supercell. Note
+        that  the  resulting  supercell  is neither symmetric nor connected in
+        general.  Usually,  the  representatives  are automatically chosen and
+        arbitrary, but they can be explicitly passed if desired.[133X
+  
+  [1X5.2-1 TGSuperCellModelGraph[101X
+  
+  [33X[1;0Y[29X[2XTGSuperCellModelGraph[102X( [3Xmodel[103X, [3Xsc[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ymodel graph as [10XTGSuperCellModelGraph[110X object (see [14X5.1[114X).[133X
+  
+  [33X[0;0YConstructs the supercell model graph obtained from extending the model [3Xmodel[103X
+  given  as a [10XTGCellModelGraph[110X object (see [14X4.1[114X) to the supercell [3Xsc[103X given as a
+  [10XTGCell[110Xobject  (see  [14X3.1[114X).  The  resulting  supercell  is  both symmetric and
+  connected.[133X
+  
+  [1X5.2-2 RandomTGSuperCellModelGraph[101X
+  
+  [33X[1;0Y[29X[2XRandomTGSuperCellModelGraph[102X( [3Xmodel[103X, [3Xscquotient[103X[, [3XGAMgens[103X[, [3XTDGAM[103X[, [3XTGAMs[103X]]] ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ycell graph as [10XSection_TGSuperCellModelGraph[110X object (see [14X5.1[114X).[133X
+  
+  [33X[0;0YConstructs the supercell model graph obtained from extending the model [3Xmodel[103X
+  given  as  a [10XTGCellModelGraph[110X object (see [14X4.1[114X) to the supercell specified by
+  the  [10XTGQuotient[110X  [3Xscquotient[103X (see [14X2.3[114X). Generally, the resulting supercell is
+  neither symmetric nor connected.[133X
+  
+  [33X[0;0YIf  desired,  explicit,  e.g.,  symmetric,  choices  for  the  generators of
+  supercell           translation           group          [23X\Gamma_\mathrm{sc}[123X,
+  [23XT_{\Delta^+}(\Gamma_\mathrm{sc})[123X,                                        and
+  [23XT_{\Gamma_\mathrm{pc}}(\Gamma_\mathrm{sc})[123X   can   be   given   as  optional
+  arguments [3XGAMgens[103X, [3XTDGAM[103X, and [3XTGAMs[103X, respectively.[133X
+  
+  
+  [1X5.3 [33X[0;0YSupercell Model Properties[133X[101X
+  
+  [1X5.3-1 GetProperTriangleGroup[101X
+  
+  [33X[1;0Y[29X[2XGetProperTriangleGroup[102X( [3Xmodel[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  the proper triangle group [23X\Delta^+[123X on which the model is based as a
+  [10XProperTriangleGroup[110X object (see [14X2.1[114X).[133X
+  
+  [1X5.3-2 PrimitiveCellRelators[101X
+  
+  [33X[1;0Y[29X[2XPrimitiveCellRelators[102X( [3Xmodel[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  the  relators in terms of elements of [10XGetProperTriangleGroup([110X[3Xmodel[103X[10X)[110X
+  specifying the [13Xprimitive cell[113X on which the model is defined.[133X
+  
+  [1X5.3-3 SuperCellRelators[101X
+  
+  [33X[1;0Y[29X[2XSuperCellRelators[102X( [3Xmodel[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  the  relators in terms of elements of [10XGetProperTriangleGroup([110X[3Xmodel[103X[10X)[110X
+  specifying the [13Xsupercell[113X.[133X
+  
+  [1X5.3-4 CellCenter[101X
+  
+  [33X[1;0Y[29X[2XCellCenter[102X( [3Xmodel[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  the an integer between [23X1[123X and [23X3[123X indicating the type of vertex of the
+  triangle  tessellation  at  the  center  of  the  cell  graph  with  [23X1[123X, [23X2[123X, [23X3[123X
+  corresponding to the vertices [23Xx[123X, [23Xy[123X, [23Xz[123X, of the fundamental Schwarz triangle.[133X
+  
+  [1X5.3-5 GetTGPrimitiveCell[101X
+  
+  [33X[1;0Y[29X[2XGetTGPrimitiveCell[102X( [3Xmodel[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  the  [10XTGCell[110X  object (see [14X3.1[114X) associated with the model's [13Xprimitive
+  cell[113X.[133X
+  
+  [1X5.3-6 GetTGSuperCell[101X
+  
+  [33X[1;0Y[29X[2XGetTGSuperCell[102X( [3Xmodel[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns the [10XTGCell[110X object (see [14X3.1[114X) associated with the model's [13Xsupercell[113X.[133X
+  
+  [1X5.3-7 ModelType[101X
+  
+  [33X[1;0Y[29X[2XModelType[102X( [3Xmodel[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  a  the identifier of the model type. See [2XModelType[102X ([14X4.3-5[114X) for more
+  details.[133X
+  
+  [1X5.3-8 CellVertices[101X
+  
+  [33X[1;0Y[29X[2XCellVertices[102X( [3Xmodel[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns the vertices of the model graph as a list.[133X
+  
+  [33X[0;0YEach vertex is of the form [10X[ w, gi, etaj ][110X with [10Xw[110X an integer between 1 and 3
+  indicating  the  vertex of the fundamental Schwarz triangle, [10Xgi[110X the position
+  of  the  element  in the transversal [23XT_{G^+}(G_w^+)[123X labeling the vertex, and
+  [10Xetaj[110X     the    position    of    the    element    in    the    transversal
+  [23XT_{\Gamma_\mathrm{pc}}(\Gamma_\mathrm{sc})[123X   labeling   the   copy   of  the
+  primitive cell containing the vertex inside the supercell.[133X
+  
+  [1X5.3-9 CellVertexPositions[101X
+  
+  [33X[1;0Y[29X[2XCellVertexPositions[102X( [3Xmodel[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  the  positions  of  the vertices as elements of the proper triangle
+  group [23X\Delta^+[123X.[133X
+  
+  [1X5.3-10 CellEdges[101X
+  
+  [33X[1;0Y[29X[2XCellEdges[102X( [3Xmodel[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns the edges of the model graph as a list.[133X
+  
+  [33X[0;0YEach  edge  is of the form [10X[ v1, v2, tag, gam ][110X with [10Xv1[110X, [10Xv2[110X the positions of
+  the  vertices  in  [10XCellVertices([110X[3Xmodel[103X[10X)[110X  connected  by the edge, [10Xtag[110X uniquely
+  identifying  the  edge,  and  [10Xgam[110X  the  translation  relating  the unit cell
+  containing  [10Xv1[110X  to  the  unit cell containing [10Xv2[110X, as element of the finitely
+  presented  group  [10XFpGroup(TGCellTranslationGroup(GetTGCell([110X[3Xmodel[103X[10X)))[110X.  If  [10Xv1[110X
+  corresponds  to  the  vertex  [23X(w,  [g_{u_w}]_w)[123X  and  [10Xv2[110X  to the vertex [23X(w',
+  [g_{\tilde{u}_{w'}}]_{w'})[123X,  then  [10Xgam[110X corresponds to the translation [23X\gamma[123X
+  such that[133X
+  
+  
+  [24X[33X[0;6Yg_{\tilde{u}_{w'}} = g_{u_w}\gamma.[133X
+  
+  [124X
+  
+  [33X[0;0YThe  tag  [10Xtag[110X  is  of  the  form  [10X[  v1pc, v2pc, tagpc ][110X with [10Xv1pc[110X, [10Xv2pc[110X the
+  positions  of  the  vertices in the primitive cell, and [10Xtagpc[110X the tag of the
+  edge  in  the  primitive  cell  (see  [14X4.2[114X).  Thus,  [10Xtag[110X specifies (up to the
+  translation) the edge in the primitive cell.[133X
+  
+  [1X5.3-11 CellEdgeTranslations[101X
+  
+  [33X[1;0Y[29X[2XCellEdgeTranslations[102X( [3Xmodel[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  the  translations associated with the edges of the model graph. The
+  translations   are  given  as  elements  of  the  finitely  presented  group
+  [10XFpGroup(TGCellTranslationGroup(GetTGCell([110Xmodel[10X)))[110X     and    describe    the
+  translation  of  the  unit  cell containing the first vertex of the oriented
+  edge to the unit cell containing the second.[133X
+  
+  [1X5.3-12 CellFaces[101X
+  
+  [33X[1;0Y[29X[2XCellFaces[102X( [3Xmodel[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns the faces of the model graph as a list.[133X
+  
+  [1X5.3-13 CellEmbedding[101X
+  
+  [33X[1;0Y[29X[2XCellEmbedding[102X( [3Xsupercell-model[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  the  embedding  of  the  primitive  cell  in  the  supercell  as  a
+  [10XTGCellEmbedding[110X object (see [14X5.4[114X).[133X
+  
+  
+  [1X5.4 [33X[0;0YEmbedding of the Primitive Cell in the Supercell[133X[101X
+  
+  [1X5.4-1 PrimitiveCellTranslationGroup[101X
+  
+  [33X[1;0Y[29X[2XPrimitiveCellTranslationGroup[102X( [3Xcellembed[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  the  primitive  cell  translation group as a [10XTGCellTranslationGroup[110X
+  object (see [14X3.4[114X).[133X
+  
+  [1X5.4-2 SuperCellTranslationGroup[101X
+  
+  [33X[1;0Y[29X[2XSuperCellTranslationGroup[102X( [3Xcellembed[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  the  supercell translation group as a [10XTGCellTranslationGroup[110X object
+  (see [14X3.4[114X).[133X
+  
+  [1X5.4-3 AsQuotient[101X
+  
+  [33X[1;0Y[29X[2XAsQuotient[102X( [3Xcellembed[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  the  quotient  group  [23X\Gamma_\mathrm{pc}/\Gamma_\mathrm{sc}[123X  of the
+  primitive  cell  by  the  supercell  translation group as a [10XRightTransversal[110X
+  object.[133X
+  
+  [1X5.4-4 GetRightTransversal[101X
+  
+  [33X[1;0Y[29X[2XGetRightTransversal[102X( [3Xcellembed[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns     the     right     transversal     of    the    quotient    group
+  [23X\Gamma_\mathrm{pc}/\Gamma_\mathrm{sc}[123X of the primitive cell by the supercell
+  translation group as a list of representatives in [23X\Gamma[123X.[133X
+  
+  [1X5.4-5 TranslationGroupEmbedding[101X
+  
+  [33X[1;0Y[29X[2XTranslationGroupEmbedding[102X( [3Xsupercell-model[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Ygroup  homomorphism  from  the  translation  group associated with
+            [10XGetTGSuperCell([110Xsupercell-model[10X)[110X    to    the   translation   group
+            associated with [10XGetTGPrimitiveCell([110Xsupercell-model[10X)[110X, each obtained
+            from the cell using [10XFpGroup(TGCellTranslationGroup([110Xcell[10X))[110X.[133X
+  
+  [33X[0;0YConstructs  an  embedding  homomorphism from the supercell translation group
+  (as  an abstract finitely-presented group) to the primitive-cell translation
+  group (also as an abstract finitely-presented group).[133X
+  
+  
+  [1X5.5 [33X[0;0YExport and Import[133X[101X
+  
+  
+  [1X5.5-1 [33X[0;0YExporting TGSuperCellModelGraph Objects[133X[101X
+  
+  [33X[1;0Y[29X[2XExport[102X( [3Xmodel[103X, [3Xoutput-stream[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XExport[102X( [3Xmodel[103X, [3Xpath[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XExportString[102X( [3Xmodel[103X ) [32X operation[133X
+  
+  [33X[0;0YExport the supercell model graph [3Xmodel[103X to the [10XOutputTextStream[110X [3Xoutput-stream[103X
+  or  to  the  file  at  the path given by the string [3Xpath[103X. Alternatively, the
+  supercell  model  graph can be exported to a string with [10XExportString[110X, which
+  returns said string.[133X
+  
+  
+  [1X5.5-2 [33X[0;0YImporting TGSuperCellModelGraph Objects[133X[101X
+  
+  [33X[1;0Y[29X[2XImportTGSuperCellModelGraph[102X( [3Xinput-stream[103X[, [3Xtg[103X] ) [32X function[133X
+  [33X[1;0Y[29X[2XImportTGSuperCellModelGraphFromFile[102X( [3Xpath[103X[, [3Xtg[103X] ) [32X function[133X
+  [33X[1;0Y[29X[2XImportTGSuperCellModelGraphFromString[102X( [3Xstring[103X[, [3Xtg[103X] ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ymodel graph as [10XTGSuperCellModelGraph[110X (see [14X5.1[114X).[133X
+  
+  [33X[0;0YImport a supercell model graph from the [10XInputTextStream[110X [3Xinput-stream[103X or from
+  the  file at the path given by the string [3Xpath[103X. Alterantively, the supercell
+  model graph can be imported from the string [3Xstring[103X. Optionally, the triangle
+  group can be given as a [10XProperTriangleGroup[110X object [3Xtg[103X (see [14X2.1[114X).[133X
+  

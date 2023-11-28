@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (HyperCells) - Chapter 3: Triangle-Group Cells</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap3"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap3.html">[MathJax off]</a></p>
+<p><a id="X82BF942B7BD1E54C" name="X82BF942B7BD1E54C"></a></p>
+<div class="ChapSects"><a href="chap3_mj.html#X82BF942B7BD1E54C">3 <span class="Heading">Triangle-Group Cells</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X7EFB1FA283E2C890">3.1 <span class="Heading">Cells</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X861AB11582880C24">3.1-1 TGCell</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X8605662B863B3B24">3.1-2 TGCellSymmetric</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X831063847A57A3A8">3.2 <span class="Heading">Cell Properties</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X82680ECE7F7D6C0D">3.2-1 GetProperTriangleGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X82B6C5AD876A6589">3.2-2 CellRelators</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7FADB1407DDDD2F9">3.2-3 TGCellTranslationGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7C7DF0CA7BB9F570">3.2-4 TGCellPointGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X781F6DEF78F34861">3.2-5 HasTGCellMSWPs</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X855ECE7E7E657E24">3.2-6 TGCellMSWPs</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X827652787BBB857F">3.3 <span class="Heading">Query Information from Cells</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7DD74CE684AC5B34">3.3-1 TGCellSchwarzTriangleRep</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X84E45C4C80C8E749">3.4 <span class="Heading">Cell Translation Group</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7E1F6673805AB560">3.4-1 AsTGSubgroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X855761E5878702CD">3.4-2 Generators</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7890BD1385FF74AD">3.4-3 FpGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X843328EE826E4322">3.4-4 FpIsomorphism</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X872516A47B98BE4A">3.5 <span class="Heading">Cell Point Group</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7E019E3B830E6BCF">3.5-1 AsQuotientGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X866BBD5583AC8217">3.5-2 AsQuotient</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7A6B3AD57E790D08">3.5-3 GetRightTransversal</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X84C551FA842E483A">3.5-4 QuotientHomomorphism</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X7AA499FB8630F663">3.6 <span class="Heading">Maximally Symmetric Wyckoff Positions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7F507BA583C430E0">3.6-1 AsQuotient</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7EBC558A7C78E88E">3.6-2 GetRightTransversal</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7A1D8848786DACBA">3.6-3 GetKernel</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X7945E96B7A771F5A">3.7 <span class="Heading">Cell Graphs</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7C1CAD48852C30ED">3.7-1 TGCellGraph</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X864917A87E33B694">3.7-2 GetProperTriangleGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7923FD7A7DF28654">3.7-3 CellRelators</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X82265B987CEA79C5">3.7-4 CellCenter</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X826680167E96C8FB">3.7-5 CellVertices</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X78D7F1257F988640">3.7-6 CellVertexPositions</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X835C05D38466C764">3.7-7 CellEdges</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7F58BD6D87565B5C">3.7-8 CellEdgeTranslations</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X78C3C0227A54EB93">3.7-9 CellFaces</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X8300C39C7FCD6C5F">3.7-10 CellFacesWithCenter</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X80D65DD186D0B80B">3.7-11 CellBoundary</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X787E6ADB85AF5DB9">3.7-12 GetTGCell</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X828F18497AE2A460">3.7-13 <span class="Heading">Exporting TGCellGraph Objects</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7CD7EFB579029EC3">3.7-14 <span class="Heading">Importing TGCellGraph Objects</span></a>
+</span>
+</div></div>
+</div>
+
+<h3>3 <span class="Heading">Triangle-Group Cells</span></h3>
+
+<p><a id="X7EFB1FA283E2C890" name="X7EFB1FA283E2C890"></a></p>
+
+<h4>3.1 <span class="Heading">Cells</span></h4>
+
+<p>A triangle-group cells is defined by the quotient group of a triangle group <span class="SimpleMath">\(\Delta\)</span> by a subgroup of translations <span class="SimpleMath">\(\Gamma\)</span>, i.e., a torsion-free normal subgroup of the proper triangle group <span class="SimpleMath">\(\Delta^+\)</span>. Geometrically, this includes a choice of transversal <span class="SimpleMath">\(T_{\Delta^+}(\Gamma)\)</span> characterizing the cell and a choice of transversal <span class="SimpleMath">\(T_{G^+}(G_w^+)\)</span>, where <span class="SimpleMath">\(G^+\cong\Delta^+/\Gamma\)</span> is the (proper) point group of the cell and <span class="SimpleMath">\(G_w^+\)</span> is the stabilizer of a maximally symmetric Wyckoff position of type <span class="SimpleMath">\(w\)</span> in the cell.</p>
+
+<p>The cell is implemented as an object of category <code class="code">TGCellObj</code> with the following components:</p>
+
+
+<ul>
+<li><p><code class="func">GetProperTriangleGroup</code> (<a href="chap3_mj.html#X82680ECE7F7D6C0D"><span class="RefLink">3.2-1</span></a>): the proper triangle group <span class="SimpleMath">\(\Delta^+\)</span></p>
+
+</li>
+<li><p><code class="func">CellRelators</code> (<a href="chap3_mj.html#X82B6C5AD876A6589"><span class="RefLink">3.2-2</span></a>): the relators defining <span class="SimpleMath">\(\Delta^+/\Gamma\)</span> as elements of <span class="SimpleMath">\(\Delta^+\)</span></p>
+
+</li>
+<li><p><code class="func">TGCellTranslationGroup</code> (<a href="chap3_mj.html#X7FADB1407DDDD2F9"><span class="RefLink">3.2-3</span></a>): the translation group <span class="SimpleMath">\(\Gamma\)</span></p>
+
+</li>
+<li><p><code class="func">TGCellPointGroup</code> (<a href="chap3_mj.html#X7C7DF0CA7BB9F570"><span class="RefLink">3.2-4</span></a>): the (proper) point group <span class="SimpleMath">\(G^+\cong\Delta^+/\Gamma\)</span></p>
+
+</li>
+<li><p><code class="func">TGCellMSWPs</code> (<a href="chap3_mj.html#X855ECE7E7E657E24"><span class="RefLink">3.2-6</span></a>): the maximally symmetric Wyckoff positions in the cell</p>
+
+</li>
+</ul>
+<p>and is printed in the form</p>
+
+
+<div class="example"><pre>
+TGCell( ProperTriangleGroup(r, q, p), rels )
+</pre></div>
+
+<p>where <span class="SimpleMath">\((r,q,p)\)</span> is the signature of the underlying triangle group and <code class="code">rels</code> the relators defining the cell in terms of the generators <span class="SimpleMath">\(x\)</span>, <span class="SimpleMath">\(y\)</span>, <span class="SimpleMath">\(z\)</span> of the proper triangle group <span class="SimpleMath">\(\Delta^+\)</span>.</p>
+
+<p><a id="X861AB11582880C24" name="X861AB11582880C24"></a></p>
+
+<h5>3.1-1 TGCell</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TGCell</code>( <var class="Arg">tg</var>, <var class="Arg">quotient</var>[, <var class="Arg">GAMgens</var>[, <var class="Arg">TDGAM</var>[, <var class="Arg">TGGw</var>]]] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: cell as <code class="code">TGCell</code> object</p>
+
+<p>Construct the cell for the triangle group <var class="Arg">tg</var> (<span class="SimpleMath">\(\Delta^+\)</span>), given as <code class="code">ProperTriangleGroup</code> object (see <a href="chap2_mj.html#X8119885384F3B9B2"><span class="RefLink">2.1</span></a>), specified by the quotient <var class="Arg">q</var> given as a <code class="code">TGQuotient</code> object <var class="Arg">quotient</var> (see <a href="chap2_mj.html#X84E92102876317DE"><span class="RefLink">2.3</span></a>).</p>
+
+<p>Optionally, generators <var class="Arg">GAMgens</var> of the translation group <span class="SimpleMath">\(\Gamma\)</span> can be explicitly given as elements of <var class="Arg">tg</var>. If not given, they are computed automatically. Similarly, choices for the transversals <span class="SimpleMath">\(T_{\Delta^+}(\Gamma)\)</span> and <span class="SimpleMath">\(T_{G^+}(G_w^+)\)</span> can be given as <var class="Arg">TDGAM</var> and <var class="Arg">TGGw</var>, respectively. If not given, they are computed automatically. Here, <var class="Arg">TDGAM</var> is a list of elements of <var class="Arg">tg</var> and <var class="Arg">TGGw</var> is a list of three lists, one for <span class="SimpleMath">\(w=x,y,z\)</span>, respectively, of elements of <var class="Arg">tg</var>.</p>
+
+<p><a id="X8605662B863B3B24" name="X8605662B863B3B24"></a></p>
+
+<h5>3.1-2 TGCellSymmetric</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TGCellSymmetric</code>( <var class="Arg">tg</var>, <var class="Arg">quotient</var>, <var class="Arg">center</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: cell as <code class="code">TGCell</code> object</p>
+
+<p>Construct the <em>symmetric</em> and at <code class="code">center</code>centered cell for the triangle group <var class="Arg">tg</var> (<span class="SimpleMath">\(\Delta^+\)</span>), given as <code class="code">ProperTriangleGroup</code> object (see <a href="chap2_mj.html#X8119885384F3B9B2"><span class="RefLink">2.1</span></a>), specified by the quotient <var class="Arg">q</var> given as a <code class="code">TGQuotient</code> object <var class="Arg">quotient</var> (see <a href="chap2_mj.html#X84E92102876317DE"><span class="RefLink">2.3</span></a>).</p>
+
+<p><a id="X831063847A57A3A8" name="X831063847A57A3A8"></a></p>
+
+<h4>3.2 <span class="Heading">Cell Properties</span></h4>
+
+<p><a id="X82680ECE7F7D6C0D" name="X82680ECE7F7D6C0D"></a></p>
+
+<h5>3.2-1 GetProperTriangleGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GetProperTriangleGroup</code>( <var class="Arg">cell</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the proper triangle group on which the cell <var class="Arg">cell</var> is based as a <code class="code">ProperTriangleGroup</code> object (see <a href="chap2_mj.html#X8119885384F3B9B2"><span class="RefLink">2.1</span></a>).</p>
+
+<p><a id="X82B6C5AD876A6589" name="X82B6C5AD876A6589"></a></p>
+
+<h5>3.2-2 CellRelators</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CellRelators</code>( <var class="Arg">cell</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the relators defining the cell as elements of <code class="code">GetProperTriangleGroup(</code><var class="Arg">cell</var><code class="code">)</code></p>
+
+<p><a id="X7FADB1407DDDD2F9" name="X7FADB1407DDDD2F9"></a></p>
+
+<h5>3.2-3 TGCellTranslationGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TGCellTranslationGroup</code>( <var class="Arg">cell</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the translations group <span class="SimpleMath">\(\Gamma\)</span> as a <code class="code">TGCellTranslationGroup</code> object (see <a href="chap3_mj.html#X84E45C4C80C8E749"><span class="RefLink">3.4</span></a>).</p>
+
+<p><a id="X7C7DF0CA7BB9F570" name="X7C7DF0CA7BB9F570"></a></p>
+
+<h5>3.2-4 TGCellPointGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TGCellPointGroup</code>( <var class="Arg">cell</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the (proper) point group <span class="SimpleMath">\(G^+\cong\Delta^+/\Gamma\)</span> as a <code class="code">TGCellPointGroup</code> object (see <a href="chap3_mj.html#X872516A47B98BE4A"><span class="RefLink">3.5</span></a>).</p>
+
+<p><a id="X781F6DEF78F34861" name="X781F6DEF78F34861"></a></p>
+
+<h5>3.2-5 HasTGCellMSWPs</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HasTGCellMSWPs</code>( <var class="Arg">cell</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns true if the the maximally symmetry Wyckoff positions are precomputed, false otherwise.</p>
+
+<p><a id="X855ECE7E7E657E24" name="X855ECE7E7E657E24"></a></p>
+
+<h5>3.2-6 TGCellMSWPs</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TGCellMSWPs</code>( <var class="Arg">cell</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the maximally symmetry Wyckoff positions as a <code class="code">TGCellMSWPs</code> object (see <a href="chap3_mj.html#X7AA499FB8630F663"><span class="RefLink">3.6</span></a>) and computes them if necessary.</p>
+
+<p>Call <code class="func">HasTGCellMSWPs</code> (<a href="chap3_mj.html#X781F6DEF78F34861"><span class="RefLink">3.2-5</span></a>) first to check if they are already precomputed.</p>
+
+<p><a id="X827652787BBB857F" name="X827652787BBB857F"></a></p>
+
+<h4>3.3 <span class="Heading">Query Information from Cells</span></h4>
+
+<p><a id="X7DD74CE684AC5B34" name="X7DD74CE684AC5B34"></a></p>
+
+<h5>3.3-1 TGCellSchwarzTriangleRep</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TGCellSchwarzTriangleRep</code>( <var class="Arg">cell</var>, <var class="Arg">elem</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the index of the Schwarz triangle representative in the cell, i.e., the position in <code class="code">GetRightTransversal(TGCellPointGroup(</code><var class="Arg">cell</var><code class="code">))</code>, for a given element <var class="Arg">elem</var> of the proper triangle group <code class="code">GetProperTriangleGroup(</code><var class="Arg">cell</var><code class="code">)</code>.</p>
+
+<p><a id="X84E45C4C80C8E749" name="X84E45C4C80C8E749"></a></p>
+
+<h4>3.4 <span class="Heading">Cell Translation Group</span></h4>
+
+<p>Cell translation groups are characterized by the translation group <span class="SimpleMath">\(\Gamma\)</span>, a normal subgroup of the proper triangle group <span class="SimpleMath">\(\Delta^+\)</span>, and an explicit choice of generators. This is implemented as an object of category <code class="code">TGCellTranslationGroupObj</code> with the following components:</p>
+
+
+<ul>
+<li><p><code class="func">AsTGSubgroup</code> (<a href="chap3_mj.html#X7E1F6673805AB560"><span class="RefLink">3.4-1</span></a>): the translation group <span class="SimpleMath">\(\Gamma\)</span> as a subgroup of the proper triangle group <span class="SimpleMath">\(\Delta^+\)</span></p>
+
+</li>
+<li><p><code class="func">Generators</code> (<a href="chap3_mj.html#X855761E5878702CD"><span class="RefLink">3.4-2</span></a>): the generators of <span class="SimpleMath">\(\Gamma\)</span> as elements of the proper triangle group <span class="SimpleMath">\(\Delta^+\)</span></p>
+
+</li>
+<li><p><code class="func">FpGroup</code> (<a href="chap3_mj.html#X7890BD1385FF74AD"><span class="RefLink">3.4-3</span></a>): the translation group <span class="SimpleMath">\(\Gamma\)</span> as a finitely presented group</p>
+
+</li>
+<li><p><code class="func">FpIsomorphism</code> (<a href="chap3_mj.html#X843328EE826E4322"><span class="RefLink">3.4-4</span></a>): the group isomorphism from <span class="SimpleMath">\(\Gamma\)</span> to the finitely presented group</p>
+
+</li>
+</ul>
+<p>and is printed in the form</p>
+
+
+<div class="example"><pre>
+TGCellTranslationGroup( &lt; g1, g2, ... &gt; | rel1, rel2, ... &gt; )
+</pre></div>
+
+<p>where <code class="code">g1</code>, <code class="code">g2</code>, ... are the generators of <span class="SimpleMath">\(\Gamma\)</span> as finitely presented group, <code class="func">FpGroup</code> (<a href="chap3_mj.html#X7890BD1385FF74AD"><span class="RefLink">3.4-3</span></a>), and <code class="code">rel1</code>, <code class="code">rel2</code>, ... are the corresponding relators.</p>
+
+<p><a id="X7E1F6673805AB560" name="X7E1F6673805AB560"></a></p>
+
+<h5>3.4-1 AsTGSubgroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AsTGSubgroup</code>( <var class="Arg">Gamma</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the translation group <var class="Arg">Gamma</var> as a subgroup of the proper triangle group <span class="SimpleMath">\(\Delta^+\)</span>.</p>
+
+<p><a id="X855761E5878702CD" name="X855761E5878702CD"></a></p>
+
+<h5>3.4-2 Generators</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Generators</code>( <var class="Arg">Gamma</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the generators of the translation group <var class="Arg">Gamma</var> as elements of the proper triangle group <span class="SimpleMath">\(\Delta^+\)</span>.</p>
+
+<p><a id="X7890BD1385FF74AD" name="X7890BD1385FF74AD"></a></p>
+
+<h5>3.4-3 FpGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FpGroup</code>( <var class="Arg">Gamma</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the translation group Gamma as a finitely presented group with generators <code class="code">g1</code>, <code class="code">g2</code>, ....</p>
+
+<p><a id="X843328EE826E4322" name="X843328EE826E4322"></a></p>
+
+<h5>3.4-4 FpIsomorphism</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FpIsomorphism</code>( <var class="Arg">Gamma</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the group isomorphism from <code class="code">AsTGSubgroup(</code><var class="Arg">Gamma</var><code class="code">)</code>, the translation group as a subgroup of proper triangle group <span class="SimpleMath">\(\Delta^+\)</span>, to the finitely presented group <code class="code">FpGroup(</code><var class="Arg">Gamma</var><code class="code">)</code>.</p>
+
+<p><a id="X872516A47B98BE4A" name="X872516A47B98BE4A"></a></p>
+
+<h4>3.5 <span class="Heading">Cell Point Group</span></h4>
+
+<p>The (proper) point group <span class="SimpleMath">\(G^+\)</span> of a triangle-group cell is ismomorphic to the quotient group <span class="SimpleMath">\(\Delta^+/\Gamma\)</span> of the proper triangle group <span class="SimpleMath">\(\Delta^+\)</span> by the translation group <span class="SimpleMath">\(\Gamma\)</span>. It is implemented as an object of category <code class="code">TGCellPointGroupObj</code> with the following components:</p>
+
+
+<ul>
+<li><p><code class="func">AsQuotientGroup</code> (<a href="chap3_mj.html#X7E019E3B830E6BCF"><span class="RefLink">3.5-1</span></a>): the quotient group <span class="SimpleMath">\(G^+\cong\Delta^+/\Gamma\)</span> as a quotient group of the proper triangle group <span class="SimpleMath">\(\Delta^+\)</span> by the translation group <span class="SimpleMath">\(\Gamma\)</span></p>
+
+</li>
+<li><p><code class="func">AsQuotient</code> (<a href="chap3_mj.html#X866BBD5583AC8217"><span class="RefLink">3.5-2</span></a>): the quotient <span class="SimpleMath">\(G^+\cong\Delta^+/\Gamma\)</span> as a <code class="code">RightTransversal</code> object</p>
+
+</li>
+<li><p><code class="func">GetRightTransversal</code> (<a href="chap3_mj.html#X7A6B3AD57E790D08"><span class="RefLink">3.5-3</span></a>): the right transversal with representatives of point group elements as elements of the proper triangle group <span class="SimpleMath">\(\Delta^+\)</span></p>
+
+</li>
+<li><p><code class="func">QuotientHomomorphism</code> (<a href="chap3_mj.html#X84C551FA842E483A"><span class="RefLink">3.5-4</span></a>): the group homomorphism from the proper triangle group <span class="SimpleMath">\(\Delta^+\)</span> to the quotient group <span class="SimpleMath">\(G^+\cong\Delta^+/\Gamma\)</span></p>
+
+</li>
+</ul>
+<p>and is printed in the form</p>
+
+
+<div class="example"><pre>
+TGCellPointGroup( &lt; x, y, z &gt; | rel1, rel2, ... &gt; )
+</pre></div>
+
+<p>where <code class="code">x</code>, <code class="code">y</code>, <code class="code">z</code> are the generators of the point group <span class="SimpleMath">\(G^+\)</span> and <code class="code">rel1</code>, <code class="code">rel2</code>, ... are the corresponding relators.</p>
+
+<p><a id="X7E019E3B830E6BCF" name="X7E019E3B830E6BCF"></a></p>
+
+<h5>3.5-1 AsQuotientGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AsQuotientGroup</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the (proper) point group <span class="SimpleMath">\(G^+\)</span> as quotient group <span class="SimpleMath">\(\Delta^+/\Gamma\)</span>.</p>
+
+<p><a id="X866BBD5583AC8217" name="X866BBD5583AC8217"></a></p>
+
+<h5>3.5-2 AsQuotient</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AsQuotient</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the (proper) point group <span class="SimpleMath">\(G^+\cong\Delta^+/\Gamma\)</span> as a <code class="code">RightTransversal</code> object.</p>
+
+<p><a id="X7A6B3AD57E790D08" name="X7A6B3AD57E790D08"></a></p>
+
+<h5>3.5-3 GetRightTransversal</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GetRightTransversal</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the right transversal with representatives of point group elements as elements of the proper triangle group <span class="SimpleMath">\(\Delta^+\)</span>.</p>
+
+<p><a id="X84C551FA842E483A" name="X84C551FA842E483A"></a></p>
+
+<h5>3.5-4 QuotientHomomorphism</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; QuotientHomomorphism</code>( <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the group homomorphism from the proper triangle group <span class="SimpleMath">\(\Delta^+\)</span> to the quotient <code class="code">AsQuotientGroup(</code><var class="Arg">G</var><code class="code">)</code> corresponding to the point group <span class="SimpleMath">\(G^+\)</span>.</p>
+
+<p><a id="X7AA499FB8630F663" name="X7AA499FB8630F663"></a></p>
+
+<h4>3.6 <span class="Heading">Maximally Symmetric Wyckoff Positions</span></h4>
+
+<p>The maximally symmetric Wyckoff positions in a triangle-group cell are given by the orbital stabilizer theorem as the coset representatives of the right cosets of the stabilizer of a maximally symmetric Wyckoff position of type <span class="SimpleMath">\(w\)</span> in the (proper) point group <span class="SimpleMath">\(G^+\)</span>, i.e., as elements of the right transversal <span class="SimpleMath">\(T_{G^+}(G_w^+)\)</span>. Here the types of maximally symmetric Wyckoff positions, <span class="SimpleMath">\(w=x,y,z\)</span>, are distinguished by the order of their stabilizer group: <span class="SimpleMath">\(|G_x^+|=r\)</span>, <span class="SimpleMath">\(|G_y^+|=q\)</span>, and <span class="SimpleMath">\(|G_z^+|=p\)</span>.</p>
+
+<p>This is implemented as an object of category <code class="code">TGCellMSWPsObj</code> with the following components:</p>
+
+
+<ul>
+<li><p><code class="func">AsQuotient</code> (<a href="chap3_mj.html#X7F507BA583C430E0"><span class="RefLink">3.6-1</span></a>): the list of the three quotients <span class="SimpleMath">\(G^+/G_w^+\)</span>, <span class="SimpleMath">\(w=x,y,z\)</span>, as <code class="code">RightTransversal</code> objects</p>
+
+</li>
+<li><p><code class="func">GetRightTransversal</code> (<a href="chap3_mj.html#X7EBC558A7C78E88E"><span class="RefLink">3.6-2</span></a>): the list of the three right transversals <span class="SimpleMath">\(T_{G^+}(G_w^+)\)</span>, <span class="SimpleMath">\(w=x,y,z\)</span>, with representatives as elements of the proper triangle group <span class="SimpleMath">\(\Delta^+\)</span></p>
+
+</li>
+<li><p><code class="func">GetKernel</code> (<a href="chap3_mj.html#X7A1D8848786DACBA"><span class="RefLink">3.6-3</span></a>): the list of the three kernels <span class="SimpleMath">\(G_w^+\)</span>, <span class="SimpleMath">\(w=x,y,z\)</span>, as ordered lists of elements of the proper point group <span class="SimpleMath">\(G^+\)</span></p>
+
+</li>
+</ul>
+<p>and is printed in the form</p>
+
+
+<div class="example"><pre>
+TGCellMSWPs( [ TGGx, TGGy, TGGz ] )
+</pre></div>
+
+<p>where <code class="code">TGGx</code>, <code class="code">TGGy</code>, <code class="code">TGGz</code> are the right transversals <span class="SimpleMath">\(T_{G^+}(G_x^+)\)</span>, <span class="SimpleMath">\(T_{G^+}(G_y^+)\)</span>, <span class="SimpleMath">\(T_{G^+}(G_z^+)\)</span>, respectively.</p>
+
+<p><a id="X7F507BA583C430E0" name="X7F507BA583C430E0"></a></p>
+
+<h5>3.6-1 AsQuotient</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AsQuotient</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the list of the three quotients <span class="SimpleMath">\(G^+/G_w^+\)</span>, <span class="SimpleMath">\(w=x,y,z\)</span>, corresponding to the list of maximally symmetric Wyckoff positions in the cell. Each quotient is given as a <code class="code">RightTransversal</code> object.</p>
+
+<p><a id="X7EBC558A7C78E88E" name="X7EBC558A7C78E88E"></a></p>
+
+<h5>3.6-2 GetRightTransversal</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GetRightTransversal</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the list of the three right transversals <span class="SimpleMath">\(T_{G^+}(G_w^+)\)</span>, <span class="SimpleMath">\(w=x,y,z\)</span>. Each right transversal is given as a list of elements of the proper triangle group <span class="SimpleMath">\(\Delta^+\)</span>, such that each elements represents a maximally symmetric Wyckoff positions of type <span class="SimpleMath">\(w\)</span>.</p>
+
+<p><a id="X7A1D8848786DACBA" name="X7A1D8848786DACBA"></a></p>
+
+<h5>3.6-3 GetKernel</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GetKernel</code>( <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the list of the three kernels, each corresponding to the list of elements of the on-site symmetry group of the maximally symmetric Wyckoff position. The list entries are given as elements of the proper point group <span class="SimpleMath">\(G^+\)</span>.</p>
+
+<p><a id="X7945E96B7A771F5A" name="X7945E96B7A771F5A"></a></p>
+
+<h4>3.7 <span class="Heading">Cell Graphs</span></h4>
+
+<p>Given a triangle-group quotient <span class="SimpleMath">\(G^+\cong\Delta^+/\Gamma\)</span> and a choice of center, the cell graph defines a maximally symmetric triangular tessellation of the corresponding connected and compactified translation unit cell. It is implemented as a <code class="code">TGCellGraph</code> object with the following components:</p>
+
+
+<ul>
+<li><p><code class="func">GetTGCell</code> (<a href="chap3_mj.html#X787E6ADB85AF5DB9"><span class="RefLink">3.7-12</span></a>): the associated <code class="code">TGCell</code> object (see <a href="chap3_mj.html#X7EFB1FA283E2C890"><span class="RefLink">3.1</span></a>)</p>
+
+</li>
+<li><p><code class="func">CellCenter</code> (<a href="chap3_mj.html#X82265B987CEA79C5"><span class="RefLink">3.7-4</span></a>): the center of the cell graph</p>
+
+</li>
+<li><p><code class="func">CellVertices</code> (<a href="chap3_mj.html#X826680167E96C8FB"><span class="RefLink">3.7-5</span></a>): the vertices of the cell graph</p>
+
+</li>
+<li><p><code class="func">CellEdges</code> (<a href="chap3_mj.html#X835C05D38466C764"><span class="RefLink">3.7-7</span></a>): the edges of the cell graph including potential translations associated with them</p>
+
+</li>
+<li><p><code class="func">CellFaces</code> (<a href="chap3_mj.html#X78C3C0227A54EB93"><span class="RefLink">3.7-9</span></a>): the oriented faces of the cell graph</p>
+
+</li>
+<li><p><code class="func">CellBoundary</code> (<a href="chap3_mj.html#X80D65DD186D0B80B"><span class="RefLink">3.7-11</span></a>): the boundary specifications of the cell graph giving the boundary identifications</p>
+
+</li>
+</ul>
+<p>and is printed in the form</p>
+
+
+<div class="example"><pre>
+TGCellGraph( cell,
+  center = w,
+  vertices = [ [ w1, gi1 ], [ w2, gi2 ], ... ],
+  edges = [ [ v1, v2, s, gam ], ... ],
+  faces = [ [ [ e1, o1 ], [ e2, o2 ], ... ], ... ],
+  boundary = [ [ d1, d2, e, b, m, gam ], ... ]
+)
+</pre></div>
+
+<p>See the corresponding references above for details.</p>
+
+<p>Cell graphs are constructed using the function <code class="func">TGCellGraph</code> (<a href="chap3_mj.html#X7C1CAD48852C30ED"><span class="RefLink">3.7-1</span></a>) by specifying the triangle group, its quotient and the center.</p>
+
+<p><a id="X7C1CAD48852C30ED" name="X7C1CAD48852C30ED"></a></p>
+
+<h5>3.7-1 TGCellGraph</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TGCellGraph</code>( <var class="Arg">tg</var>, <var class="Arg">quotient</var>, <var class="Arg">center</var>[, <var class="Arg">GAMgens</var>[, <var class="Arg">TDGAM</var>[, <var class="Arg">TGGw</var>]]] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: cell graph as <code class="code">TGCellGraph</code> object (see <a href="chap3_mj.html#X7945E96B7A771F5A"><span class="RefLink">3.7</span></a>).</p>
+
+<p>Construct the cell graph representing a connected and symmetric cell that is specified by</p>
+
+
+<ul>
+<li><p>the <code class="code">ProperTriangleGroup</code> (see <a href="chap2_mj.html#X8119885384F3B9B2"><span class="RefLink">2.1</span></a>) <var class="Arg">tg</var>,</p>
+
+</li>
+<li><p>the <code class="code">TGQuotient</code> (see <a href="chap2_mj.html#X84E92102876317DE"><span class="RefLink">2.3</span></a>) <var class="Arg">quotient</var></p>
+
+</li>
+<li><p>and is centered at <var class="Arg">center</var>, an integer between <span class="SimpleMath">\(1\)</span> and <span class="SimpleMath">\(3\)</span> corresponding to one of the three vertices <span class="SimpleMath">\(x\)</span>, <span class="SimpleMath">\(y\)</span>, <span class="SimpleMath">\(z\)</span>, of the fundamental Schwarz triangle.</p>
+
+</li>
+</ul>
+<p>Optionally, generators <var class="Arg">GAMgens</var> of the translation group <span class="SimpleMath">\(\Gamma\)</span> can be explicitly given as elements of <var class="Arg">tg</var>. If not given, they are computed automatically. Similarly, choices for the transversals <span class="SimpleMath">\(T_{\Delta^+}(\Gamma)\)</span> and <span class="SimpleMath">\(T_{G^+}(G_w^+)\)</span> can be given as <var class="Arg">TDGAM</var> and <var class="Arg">TGGw</var>, respectively. If not given, they are computed automatically. Here, <var class="Arg">TDGAM</var> is a list of elements of <var class="Arg">tg</var> and <var class="Arg">TGGw</var> is a list of three lists, one for <span class="SimpleMath">\(w=x,y,z\)</span>, respectively, of elements of <var class="Arg">tg</var>.</p>
+
+<p>The option <code class="code">simplify</code>, which takes a non-negative integer as argument, can be used to specify the level of simplification of words in the translation group, both for the translation generators expressed in terms of generators of the proper triangle group and for the translations expressed as elements of the finitely presented group <code class="code">FpGroup(TGCellTranslationGroup(GetTGCell(</code><var class="Arg">cellgraph</var><code class="code">)))</code>.</p>
+
+<p><a id="X864917A87E33B694" name="X864917A87E33B694"></a></p>
+
+<h5>3.7-2 GetProperTriangleGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GetProperTriangleGroup</code>( <var class="Arg">cellgraph</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the proper triangle group <span class="SimpleMath">\(\Delta^+\)</span> on which the cell is based as a <code class="code">ProperTriangleGroup</code> object (see <a href="chap2_mj.html#X8119885384F3B9B2"><span class="RefLink">2.1</span></a>).</p>
+
+<p><a id="X7923FD7A7DF28654" name="X7923FD7A7DF28654"></a></p>
+
+<h5>3.7-3 CellRelators</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CellRelators</code>( <var class="Arg">cellgraph</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the relators in terms of elements of <code class="code">GetProperTriangleGroup(</code><var class="Arg">cellgraph</var><code class="code">)</code> defining the cell.</p>
+
+<p><a id="X82265B987CEA79C5" name="X82265B987CEA79C5"></a></p>
+
+<h5>3.7-4 CellCenter</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CellCenter</code>( <var class="Arg">cellgraph</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the an integer between <span class="SimpleMath">\(1\)</span> and <span class="SimpleMath">\(3\)</span> indicating the type of vertex of the triangle tessellation at the center of the cell graph with <span class="SimpleMath">\(1\)</span>, <span class="SimpleMath">\(2\)</span>, <span class="SimpleMath">\(3\)</span> corresponding to the vertices <span class="SimpleMath">\(x\)</span>, <span class="SimpleMath">\(y\)</span>, <span class="SimpleMath">\(z\)</span>, of the fundamental Schwarz triangle.</p>
+
+<p><a id="X826680167E96C8FB" name="X826680167E96C8FB"></a></p>
+
+<h5>3.7-5 CellVertices</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CellVertices</code>( <var class="Arg">cellgraph</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the vertices of the cell graph as a list.</p>
+
+<p>Each vertex is of the form <code class="code">[ w, gi ]</code> with <code class="code">w</code> an integer between 1 and 3 indicating the vertex of the fundamental Schwarz triangle and <code class="code">gi</code> the position of the element in the transversal <span class="SimpleMath">\(T_{G^+}(G_w^+)\)</span> labeling the vertex.</p>
+
+<p><a id="X78D7F1257F988640" name="X78D7F1257F988640"></a></p>
+
+<h5>3.7-6 CellVertexPositions</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CellVertexPositions</code>( <var class="Arg">cellgraph</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the positions of the vertices as elements of the proper triangle group <span class="SimpleMath">\(\Delta^+\)</span>.</p>
+
+<p><a id="X835C05D38466C764" name="X835C05D38466C764"></a></p>
+
+<h5>3.7-7 CellEdges</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CellEdges</code>( <var class="Arg">cellgraph</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the edges of the cell graph as a list.</p>
+
+<p>Each edge is of the form <code class="code">[ v1, v2, s, gam ]</code> with <code class="code">v1</code>, <code class="code">v2</code> the positions of the vertices in <code class="code">CellVertices(</code><var class="Arg">cellgraph</var><code class="code">)</code> connected by the edge, <code class="code">s</code> the position of the element of <span class="SimpleMath">\(T_{\Delta^+}(\Gamma)\)</span> labeling the Schwarz triangle this edge is a part of, and <code class="code">gam</code> the translation relating the unit cell containing <code class="code">v1</code> to the unit cell containing <code class="code">v2</code>, as element of the finitely presented group <code class="code">FpGroup(TGCellTranslationGroup(GetTGCell(</code><var class="Arg">cellgraph</var><code class="code">)))</code>. If <code class="code">v1</code> corresponds to the vertex <span class="SimpleMath">\((w, [g_{u_w}]_w)\)</span> and <code class="code">v2</code> to the vertex <span class="SimpleMath">\((w', [g_{\tilde{u}_{w'}}]_{w'})\)</span>, then <code class="code">gam</code> corresponds to the translation <span class="SimpleMath">\(\gamma\)</span> such that</p>
+
+<p class="center">\[g_{\tilde{u}_{w'}} = g_{u_w}\gamma.\]</p>
+
+<p><a id="X7F58BD6D87565B5C" name="X7F58BD6D87565B5C"></a></p>
+
+<h5>3.7-8 CellEdgeTranslations</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CellEdgeTranslations</code>( <var class="Arg">cellgraph</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns only the list of translations associated with the edges of the cell graph in the same format as <code class="func">CellEdges</code> (<a href="chap3_mj.html#X835C05D38466C764"><span class="RefLink">3.7-7</span></a>).</p>
+
+<p><a id="X78C3C0227A54EB93" name="X78C3C0227A54EB93"></a></p>
+
+<h5>3.7-9 CellFaces</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CellFaces</code>( <var class="Arg">cellgraph</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the faces of the cell graph as a list.</p>
+
+<p>Each face is an ordered list of tuples <code class="code">[ edge, orientation ]</code>, where <code class="code">edges</code> is a position in <code class="code">CellEdges(</code><var class="Arg">cellgraph</var><code class="code">)</code> and <code class="code">orientation</code> is equal to +1 (-1) if the orientation is the same (opposite) compared to the entry in <code class="code">CellEdges(</code><var class="Arg">cellgraph</var><code class="code">)</code>. The edges of the face are ordered such that the orientation of the face is positive.</p>
+
+<p><a id="X8300C39C7FCD6C5F" name="X8300C39C7FCD6C5F"></a></p>
+
+<h5>3.7-10 CellFacesWithCenter</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CellFacesWithCenter</code>( <var class="Arg">cellgraph</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns a list of three lists with faces of the cell graph with the <span class="SimpleMath">\(x\)</span>, <span class="SimpleMath">\(y\)</span>, <span class="SimpleMath">\(z\)</span> vertex of the fundamental Schwarz triangle as center, respectively. The format of the faces is the same as <code class="func">CellFaces</code> (<a href="chap3_mj.html#X78C3C0227A54EB93"><span class="RefLink">3.7-9</span></a>).</p>
+
+<p><a id="X80D65DD186D0B80B" name="X80D65DD186D0B80B"></a></p>
+
+<h5>3.7-11 CellBoundary</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CellBoundary</code>( <var class="Arg">cellgraph</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns a list of boundary specifications of the cell.</p>
+
+<p>Each boundary is described by a list of the form <code class="code">[ d1, d2, e, b, m, gam ]</code>, where <code class="code">d1</code>, <code class="code">d2</code> are elements of <span class="SimpleMath">\(T_{\Delta^+}(\Gamma)\subset\Delta^+\)</span> labeling the Schwarz triangles this edge is a part of, <code class="code">e</code> the position in the list of edges <code class="code">CellEdges(</code><var class="Arg">celgraph</var><code class="code">)</code>, <code class="code">b</code> the index of the boundary (identical for identified boundaries), <code class="code">m</code> either 0 or 1 indicating the orientation of the triangle associated with this instance of the boundary (0 for gray and 1 for white), and <code class="code">gam</code> the translation relating the given to the identified boundary, as an element of the finitely presented group <code class="code">FpGroup(TGCellTranslationGroup(GetTGCell(</code><var class="Arg">cellgraph</var><code class="code">)))</code>.</p>
+
+<p><a id="X787E6ADB85AF5DB9" name="X787E6ADB85AF5DB9"></a></p>
+
+<h5>3.7-12 GetTGCell</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GetTGCell</code>( <var class="Arg">cellgraph</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the associated <code class="code">TGCell</code> object (see <a href="chap3_mj.html#X7EFB1FA283E2C890"><span class="RefLink">3.1</span></a>).</p>
+
+<p><a id="X828F18497AE2A460" name="X828F18497AE2A460"></a></p>
+
+<h5>3.7-13 <span class="Heading">Exporting TGCellGraph Objects</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Export</code>( <var class="Arg">cellgraph</var>, <var class="Arg">output-stream</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Export</code>( <var class="Arg">cellgraph</var>, <var class="Arg">path</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ExportString</code>( <var class="Arg">cellgraph</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Export the cell graph <var class="Arg">cellgraph</var> to the <code class="code">OutputTextStream</code> <var class="Arg">output-stream</var> or to the file at the path given by the string <var class="Arg">path</var>. Alterantively, the cell graph can be exported to a string with <code class="code">ExportString</code>, which returns said string.</p>
+
+<p><a id="X7CD7EFB579029EC3" name="X7CD7EFB579029EC3"></a></p>
+
+<h5>3.7-14 <span class="Heading">Importing TGCellGraph Objects</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ImportTGCellGraph</code>( <var class="Arg">input-stream</var>[, <var class="Arg">tg</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ImportTGCellGraphFromFile</code>( <var class="Arg">path</var>[, <var class="Arg">tg</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ImportTGCellGraphFromString</code>( <var class="Arg">string</var>[, <var class="Arg">tg</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: cell graph as <code class="code">TGCellGraph</code> (see <a href="chap3_mj.html#X7945E96B7A771F5A"><span class="RefLink">3.7</span></a>).</p>
+
+<p>Import a cell graph from the <code class="code">InputTextStream</code> <var class="Arg">input-stream</var> or from the file at the path given by the string <var class="Arg">path</var>. Alterantively, the cell graph can be imported from the string <var class="Arg">string</var>. Optionally, the triangle group can be given as a <code class="code">ProperTriangleGroup</code> object <var class="Arg">tg</var> (see <a href="chap2_mj.html#X8119885384F3B9B2"><span class="RefLink">2.1</span></a>).</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

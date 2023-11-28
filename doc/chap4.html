@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (HyperCells) - Chapter 4: Tight-binding Model Graphs</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap4"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap4_mj.html">[MathJax on]</a></p>
+<p><a id="X87EFD9CF84FB0066" name="X87EFD9CF84FB0066"></a></p>
+<div class="ChapSects"><a href="chap4.html#X87EFD9CF84FB0066">4 <span class="Heading">Tight-binding Model Graphs</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X87FE1AF37CFB0B86">4.1 <span class="Heading">Cell Model Graphs</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X815588F086D7AFC5">4.2 <span class="Heading">Constructing Models</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7BA14A6582AE5C5E">4.2-1 TGCellModelGraph</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X81214D9683970055">4.2-2 TessellationModelGraph</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X845763347FC85D18">4.2-3 AddOrientedNNNEdgesToTessellationModelGraph</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X83338B0D7836C5F5">4.2-4 KagomeModelGraph</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X809AA1397EEB4675">4.3 <span class="Heading">Model Properties</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X861C9AC978E090EE">4.3-1 GetProperTriangleGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7831916687B098AB">4.3-2 CellRelators</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7938F4927EAA7BEC">4.3-3 CellCenter</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7D0C6BE67EE74ED6">4.3-4 GetTGCell</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X789A090384E0718C">4.3-5 ModelType</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X85A58CF185FC5CF6">4.3-6 ModelName</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X875E9EDB84D4D604">4.3-7 CellVertices</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7884E65381473043">4.3-8 CellVertexPositions</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X847C5F697F2ED40B">4.3-9 CellEdges</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X82A9C3A68233B8A8">4.3-10 CellEdgeTranslations</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X782A25FC811CF8FC">4.3-11 CellFaces</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X8492C5B38700A475">4.4 <span class="Heading">Export and Import</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7C1C17EF7A0F02BA">4.4-1 <span class="Heading">Exporting TGCellModelGraph Objects</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7985865579EF3819">4.4-2 <span class="Heading">Importing TGCellModelGraph Objects</span></a>
+</span>
+</div></div>
+</div>
+
+<h3>4 <span class="Heading">Tight-binding Model Graphs</span></h3>
+
+<p><a id="X87FE1AF37CFB0B86" name="X87FE1AF37CFB0B86"></a></p>
+
+<h4>4.1 <span class="Heading">Cell Model Graphs</span></h4>
+
+<p>Tight-binding models are defined on top of a cell graph by selecting some of the vertices of the cell graph and adding edges between them. The model is thus defined on a <em>cell</em> and forms itself a graph of the same structure as the cell graph. The vertices of the model graph are a subset of vertices of the cell graph, while the edges must not be a subset of the edges of the cell graph. Faces are given as ordered lists of edges of the model graph.</p>
+
+<p>Model graphs are implemented as objects of category <code class="code">TGCellModelGraph</code> with the following components:</p>
+
+
+<ul>
+<li><p><code class="func">GetTGCell</code> (<a href="chap4.html#X7D0C6BE67EE74ED6"><span class="RefLink">4.3-4</span></a>): the associated <code class="code">TGCell</code> object (see <a href="chap3.html#X7EFB1FA283E2C890"><span class="RefLink">3.1</span></a>)</p>
+
+</li>
+<li><p><code class="func">CellCenter</code> (<a href="chap4.html#X7938F4927EAA7BEC"><span class="RefLink">4.3-3</span></a>): the cell center of the model graph</p>
+
+</li>
+<li><p><code class="func">ModelType</code> (<a href="chap4.html#X789A090384E0718C"><span class="RefLink">4.3-5</span></a>): identifier of the type of model, e.g., tessellation, kagome etc.</p>
+
+</li>
+<li><p><code class="func">CellVertices</code> (<a href="chap4.html#X875E9EDB84D4D604"><span class="RefLink">4.3-7</span></a>): the vertices of the model graph, i.e., the sites of the tight-binding model</p>
+
+</li>
+<li><p><code class="func">CellEdges</code> (<a href="chap4.html#X847C5F697F2ED40B"><span class="RefLink">4.3-9</span></a>): the edges of the model graph, i.e., the hoppings of the tight-binding model, including potential translations associated with them</p>
+
+</li>
+<li><p><code class="func">CellFaces</code> (<a href="chap4.html#X782A25FC811CF8FC"><span class="RefLink">4.3-11</span></a>): the oriented faces of the model graph, i.e., the plaquettes of the tight-binding model</p>
+
+</li>
+</ul>
+<p>and is printed in the form</p>
+
+
+<div class="example"><pre>
+TGCellModelGraph( cell,
+  center = w,
+  type = &lt;type&gt;,
+  vertices = [ [ w1, gi1 ], [ w2, gi2 ], ... ],
+  edges = [ [ v1, v2, s, gam ], ... ],
+  faces = [ [ [ e1, o1 ], [ e2, o2 ], ... ], ... ],
+  boundary = [ [ d1, d2, e, b, m, gam ], ... ]
+)
+</pre></div>
+
+<p>See the corresponding references above for details.</p>
+
+<p><a id="X815588F086D7AFC5" name="X815588F086D7AFC5"></a></p>
+
+<h4>4.2 <span class="Heading">Constructing Models</span></h4>
+
+<p>There are several functions for constructing specfic tight-binding models:</p>
+
+
+<ul>
+<li><p><code class="func">TGCellModelGraph</code> (<a href="chap4.html#X7BA14A6582AE5C5E"><span class="RefLink">4.2-1</span></a>): constructs a model graph from a cell graph and a specification of which cell-graph vertices are to be used as vertices of the model graph, which define edges, and which define faces of the model graph.</p>
+
+</li>
+<li><p><code class="func">TessellationModelGraph</code> (<a href="chap4.html#X81214D9683970055"><span class="RefLink">4.2-2</span></a>): constructs a tessellation graph from a cell graph of a triangle group.</p>
+
+</li>
+<li><p><code class="func">KagomeModelGraph</code> (<a href="chap4.html#X83338B0D7836C5F5"><span class="RefLink">4.2-4</span></a>): constructs a kagome graph from a cell graph of a triangle group.</p>
+
+</li>
+</ul>
+<p>In all of those functions, the option <code class="code">simplify</code>, which takes a non-negative integer as argument, can be used to specify the level of simplification of words in the translation group, both for the translation generators expressed in terms of generators of the proper triangle group and for the translations expressed as elements of the finitely presented group.</p>
+
+<p><a id="X7BA14A6582AE5C5E" name="X7BA14A6582AE5C5E"></a></p>
+
+<h5>4.2-1 TGCellModelGraph</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TGCellModelGraph</code>( <var class="Arg">cellgraph</var>, <var class="Arg">vfs</var>, <var class="Arg">efs</var>, <var class="Arg">ffs</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: the model graph as <code class="code">TGCellModelGraph</code> object (see <a href="chap4.html#X87FE1AF37CFB0B86"><span class="RefLink">4.1</span></a>).</p>
+
+<p>Constructs the model graph derived from the <code class="code">TGCellGraph</code> (see <a href="chap3.html#X7945E96B7A771F5A"><span class="RefLink">3.7</span></a>) <var class="Arg">cellgraph</var> by selecting the vertices of types given in the list <var class="Arg">vfs</var> as vertices of the model graph. The type is given in terms of the cell graph's vertex type, i.e., 1, 2, or 3, corresponding to the vertices of the fundamental Schwarz triangle <span class="Math">x</span>, <span class="Math">y</span>, and <span class="Math">z</span>, respectively. The edges of the model graph are determined by adjacency to the cell-graph vertices of the type given in the list <var class="Arg">efs</var> and the faces are determined by the cell-graph vertices of the type given in the list <var class="Arg">ffs</var>.</p>
+
+<p>The model type is set to</p>
+
+
+<div class="example"><pre>
+[ "VEF", [ vfs, efs, ffs ] ]
+</pre></div>
+
+<p>and edge tags take the form</p>
+
+
+<div class="example"><pre>
+[ 1, [ ve, s1, s2 ] ]
+</pre></div>
+
+<p>where the first entry, <code class="code">1</code>, indicates a nearest-neighbor edge, <code class="code">ve</code> is the position of the Schwarz triangle associated with the cell-graph edge vertex in <span class="Math">T_{\Delta^+}(\Gamma)</span>, and <code class="code">s1</code>, <code class="code">s2</code> are the positions of the Schwarz triangles associated with the cell-graph edges in <span class="Math">T_{\Delta^+}(\Gamma)</span>.</p>
+
+<p><a id="X81214D9683970055" name="X81214D9683970055"></a></p>
+
+<h5>4.2-2 TessellationModelGraph</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TessellationModelGraph</code>( <var class="Arg">cellgraph</var>[, <var class="Arg">dual</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: the model graph as <code class="code">TGCellModelGraph</code> object (see <a href="chap4.html#X87FE1AF37CFB0B86"><span class="RefLink">4.1</span></a>).</p>
+
+<p>Constructs the <span class="Math">\{p,q\}</span>-tessellation model graph derived from the <code class="code">TGCellGraph</code> (see <a href="chap3.html#X7945E96B7A771F5A"><span class="RefLink">3.7</span></a>) <var class="Arg">cellgraph</var> of the triangle group <span class="Math">(2,q,p)</span> associated with <var class="Arg">cellgraph</var>. If the optional argument <var class="Arg">dual</var> is set to true, the <span class="Math">\{q,p\}</span>-tessellation is constructed instead.</p>
+
+<p>The model type is set to</p>
+
+
+<div class="example"><pre>
+[ "TESS", [ p, q ], [ "VEF", [ [ 2 ], [ 1 ], [ 3 ] ] ] ]
+</pre></div>
+
+<p>for the <span class="Math">\{p,q\}</span> tessellation and to</p>
+
+
+<div class="example"><pre>
+[ "TESS", [ p, q ], [ "VEF", [ [ 3 ], [ 1 ], [ 2 ] ] ] ]
+</pre></div>
+
+<p>for the <span class="Math">\{q,p\}</span> tessellation. The edge tags are given in the same format as in <code class="func">TGCellModelGraph</code> (<a href="chap4.html#X7BA14A6582AE5C5E"><span class="RefLink">4.2-1</span></a>).</p>
+
+<p><a id="X845763347FC85D18" name="X845763347FC85D18"></a></p>
+
+<h5>4.2-3 AddOrientedNNNEdgesToTessellationModelGraph</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AddOrientedNNNEdgesToTessellationModelGraph</code>( <var class="Arg">model</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: the model graph as <code class="code">TGCellModelGraph</code> object (see <a href="chap4.html#X87FE1AF37CFB0B86"><span class="RefLink">4.1</span></a>).</p>
+
+<p>Modifies the <span class="Math">\{p,q\}</span>-tessellation model graph <var class="Arg">model</var> by adding oriented next-nearest neighbor edges to all faces with at least five edges. The orientation of the next-nearest neighbor edges follows the positive orientation of the faces of the <span class="Math">\{p,q\}</span>-tessellation. Faces with four or less edges are ignored.</p>
+
+<p>The edge tags of the next-nearest neighbor edges take the form</p>
+
+
+<div class="example"><pre>
+[ 2, [ f, e1, e2 ] ]
+</pre></div>
+
+<p>where the first entry, <code class="code">2</code>, indicates a next-nearest-neighbor edge, <code class="code">f</code> is the position of the face characterizing the edge in the list of faces <code class="code">CellFaces(</code><var class="Arg">model</var><code class="code">)</code>, and <code class="code">e1</code>, <code class="code">e2</code> are the positions of the nearest-neighbor edges that together connect the same vertices as the next-nearest-neighbor edge in the list of edges <code class="code">CellEdges(</code><var class="Arg">model</var><code class="code">)</code>. The model type remains unchanged.</p>
+
+<p><a id="X83338B0D7836C5F5" name="X83338B0D7836C5F5"></a></p>
+
+<h5>4.2-4 KagomeModelGraph</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; KagomeModelGraph</code>( <var class="Arg">cellgraph</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: the model graph as <code class="code">TGCellModelGraph</code> object (see <a href="chap4.html#X87FE1AF37CFB0B86"><span class="RefLink">4.1</span></a>).</p>
+
+<p>Constructs the <span class="Math">p</span>-kagome model graph derived from the <code class="code">TGCellGraph</code> (see <a href="chap3.html#X7945E96B7A771F5A"><span class="RefLink">3.7</span></a>) <var class="Arg">cellgraph</var> of the triangle group <span class="Math">(2,3,p)</span> associated with <var class="Arg">cellgraph</var>.</p>
+
+<p>The model type is set to</p>
+
+
+<div class="example"><pre>
+[ "KAGOME", p, [ "VEF", [ [ 1 ], [ 2 ], [ 2, 3 ] ] ] ]
+</pre></div>
+
+<p>The edge tags are given in the same format as in <code class="func">TGCellModelGraph</code> (<a href="chap4.html#X7BA14A6582AE5C5E"><span class="RefLink">4.2-1</span></a>).</p>
+
+<p><a id="X809AA1397EEB4675" name="X809AA1397EEB4675"></a></p>
+
+<h4>4.3 <span class="Heading">Model Properties</span></h4>
+
+<p><a id="X861C9AC978E090EE" name="X861C9AC978E090EE"></a></p>
+
+<h5>4.3-1 GetProperTriangleGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GetProperTriangleGroup</code>( <var class="Arg">model</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the proper triangle group <span class="Math">\Delta^+</span> on which the model is based as a <code class="code">ProperTriangleGroup</code> object (see <a href="chap2.html#X8119885384F3B9B2"><span class="RefLink">2.1</span></a>).</p>
+
+<p><a id="X7831916687B098AB" name="X7831916687B098AB"></a></p>
+
+<h5>4.3-2 CellRelators</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CellRelators</code>( <var class="Arg">model</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the relators in terms of elements of <code class="code">GetProperTriangleGroup(</code><var class="Arg">model</var><code class="code">)</code> specifying the cell on which the model is defined.</p>
+
+<p><a id="X7938F4927EAA7BEC" name="X7938F4927EAA7BEC"></a></p>
+
+<h5>4.3-3 CellCenter</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CellCenter</code>( <var class="Arg">model</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the an integer between <span class="Math">1</span> and <span class="Math">3</span> indicating the type of vertex of the triangle tessellation at the center of the cell graph with <span class="Math">1</span>, <span class="Math">2</span>, <span class="Math">3</span> corresponding to the vertices <span class="Math">x</span>, <span class="Math">y</span>, <span class="Math">z</span>, of the fundamental Schwarz triangle.</p>
+
+<p><a id="X7D0C6BE67EE74ED6" name="X7D0C6BE67EE74ED6"></a></p>
+
+<h5>4.3-4 GetTGCell</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GetTGCell</code>( <var class="Arg">model</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the associated <code class="code">TGCell</code> object (see <a href="chap3.html#X7EFB1FA283E2C890"><span class="RefLink">3.1</span></a>).</p>
+
+<p><a id="X789A090384E0718C" name="X789A090384E0718C"></a></p>
+
+<h5>4.3-5 ModelType</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ModelType</code>( <var class="Arg">model</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns a the identifier of the model type.</p>
+
+<p>The following model types are currently implemented:</p>
+
+
+<ul>
+<li><p><em>Derived graph</em>: general model graph with vertices, edges, and faces derived from the cell graph. The model type is given as</p>
+
+</li>
+</ul>
+
+<div class="example"><pre>
+[ "VEF", [ vfs, efs, ffs ] ]
+</pre></div>
+
+<p>where <code class="code">vfs</code>, <code class="code">efs</code>, and <code class="code">ffs</code> are lists of integers between 1 and 3 indicating the vertex types, edge types, and face types, respectively. See <code class="func">TGCellModelGraph</code> (<a href="chap4.html#X7BA14A6582AE5C5E"><span class="RefLink">4.2-1</span></a>) for details.</p>
+
+
+<ul>
+<li><p><em>Tessellation graph</em>: tessellation model graph derived from a cell graph of a triangle group. The model type is given as</p>
+
+</li>
+</ul>
+
+<div class="example"><pre>
+[ "TESS", [ p, q ], [ "VEF", [ [ 2 ], [ 1 ], [ 3 ] ] ] ]
+</pre></div>
+
+<p>for the <span class="Math">\{p,q\}</span> tessellation and as</p>
+
+
+<div class="example"><pre>
+[ "TESS", [ p, q ], [ "VEF", [ [ 3 ], [ 1 ], [ 2 ] ] ] ]
+</pre></div>
+
+<p>for the (dual) <span class="Math">\{q,p\}</span> tessellation. See <code class="func">TessellationModelGraph</code> (<a href="chap4.html#X81214D9683970055"><span class="RefLink">4.2-2</span></a>) for details.</p>
+
+
+<ul>
+<li><p><em>Kagome graph</em>: kagome model graph derived from a cell graph of a triangle group. The model type is given as</p>
+
+</li>
+</ul>
+
+<div class="example"><pre>
+[ "KAGOME", p, [ "VEF", [ [ 1 ], [ 2 ], [ 2, 3 ] ] ] ]
+</pre></div>
+
+<p>See <code class="func">KagomeModelGraph</code> (<a href="chap4.html#X83338B0D7836C5F5"><span class="RefLink">4.2-4</span></a>) for details.</p>
+
+<p><a id="X85A58CF185FC5CF6" name="X85A58CF185FC5CF6"></a></p>
+
+<h5>4.3-6 ModelName</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ModelName</code>( <var class="Arg">model</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns a friendly name of the model. The friendly name is constructed from the model type and for the implemented model types is given as</p>
+
+
+<ul>
+<li><p><em>Derived graph</em>: <code class="code">"derived-model&lt;[vfs,efs,ffs]&gt;"</code></p>
+
+</li>
+<li><p><em>Tessellation graph</em>: <code class="code">"{p,q}-tess"</code></p>
+
+</li>
+<li><p><em>Kagome graph</em>: <code class="code">"p-kagome"</code></p>
+
+</li>
+</ul>
+<p><a id="X875E9EDB84D4D604" name="X875E9EDB84D4D604"></a></p>
+
+<h5>4.3-7 CellVertices</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CellVertices</code>( <var class="Arg">model</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the vertices of the model graph as a list.</p>
+
+<p>Each vertex is of the form <code class="code">[ w, gi ]</code> with <code class="code">w</code> an integer between 1 and 3 indicating the vertex of the fundamental Schwarz triangle and <code class="code">gi</code> the position of the element in the transversal <span class="Math">T_{G^+}(G_w^+)</span> labeling the vertex.</p>
+
+<p><a id="X7884E65381473043" name="X7884E65381473043"></a></p>
+
+<h5>4.3-8 CellVertexPositions</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CellVertexPositions</code>( <var class="Arg">model</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the positions of the vertices as elements of the proper triangle group <span class="Math">\Delta^+</span>.</p>
+
+<p><a id="X847C5F697F2ED40B" name="X847C5F697F2ED40B"></a></p>
+
+<h5>4.3-9 CellEdges</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CellEdges</code>( <var class="Arg">model</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the edges of the model graph as a list.</p>
+
+<p>Each edge is of the form <code class="code">[ v1, v2, tag, gam ]</code> with <code class="code">v1</code>, <code class="code">v2</code> the positions of the vertices in <code class="code">CellVertices(</code><var class="Arg">model</var><code class="code">)</code> connected by the edge, <code class="code">tag</code> uniquely identifying the edge, and <code class="code">gam</code> the translation relating the unit cell containing <code class="code">v1</code> to the unit cell containing <code class="code">v2</code>, as element of the finitely presented group <code class="code">FpGroup(TGCellTranslationGroup(GetTGCell(</code><var class="Arg">model</var><code class="code">)))</code>. If <code class="code">v1</code> corresponds to the vertex <span class="Math">(w, [g_{u_w}]_w)</span> and <code class="code">v2</code> to the vertex <span class="Math">(w', [g_{\tilde{u}_{w'}}]_{w'})</span>, then <code class="code">gam</code> corresponds to the translation <span class="Math">\gamma</span> such that</p>
+
+<p class="pcenter">g_{\tilde{u}_{w'}} = g_{u_w}\gamma.</p>
+
+<p>More details on the tags are given in the methods for constructing different models, see <a href="chap4.html#X815588F086D7AFC5"><span class="RefLink">4.2</span></a>.</p>
+
+<p><a id="X82A9C3A68233B8A8" name="X82A9C3A68233B8A8"></a></p>
+
+<h5>4.3-10 CellEdgeTranslations</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CellEdgeTranslations</code>( <var class="Arg">model</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns only the list of translations associated with the edges of the model in the same format as <code class="func">CellEdges</code> (<a href="chap4.html#X847C5F697F2ED40B"><span class="RefLink">4.3-9</span></a>).</p>
+
+<p><a id="X782A25FC811CF8FC" name="X782A25FC811CF8FC"></a></p>
+
+<h5>4.3-11 CellFaces</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CellFaces</code>( <var class="Arg">model</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the faces of the model graph as a list.</p>
+
+<p>Each face is an ordered list of tuples <code class="code">[ edge, orientation ]</code>, where <code class="code">edges</code> is a position in <code class="code">CellEdges(</code><var class="Arg">model</var><code class="code">)</code> and <code class="code">orientation</code> is equal to +1 (-1) if the orientation is the same (opposite) compared to the entry in <code class="code">CellEdges(</code><var class="Arg">model</var><code class="code">)</code>. The edges of the face are ordered such that the orientation of the face is positive.</p>
+
+<p><a id="X8492C5B38700A475" name="X8492C5B38700A475"></a></p>
+
+<h4>4.4 <span class="Heading">Export and Import</span></h4>
+
+<p><a id="X7C1C17EF7A0F02BA" name="X7C1C17EF7A0F02BA"></a></p>
+
+<h5>4.4-1 <span class="Heading">Exporting TGCellModelGraph Objects</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Export</code>( <var class="Arg">model</var>, <var class="Arg">output-stream</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Export</code>( <var class="Arg">model</var>, <var class="Arg">path</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ExportString</code>( <var class="Arg">model</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Export the model graph <var class="Arg">model</var> to the <code class="code">OutputTextStream</code> <var class="Arg">output-stream</var> or to the file at the path given by the string <var class="Arg">path</var>. Alternatively, the model graph can be exported to a string with <code class="code">ExportString</code>, which returns said string.</p>
+
+<p><a id="X7985865579EF3819" name="X7985865579EF3819"></a></p>
+
+<h5>4.4-2 <span class="Heading">Importing TGCellModelGraph Objects</span></h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ImportTGCellModelGraph</code>( <var class="Arg">input-stream</var>[, <var class="Arg">tg</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ImportTGCellModelGraphFromFile</code>( <var class="Arg">path</var>[, <var class="Arg">tg</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ImportTGCellModelGraphFromString</code>( <var class="Arg">string</var>[, <var class="Arg">tg</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: model graph as <code class="code">TGCellModelGraph</code> (see <a href="chap4.html#X87FE1AF37CFB0B86"><span class="RefLink">4.1</span></a>).</p>
+
+<p>Import a model graph from the <code class="code">InputTextStream</code> <var class="Arg">input-stream</var> or from the file at the path given by the string <var class="Arg">path</var>. Alterantively, the model graph can be imported from the string <var class="Arg">string</var>. Optionally, the triangle group can be given as a <code class="code">ProperTriangleGroup</code> object <var class="Arg">tg</var> (see <a href="chap2.html#X8119885384F3B9B2"><span class="RefLink">2.1</span></a>).</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

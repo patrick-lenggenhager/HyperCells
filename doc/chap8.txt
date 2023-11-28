@@ -1,0 +1,11 @@
+  
+  [1X8 [33X[0;0YReferences[133X[101X
+  
+  [33X[0;0Y[[3XLMB23[103X]  P.  M.  Lenggenhager,  J.  Maciejko,  and  T. Bzdušek, "[13XNon-Abelian
+  hyperbolic  band  theory  from  supercells[113X",  arXiv:2305.04945  (2023),  see
+  [7Xhttps://doi.org/10.48550/arXiv.2305.04945[107X.[133X
+  
+  [33X[0;0Y[[3XLP22[103X]  R.  Lux  and  E.  Prodan,  "[13XSpectral  and  combinatorial  aspects of
+  Cayley-crystals[113X",           arXiv:2212.10329           (2022),           see
+  [7Xhttps://doi.org/10.48550/arXiv.2212.10329[107X.[133X
+  

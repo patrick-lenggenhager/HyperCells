@@ -1,1 +1,179 @@
-Placeholder
+  
+  
+                                  [1X HyperCells [101X
+  
+  
+    [1X Primitive cells and supercells of hyperbolic lattices based on triangle
+                                    groups [101X
+  
+  
+                                      0.5
+  
+  
+                                27 November 2023
+  
+  
+                            Patrick M. Lenggenhager
+  
+                                Joseph Maciejko
+  
+                                 Tomáš Bzdušek
+  
+  
+  
+  Patrick M. Lenggenhager
+      Email:    [7Xmailto:plengg@pks.mpg.de[107X
+      Homepage: [7Xhttps://patrick-lenggenhager.github.io[107X
+  Joseph Maciejko
+      Email:    [7Xmailto:maciejko@ualberta.ca[107X
+  Tomáš Bzdušek
+      Email:    [7Xmailto:tomas.bzdusek@uzh.ch[107X
+  
+  -------------------------------------------------------
+  
+  
+  [1XContents (HyperCells)[101X
+  
+  1 [33X[0;0YIntroduction[133X
+    1.1 [33X[0;0YExample[133X
+  2 [33X[0;0YTriangle Groups and Translation Subgroups[133X
+    2.1 [33X[0;0YTriangle Groups[133X
+      2.1-1 TriangleGroup
+      2.1-2 ProperTriangleGroup
+      2.1-3 Signature
+      2.1-4 FpGroup
+    2.2 [33X[0;0YTranslation Groups[133X
+      2.2-1 TGTranslationGroupFromQuotient
+      2.2-2 TGTranslationGroup
+      2.2-3 GetProperTriangleGroup
+      2.2-4 QuotientHomomorphism
+      2.2-5 AsTGSubgroup
+      2.2-6 FpGroup
+      2.2-7 FpIsomorphism
+    2.3 [33X[0;0YTriangle-Group Quotients[133X
+      2.3-1 TGQuotient
+      2.3-2 TGQuotientName
+      2.3-3 TGQuotientGenus
+      2.3-4 TriangleGroupSignature
+      2.3-5 TGQuotientOrder
+      2.3-6 TGQuotientActionType
+      2.3-7 TGQuotientRelators
+      2.3-8 TGQuotientRelators
+      2.3-9 TGQuotientGroup
+    2.4 [33X[0;0YLibrary of Triangle-Group Quotients[133X
+      2.4-1 LoadTGQuotients
+      2.4-2 ListTriangleGroups
+      2.4-3 ListTGQuotients
+    2.5 [33X[0;0YExport and Import[133X
+      2.5-1 ExportString
+      2.5-2 ImportTGQuotientString
+  3 [33X[0;0YTriangle-Group Cells[133X
+    3.1 [33X[0;0YCells[133X
+      3.1-1 TGCell
+      3.1-2 TGCellSymmetric
+    3.2 [33X[0;0YCell Properties[133X
+      3.2-1 GetProperTriangleGroup
+      3.2-2 CellRelators
+      3.2-3 TGCellTranslationGroup
+      3.2-4 TGCellPointGroup
+      3.2-5 HasTGCellMSWPs
+      3.2-6 TGCellMSWPs
+    3.3 [33X[0;0YQuery Information from Cells[133X
+      3.3-1 TGCellSchwarzTriangleRep
+    3.4 [33X[0;0YCell Translation Group[133X
+      3.4-1 AsTGSubgroup
+      3.4-2 Generators
+      3.4-3 FpGroup
+      3.4-4 FpIsomorphism
+    3.5 [33X[0;0YCell Point Group[133X
+      3.5-1 AsQuotientGroup
+      3.5-2 AsQuotient
+      3.5-3 GetRightTransversal
+      3.5-4 QuotientHomomorphism
+    3.6 [33X[0;0YMaximally Symmetric Wyckoff Positions[133X
+      3.6-1 AsQuotient
+      3.6-2 GetRightTransversal
+      3.6-3 GetKernel
+    3.7 [33X[0;0YCell Graphs[133X
+      3.7-1 TGCellGraph
+      3.7-2 GetProperTriangleGroup
+      3.7-3 CellRelators
+      3.7-4 CellCenter
+      3.7-5 CellVertices
+      3.7-6 CellVertexPositions
+      3.7-7 CellEdges
+      3.7-8 CellEdgeTranslations
+      3.7-9 CellFaces
+      3.7-10 CellFacesWithCenter
+      3.7-11 CellBoundary
+      3.7-12 GetTGCell
+      3.7-13 [33X[0;0YExporting TGCellGraph Objects[133X
+      3.7-14 [33X[0;0YImporting TGCellGraph Objects[133X
+  4 [33X[0;0YTight-binding Model Graphs[133X
+    4.1 [33X[0;0YCell Model Graphs[133X
+    4.2 [33X[0;0YConstructing Models[133X
+      4.2-1 TGCellModelGraph
+      4.2-2 TessellationModelGraph
+      4.2-3 AddOrientedNNNEdgesToTessellationModelGraph
+      4.2-4 KagomeModelGraph
+    4.3 [33X[0;0YModel Properties[133X
+      4.3-1 GetProperTriangleGroup
+      4.3-2 CellRelators
+      4.3-3 CellCenter
+      4.3-4 GetTGCell
+      4.3-5 ModelType
+      4.3-6 ModelName
+      4.3-7 CellVertices
+      4.3-8 CellVertexPositions
+      4.3-9 CellEdges
+      4.3-10 CellEdgeTranslations
+      4.3-11 CellFaces
+    4.4 [33X[0;0YExport and Import[133X
+      4.4-1 [33X[0;0YExporting TGCellModelGraph Objects[133X
+      4.4-2 [33X[0;0YImporting TGCellModelGraph Objects[133X
+  5 [33X[0;0YSupercells[133X
+    5.1 [33X[0;0YSupercell Model Graphs[133X
+    5.2 [33X[0;0YConstructing Supercell Models[133X
+      5.2-1 TGSuperCellModelGraph
+      5.2-2 RandomTGSuperCellModelGraph
+    5.3 [33X[0;0YSupercell Model Properties[133X
+      5.3-1 GetProperTriangleGroup
+      5.3-2 PrimitiveCellRelators
+      5.3-3 SuperCellRelators
+      5.3-4 CellCenter
+      5.3-5 GetTGPrimitiveCell
+      5.3-6 GetTGSuperCell
+      5.3-7 ModelType
+      5.3-8 CellVertices
+      5.3-9 CellVertexPositions
+      5.3-10 CellEdges
+      5.3-11 CellEdgeTranslations
+      5.3-12 CellFaces
+      5.3-13 CellEmbedding
+    5.4 [33X[0;0YEmbedding of the Primitive Cell in the Supercell[133X
+      5.4-1 PrimitiveCellTranslationGroup
+      5.4-2 SuperCellTranslationGroup
+      5.4-3 AsQuotient
+      5.4-4 GetRightTransversal
+      5.4-5 TranslationGroupEmbedding
+    5.5 [33X[0;0YExport and Import[133X
+      5.5-1 [33X[0;0YExporting TGSuperCellModelGraph Objects[133X
+      5.5-2 [33X[0;0YImporting TGSuperCellModelGraph Objects[133X
+  6 [33X[0;0YSequences of Triangle-Group Quotients[133X
+    6.1 [33X[0;0YCheck Sequence of Triangle-Group Quotients[133X
+      6.1-1 IsTGQuotientSequence
+    6.2 [33X[0;0YExtending Quotient Sequences[133X
+      6.2-1 ExtendTGQuotientSequence
+      6.2-2 NextTGQuotientOptions
+    6.3 [33X[0;0YExport and Import[133X
+      6.3-1 ExportTGQuotientList
+      6.3-2 ExportTGQuotientSequences
+      6.3-3 ImportTGQuotientList
+      6.3-4 ImportTGQuotientSequences
+  7 [33X[0;0YFile Formats[133X
+    7.1 [33X[0;0YHyperCell cell graph (*.hcc)[133X
+    7.2 [33X[0;0YHyperCell model graph (*.hcm)[133X
+    7.3 [33X[0;0YHyperCell supercell graph (*.hcs)[133X
+  
+  
+  [32X

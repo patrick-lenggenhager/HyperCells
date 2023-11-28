@@ -1,0 +1,113 @@
+  
+  [1X6 [33X[0;0YSequences of Triangle-Group Quotients[133X[101X
+  
+  [33X[0;0YSequences  of  triangle-group  quotients [23XG^{(n)}[123X are used to approximate the
+  thermodynamic  limit,  either  in  real space [LP23], or in reciprocal space
+  [LMB23].  They  are  constructed as quotients of the (proper) triangle group
+  [23X\Delta^+[123X by translation groups [23X\Gamma^{(n)}\triangleleft\Delta^+[123X such that[133X
+  
+  
+  [24X[33X[0;6Y\Delta^+   =   \Gamma^{(0)}   \triangleright   \Gamma^{(1)}   \triangleright
+  \Gamma^{(2)} \triangleright \cdots[133X
+  
+  [124X
+  
+  [33X[0;0Yand [23X\bigcap_{n\geq 0} \Gamma^{(n)} = {1}[123X.[133X
+  
+  
+  [1X6.1 [33X[0;0YCheck Sequence of Triangle-Group Quotients[133X[101X
+  
+  [33X[0;0YTo  check  whether  a  given  sequence of triangle-group quotients is valid,
+  i.e., whether the corresponding translation groups form a normal sequence as
+  described above, the following functio can be used:[133X
+  
+  [1X6.1-1 IsTGQuotientSequence[101X
+  
+  [33X[1;0Y[29X[2XIsTGQuotientSequence[102X( [3Xsequence[103X ) [32X function[133X
+  
+  [33X[0;0Yreturns  true  if  the given list of [10XTGQuotient[110X objects (see [14X2.3[114X) is a valid
+  sequence  of  quotient  groups  of  the  same  triangle  group, i.e., if the
+  corresponding translation groups form a normal sequence as described above.[133X
+  
+  
+  [1X6.2 [33X[0;0YExtending Quotient Sequences[133X[101X
+  
+  [33X[0;0YWhile such sequences can be found in the library of triangle-group quotients
+  described  in  [14X2.4[114X, an exhaustive search based on low-index normal subgroups
+  such as the one that that library is based on is not efficient for producing
+  long  sequences  directly.  However,  given a normal sequence of translation
+  groups  and one additional translation group not part of the sequence, it is
+  possible  to  extend  the  sequence  by  forming  intersections [Len23]. Let
+  [23X\Gamma^{(n)}[123X    be    the    last    element    of    the    sequence    and
+  [23X\Gamma'\triangleleft\Delta^+[123X  a  translation group not part of the sequence,
+  then[133X
+  
+  
+  [24X[33X[0;6Y\Gamma^{(n+1)} = \Gamma^{(n)} \cap \Gamma'[133X
+  
+  [124X
+  
+  [33X[0;0Yis  a normal subgroup of both [23X\Gamma^{(n)}[123X and [23X\Delta^+[123X (but not necessarily
+  a  [13Xstrict[113X subgroup of [23X\Gamma^{(n)}[123X). This can be used to extend sequences of
+  triangle-group quotients.[133X
+  
+  [33X[0;0YThe   HyperCells  package  implements  the  following  functions  to  extend
+  sequences:[133X
+  
+  [1X6.2-1 ExtendTGQuotientSequence[101X
+  
+  [33X[1;0Y[29X[2XExtendTGQuotientSequence[102X( [3Xquotients[103X, [3Xsequence[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ysequence  of  triangle-group  quotients  as  a  list of [10XTGQuotient[110X
+            objects.[133X
+  
+  [33X[0;0YExtends  the  sequence  [3Xsequence[103X  using  the  list  of  additional quotients
+  [3Xquotients[103X,  where  both arguments are lists of [10XTGQuotient[110X objects (see [14X2.3[114X).
+  Intersections   of   the  last  element  of  the  (extended)  sequences  are
+  successively formed with the quotients in [3Xquotients[103X.[133X
+  
+  [1X6.2-2 NextTGQuotientOptions[101X
+  
+  [33X[1;0Y[29X[2XNextTGQuotientOptions[102X( [3Xquotients[103X, [3XQ0[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ylist  of viable options of quotients in the form [10X[ [ Q, ind ], ...
+            ][110X,  where  [10XQ[110X  is  a  [10XTGQuotient[110X object and [10Xind[110X is the index of the
+            intersection  of  the  translation  groups  of  [10XQ[110X  and  [10XQ0[110X  in the
+            translation group of [10XQ0[110X.[133X
+  
+  [33X[0;0YSearches for viable options to extend a sequence ending with the quotient [3XQ0[103X
+  using  the  list  of additional quotients [3Xquotients[103X, where all quotients are
+  given as [10XTGQuotient[110X objects (see [14X2.3[114X).[133X
+  
+  
+  [1X6.3 [33X[0;0YExport and Import[133X[101X
+  
+  [1X6.3-1 ExportTGQuotientList[101X
+  
+  [33X[1;0Y[29X[2XExportTGQuotientList[102X( [3Xlist[103X, [3Xpath[103X ) [32X function[133X
+  
+  [33X[0;0YExports the given list of [10XTGQuotient[110X objects (see [14X2.3[114X) as a text file.[133X
+  
+  [1X6.3-2 ExportTGQuotientSequences[101X
+  
+  [33X[1;0Y[29X[2XExportTGQuotientSequences[102X( [3Xseqs[103X, [3Xpath[103X ) [32X function[133X
+  
+  [33X[0;0YExports  the given list of sequences, each a list of [10XTGQuotient[110X objects (see
+  [14X2.3[114X) as a text file.[133X
+  
+  [1X6.3-3 ImportTGQuotientList[101X
+  
+  [33X[1;0Y[29X[2XImportTGQuotientList[102X( [3Xinput-stream[103X ) [32X function[133X
+  [33X[1;0Y[29X[2XImportTGQuotientListFromFile[102X( [3Xpath[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ylist of [10XTGQuotient[110X objects.[133X
+  
+  [33X[0;0YImport  a  list  of  [10XTGQuotient[110X  objects  (see  [14X2.3[114X)  from  the input-stream
+  [3Xinput-stream[103X or from a file at path [3Xpath[103X.[133X
+  
+  [1X6.3-4 ImportTGQuotientSequences[101X
+  
+  [33X[1;0Y[29X[2XImportTGQuotientSequences[102X( [3Xinput-stream[103X ) [32X function[133X
+  [33X[1;0Y[29X[2XImportTGQuotientSequencesFromFile[102X( [3Xpath[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ylist of list of [10XTGQuotient[110X objects.[133X
+  
+  [33X[0;0YImport a list of lists of [10XTGQuotient[110X objects (see [14X2.3[114X) from the input-stream
+  [3Xinput-stream[103X or from a file at path [3Xpath[103X.[133X
+  

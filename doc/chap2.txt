@@ -1,0 +1,355 @@
+  
+  [1X2 [33X[0;0YTriangle Groups and Translation Subgroups[133X[101X
+  
+  
+  [1X2.1 [33X[0;0YTriangle Groups[133X[101X
+  
+  [33X[0;0YTriangle  groups  are  stored  as  objects  of  category  [10XTriangleGroup[110X. The
+  triangle  group is characterized by its signature [23X(r,q,p)[123X, with the integers
+  [23Xr[123X, [23Xq[123X, [23Xp[123X by convention given in ascending order. It is defined as[133X
+  
+  
+  [24X[33X[0;6Y\Delta(r,q,p)                         =                         \left\langle
+  a,b,c\left|a^2,b^2,c^2,(ab)^r,(bc)^q,(ca)^p\right.\right\rangle.[133X
+  
+  [124X
+  
+  [33X[0;0YTo construct a triangle group, use the function [2XTriangleGroup[102X ([14X2.1-1[114X).[133X
+  
+  [33X[0;0YSimilarly, proper triangle groups are stored as [10XProperTriangleGroup[110X objects.
+  They too are characterized by their signature [23X(r,q,p)[123X, and defined as[133X
+  
+  
+  [24X[33X[0;6Y\Delta^+(r,q,p)                        =                        \left\langle
+  x,y,z\left|xyz,x^r,y^q,z^p\right.\right\rangle,[133X
+  
+  [124X
+  
+  [33X[0;0Ywhere  the  generators  [23Xx[123X, [23Xy[123X, [23Xz[123X are related to the generators [23Xa[123X, [23Xb[123X, [23Xc[123X of the
+  corresponding  triangle  group  by  [23Xx  =  ab[123X, [23Xy = bc[123X, [23Xz = ca[123X. To construct a
+  triangle group, use the function [2XProperTriangleGroup[102X ([14X2.1-2[114X).[133X
+  
+  [33X[0;0YThe two objects are printed in the form[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28XTriangleGroup( [ r, q, p ] )[128X[104X
+    [4X[28XProperTriangleGroup( [ r, q, p ] )[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0Yrespectively.[133X
+  
+  [33X[0;0YGiven a [10XTriangleGroup[110X or [10XProperTriangleGroup[110X object [3Xtg[103X, its signature can be
+  obtained  by the operation [2XSignature[102X ([14X2.1-3[114X) and the (proper) triangle group
+  itself can be obtained by the operation [2XFpGroup[102X ([14X2.1-4[114X).[133X
+  
+  [1X2.1-1 TriangleGroup[101X
+  
+  [33X[1;0Y[29X[2XTriangleGroup[102X( [3Xsignature[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ya  [10XTriangleGroup[110X  object  representing  the  full  triangle  group
+            [23X\Delta[123X.[133X
+  
+  [33X[0;0YConstruct the full triangle group with signature [3Xsignature[103X given as a list [10X[
+  r, q, p ][110X:[133X
+  
+  
+  [24X[33X[0;6Y\Delta(r,q,p)                         =                         \left\langle
+  a,b,c\left|a^2,b^2,c^2,(ab)^r,(bc)^q,(ca)^p\right.\right\rangle.[133X
+  
+  [124X
+  
+  [33X[0;0YThe generators are named [10Xa[110X, [10Xb[110X, and [10Xc[110X, respectively.[133X
+  
+  [1X2.1-2 ProperTriangleGroup[101X
+  
+  [33X[1;0Y[29X[2XProperTriangleGroup[102X( [3Xsignature[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ya  [10XProperTriangleGroup[110X  object  representing  the  proper triangle
+            group [23X\Delta^+[123X.[133X
+  
+  [33X[0;0YConstruct the proper triangle group with signature [3Xsignature[103X given as a list
+  [10X[ r, q, p ][110X:[133X
+  
+  
+  [24X[33X[0;6Y\Delta^+(r,q,p)                        =                        \left\langle
+  x,y,z\left|xyz,x^r,y^q,z^p\right.\right\rangle.[133X
+  
+  [124X
+  
+  [33X[0;0YThe generators are named [10Xx[110X, [10Xy[110X, and [10Xz[110X, respectively.[133X
+  
+  [1X2.1-3 Signature[101X
+  
+  [33X[1;0Y[29X[2XSignature[102X( [3Xtg[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns the signature of the triangle group [3Xtg[103X given either as [10XTriangleGroup[110X
+  or [10XProperTriangleGroup[110X object as a list of integers [10X[ r, q, p ][110X.[133X
+  
+  [1X2.1-4 FpGroup[101X
+  
+  [33X[1;0Y[29X[2XFpGroup[102X( [3Xtg[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns   the   triangle   group   [3Xtg[103X   given  either  as  [10XTriangleGroup[110X  or
+  [10XProperTriangleGroup[110X object as a finitely presented group.[133X
+  
+  
+  [1X2.2 [33X[0;0YTranslation Groups[133X[101X
+  
+  [33X[0;0YTriangle-group  translation subgroups are implemented as objects of category
+  [10XTGTranslationGroup[110X  and store the underlying proper triangle group [23X\Delta^+[123X,
+  the  quotient  homomorphism  [23X\Delta^+  \to  \Delta^+/\Gamma[123X, the translation
+  group  [23X\Gamma[123X  as  a subgroup of [23X\Delta^+[123X and as a finitely presented group.
+  Additionally,  the  group  isomorphism from [23X\Gamma[123X to the finitely presented
+  group  is  stored.  A  [10XTGTranslationGroup[110X object can be constructed from the
+  proper  triangle  group [23X\Delta^+[123X and a quotient group [23X\Delta^+/\Gamma[123X with a
+  translation       subgroup       [23X\Gamma[123X       using       the       function
+  [2XTGTranslationGroupFromQuotient[102X ([14X2.2-1[114X).[133X
+  
+  [33X[0;0YTriangle-group translation subgroups are printed in the form[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28XTranslationGroup( < g1, g2, ... | rel1, rel2, ... > )[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0Ywhere  [10Xg1[110X,  [10Xg2[110X,  ...  are the generators of the finitely presented group and
+  [10Xrel1[110X, [10Xrel2[110X, ... are the relators.[133X
+  
+  [33X[0;0YThe  components  of  a  [10XTGTranslationGroup[110X  object can be accessed using the
+  following operations:[133X
+  
+  [30X    [33X[0;6Y[2XGetProperTriangleGroup[102X ([14X2.2-3[114X)[133X
+  
+  [30X    [33X[0;6Y[2XQuotientHomomorphism[102X ([14X2.2-4[114X)[133X
+  
+  [30X    [33X[0;6Y[2XAsTGSubgroup[102X ([14X2.2-5[114X)[133X
+  
+  [30X    [33X[0;6Y[2XFpGroup[102X ([14X2.2-6[114X)[133X
+  
+  [1X2.2-1 TGTranslationGroupFromQuotient[101X
+  
+  [33X[1;0Y[29X[2XTGTranslationGroupFromQuotient[102X( [3XD[103X, [3XG[103X, [3Xgenus[103X[, [3XGAMgens[103X[, [3XTDGAM[103X[, [3XTGGw[103X]]] ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ythe translation group as a [10XTriangleTranslationGroup[110X object.[133X
+  
+  [33X[0;0YConstruct  the  translation group as the kernel of the quotient homomorphism
+  from  the  proper  triangle  group  [3XD[103X to the quotient group [3XG[103X. The functions
+  makes  sure  that  a  minimal  number  of  translation generators is used by
+  ensuring the number matches [3X2*genus[103X.[133X
+  
+  [33X[0;0YOptionally,  generators  [3XGAMgens[103X  of  the  translation  group  [23X\Gamma[123X can be
+  explicitly  given  as  elements  of  [3Xtg[103X.  If  not  given,  they are computed
+  automatically.  Similarly, choices for the transversals [23XT_{\Delta^+}(\Gamma)[123X
+  and  [23XT_{G^+}(G_w^+)[123X  can  be  given  as [3XTDGAM[103X and [3XTGGw[103X, respectively. If not
+  given, they are computed automatically. Here, [3XTDGAM[103X is a list of elements of
+  [3Xtg[103X  and  [3XTGGw[103X  is  a  list of three lists, one for [23Xw=x,y,z[123X, respectively, of
+  elements of [3Xtg[103X.[133X
+  
+  [1X2.2-2 TGTranslationGroup[101X
+  
+  [33X[1;0Y[29X[2XTGTranslationGroup[102X( [3Xtg[103X, [3Xquotient[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ythe translation group as a [10XTriangleTranslationGroup[110X object.[133X
+  
+  [33X[0;0YConstruct  the  translation group as the kernel of the quotient homomorphism
+  from the proper triangle group [3Xtg[103X given as a [10XProperTriangleGroup[110X object (see
+  [14X2.1[114X) to the quotient group [3Xquotient[103X given as a [10XTGQuotient[110X object (see [14X2.3[114X).[133X
+  
+  [1X2.2-3 GetProperTriangleGroup[101X
+  
+  [33X[1;0Y[29X[2XGetProperTriangleGroup[102X( [3XGamma[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  the  proper  triangle group [23X\Delta^+[123X of which the translation group
+  [3XGamma[103X is a subgroup.[133X
+  
+  [1X2.2-4 QuotientHomomorphism[101X
+  
+  [33X[1;0Y[29X[2XQuotientHomomorphism[102X( [3XGamma[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns the group homomorphism from the proper triangle group [23X\Delta^+[123X given
+  by [10XGetProperTriangleGroup([110X[3XGamma[103X[10X)[110X to the quotient group [23X\Delta^+/\Gamma[123X.[133X
+  
+  [1X2.2-5 AsTGSubgroup[101X
+  
+  [33X[1;0Y[29X[2XAsTGSubgroup[102X( [3XGamma[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  the  translation  group  [3XGamma[103X as a subgroup of the proper triangle
+  group [23X\Delta^+[123X given by [10XGetProperTriangleGroup([110X[3XGamma[103X[10X)[110X.[133X
+  
+  [1X2.2-6 FpGroup[101X
+  
+  [33X[1;0Y[29X[2XFpGroup[102X( [3XGamma[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  the  translation  group  [3XGamma[103X  as  a finitely presented group with
+  generators [10Xg1[110X, [10Xg2[110X, ....[133X
+  
+  [1X2.2-7 FpIsomorphism[101X
+  
+  [33X[1;0Y[29X[2XFpIsomorphism[102X( [3XGamma[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  the  group  isomorphism  from  [10XAsTGSubgroup([110X[3XGamma[103X[10X)[110X, the translation
+  group  as  a  subgroup  of  proper triangle group, to the finitely presented
+  group [10XFpGroup([110X[3XGamma[103X[10X)[110X.[133X
+  
+  
+  [1X2.3 [33X[0;0YTriangle-Group Quotients[133X[101X
+  
+  [33X[0;0YTriangle-group  quotients  [23X\Delta^+/\Gamma[123X  are  implemented  as  objects of
+  category [10XTGQuotient[110X with the following components:[133X
+  
+  [30X    [33X[0;6Y[2XTGQuotientName[102X ([14X2.3-2[114X): name of the triangle group quotient[133X
+  
+  [30X    [33X[0;6Y[2XTriangleGroupSignature[102X  ([14X2.3-4[114X):  signature of the underlying triangle
+        group[133X
+  
+  [30X    [33X[0;6Y[2XTGQuotientGenus[102X ([14X2.3-3[114X): genus of the triangle group quotient[133X
+  
+  [30X    [33X[0;6Y[2XTGQuotientOrder[102X ([14X2.3-5[114X): order of the quotient group[133X
+  
+  [30X    [33X[0;6Y[2XTGQuotientActionType[102X ([14X2.3-6[114X): type of the action of the triangle group
+        quotient[133X
+  
+  [30X    [33X[0;6Y[2XTGQuotientRelators[102X  ([14X2.3-7[114X):  defining  relators  of the quotient as a
+        string[133X
+  
+  [33X[0;0YIt is printed in the form[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X  TGQuotient( name, [ r, q, p ], order, genus, actiontype, relators )[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0Ywhere  [10Xname[110X  is  the name of the triangle group quotient, [10X[ r, q, p ][110X is the
+  signature  of  the  underlying  triangle  group,  [10Xorder[110X  is the order of the
+  quotient  group,  [10Xgenus[110X  is  the  genus  of  the  triangle  group  quotient,
+  [10Xactiontype[110X  is the type of the action, and [10Xrelators[110X is the defining relators
+  of the quotient.[133X
+  
+  [1X2.3-1 TGQuotient[101X
+  
+  [33X[1;0Y[29X[2XTGQuotient[102X( [3Xquotient[103X[, [3Xsignature[103X] ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ytriangle-group quotient as [10XTGQuotient[110X.[133X
+  
+  [33X[0;0YConstructs  the triangle group quotient of the triangle-group with signature
+  [10Xsignature[110X,  given  as  a  list  [10X[ r, q, p ][110X, specified by [10Xquotient[110X, which is
+  either an integer giving the position in Conder's list or a list of the form
+  [10X[genus,  number][110X  giving  the  genus  and  number  in  Conder's  list of the
+  quotient. In the latter case, signature can be omitted.[133X
+  
+  [33X[0;0YLoads  all  quotient groups of the corresponding triangle group if they have
+  not been loaded before.[133X
+  
+  [1X2.3-2 TGQuotientName[101X
+  
+  [33X[1;0Y[29X[2XTGQuotientName[102X( [3Xtgquotient[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  the  name  of  the  triangle group quotient. For quotients from the
+  library, i.e., Conder's list, this takes the form [10X[genus, number][110X, [10Xnumber[110X is
+  a running index over all triangle groups for the given genus.[133X
+  
+  [1X2.3-3 TGQuotientGenus[101X
+  
+  [33X[1;0Y[29X[2XTGQuotientGenus[102X( [3Xtgquotient[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns the genus of the triangle group quotient.[133X
+  
+  [1X2.3-4 TriangleGroupSignature[101X
+  
+  [33X[1;0Y[29X[2XTriangleGroupSignature[102X( [3Xtgquotient[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns the signature of the triangle group in the form [10X[ r, q, p ][110X.[133X
+  
+  [1X2.3-5 TGQuotientOrder[101X
+  
+  [33X[1;0Y[29X[2XTGQuotientOrder[102X( [3Xtgquotient[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns the order of the triangle group quotient.[133X
+  
+  [1X2.3-6 TGQuotientActionType[101X
+  
+  [33X[1;0Y[29X[2XTGQuotientActionType[102X( [3Xtgquotient[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns the type of the action of the triangle group quotient, following the
+  terminology of Marston Conder described in [Con07].[133X
+  
+  [33X[0;0YThe  action  is  called  [10X"reflexible  [m]"[110X  if  there  exists  an involutory
+  automorphism  of  the  quotient  that inverts the images of two of the three
+  generators [23Xx[123X, [23Xy[123X and [23Xz[123X. This is the same as hypermap reflexibility.[133X
+  
+  [33X[0;0YThe  action  is  called  [10X"reflexible  [n]"[110X  if two or more of [23Xp[123X, [23Xq[123X and [23Xr[123X are
+  equal,  and  there  exists  an  involutory automorphism of the quotient that
+  swaps  the images of two of the three generators [23Xx[123X, [23Xy[123X and [23Xz[123X with the inverse
+  of  the  other.  For  example,  this  happens  if  [23Xp  = q[123X and the involutory
+  automorphism  swaps the image of [23Xx[123X with the image of [23Xy^{-1}[123X, and vice versa.
+  This  is  equivalent  to an extension of the [23X(p,p,r)[123X triangular action to an
+  action of a larger group with NEC signature [23X(0; +; [p]; {(r)})[123X.[133X
+  
+  [33X[0;0YIn all other cases the action is irreflexible, or [10X"chiral"[110X.[133X
+  
+  [1X2.3-7 TGQuotientRelators[101X
+  
+  [33X[1;0Y[29X[2XTGQuotientRelators[102X( [3Xtgquotient[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns the defining relators of the quotient as a string.[133X
+  
+  [1X2.3-8 TGQuotientRelators[101X
+  
+  [33X[1;0Y[29X[2XTGQuotientRelators[102X( [3Xtg[103X, [3Xtgquotient[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  the  defining  relators  of  [3Xtgquotient[103X  as  group  elements of the
+  triangle group [3Xtg[103X given as a [10XProperTriangleGroup[110X object (see [14X2.1[114X).[133X
+  
+  [1X2.3-9 TGQuotientGroup[101X
+  
+  [33X[1;0Y[29X[2XTGQuotientGroup[102X( [3Xtg[103X, [3Xtgquotient[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns  [3Xtgquotient[103X  as a quotient group of the triangle group [3Xtg[103X given as a
+  [10XProperTriangleGroup[110X object (see [14X2.1[114X).[133X
+  
+  
+  [1X2.4 [33X[0;0YLibrary of Triangle-Group Quotients[133X[101X
+  
+  [33X[0;0YThe  HyperCells  package  comes  with  a library of triangle-group quotients
+  acting  on  surfaces  of  genus 2 to 101 based on the list by Marston Conder
+  [Con07]                             published                             at
+  [7Xhttps://www.math.auckland.ac.nz/~conder/TriangleGroupQuotients101.txt[107X.   The
+  quotients are labeled by the genus [10Xg[110X and a running index [10Xn[110X over all triangle
+  groups for the given genus: [10XTg.n[110X.[133X
+  
+  [33X[0;0YAll these quotients can be accessed using the function [2XTGQuotient[102X ([14X2.3-1[114X).[133X
+  
+  [1X2.4-1 LoadTGQuotients[101X
+  
+  [33X[1;0Y[29X[2XLoadTGQuotients[102X( [3Xsignature[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X  if  the  quotients  were loaded for the first time, [10Xfalse[110X if
+            they had been loaded before.[133X
+  
+  [33X[0;0YLoads  all  available  triangle  group  quotients  for  triangle  group with
+  signature [10X[ r, q, p ][110X from the library.[133X
+  
+  [1X2.4-2 ListTriangleGroups[101X
+  
+  [33X[1;0Y[29X[2XListTriangleGroups[102X( [3Xarg[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ylist  of  signatures  [10X[  r,  q,  p ][110X identifying all the available
+            triangle groups.[133X
+  
+  [33X[0;0YList all triangle groups.[133X
+  
+  [1X2.4-3 ListTGQuotients[101X
+  
+  [33X[1;0Y[29X[2XListTGQuotients[102X( [3Xsignature[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ylist of quotient specifiers in the form [10X[genus, number][110X.[133X
+  
+  [33X[0;0YLists all quotients of the triangle group with signature [10X[ r, q, p ][110X.[133X
+  
+  
+  [1X2.5 [33X[0;0YExport and Import[133X[101X
+  
+  [1X2.5-1 ExportString[101X
+  
+  [33X[1;0Y[29X[2XExportString[102X( [3Xtgquotient[103X ) [32X operation[133X
+  
+  [33X[0;0Yreturns a string appropriate for export to a text file.[133X
+  
+  [1X2.5-2 ImportTGQuotientString[101X
+  
+  [33X[1;0Y[29X[2XImportTGQuotientString[102X( [3Xstring[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ytriangle-group quotient as [10XTGQuotient[110X.[133X
+  
+  [33X[0;0YConstructs  the triangle group quotient from a string in the format produced
+  by [10XExportString[110X.[133X
+  

@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (HyperCells) - Chapter 2: Triangle Groups and Translation Subgroups</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap2"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap2.html">[MathJax off]</a></p>
+<p><a id="X82D0C61B7D9864E4" name="X82D0C61B7D9864E4"></a></p>
+<div class="ChapSects"><a href="chap2_mj.html#X82D0C61B7D9864E4">2 <span class="Heading">Triangle Groups and Translation Subgroups</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X8119885384F3B9B2">2.1 <span class="Heading">Triangle Groups</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7DE9B0FF7EEC5D80">2.1-1 TriangleGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X8324988F829EAC53">2.1-2 ProperTriangleGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7B9A00F77F6704D1">2.1-3 Signature</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X8732033B7E77800C">2.1-4 FpGroup</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X7AAEB8C27A0289E0">2.2 <span class="Heading">Translation Groups</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X855BB284856ABE2B">2.2-1 TGTranslationGroupFromQuotient</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X79A1CE2684146D6C">2.2-2 TGTranslationGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X84BDCEF68004226A">2.2-3 GetProperTriangleGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X8245D1BC800C8C70">2.2-4 QuotientHomomorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X793AF5637FAE6575">2.2-5 AsTGSubgroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7DEF1F5079699BCF">2.2-6 FpGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X80B0AC767D4797F6">2.2-7 FpIsomorphism</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X84E92102876317DE">2.3 <span class="Heading">Triangle-Group Quotients</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X85DCE333807E1400">2.3-1 TGQuotient</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X86E4F03C82BE158F">2.3-2 TGQuotientName</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X8461F63780EB6E6A">2.3-3 TGQuotientGenus</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X786597997A80F2ED">2.3-4 TriangleGroupSignature</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X82904C8E829E3823">2.3-5 TGQuotientOrder</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7FFC5E547A150A0A">2.3-6 TGQuotientActionType</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7F21C5D88445173C">2.3-7 TGQuotientRelators</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7A8CEB11879C950C">2.3-8 TGQuotientRelators</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7BEE2D0C86E1C45B">2.3-9 TGQuotientGroup</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X7B8966377BC32490">2.4 <span class="Heading">Library of Triangle-Group Quotients</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7DF658C382A24465">2.4-1 LoadTGQuotients</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X78CBBF0E8312697E">2.4-2 ListTriangleGroups</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7FFE439E833C5C15">2.4-3 ListTGQuotients</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X8492C5B38700A475">2.5 <span class="Heading">Export and Import</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X813D79657CD11FC9">2.5-1 ExportString</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X80C3DBA3845451D6">2.5-2 ImportTGQuotientString</a></span>
+</div></div>
+</div>
+
+<h3>2 <span class="Heading">Triangle Groups and Translation Subgroups</span></h3>
+
+<p><a id="X8119885384F3B9B2" name="X8119885384F3B9B2"></a></p>
+
+<h4>2.1 <span class="Heading">Triangle Groups</span></h4>
+
+<p>Triangle groups are stored as objects of category <code class="code">TriangleGroup</code>. The triangle group is characterized by its signature <span class="SimpleMath">\((r,q,p)\)</span>, with the integers <span class="SimpleMath">\(r\)</span>, <span class="SimpleMath">\(q\)</span>, <span class="SimpleMath">\(p\)</span> by convention given in ascending order. It is defined as</p>
+
+<p class="center">\[\Delta(r,q,p) = 
+   \left\langle a,b,c\left|a^2,b^2,c^2,(ab)^r,(bc)^q,(ca)^p\right.\right\rangle.\]</p>
+
+<p>To construct a triangle group, use the function <code class="func">TriangleGroup</code> (<a href="chap2_mj.html#X7DE9B0FF7EEC5D80"><span class="RefLink">2.1-1</span></a>).</p>
+
+<p>Similarly, proper triangle groups are stored as <code class="code">ProperTriangleGroup</code> objects. They too are characterized by their signature <span class="SimpleMath">\((r,q,p)\)</span>, and defined as</p>
+
+<p class="center">\[\Delta^+(r,q,p) = \left\langle x,y,z\left|xyz,x^r,y^q,z^p\right.\right\rangle,\]</p>
+
+<p>where the generators <span class="SimpleMath">\(x\)</span>, <span class="SimpleMath">\(y\)</span>, <span class="SimpleMath">\(z\)</span> are related to the generators <span class="SimpleMath">\(a\)</span>, <span class="SimpleMath">\(b\)</span>, <span class="SimpleMath">\(c\)</span> of the corresponding triangle group by <span class="SimpleMath">\(x = ab\)</span>, <span class="SimpleMath">\(y = bc\)</span>, <span class="SimpleMath">\(z = ca\)</span>. To construct a triangle group, use the function <code class="func">ProperTriangleGroup</code> (<a href="chap2_mj.html#X8324988F829EAC53"><span class="RefLink">2.1-2</span></a>).</p>
+
+<p>The two objects are printed in the form</p>
+
+
+<div class="example"><pre>
+TriangleGroup( [ r, q, p ] )
+ProperTriangleGroup( [ r, q, p ] )
+</pre></div>
+
+<p>respectively.</p>
+
+<p>Given a <code class="code">TriangleGroup</code> or <code class="code">ProperTriangleGroup</code> object <var class="Arg">tg</var>, its signature can be obtained by the operation <code class="func">Signature</code> (<a href="chap2_mj.html#X7B9A00F77F6704D1"><span class="RefLink">2.1-3</span></a>) and the (proper) triangle group itself can be obtained by the operation <code class="func">FpGroup</code> (<a href="chap2_mj.html#X8732033B7E77800C"><span class="RefLink">2.1-4</span></a>).</p>
+
+<p><a id="X7DE9B0FF7EEC5D80" name="X7DE9B0FF7EEC5D80"></a></p>
+
+<h5>2.1-1 TriangleGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TriangleGroup</code>( <var class="Arg">signature</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a <code class="code">TriangleGroup</code> object representing the full triangle group <span class="SimpleMath">\(\Delta\)</span>.</p>
+
+<p>Construct the full triangle group with signature <var class="Arg">signature</var> given as a list <code class="code">[ r, q, p ]</code>:</p>
+
+<p class="center">\[\Delta(r,q,p) =
+     \left\langle a,b,c\left|a^2,b^2,c^2,(ab)^r,(bc)^q,(ca)^p\right.\right\rangle.\]</p>
+
+<p>The generators are named <code class="code">a</code>, <code class="code">b</code>, and <code class="code">c</code>, respectively.</p>
+
+<p><a id="X8324988F829EAC53" name="X8324988F829EAC53"></a></p>
+
+<h5>2.1-2 ProperTriangleGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ProperTriangleGroup</code>( <var class="Arg">signature</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: a <code class="code">ProperTriangleGroup</code> object representing the proper triangle group <span class="SimpleMath">\(\Delta^+\)</span>.</p>
+
+<p>Construct the proper triangle group with signature <var class="Arg">signature</var> given as a list <code class="code">[ r, q, p ]</code>:</p>
+
+<p class="center">\[\Delta^+(r,q,p) = \left\langle x,y,z\left|xyz,x^r,y^q,z^p\right.\right\rangle.\]</p>
+
+<p>The generators are named <code class="code">x</code>, <code class="code">y</code>, and <code class="code">z</code>, respectively.</p>
+
+<p><a id="X7B9A00F77F6704D1" name="X7B9A00F77F6704D1"></a></p>
+
+<h5>2.1-3 Signature</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Signature</code>( <var class="Arg">tg</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the signature of the triangle group <var class="Arg">tg</var> given either as <code class="code">TriangleGroup</code> or <code class="code">ProperTriangleGroup</code> object as a list of integers <code class="code">[ r, q, p ]</code>.</p>
+
+<p><a id="X8732033B7E77800C" name="X8732033B7E77800C"></a></p>
+
+<h5>2.1-4 FpGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FpGroup</code>( <var class="Arg">tg</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the triangle group <var class="Arg">tg</var> given either as <code class="code">TriangleGroup</code> or <code class="code">ProperTriangleGroup</code> object as a finitely presented group.</p>
+
+<p><a id="X7AAEB8C27A0289E0" name="X7AAEB8C27A0289E0"></a></p>
+
+<h4>2.2 <span class="Heading">Translation Groups</span></h4>
+
+<p>Triangle-group translation subgroups are implemented as objects of category <code class="code">TGTranslationGroup</code> and store the underlying proper triangle group <span class="SimpleMath">\(\Delta^+\)</span>, the quotient homomorphism <span class="SimpleMath">\(\Delta^+ \to \Delta^+/\Gamma\)</span>, the translation group <span class="SimpleMath">\(\Gamma\)</span> as a subgroup of <span class="SimpleMath">\(\Delta^+\)</span> and as a finitely presented group. Additionally, the group isomorphism from <span class="SimpleMath">\(\Gamma\)</span> to the finitely presented group is stored. A <code class="code">TGTranslationGroup</code> object can be constructed from the proper triangle group <span class="SimpleMath">\(\Delta^+\)</span> and a quotient group <span class="SimpleMath">\(\Delta^+/\Gamma\)</span> with a translation subgroup <span class="SimpleMath">\(\Gamma\)</span> using the function <code class="func">TGTranslationGroupFromQuotient</code> (<a href="chap2_mj.html#X855BB284856ABE2B"><span class="RefLink">2.2-1</span></a>).</p>
+
+<p>Triangle-group translation subgroups are printed in the form</p>
+
+
+<div class="example"><pre>
+TranslationGroup( &lt; g1, g2, ... | rel1, rel2, ... &gt; )
+</pre></div>
+
+<p>where <code class="code">g1</code>, <code class="code">g2</code>, ... are the generators of the finitely presented group and <code class="code">rel1</code>, <code class="code">rel2</code>, ... are the relators.</p>
+
+<p>The components of a <code class="code">TGTranslationGroup</code> object can be accessed using the following operations:</p>
+
+
+<ul>
+<li><p><code class="func">GetProperTriangleGroup</code> (<a href="chap2_mj.html#X84BDCEF68004226A"><span class="RefLink">2.2-3</span></a>)</p>
+
+</li>
+<li><p><code class="func">QuotientHomomorphism</code> (<a href="chap2_mj.html#X8245D1BC800C8C70"><span class="RefLink">2.2-4</span></a>)</p>
+
+</li>
+<li><p><code class="func">AsTGSubgroup</code> (<a href="chap2_mj.html#X793AF5637FAE6575"><span class="RefLink">2.2-5</span></a>)</p>
+
+</li>
+<li><p><code class="func">FpGroup</code> (<a href="chap2_mj.html#X7DEF1F5079699BCF"><span class="RefLink">2.2-6</span></a>)</p>
+
+</li>
+</ul>
+<p><a id="X855BB284856ABE2B" name="X855BB284856ABE2B"></a></p>
+
+<h5>2.2-1 TGTranslationGroupFromQuotient</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TGTranslationGroupFromQuotient</code>( <var class="Arg">D</var>, <var class="Arg">G</var>, <var class="Arg">genus</var>[, <var class="Arg">GAMgens</var>[, <var class="Arg">TDGAM</var>[, <var class="Arg">TGGw</var>]]] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: the translation group as a <code class="code">TriangleTranslationGroup</code> object.</p>
+
+<p>Construct the translation group as the kernel of the quotient homomorphism from the proper triangle group <var class="Arg">D</var> to the quotient group <var class="Arg">G</var>. The functions makes sure that a minimal number of translation generators is used by ensuring the number matches <var class="Arg">2*genus</var>.</p>
+
+<p>Optionally, generators <var class="Arg">GAMgens</var> of the translation group <span class="SimpleMath">\(\Gamma\)</span> can be explicitly given as elements of <var class="Arg">tg</var>. If not given, they are computed automatically. Similarly, choices for the transversals <span class="SimpleMath">\(T_{\Delta^+}(\Gamma)\)</span> and <span class="SimpleMath">\(T_{G^+}(G_w^+)\)</span> can be given as <var class="Arg">TDGAM</var> and <var class="Arg">TGGw</var>, respectively. If not given, they are computed automatically. Here, <var class="Arg">TDGAM</var> is a list of elements of <var class="Arg">tg</var> and <var class="Arg">TGGw</var> is a list of three lists, one for <span class="SimpleMath">\(w=x,y,z\)</span>, respectively, of elements of <var class="Arg">tg</var>.</p>
+
+<p><a id="X79A1CE2684146D6C" name="X79A1CE2684146D6C"></a></p>
+
+<h5>2.2-2 TGTranslationGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TGTranslationGroup</code>( <var class="Arg">tg</var>, <var class="Arg">quotient</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: the translation group as a <code class="code">TriangleTranslationGroup</code> object.</p>
+
+<p>Construct the translation group as the kernel of the quotient homomorphism from the proper triangle group <var class="Arg">tg</var> given as a <code class="code">ProperTriangleGroup</code> object (see <a href="chap2_mj.html#X8119885384F3B9B2"><span class="RefLink">2.1</span></a>) to the quotient group <var class="Arg">quotient</var> given as a <code class="code">TGQuotient</code> object (see <a href="chap2_mj.html#X84E92102876317DE"><span class="RefLink">2.3</span></a>).</p>
+
+<p><a id="X84BDCEF68004226A" name="X84BDCEF68004226A"></a></p>
+
+<h5>2.2-3 GetProperTriangleGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GetProperTriangleGroup</code>( <var class="Arg">Gamma</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the proper triangle group <span class="SimpleMath">\(\Delta^+\)</span> of which the translation group <var class="Arg">Gamma</var> is a subgroup.</p>
+
+<p><a id="X8245D1BC800C8C70" name="X8245D1BC800C8C70"></a></p>
+
+<h5>2.2-4 QuotientHomomorphism</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; QuotientHomomorphism</code>( <var class="Arg">Gamma</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the group homomorphism from the proper triangle group <span class="SimpleMath">\(\Delta^+\)</span> given by <code class="code">GetProperTriangleGroup(</code><var class="Arg">Gamma</var><code class="code">)</code> to the quotient group <span class="SimpleMath">\(\Delta^+/\Gamma\)</span>.</p>
+
+<p><a id="X793AF5637FAE6575" name="X793AF5637FAE6575"></a></p>
+
+<h5>2.2-5 AsTGSubgroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AsTGSubgroup</code>( <var class="Arg">Gamma</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the translation group <var class="Arg">Gamma</var> as a subgroup of the proper triangle group <span class="SimpleMath">\(\Delta^+\)</span> given by <code class="code">GetProperTriangleGroup(</code><var class="Arg">Gamma</var><code class="code">)</code>.</p>
+
+<p><a id="X7DEF1F5079699BCF" name="X7DEF1F5079699BCF"></a></p>
+
+<h5>2.2-6 FpGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FpGroup</code>( <var class="Arg">Gamma</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the translation group <var class="Arg">Gamma</var> as a finitely presented group with generators <code class="code">g1</code>, <code class="code">g2</code>, ....</p>
+
+<p><a id="X80B0AC767D4797F6" name="X80B0AC767D4797F6"></a></p>
+
+<h5>2.2-7 FpIsomorphism</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FpIsomorphism</code>( <var class="Arg">Gamma</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the group isomorphism from <code class="code">AsTGSubgroup(</code><var class="Arg">Gamma</var><code class="code">)</code>, the translation group as a subgroup of proper triangle group, to the finitely presented group <code class="code">FpGroup(</code><var class="Arg">Gamma</var><code class="code">)</code>.</p>
+
+<p><a id="X84E92102876317DE" name="X84E92102876317DE"></a></p>
+
+<h4>2.3 <span class="Heading">Triangle-Group Quotients</span></h4>
+
+<p>Triangle-group quotients <span class="SimpleMath">\(\Delta^+/\Gamma\)</span> are implemented as objects of category <code class="code">TGQuotient</code> with the following components:</p>
+
+
+<ul>
+<li><p><code class="func">TGQuotientName</code> (<a href="chap2_mj.html#X86E4F03C82BE158F"><span class="RefLink">2.3-2</span></a>): name of the triangle group quotient</p>
+
+</li>
+<li><p><code class="func">TriangleGroupSignature</code> (<a href="chap2_mj.html#X786597997A80F2ED"><span class="RefLink">2.3-4</span></a>): signature of the underlying triangle group</p>
+
+</li>
+<li><p><code class="func">TGQuotientGenus</code> (<a href="chap2_mj.html#X8461F63780EB6E6A"><span class="RefLink">2.3-3</span></a>): genus of the triangle group quotient</p>
+
+</li>
+<li><p><code class="func">TGQuotientOrder</code> (<a href="chap2_mj.html#X82904C8E829E3823"><span class="RefLink">2.3-5</span></a>): order of the quotient group</p>
+
+</li>
+<li><p><code class="func">TGQuotientActionType</code> (<a href="chap2_mj.html#X7FFC5E547A150A0A"><span class="RefLink">2.3-6</span></a>): type of the action of the triangle group quotient</p>
+
+</li>
+<li><p><code class="func">TGQuotientRelators</code> (<a href="chap2_mj.html#X7F21C5D88445173C"><span class="RefLink">2.3-7</span></a>): defining relators of the quotient as a string</p>
+
+</li>
+</ul>
+<p>It is printed in the form</p>
+
+
+<div class="example"><pre>
+  TGQuotient( name, [ r, q, p ], order, genus, actiontype, relators )
+</pre></div>
+
+<p>where <code class="code">name</code> is the name of the triangle group quotient, <code class="code">[ r, q, p ]</code> is the signature of the underlying triangle group, <code class="code">order</code> is the order of the quotient group, <code class="code">genus</code> is the genus of the triangle group quotient, <code class="code">actiontype</code> is the type of the action, and <code class="code">relators</code> is the defining relators of the quotient.</p>
+
+<p><a id="X85DCE333807E1400" name="X85DCE333807E1400"></a></p>
+
+<h5>2.3-1 TGQuotient</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TGQuotient</code>( <var class="Arg">quotient</var>[, <var class="Arg">signature</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: triangle-group quotient as <code class="code">TGQuotient</code>.</p>
+
+<p>Constructs the triangle group quotient of the triangle-group with signature <code class="code">signature</code>, given as a list <code class="code">[ r, q, p ]</code>, specified by <code class="code">quotient</code>, which is either an integer giving the position in Conder's list or a list of the form <code class="code">[genus, number]</code> giving the genus and number in Conder's list of the quotient. In the latter case, signature can be omitted.</p>
+
+<p>Loads all quotient groups of the corresponding triangle group if they have not been loaded before.</p>
+
+<p><a id="X86E4F03C82BE158F" name="X86E4F03C82BE158F"></a></p>
+
+<h5>2.3-2 TGQuotientName</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TGQuotientName</code>( <var class="Arg">tgquotient</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the name of the triangle group quotient. For quotients from the library, i.e., Conder's list, this takes the form <code class="code">[genus, number]</code>, <code class="code">number</code> is a running index over all triangle groups for the given genus.</p>
+
+<p><a id="X8461F63780EB6E6A" name="X8461F63780EB6E6A"></a></p>
+
+<h5>2.3-3 TGQuotientGenus</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TGQuotientGenus</code>( <var class="Arg">tgquotient</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the genus of the triangle group quotient.</p>
+
+<p><a id="X786597997A80F2ED" name="X786597997A80F2ED"></a></p>
+
+<h5>2.3-4 TriangleGroupSignature</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TriangleGroupSignature</code>( <var class="Arg">tgquotient</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the signature of the triangle group in the form <code class="code">[ r, q, p ]</code>.</p>
+
+<p><a id="X82904C8E829E3823" name="X82904C8E829E3823"></a></p>
+
+<h5>2.3-5 TGQuotientOrder</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TGQuotientOrder</code>( <var class="Arg">tgquotient</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the order of the triangle group quotient.</p>
+
+<p><a id="X7FFC5E547A150A0A" name="X7FFC5E547A150A0A"></a></p>
+
+<h5>2.3-6 TGQuotientActionType</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TGQuotientActionType</code>( <var class="Arg">tgquotient</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the type of the action of the triangle group quotient, following the terminology of Marston Conder described in <a href="chapBib_mj.html#biBConder:2007">[Con07]</a>.</p>
+
+<p>The action is called <code class="code">"reflexible [m]"</code> if there exists an involutory automorphism of the quotient that inverts the images of two of the three generators <span class="SimpleMath">\(x\)</span>, <span class="SimpleMath">\(y\)</span> and <span class="SimpleMath">\(z\)</span>. This is the same as hypermap reflexibility.</p>
+
+<p>The action is called <code class="code">"reflexible [n]"</code> if two or more of <span class="SimpleMath">\(p\)</span>, <span class="SimpleMath">\(q\)</span> and <span class="SimpleMath">\(r\)</span> are equal, and there exists an involutory automorphism of the quotient that swaps the images of two of the three generators <span class="SimpleMath">\(x\)</span>, <span class="SimpleMath">\(y\)</span> and <span class="SimpleMath">\(z\)</span> with the inverse of the other. For example, this happens if <span class="SimpleMath">\(p = q\)</span> and the involutory automorphism swaps the image of <span class="SimpleMath">\(x\)</span> with the image of <span class="SimpleMath">\(y^{-1}\)</span>, and vice versa. This is equivalent to an extension of the <span class="SimpleMath">\((p,p,r)\)</span> triangular action to an action of a larger group with NEC signature <span class="SimpleMath">\((0; +; [p]; {(r)})\)</span>.</p>
+
+<p>In all other cases the action is irreflexible, or <code class="code">"chiral"</code>.</p>
+
+<p><a id="X7F21C5D88445173C" name="X7F21C5D88445173C"></a></p>
+
+<h5>2.3-7 TGQuotientRelators</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TGQuotientRelators</code>( <var class="Arg">tgquotient</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the defining relators of the quotient as a string.</p>
+
+<p><a id="X7A8CEB11879C950C" name="X7A8CEB11879C950C"></a></p>
+
+<h5>2.3-8 TGQuotientRelators</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TGQuotientRelators</code>( <var class="Arg">tg</var>, <var class="Arg">tgquotient</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns the defining relators of <var class="Arg">tgquotient</var> as group elements of the triangle group <var class="Arg">tg</var> given as a <code class="code">ProperTriangleGroup</code> object (see <a href="chap2_mj.html#X8119885384F3B9B2"><span class="RefLink">2.1</span></a>).</p>
+
+<p><a id="X7BEE2D0C86E1C45B" name="X7BEE2D0C86E1C45B"></a></p>
+
+<h5>2.3-9 TGQuotientGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TGQuotientGroup</code>( <var class="Arg">tg</var>, <var class="Arg">tgquotient</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns <var class="Arg">tgquotient</var> as a quotient group of the triangle group <var class="Arg">tg</var> given as a <code class="code">ProperTriangleGroup</code> object (see <a href="chap2_mj.html#X8119885384F3B9B2"><span class="RefLink">2.1</span></a>).</p>
+
+<p><a id="X7B8966377BC32490" name="X7B8966377BC32490"></a></p>
+
+<h4>2.4 <span class="Heading">Library of Triangle-Group Quotients</span></h4>
+
+<p>The HyperCells package comes with a library of triangle-group quotients acting on surfaces of genus 2 to 101 based on the list by Marston Conder <a href="chapBib_mj.html#biBConder:2007">[Con07]</a> published at <span class="URL"><a href="https://www.math.auckland.ac.nz/~conder/TriangleGroupQuotients101.txt">https://www.math.auckland.ac.nz/~conder/TriangleGroupQuotients101.txt</a></span>. The quotients are labeled by the genus <code class="code">g</code> and a running index <code class="code">n</code> over all triangle groups for the given genus: <code class="code">Tg.n</code>.</p>
+
+<p>All these quotients can be accessed using the function <code class="func">TGQuotient</code> (<a href="chap2_mj.html#X85DCE333807E1400"><span class="RefLink">2.3-1</span></a>).</p>
+
+<p><a id="X7DF658C382A24465" name="X7DF658C382A24465"></a></p>
+
+<h5>2.4-1 LoadTGQuotients</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LoadTGQuotients</code>( <var class="Arg">signature</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: <code class="code">true</code> if the quotients were loaded for the first time, <code class="code">false</code> if they had been loaded before.</p>
+
+<p>Loads all available triangle group quotients for triangle group with signature <code class="code">[ r, q, p ]</code> from the library.</p>
+
+<p><a id="X78CBBF0E8312697E" name="X78CBBF0E8312697E"></a></p>
+
+<h5>2.4-2 ListTriangleGroups</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ListTriangleGroups</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: list of signatures <code class="code">[ r, q, p ]</code> identifying all the available triangle groups.</p>
+
+<p>List all triangle groups.</p>
+
+<p><a id="X7FFE439E833C5C15" name="X7FFE439E833C5C15"></a></p>
+
+<h5>2.4-3 ListTGQuotients</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ListTGQuotients</code>( <var class="Arg">signature</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: list of quotient specifiers in the form <code class="code">[genus, number]</code>.</p>
+
+<p>Lists all quotients of the triangle group with signature <code class="code">[ r, q, p ]</code>.</p>
+
+<p><a id="X8492C5B38700A475" name="X8492C5B38700A475"></a></p>
+
+<h4>2.5 <span class="Heading">Export and Import</span></h4>
+
+<p><a id="X813D79657CD11FC9" name="X813D79657CD11FC9"></a></p>
+
+<h5>2.5-1 ExportString</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ExportString</code>( <var class="Arg">tgquotient</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>returns a string appropriate for export to a text file.</p>
+
+<p><a id="X80C3DBA3845451D6" name="X80C3DBA3845451D6"></a></p>
+
+<h5>2.5-2 ImportTGQuotientString</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ImportTGQuotientString</code>( <var class="Arg">string</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Returns: triangle-group quotient as <code class="code">TGQuotient</code>.</p>
+
+<p>Constructs the triangle group quotient from a string in the format produced by <code class="code">ExportString</code>.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>
