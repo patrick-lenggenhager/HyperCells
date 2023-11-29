@@ -1,5 +1,5 @@
 #
-# HyperCells: A package for constructing primitive cells and supercells of hyperbolic lattices.
+# HyperCells: A GAP package for constructing primitive cells and supercells of hyperbolic lattices
 #
 # This file runs package tests. It is also referenced in the package
 # metadata in PackageInfo.g.

@@ -1,5 +1,5 @@
 #
-# HyperCells: A package for constructing primitive cells and supercells of hyperbolic lattices.
+# HyperCells: A GAP package for constructing primitive cells and supercells of hyperbolic lattices
 #
 # This file contains package meta data. For additional information on
 # the meaning and correct usage of these fields, please consult the
@@ -11,7 +11,7 @@ SetPackageInfo( rec(
 PackageName := "HyperCells",
 Subtitle := "A GAP package for constructing primitive cells and supercells of hyperbolic lattices",
 Version := "0.9.0",
-Date := "27/11/2023", # dd/mm/yyyy format
+Date := "29/11/2023", # dd/mm/yyyy format
 License := "CC BY-SA 4.0",
 
 Persons := [
