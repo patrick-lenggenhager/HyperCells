@@ -1,7 +1,7 @@
 name: HyperCells
 version: "0.9.0"
 license: "CC BY-SA 4.0"
-date: 2023-11-27
+date: 2023-11-29
 description: |
     A GAP package for constructing primitive cells and supercells of hyperbolic lattices
 
