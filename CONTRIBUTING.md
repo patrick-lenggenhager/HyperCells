@@ -74,3 +74,8 @@ In general, we follow the ["fork-and-pull" Git workflow](https://github.com/susa
 
 By contributing, you agree that your contributions will be licensed under the
 CC BY-SA-4.0 License, as described in the [LICENSE](LICENSE.txt) file.
+
+## References
+
+Parts of this document are based on the template provided by [Auth0](https://github.com/auth0):
+[https://github.com/auth0/open-source-template/blob/master/GENERAL-CONTRIBUTING.md]
