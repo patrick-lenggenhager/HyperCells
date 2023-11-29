@@ -122,6 +122,16 @@ function(tg, quotient, center, args...)
 			GAMgens, MapTranslation,
 		F, cell;
 
+	# check arguments
+	CheckTGandQuotientArguments@(tg, quotient);
+	if not (center = 1 or center = 2 or center = 3) then
+		Error(StringFormatted(
+			"The center {} is not valid. It must be 1, 2, or 3.",
+			center
+		));
+		return fail;
+	fi;
+
 	# options
     simplify := ValueOption("simplify");
 	swordlength := 0;
@@ -681,6 +691,12 @@ function(input, args...)
 		GAMgens, TDGAM, TGGw, quotient, cell,
 		vertices, pos, edges, translations, faces, t, boundary, F, i;
 
+	# check arguments
+	if not IsInputTextStream(input) then
+		Error("The first argument must be an input text stream.");
+		return fail;
+	fi;
+
 	# version
 	version := ReadAllLine(input);
 
@@ -795,6 +811,12 @@ end );
 InstallGlobalFunction( ImportTGCellGraphFromString,
 function(string, args...)
 	local input, cell;
+
+	# check arguments
+	if not IsString(string) then
+		Error("The first argument must be a string.");
+		return fail;
+	fi;
 
 	# open string stream
 	input := InputTextString(string);

@@ -6,6 +6,8 @@ InstallGlobalFunction( TGTranslationGroupFromQuotient,
 function(D, G, genus, args...)
     local homDG, GAMMA, isofpGAMMA, fpGAMMA, GAMgens, fpsimplify, isosimp, F;
 
+	# TODO: check arguments
+
 	# options
 	fpsimplify := ValueOption("fpsimplify");
 	if fpsimplify = fail or not IsBool(fpsimplify) then
@@ -62,6 +64,9 @@ end );
 
 InstallGlobalFunction( TGTranslationGroup,
 function(tg, quotient)
+	# check arguments
+	CheckTGandQuotientArguments@(tg, quotient);
+
     return TGTranslationGroupFromQuotient(
 		FpGroup(tg), TGQuotientGroup(tg, quotient), TGQuotientGenus(quotient)
 	);

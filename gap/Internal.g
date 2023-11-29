@@ -60,6 +60,74 @@ SetQRep@ := function(Q, T, qhom, el)
     fi;
 end;
 
+CheckTGandQuotientArguments@ := function(tg, quotient)
+    if not IsProperTriangleGroupObj(tg) then
+		Error("The first argument must be a ProperTriangleGroup object.");
+		return fail;
+	fi;
+	if not IsTGQuotientObj(quotient) then
+		Error("The second argument must be a TGQuotient object.");
+		return fail;
+	fi;
+	if not Signature(tg) = TriangleGroupSignature(quotient) then
+		Error("The signature of the triangle group and the quotient must be the same.");
+		return fail;
+	fi;
+end;
+
+IsValidListOfWPTypes@ := function(fs)
+    local f;
+
+    if not IsList(fs) then
+        return false;
+    fi;
+
+    for f in fs do
+        if not (f = 1 or f = 2 or f = 3) then
+            return false;
+        fi;
+    od;
+
+    return true;
+end;
+
+IsTGSignature@ := function(sign)
+    local p, q, r;
+
+    if not IsList(sign) then
+        return false;
+    fi;
+    if not Length(sign) = 3 then
+        return false;
+    fi;
+
+    p := sign[1];
+    q := sign[2];
+    r := sign[3];
+
+    if not IsInt(p) or not IsInt(q) or not IsInt(r) then
+        return false;
+    fi;
+    if not p >= 2 or not q >= 2 or not r >= 2 then
+        return false;
+    fi;
+
+    return true;
+end;
+
+IsHyperbolicTGSignature@ := function(sign)
+    local p, q, r;
+
+    if not IsTGSignature@(sign) then
+        return false;
+    fi;
+
+    p := sign[1];
+    q := sign[2];
+    r := sign[3];
+
+    return 1/p + 1/q + 1/r < 1;
+end;
 
 # PARSING TOOLS
 

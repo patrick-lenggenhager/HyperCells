@@ -43,6 +43,10 @@ function(quotient, sequence)
     # extend sequence of translation group
     extseq := [];
     for Q in quotient do
+        if not IsTGQuotientObj(Q) then
+            Error(StringFormatted("The quotient {} is not a TGQuotient object.", Q));
+            return fail;
+        fi;
         if not TriangleGroupSignature(Q) = sgn then
             Error(StringFormatted("The quotient {} is not a quotient of the triangle group with signature {}.", TGQuotientName(Q), sgn));
         fi;
@@ -89,6 +93,12 @@ InstallGlobalFunction( NextTGQuotientOptions,
 function(quotient, Q0)
     local sgn, tg, D, GAM0, opts, Q, GAMtilde, GAM1, ind;
 
+    # check arguments
+    if not IsTGQuotientObj(Q0) then
+        Error(StringFormatted("The quotient {} is not a TGQuotient object.", Q0));
+        return fail;
+    fi;
+
     # triangle group
     sgn := TriangleGroupSignature(Q0);
     tg := ProperTriangleGroup(sgn);
@@ -102,6 +112,10 @@ function(quotient, Q0)
     # iterate over options for extension
     opts := [];
     for Q in quotient do
+        if not IsTGQuotientObj(Q) then
+            Error(StringFormatted("The quotient {} is not a TGQuotient object.", Q));
+            return fail;
+        fi;
         if not TriangleGroupSignature(Q) = sgn then
             Error(StringFormatted("The quotient {} is not a quotient of the triangle group with signature {}.", TGQuotientName(Q), sgn));
         fi;
@@ -298,6 +312,12 @@ InstallGlobalFunction( ImportTGQuotientList,
 function(input)
     local str, list;
 
+    # check arguments
+	if not IsInputTextStream(input) then
+		Error("The input must be a text stream.");
+		return fail;
+	fi;
+
     # list of quotients
     list := [];
 
@@ -331,6 +351,12 @@ end );
 InstallGlobalFunction( ImportTGQuotientSequences,
 function(input)
     local str, seqs, i;
+
+    # check arguments
+	if not IsInputTextStream(input) then
+		Error("The first argument must be an input text stream.");
+		return fail;
+	fi;
 
     # list of sequences
     seqs := [ [] ];

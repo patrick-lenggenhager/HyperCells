@@ -78,7 +78,7 @@ PackageDoc := rec(
   HTMLStart := "doc/chap0_mj.html",
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
-  LongTitle := "Primitive cells and supercells of hyperbolic lattices based on triangle groups",
+  LongTitle := "A GAP package for constructing primitive cells and supercells of hyperbolic lattices",
 ),
 
 Dependencies := rec(

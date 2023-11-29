@@ -182,6 +182,16 @@ function(model, sc)
         eta, gam0, eta2, gam1, gam2, gam,
         w, d0, g, w1, d10, d1, w2, d20, d2,
 		cellembed;
+	
+	# check arguments
+	if not IsTGCellModelGraphObj(model) then
+		Error("The first argument must be a TGCellModelGraph object.");
+		return fail;
+	fi;
+	if not IsTGCellObj(sc) then
+		Error("The second argument must be a TGCell object.");
+		return fail;
+	fi;
 
     # options
     simplify := ValueOption("simplify");
@@ -319,6 +329,16 @@ function(model, scquotient, args...)
         w, g0, g, w1, d10, d1, w2, d20, d2,
 		schwarz, GwGens, GwElems, QGGw, TGGw, itriangle, sc,
 		cellembed;
+
+	# check arguments
+	if not IsTGCellModelGraphObj(model) then
+		Error("The first argument must be a TGCellModelGraph object.");
+		return fail;
+	fi;
+	if not IsTGQuotientObj(scquotient) then
+		Error("The second argument must be a TGQuotient object.");
+		return fail;
+	fi;
 
 	# options
     simplify := ValueOption("simplify");
@@ -681,6 +701,12 @@ function(input, args...)
         verts, pos, vertexpos, edges, t, transls, i, faces,
 		cellembed;
 
+	# check arguments
+	if not IsInputTextStream(input) then
+		Error("The first argument must be an input text stream.");
+		return fail;
+	fi;
+
 	# version
 	version := ReadAllLine(input);
 
@@ -847,6 +873,12 @@ end );
 InstallGlobalFunction( ImportTGSuperCellModelGraphFromString,
 function(string, args...)
 	local input, model;
+
+	# check arguments
+	if not IsString(string) then
+		Error("The first argument must be a string.");
+		return fail;
+	fi;
 
 	# open string stream
 	input := InputTextString(string);

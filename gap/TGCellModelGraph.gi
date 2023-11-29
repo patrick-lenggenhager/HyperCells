@@ -128,6 +128,24 @@ function(cg, vfs, efs, ffs)
         vf, svf, dvf, Sf, fcvs, fces, fcfs, sf, i, svv, vv, trf, trfvs, cpos,
         cedges, gedges, fvs, fes, vei;
 
+    # check arguments
+    if not IsTGCellGraphObj(cg) then
+        Error("The first argument must be a TGCellGraph object.");
+        return fail;
+    fi;
+    if not IsValidListOfWPTypes@(vfs) then
+        Error("The second argument must be a list of Wyckoff position types, i.e., 1, 2, or 3.");
+        return fail;
+    fi;
+    if not IsValidListOfWPTypes@(efs) then
+        Error("The third argument must be a list of Wyckoff position types, i.e., 1, 2, or 3.");
+        return fail;
+    fi;
+    if not IsValidListOfWPTypes@(ffs) then
+        Error("The fourth argument must be a list of Wyckoff position types, i.e., 1, 2, or 3.");
+        return fail;
+    fi;
+
     # options
     simplify := ValueOption("simplify");
     if simplify = fail then
@@ -334,6 +352,12 @@ InstallGlobalFunction(TessellationModelGraph,
 function(cellgraph, args...)
     local signature, dual, model, pq;
 
+    # check arguments
+    if not IsTGCellGraphObj(cellgraph) then
+        Error("The first argument must be a TGCellGraph object.");
+        return fail;
+    fi;
+
     signature := Signature(GetProperTriangleGroup(cellgraph));
 
     if not signature[1] = 2 then
@@ -362,6 +386,12 @@ end );
 InstallGlobalFunction(AddOrientedNNNEdgesToTessellationModelGraph,
 function(model)
     local simplify, nnnedges, face, e1, e2, v1, v2, gam, epart, f, e, v;
+
+    # check arguments
+    if not IsTGCellModelGraphObj(model) then
+        Error("The first argument must be a TGCellModelGraph object.");
+        return fail;
+    fi;
 
     # options
     simplify := ValueOption("simplify");
@@ -425,6 +455,12 @@ end );
 InstallGlobalFunction(KagomeModelGraph,
 function(cellgraph)
     local signature, model, p;
+
+    # check arguments
+    if not IsTGCellGraphObj(cellgraph) then
+        Error("The first argument must be a TGCellGraph object.");
+        return fail;
+    fi;
 
     signature := Signature(GetProperTriangleGroup(cellgraph));
 
@@ -532,6 +568,12 @@ function(input, args...)
         GAMgens, TDGAM, TGGw, quotient, cell, type,
         verts, edges, t, transls, i, faces;
 
+    # check arguments
+	if not IsInputTextStream(input) then
+		Error("The first argument must be an input text stream.");
+		return fail;
+	fi;
+
 	# version
 	version := ReadAllLine(input);
 
@@ -638,6 +680,12 @@ end );
 InstallGlobalFunction( ImportTGCellModelGraphFromString,
 function(string, args...)
 	local input, model;
+
+	# check arguments
+	if not IsString(string) then
+		Error("The first argument must be a string.");
+		return fail;
+	fi;
 
 	# open string stream
 	input := InputTextString(string);

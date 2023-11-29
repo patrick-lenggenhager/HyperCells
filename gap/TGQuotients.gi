@@ -97,11 +97,23 @@ end );
 
 InstallMethod( TGQuotientRelators, [ IsProperTriangleGroupObj and IsProperTriangleGroupComponentRep, IsTGQuotientObj and IsTGQuotientComponentRep ],
 function(tg, tgquotient)
+    # check arguments
+	if not Signature(tg) = TriangleGroupSignature(tgquotient) then
+		Error("The signature of the triangle group and the quotient must be the same.");
+		return fail;
+	fi;
+
 	return EvalDString@(tgquotient!.relators, FpGroup(tg));
 end );
 
 InstallMethod( TGQuotientGroup, [ IsProperTriangleGroupObj and IsProperTriangleGroupComponentRep, IsTGQuotientObj and IsTGQuotientComponentRep ],
 function(tg, quotient)
+    # check arguments
+	if not Signature(tg) = TriangleGroupSignature(quotient) then
+		Error("The signature of the triangle group and the quotient must be the same.");
+		return fail;
+	fi;
+
     return FpGroup(tg) / TGQuotientRelators(tg, quotient);
 end );
 
@@ -118,6 +130,12 @@ end );
 InstallGlobalFunction( LoadTGQuotients,
 function(signature)
     local dict, sign;
+
+    # check arguments
+    if not IsTGSignature@(signature) then
+        Error(StringFormatted("Invalid triangle-group signature: {}", signature));
+        return fail;
+    fi;
 
     sign := ShallowCopy(signature);
     Sort(sign);

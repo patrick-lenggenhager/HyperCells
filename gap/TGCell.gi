@@ -300,6 +300,9 @@ function(tg, quotient, args...)
 	local D, rels, Gplus, GAMMA, homDG, TDGAM,
 		schwarz, GwGens, GwElems, QGGw, w, TGGw, itriangle, i, GGw, F;
 
+	# check arguments
+	CheckTGandQuotientArguments@(tg, quotient);
+
 	# proper triangle group
 	D := FpGroup(tg);
 
@@ -398,6 +401,16 @@ function(tg, quotient, center)
 		embDDELTA, DELTAplus, relsfull, G, homDELTAG, StabCell, Gcell, GcellElems,
 		n, Qfdom, Tfdom, prev, new, d1, d2, m, d, Tcell, Tcellplus, schwarz, GwGens,
 		GwElems, QGGw, TGGw, itriangle, w, F, cell;
+
+	# check arguments
+	CheckTGandQuotientArguments@(tg, quotient);
+	if not (center = 1 or center = 2 or center = 3) then
+		Error(StringFormatted(
+			"The center {} is not valid. It must be 1, 2, or 3.",
+			center
+		));
+		return fail;
+	fi;
 
 	###############################################################
 	####################### CONSTRUCT GROUPS ######################

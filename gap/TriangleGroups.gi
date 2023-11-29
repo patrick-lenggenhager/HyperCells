@@ -6,6 +6,11 @@ InstallGlobalFunction( TriangleGroup,
 function(signature)
     local r, q, p, FG, a, b, c, DELTA, F;
 
+	# check argument
+	if not IsTGSignature@(signature) then
+		Error("The signature must be a list of three integers greater or equal to two.");
+	fi;
+
 	r := signature[1];
 	q := signature[2];
 	p := signature[3];
@@ -51,6 +56,11 @@ DeclareRepresentation("IsProperTriangleGroupComponentRep", IsComponentObjectRep,
 InstallGlobalFunction( ProperTriangleGroup,
 function(signature)
     local r, q, p, FG, x, y, z, D, F;
+
+	# check argument
+	if not IsTGSignature@(signature) then
+		Error("The signature must be a list of three integers greater or equal to two.");
+	fi;
 
 	r := signature[1];
 	q := signature[2];
