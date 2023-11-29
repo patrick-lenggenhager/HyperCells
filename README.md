@@ -25,6 +25,10 @@ and the list of quotient groups:
 > M. Conder, *Quotients of triangle groups acting on surfaces of genus 2 to 101*,
   [https://www.math.auckland.ac.nz/~conder/TriangleGroupQuotients101.txt](https://www.math.auckland.ac.nz/~conder/TriangleGroupQuotients101.txt) (2007)
 
+
+Please refer to [CONTRIBUTING.md](CONTRIBUTING.md) on how you can contribute to
+the development of this package.
+
 #### Table of Contents  
 - [Authors and developers](#authors-and-developers)
 - [Installation](#installation)
