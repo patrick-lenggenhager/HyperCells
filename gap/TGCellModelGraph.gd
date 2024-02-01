@@ -118,7 +118,7 @@ DeclareGlobalFunction( "TGCellModelGraph" );
 DeclareGlobalFunction( "TessellationModelGraph" );
 
 #! @Description
-#!   Modifies the $\{p,q\}$-tessellation model graph <A>model</A> by adding
+#!   Modifies the $\{p,q\}$-tessellation model graph <A>model</A> in place by adding
 #!   oriented next-nearest neighbor edges to all faces with at least five edges.
 #!   The orientation of the next-nearest neighbor edges follows the positive
 #!   orientation of the faces of the $\{p,q\}$-tessellation.
@@ -135,8 +135,6 @@ DeclareGlobalFunction( "TessellationModelGraph" );
 #!   in the list of edges `CellEdges(`<A>model</A>`)`.
 #!   The model type remains unchanged.
 #! @Arguments model
-#! @Returns the model graph as `TGCellModelGraph` object
-#! (see <Ref Sect='Section_TGCellModelGraph'/>).
 DeclareGlobalFunction( "AddOrientedNNNEdgesToTessellationModelGraph" );
 
 #! @Description
