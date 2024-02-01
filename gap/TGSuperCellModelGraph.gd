@@ -143,6 +143,11 @@ DeclareOperation( "GetTGPrimitiveCell", [ IsTGSuperCellModelGraphObj ] );
 #! @Label for TGSuperCellModelGraph
 DeclareOperation( "GetTGSuperCell", [ IsTGSuperCellModelGraphObj ] );
 #! @Description
+#!   This is an alias for <Ref Oper='GetTGSuperCell' Label='for TGSuperCellModelGraph'/>.
+#! @Arguments model
+#! @Label for TGSuperCellModelGraph
+DeclareOperation( "GetTGCell", [ IsTGSuperCellModelGraphObj ] );
+#! @Description
 #!   returns a the identifier of the model type. See
 #!   <Ref Oper='ModelType' Label='for TGCellModelGraph'/> for more details.
 #! @Arguments model

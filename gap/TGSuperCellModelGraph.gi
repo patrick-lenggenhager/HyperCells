@@ -82,6 +82,11 @@ function(model)
 	return model!.supercell;
 end );
 
+InstallMethod( GetTGCell, [ IsTGSuperCellModelGraphObj and IsTGSuperCellModelGraphComponentRep ],
+function(model)
+	return GetTGSuperCell(model);
+end );
+
 InstallMethod( ModelType, [ IsTGSuperCellModelGraphObj and IsTGSuperCellModelGraphComponentRep ],
 function(model)
 	return model!.type;
@@ -184,8 +189,8 @@ function(model, sc)
 		cellembed;
 	
 	# check arguments
-	if not IsTGCellModelGraphObj(model) then
-		Error("The first argument must be a TGCellModelGraph object.");
+	if not (IsTGCellModelGraphObj(model) or IsTGSuperCellModelGraphObj(model)) then
+		Error("The first argument must be a TGCellModelGraph (or IsTGSuperCellModelGraph) object.");
 		return fail;
 	fi;
 	if not IsTGCellObj(sc) then
@@ -331,8 +336,8 @@ function(model, scquotient, args...)
 		cellembed;
 
 	# check arguments
-	if not IsTGCellModelGraphObj(model) then
-		Error("The first argument must be a TGCellModelGraph object.");
+	if not (IsTGCellModelGraphObj(model) or IsTGSuperCellModelGraphObj(model)) then
+		Error("The first argument must be a TGCellModelGraph (or IsTGSuperCellModelGraph) object.");
 		return fail;
 	fi;
 	if not IsTGQuotientObj(scquotient) then
