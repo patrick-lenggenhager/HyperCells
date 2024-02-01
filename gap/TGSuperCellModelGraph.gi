@@ -82,6 +82,11 @@ function(model)
 	return model!.supercell;
 end );
 
+InstallMethod( GetTGCell, [ IsTGSuperCellModelGraphObj and IsTGSuperCellModelGraphComponentRep ],
+function(model)
+	return GetTGSuperCell(model);
+end );
+
 InstallMethod( ModelType, [ IsTGSuperCellModelGraphObj and IsTGSuperCellModelGraphComponentRep ],
 function(model)
 	return model!.type;
