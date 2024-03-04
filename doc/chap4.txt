@@ -127,11 +127,10 @@
   [1X4.2-3 AddOrientedNNNEdgesToTessellationModelGraph[101X
   
   [33X[1;0Y[29X[2XAddOrientedNNNEdgesToTessellationModelGraph[102X( [3Xmodel[103X ) [32X function[133X
-  [6XReturns:[106X  [33X[0;10Ythe model graph as [10XTGCellModelGraph[110X object (see [14X4.1[114X).[133X
   
-  [33X[0;0YModifies  the  [23X\{p,q\}[123X-tessellation  model  graph  [3Xmodel[103X  by adding oriented
-  next-nearest  neighbor  edges  to  all  faces  with at least five edges. The
-  orientation   of  the  next-nearest  neighbor  edges  follows  the  positive
+  [33X[0;0YModifies  the  [23X\{p,q\}[123X-tessellation  model  graph  [3Xmodel[103X  in place by adding
+  oriented  next-nearest neighbor edges to all faces with at least five edges.
+  The  orientation  of  the  next-nearest  neighbor edges follows the positive
   orientation  of  the  faces  of the [23X\{p,q\}[123X-tessellation. Faces with four or
   less edges are ignored.[133X
   

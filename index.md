@@ -7,8 +7,11 @@ layout: default
 {{site.data.package.abstract}}
 
 The current version of this package is version {{site.data.package.version}}, released on {{site.data.package.date}}.
-For more information, please refer to [the package manual]({{site.data.package.doc-html}}).
-There is also a [README](README.html) file.
+A getting-started guide for this and its sister package
+([HyperBloch](https://github.com/patrick-lenggenhager/HyperBloch)) can be found
+[here](https://patrick-lenggenhager.github.io/software/2024/01/10/HyperGuide.html).
+For more information, please refer to the [README](README.html) file and the
+[the package manual]({{site.data.package.doc-html}}).
 
 ## Dependencies
 

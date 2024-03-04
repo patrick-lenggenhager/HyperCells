@@ -143,13 +143,14 @@
       5.3-4 CellCenter
       5.3-5 GetTGPrimitiveCell
       5.3-6 GetTGSuperCell
-      5.3-7 ModelType
-      5.3-8 CellVertices
-      5.3-9 CellVertexPositions
-      5.3-10 CellEdges
-      5.3-11 CellEdgeTranslations
-      5.3-12 CellFaces
-      5.3-13 CellEmbedding
+      5.3-7 GetTGCell
+      5.3-8 ModelType
+      5.3-9 CellVertices
+      5.3-10 CellVertexPositions
+      5.3-11 CellEdges
+      5.3-12 CellEdgeTranslations
+      5.3-13 CellFaces
+      5.3-14 CellEmbedding
     5.4 [33X[0;0YEmbedding of the Primitive Cell in the Supercell[133X
       5.4-1 PrimitiveCellTranslationGroup
       5.4-2 SuperCellTranslationGroup

@@ -180,9 +180,7 @@ TGCellModelGraph( cell,
 <h5>4.2-3 AddOrientedNNNEdgesToTessellationModelGraph</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AddOrientedNNNEdgesToTessellationModelGraph</code>( <var class="Arg">model</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
-<p>Returns: the model graph as <code class="code">TGCellModelGraph</code> object (see <a href="chap4.html#X87FE1AF37CFB0B86"><span class="RefLink">4.1</span></a>).</p>
-
-<p>Modifies the <span class="Math">\{p,q\}</span>-tessellation model graph <var class="Arg">model</var> by adding oriented next-nearest neighbor edges to all faces with at least five edges. The orientation of the next-nearest neighbor edges follows the positive orientation of the faces of the <span class="Math">\{p,q\}</span>-tessellation. Faces with four or less edges are ignored.</p>
+<p>Modifies the <span class="Math">\{p,q\}</span>-tessellation model graph <var class="Arg">model</var> in place by adding oriented next-nearest neighbor edges to all faces with at least five edges. The orientation of the next-nearest neighbor edges follows the positive orientation of the faces of the <span class="Math">\{p,q\}</span>-tessellation. Faces with four or less edges are ignored.</p>
 
 <p>The edge tags of the next-nearest neighbor edges take the form</p>
 

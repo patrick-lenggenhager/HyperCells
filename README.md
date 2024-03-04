@@ -26,6 +26,11 @@ and the list of quotient groups:
   [https://www.math.auckland.ac.nz/~conder/TriangleGroupQuotients101.txt](https://www.math.auckland.ac.nz/~conder/TriangleGroupQuotients101.txt) (2007)
 
 
+A getting-started guide for this and its sister package
+([HyperBloch](https://github.com/patrick-lenggenhager/HyperBloch)) can be found
+[here](https://patrick-lenggenhager.github.io/software/2024/01/10/HyperGuide.html).
+
+
 Please refer to [CONTRIBUTING.md](CONTRIBUTING.md) on how you can contribute to
 the development of this package.
 

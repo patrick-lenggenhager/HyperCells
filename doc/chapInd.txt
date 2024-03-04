@@ -15,24 +15,24 @@
       for TGSuperCellModelGraph 5.3-4 
   [2XCellEdges[102X, for TGCellGraph 3.7-7 
       for TGCellModelGraph 4.3-9 
-      for TGSuperCellModelGraph 5.3-10 
+      for TGSuperCellModelGraph 5.3-11 
   [2XCellEdgeTranslations[102X, for TGCellGraph 3.7-8 
       for TGCellModelGraph 4.3-10 
-      for TGSuperCellModelGraph 5.3-11 
-  [2XCellEmbedding[102X, for TGSuperCellModelGraph 5.3-13 
+      for TGSuperCellModelGraph 5.3-12 
+  [2XCellEmbedding[102X, for TGSuperCellModelGraph 5.3-14 
   [2XCellFaces[102X, for TGCellGraph 3.7-9 
       for TGCellModelGraph 4.3-11 
-      for TGSuperCellModelGraph 5.3-12 
+      for TGSuperCellModelGraph 5.3-13 
   [2XCellFacesWithCenter[102X, for TGCellGraph 3.7-10 
   [2XCellRelators[102X, for TGCell 3.2-2 
       for TGCellGraph 3.7-3 
       for TGCellModelGraph 4.3-2 
   [2XCellVertexPositions[102X, for TGCellGraph 3.7-6 
       for TGCellModelGraph 4.3-8 
-      for TGSuperCellModelGraph 5.3-9 
+      for TGSuperCellModelGraph 5.3-10 
   [2XCellVertices[102X, for TGCellGraph 3.7-5 
       for TGCellModelGraph 4.3-7 
-      for TGSuperCellModelGraph 5.3-8 
+      for TGSuperCellModelGraph 5.3-9 
   [2XExport[102X, for TGCellGraph, OutputTextStream 3.7-13 
       for TGCellGraph, String 3.7-13 
       for TGCellModelGraph, OutputTextStream 4.4-1 
@@ -63,6 +63,7 @@
       for TGCellPointGroup 3.5-3 
   [2XGetTGCell[102X, for TGCellGraph 3.7-12 
       for TGCellModelGraph 4.3-4 
+      for TGSuperCellModelGraph 5.3-7 
   [2XGetTGPrimitiveCell[102X, for TGSuperCellModelGraph 5.3-5 
   [2XGetTGSuperCell[102X, for TGSuperCellModelGraph 5.3-6 
   [2XHasTGCellMSWPs[102X, for TGCell 3.2-5 
@@ -87,7 +88,7 @@
   [2XLoadTGQuotients[102X 2.4-1 
   [2XModelName[102X, for TGCellModelGraph 4.3-6 
   [2XModelType[102X, for TGCellModelGraph 4.3-5 
-      for TGSuperCellModelGraph 5.3-7 
+      for TGSuperCellModelGraph 5.3-8 
   [2XNextTGQuotientOptions[102X 6.2-2 
   [2XPrimitiveCellRelators[102X, for TGSuperCellModelGraph 5.3-2 
   [2XPrimitiveCellTranslationGroup[102X, for TGCellEmbedding 5.4-1 

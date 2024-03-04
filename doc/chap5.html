@@ -40,13 +40,14 @@
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X82986DEE80966B2D">5.3-4 CellCenter</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X879B87447C28391A">5.3-5 GetTGPrimitiveCell</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X84E17B7D838AD2A8">5.3-6 GetTGSuperCell</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7EBC61717EC00174">5.3-7 ModelType</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7866750E7BB97A3B">5.3-8 CellVertices</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X85F298307E4E9494">5.3-9 CellVertexPositions</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X86B49759850EA4F3">5.3-10 CellEdges</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7E6686C07931B88E">5.3-11 CellEdgeTranslations</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7E2EC4117B3C8804">5.3-12 CellFaces</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X866BA50A7C6EC426">5.3-13 CellEmbedding</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7846B1A984C73E2E">5.3-7 GetTGCell</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7EBC61717EC00174">5.3-8 ModelType</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7866750E7BB97A3B">5.3-9 CellVertices</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X85F298307E4E9494">5.3-10 CellVertexPositions</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X86B49759850EA4F3">5.3-11 CellEdges</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7E6686C07931B88E">5.3-12 CellEdgeTranslations</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7E2EC4117B3C8804">5.3-13 CellFaces</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X866BA50A7C6EC426">5.3-14 CellEmbedding</a></span>
 </div></div>
 <div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X7CCCDE4283351A5C">5.4 <span class="Heading">Embedding of the Primitive Cell in the Supercell</span></a>
 </span>
@@ -88,22 +89,22 @@
 <li><p><code class="func">CellCenter</code> (<a href="chap5.html#X82986DEE80966B2D"><span class="RefLink">5.3-4</span></a>): the cell center of the supercell model graph</p>
 
 </li>
-<li><p><code class="func">CellEmbedding</code> (<a href="chap5.html#X866BA50A7C6EC426"><span class="RefLink">5.3-13</span></a>): the embedding of the primitive cell in the supercell as a <code class="code">TGCellEmbedding</code> object (see <a href="chap5.html#X7CCCDE4283351A5C"><span class="RefLink">5.4</span></a>)</p>
+<li><p><code class="func">CellEmbedding</code> (<a href="chap5.html#X866BA50A7C6EC426"><span class="RefLink">5.3-14</span></a>): the embedding of the primitive cell in the supercell as a <code class="code">TGCellEmbedding</code> object (see <a href="chap5.html#X7CCCDE4283351A5C"><span class="RefLink">5.4</span></a>)</p>
 
 </li>
-<li><p><code class="func">ModelType</code> (<a href="chap5.html#X7EBC61717EC00174"><span class="RefLink">5.3-7</span></a>): identifier of the type of model, e.g., tessellation, kagome etc.</p>
+<li><p><code class="func">ModelType</code> (<a href="chap5.html#X7EBC61717EC00174"><span class="RefLink">5.3-8</span></a>): identifier of the type of model, e.g., tessellation, kagome etc.</p>
 
 </li>
-<li><p><code class="func">CellVertices</code> (<a href="chap5.html#X7866750E7BB97A3B"><span class="RefLink">5.3-8</span></a>): the vertices of the supercell model graph, i.e., the sites of the tight-binding model</p>
+<li><p><code class="func">CellVertices</code> (<a href="chap5.html#X7866750E7BB97A3B"><span class="RefLink">5.3-9</span></a>): the vertices of the supercell model graph, i.e., the sites of the tight-binding model</p>
 
 </li>
-<li><p><code class="func">CellVertexPositions</code> (<a href="chap5.html#X85F298307E4E9494"><span class="RefLink">5.3-9</span></a>): the positions of the vertices of the supercell model graph as elements of the proper triangle group</p>
+<li><p><code class="func">CellVertexPositions</code> (<a href="chap5.html#X85F298307E4E9494"><span class="RefLink">5.3-10</span></a>): the positions of the vertices of the supercell model graph as elements of the proper triangle group</p>
 
 </li>
-<li><p><code class="func">CellEdges</code> (<a href="chap5.html#X86B49759850EA4F3"><span class="RefLink">5.3-10</span></a>): the edges of the supercell model graph, i.e., the hoppings of the tight-binding model, including potential translations associated with them</p>
+<li><p><code class="func">CellEdges</code> (<a href="chap5.html#X86B49759850EA4F3"><span class="RefLink">5.3-11</span></a>): the edges of the supercell model graph, i.e., the hoppings of the tight-binding model, including potential translations associated with them</p>
 
 </li>
-<li><p><code class="func">CellFaces</code> (<a href="chap5.html#X7E2EC4117B3C8804"><span class="RefLink">5.3-12</span></a>): the faces of the supercell model graph, i.e., the plaquettes of the tight-binding model</p>
+<li><p><code class="func">CellFaces</code> (<a href="chap5.html#X7E2EC4117B3C8804"><span class="RefLink">5.3-13</span></a>): the faces of the supercell model graph, i.e., the plaquettes of the tight-binding model</p>
 
 </li>
 </ul>
@@ -205,16 +206,23 @@ TGSuperCellModelGraph(
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GetTGSuperCell</code>( <var class="Arg">model</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>returns the <code class="code">TGCell</code> object (see <a href="chap3.html#X7EFB1FA283E2C890"><span class="RefLink">3.1</span></a>) associated with the model's <em>supercell</em>.</p>
 
+<p><a id="X7846B1A984C73E2E" name="X7846B1A984C73E2E"></a></p>
+
+<h5>5.3-7 GetTGCell</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GetTGCell</code>( <var class="Arg">model</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>This is an alias for <code class="func">GetTGSuperCell</code> (<a href="chap5.html#X84E17B7D838AD2A8"><span class="RefLink">5.3-6</span></a>).</p>
+
 <p><a id="X7EBC61717EC00174" name="X7EBC61717EC00174"></a></p>
 
-<h5>5.3-7 ModelType</h5>
+<h5>5.3-8 ModelType</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ModelType</code>( <var class="Arg">model</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>returns a the identifier of the model type. See <code class="func">ModelType</code> (<a href="chap4.html#X789A090384E0718C"><span class="RefLink">4.3-5</span></a>) for more details.</p>
 
 <p><a id="X7866750E7BB97A3B" name="X7866750E7BB97A3B"></a></p>
 
-<h5>5.3-8 CellVertices</h5>
+<h5>5.3-9 CellVertices</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CellVertices</code>( <var class="Arg">model</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>returns the vertices of the model graph as a list.</p>
@@ -223,14 +231,14 @@ TGSuperCellModelGraph(
 
 <p><a id="X85F298307E4E9494" name="X85F298307E4E9494"></a></p>
 
-<h5>5.3-9 CellVertexPositions</h5>
+<h5>5.3-10 CellVertexPositions</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CellVertexPositions</code>( <var class="Arg">model</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>returns the positions of the vertices as elements of the proper triangle group <span class="Math">\Delta^+</span>.</p>
 
 <p><a id="X86B49759850EA4F3" name="X86B49759850EA4F3"></a></p>
 
-<h5>5.3-10 CellEdges</h5>
+<h5>5.3-11 CellEdges</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CellEdges</code>( <var class="Arg">model</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>returns the edges of the model graph as a list.</p>
@@ -243,21 +251,21 @@ TGSuperCellModelGraph(
 
 <p><a id="X7E6686C07931B88E" name="X7E6686C07931B88E"></a></p>
 
-<h5>5.3-11 CellEdgeTranslations</h5>
+<h5>5.3-12 CellEdgeTranslations</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CellEdgeTranslations</code>( <var class="Arg">model</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>returns the translations associated with the edges of the model graph. The translations are given as elements of the finitely presented group <code class="code">FpGroup(TGCellTranslationGroup(GetTGCell(</code>model<code class="code">)))</code> and describe the translation of the unit cell containing the first vertex of the oriented edge to the unit cell containing the second.</p>
 
 <p><a id="X7E2EC4117B3C8804" name="X7E2EC4117B3C8804"></a></p>
 
-<h5>5.3-12 CellFaces</h5>
+<h5>5.3-13 CellFaces</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CellFaces</code>( <var class="Arg">model</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>returns the faces of the model graph as a list.</p>
 
 <p><a id="X866BA50A7C6EC426" name="X866BA50A7C6EC426"></a></p>
 
-<h5>5.3-13 CellEmbedding</h5>
+<h5>5.3-14 CellEmbedding</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CellEmbedding</code>( <var class="Arg">supercell-model</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>returns the embedding of the primitive cell in the supercell as a <code class="code">TGCellEmbedding</code> object (see <a href="chap5.html#X7CCCDE4283351A5C"><span class="RefLink">5.4</span></a>).</p>
