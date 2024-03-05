@@ -69,44 +69,50 @@ If you use this package, please cite the package repository
 {% raw %}
 P. M. Lenggenhager, J. Maciejko, and T. Bzdušek,
 *HyperCells: A GAP package for constructing primitive cells and supercells of
-hyperbolic lattices*, https://github.com/patrick-lenggenhager/HyperCells (2023)
+hyperbolic lattices*, [https://github.com/patrick-lenggenhager/HyperCells](https://github.com/patrick-lenggenhager/HyperCells),
+[10.5281/zenodo.10222598](https://doi.org/10.5281/zenodo.10222598) (2023)
 
 ```BibTeX
 @misc{HyperCells,
-  title           = {{H}yper{C}ells: {A} {GAP} package for constructing primitive cells and supercells of hyperbolic lattices},
+  title           = {Hyper{C}ells: {A} {GAP} package for constructing primitive cells and supercells of hyperbolic lattices},
   author          = {Lenggenhager, Patrick M. and Maciejko, Joseph and Bzdu\v{s}ek, Tom\'{a}\v{s}},
   year            = {2023},
-  howpublished    = {\url{https://github.com/patrick-lenggenhager/HyperCells}}
+  doi             = {10.5281/zenodo.10222598},
+  note            = {\url{https://github.com/patrick-lenggenhager/HyperCells}}
 }
 ```
 
 and at least one of the following references:
 
 P. M. Lenggenhager, J. Maciejko, and T. Bzdušek,
-*Non-Abelian hyperbolic band theory from supercells*, Phys. Rev. Lett. (accepted), 
-[arXiv:2305.04945](https://doi.org/10.48550/arXiv.2305.04945) (2023)
+*Non-Abelian hyperbolic band theory from supercells*,
+[Phys. Rev. Lett. 131, 226401](https://doi.org/10.1103/PhysRevLett.131.226401) (2023)
 ```BibTeX
 @article{Lenggenhager:2023,
-  title           = {Non-{A}belian hyperbolic band theory from supercells}, 
-  author          = {Lenggenhager, Patrick M. and Maciejko, Joseph and Bzdu\v{s}ek, Tom\'{a}\v{s}},
-  year            = {2023},
-  journal         = {Phys. Rev. Lett. (accepted)},
-  eprint          = {2305.04945},
-  eprintType      = {arXiv},
-  archivePrefix   = {arXiv},
-  doi             = {10.48550/arXiv.2305.04945}
+  title               = {Non-{A}belian hyperbolic band theory from supercells}, 
+  author              = {Lenggenhager, Patrick M. and Maciejko, Joseph and Bzdu\v{s}ek, Tom\'{a}\v{s}},
+  journal             = {Phys. Rev. Lett.},
+  volume              = {131},
+  issue               = {22},
+  pages               = {226401},
+  numpages            = {7},
+  year                = {2023},
+  month               = {Dec},
+  publisher           = {American Physical Society},
+  doi                 = {10.1103/PhysRevLett.131.226401}
 }
 ```
 
 P. M. Lenggenhager,
 *Emerging avenues in band theory: multigap topology and hyperbolic lattices*,
-PhD thesis, ETH Zurich (2023)
+[PhD thesis](https://doi.org/10.3929/ethz-b-000645370), ETH Zurich (2023)
 ```BibTeX
 @phdthesis{Lenggenhager:PhDThesis,
   title           = {Emerging avenues in band theory: multigap topology and hyperbolic lattices},
   author          = {Lenggenhager, Patrick M.}, 
   year            = {2023},
-  school          = {ETH Zurich}
+  school          = {ETH Zurich},
+  doi             = {10.3929/ethz-b-000645370}
 }
 ```
 
@@ -114,7 +120,7 @@ as well as the following reference for the database of quotients of triangle gro
 with normal subgroups:
 
 M. Conder, *Quotients of triangle groups acting on surfaces of genus 2 to 101*,
-https://www.math.auckland.ac.nz/~conder/TriangleGroupQuotients101.txt (2007)
+[https://www.math.auckland.ac.nz/~conder/TriangleGroupQuotients101.txt](https://www.math.auckland.ac.nz/~conder/TriangleGroupQuotients101.txt) (2007)
 ```BibTeX
 @misc{Conder:2007,
   title           = {Quotients of triangle groups acting on surfaces of genus 2 to 101},

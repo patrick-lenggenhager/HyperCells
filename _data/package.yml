@@ -22,6 +22,7 @@ GAP: ">= 4.11"
 www: https://patrick-lenggenhager.github.io/HyperCells/
 readme: README.md
 packageinfo: https://patrick-lenggenhager.github.io/HyperCells/PackageInfo.g
+github: https://github.com/patrick-lenggenhager/HyperCells
 
 downloads:
     - name: .tar.gz
