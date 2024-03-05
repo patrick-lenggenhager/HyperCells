@@ -83,11 +83,8 @@ of the publication mentioned above.
 - `TGCellGraph` objects and symmetric `TGCell` objects cannot be produced for
   cells without mirror symmetries, i.e., for quotients that act "chirally" on
   the surface.
-- Tests currently only succeed with GAP version 4.11 due to different but equivalent
-  representation of certain groups elements as words in the generators.
-- Faces of `TGCellGraph` objects are currently not implemented for all cases, they
-  are only implemented for tessellation and kagome graphs obtained using the
-  `TGTessellationGraph` and `TGKagomeGraph` functions, respectively.
+- Faces of `TGCellGraph` objects have only been tested in the context of
+  `TGTessellationGraph` and `TGKagomeGraph` and might not work in general.
 
 ## HyperBloch package
 
