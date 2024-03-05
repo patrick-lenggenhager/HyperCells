@@ -91,7 +91,7 @@ DeclareCategory( "IsTGCellModelGraphObj", IsObject );
 #!   @BeginLog
 #! GetRightTransversal( TGCellPointGroup( GetTGCell( <A>model</A> ) ) )[s1]
 #!   @EndLog
-#! For `n=2`, on the other hand, edges are constructed based on faces, and as such `root``
+#! For `n=2`, on the other hand, edges are constructed based on faces, and as such `root`
 #!   takes the form
 #!   @BeginLog
 #! [ f, e1, e2 ]
