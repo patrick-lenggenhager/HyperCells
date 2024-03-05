@@ -48,7 +48,7 @@
 #!   center = w,
 #!   type = <type>,
 #!   vertices = [ [ w1, gi1 ], [ w2, gi2 ], ... ],
-#!   edges = [ [ v1, v2, s, gam ], ... ],
+#!   edges = [ [ v1, v2, tag, gam ], ... ],
 #!   faces = [ [ [ e1, o1 ], [ e2, o2 ], ... ], ... ]
 #! )
 #! @EndLog
