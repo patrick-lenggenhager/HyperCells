@@ -85,21 +85,21 @@ DeclareCategory( "IsTGCellModelGraphObj", IsObject );
 #! Schwarz triangles $g_1,g_2$ associated with the cell-graph edges in $T_{\Delta^+}(\Gamma)$.
 #! We can obtain $\delta$ as follows:
 #!   @BeginLog
-#! GetRightTransversal( TGCellMSWPs( GetTGCell( <A>model</A> ) ) )[w][gi]
+#! GetRightTransversal( TGCellMSWPs( GetTGCell( model ) ) )[w][gi]
 #!   @EndLog
 #! and $g_1$:
 #!   @BeginLog
-#! GetRightTransversal( TGCellPointGroup( GetTGCell( <A>model</A> ) ) )[s1]
+#! GetRightTransversal( TGCellPointGroup( GetTGCell( model ) ) )[s1]
 #!   @EndLog
 #! For `n=2`, on the other hand, edges are constructed based on faces, and as such `root`
 #!   takes the form
 #!   @BeginLog
 #! [ f, e1, e2 ]
 #!   @EndLog
-#! `f` is the position of the face characterizing the edge in the list of faces
-#! `CellFaces(`<A>model</A>`)`, and `e1`, `e2` are the positions of the nearest-neighbor
+#! where `f` is the position of the face characterizing the edge in the list of faces
+#! `CellFaces(model)`, and `e1`, `e2` are the positions of the nearest-neighbor
 #! edges that together connect the same vertices as the next-nearest-neighbor edge
-#! in the list of edges `CellEdges(`<A>model</A>`)`.
+#! in the list of edges `CellEdges(model)`.
 
 
 #! @Description
