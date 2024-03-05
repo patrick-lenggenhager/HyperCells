@@ -97,13 +97,13 @@ TGCellModelGraph( cell,
   center = w,
   type = &lt;type&gt;,
   vertices = [ [ w1, gi1 ], [ w2, gi2 ], ... ],
-  edges = [ [ v1, v2, s, gam ], ... ],
+  edges = [ [ v1, v2, tag, gam ], ... ],
   faces = [ [ [ e1, o1 ], [ e2, o2 ], ... ], ... ],
   boundary = [ [ d1, d2, e, b, m, gam ], ... ]
 )
 </pre></div>
 
-<p>See the corresponding references above for details.</p>
+<p>See the corresponding references above and the discussion of <code class="code">tag</code> in <a href="chap4.html#X87FE1AF37CFB0B86"><span class="RefLink">4.1</span></a> for details.</p>
 
 <p><a id="X815588F086D7AFC5" name="X815588F086D7AFC5"></a></p>
 
@@ -123,7 +123,42 @@ TGCellModelGraph( cell,
 
 </li>
 </ul>
-<p>In all of those functions, the option <code class="code">simplify</code>, which takes a non-negative integer as argument, can be used to specify the level of simplification of words in the translation group, both for the translation generators expressed in terms of generators of the proper triangle group and for the translations expressed as elements of the finitely presented group.</p>
+<p>In all of those functions, the option <code class="code">simplify</code>, which takes a non-negative integer as argument, can be used to specify the level of simplification of words in the translation group, both for the translation generators expressed in terms of generators of the proper triangle group and for the translations expressed as elements of the finitely presented group. As shown in <a href="chap4.html#X87FE1AF37CFB0B86"><span class="RefLink">4.1</span></a>, additional information about the edges is given by edge tags. The edge tags depend on the particular model type, but follow the basic structure</p>
+
+
+<div class="example"><pre>
+[ n, root ]
+</pre></div>
+
+<p>where <code class="code">n</code> specifies the range of the edge, i.e., <code class="code">1</code> for nearest-neighbors (based on the cell graph), <code class="code">2</code> for next-nearest-neighbors, and so on, and <code class="code">root</code> specifies how the edge was constructed. For <code class="code">n=1</code>, <code class="code">root</code> takes the form</p>
+
+
+<div class="example"><pre>
+[ [ w, gi ], s1, s2 ]
+</pre></div>
+
+<p>where <code class="code">gi</code> is the position of the element <span class="Math">\delta</span> in <span class="Math">T_{G^+}(G_w^+)</span> characterizing the cell-graph edge vertex the edge roots in, and <code class="code">s1</code>, <code class="code">s2</code> are the positions of the Schwarz triangles <span class="Math">g_1,g_2</span> associated with the cell-graph edges in <span class="Math">T_{\Delta^+}(\Gamma)</span>. We can obtain <span class="Math">\delta</span> as follows:</p>
+
+
+<div class="example"><pre>
+GetRightTransversal( TGCellMSWPs( GetTGCell( model ) ) )[w][gi]
+</pre></div>
+
+<p>and <span class="Math">g_1</span>:</p>
+
+
+<div class="example"><pre>
+GetRightTransversal( TGCellPointGroup( GetTGCell( model ) ) )[s1]
+</pre></div>
+
+<p>For <code class="code">n=2</code>, on the other hand, edges are constructed based on faces, and as such <code class="code">root</code> takes the form</p>
+
+
+<div class="example"><pre>
+[ f, e1, e2 ]
+</pre></div>
+
+<p>where <code class="code">f</code> is the position of the face characterizing the edge in the list of faces <code class="code">CellFaces(model)</code>, and <code class="code">e1</code>, <code class="code">e2</code> are the positions of the nearest-neighbor edges that together connect the same vertices as the next-nearest-neighbor edge in the list of edges <code class="code">CellEdges(model)</code>.</p>
 
 <p><a id="X7BA14A6582AE5C5E" name="X7BA14A6582AE5C5E"></a></p>
 
@@ -148,7 +183,7 @@ TGCellModelGraph( cell,
 [ 1, [ ve, s1, s2 ] ]
 </pre></div>
 
-<p>where the first entry, <code class="code">1</code>, indicates a nearest-neighbor edge, <code class="code">ve</code> is the position of the Schwarz triangle associated with the cell-graph edge vertex in <span class="Math">T_{\Delta^+}(\Gamma)</span>, and <code class="code">s1</code>, <code class="code">s2</code> are the positions of the Schwarz triangles associated with the cell-graph edges in <span class="Math">T_{\Delta^+}(\Gamma)</span>.</p>
+<p>where the first entry, <code class="code">1</code>, indicates a nearest-neighbor edge, <code class="code">ve=[w,gi]</code> specifies the cell-graph edge vertex with <code class="code">gi</code> the position of the element in <span class="Math">T_{G^+}(G_w^+)</span>, and <code class="code">s1</code>, <code class="code">s2</code> are the positions of the Schwarz triangles associated with the cell-graph edges in <span class="Math">T_{\Delta^+}(\Gamma)</span>.</p>
 
 <p><a id="X81214D9683970055" name="X81214D9683970055"></a></p>
 

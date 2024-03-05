@@ -1,7 +1,7 @@
 name: HyperCells
-version: "0.9.0-beta"
+version: "0.9.1-beta"
 license: "CC BY-SA 4.0"
-date: 2023-11-29
+date: 2024-03-05
 description: |
     A GAP package for constructing primitive cells and supercells of hyperbolic lattices
 
@@ -26,7 +26,7 @@ github: https://github.com/patrick-lenggenhager/HyperCells
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/patrick-lenggenhager/HyperCells/releases/download/v0.9.0-beta/HyperCells-0.9.0-beta.tar.gz
+      url: https://github.com/patrick-lenggenhager/HyperCells/releases/download/v0.9.1-beta/HyperCells-0.9.1-beta.tar.gz
 
 abstract: |
 
@@ -37,24 +37,24 @@ keywords: |
     hyperbolic lattices, triangle groups.
 citeas: |
     <p class='BibEntry'>
-    [<span class='BibKey'>LMB23</span>]   <b class='BibAuthor'>Lenggenhager, P. M., Maciejko, J. and Bzdušek, T.</b>,
+    [<span class='BibKey'>LMB24</span>]   <b class='BibAuthor'>Lenggenhager, P. M., Maciejko, J. and Bzdušek, T.</b>,
      <i class='BibTitle'>HyperCells, A GAP package for constructing primitive cells and supercells of hyperbolic lattices,
-             Version 0.9.0-beta</i>
-     (<span class='BibYear'>2023</span>)<br />
+             Version 0.9.1-beta</i>
+     (<span class='BibYear'>2024</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://patrick-lenggenhager.github.io/HyperCells/">https://patrick-lenggenhager.github.io/HyperCells/</a></span>.
     </p>
     
 
 bibtex: |
-    @misc{ HyperCells0.9.0-beta,
+    @misc{ HyperCells0.9.1-beta,
       author =           {Lenggenhager, P. M. and Maciejko, J. and Bzdu{\v s}ek, T.},
-      title =            {{HyperCells}, A GAP package for constructing primitive cells and supercells of hyperbolic lattices, {V}ersion 0.9.0-beta},
-      month =            {Nov},
-      year =             {2023},
+      title =            {{HyperCells}, A GAP package for constructing primitive cells and supercells of hyperbolic lattices, {V}ersion 0.9.1-beta},
+      month =            {Mar},
+      year =             {2024},
       note =             {GAP package},
       howpublished =     {\href {https://patrick-lenggenhager.github.io/HyperCells/} {\texttt{https://patrick-lenggenhager.github.io/}\discretionary {}{}{}\texttt{HyperCells/}}},
       keywords =         {hyperbolic lattices; triangle groups},
-      printedkey =       {LMB23}
+      printedkey =       {LMB24}
     }
 

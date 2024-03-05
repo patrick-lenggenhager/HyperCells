@@ -7,10 +7,10 @@
                                    lattices [101X
   
   
-                                   0.9.0-beta
+                                   0.9.1-beta
   
   
-                                29 November 2023
+                                  5 March 2024
   
   
                             Patrick M. Lenggenhager

@@ -38,13 +38,14 @@
     [4X[28X  center = w,[128X[104X
     [4X[28X  type = <type>,[128X[104X
     [4X[28X  vertices = [ [ w1, gi1 ], [ w2, gi2 ], ... ],[128X[104X
-    [4X[28X  edges = [ [ v1, v2, s, gam ], ... ],[128X[104X
+    [4X[28X  edges = [ [ v1, v2, tag, gam ], ... ],[128X[104X
     [4X[28X  faces = [ [ [ e1, o1 ], [ e2, o2 ], ... ], ... ],[128X[104X
     [4X[28X  boundary = [ [ d1, d2, e, b, m, gam ], ... ][128X[104X
     [4X[28X)[128X[104X
   [4X[32X[104X
   
-  [33X[0;0YSee the corresponding references above for details.[133X
+  [33X[0;0YSee  the corresponding references above and the discussion of [10Xtag[110X in [14X4.1[114X for
+  details.[133X
   
   
   [1X4.2 [33X[0;0YConstructing Models[133X[101X
@@ -66,7 +67,49 @@
   integer  as  argument, can be used to specify the level of simplification of
   words  in  the  translation  group,  both  for  the  translation  generators
   expressed  in  terms  of generators of the proper triangle group and for the
-  translations expressed as elements of the finitely presented group.[133X
+  translations expressed as elements of the finitely presented group. As shown
+  in  [14X4.1[114X,  additional  information about the edges is given by edge tags. The
+  edge  tags  depend  on  the  particular  model  type,  but  follow the basic
+  structure[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[ n, root ][128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0Ywhere  [10Xn[110X  specifies  the  range  of  the edge, i.e., [10X1[110X for nearest-neighbors
+  (based on the cell graph), [10X2[110X for next-nearest-neighbors, and so on, and [10Xroot[110X
+  specifies how the edge was constructed. For [10Xn=1[110X, [10Xroot[110X takes the form[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[ [ w, gi ], s1, s2 ][128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0Ywhere   [10Xgi[110X   is  the  position  of  the  element  [23X\delta[123X  in  [23XT_{G^+}(G_w^+)[123X
+  characterizing  the cell-graph edge vertex the edge roots in, and [10Xs1[110X, [10Xs2[110X are
+  the   positions  of  the  Schwarz  triangles  [23Xg_1,g_2[123X  associated  with  the
+  cell-graph edges in [23XT_{\Delta^+}(\Gamma)[123X. We can obtain [23X\delta[123X as follows:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28XGetRightTransversal( TGCellMSWPs( GetTGCell( model ) ) )[w][gi][128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0Yand [23Xg_1[123X:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28XGetRightTransversal( TGCellPointGroup( GetTGCell( model ) ) )[s1][128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YFor  [10Xn=2[110X,  on  the  other hand, edges are constructed based on faces, and as
+  such [10Xroot[110X takes the form[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[ f, e1, e2 ][128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0Ywhere  [10Xf[110X  is the position of the face characterizing the edge in the list of
+  faces [10XCellFaces(model)[110X, and [10Xe1[110X, [10Xe2[110X are the positions of the nearest-neighbor
+  edges  that  together connect the same vertices as the next-nearest-neighbor
+  edge in the list of edges [10XCellEdges(model)[110X.[133X
   
   [1X4.2-1 TGCellModelGraph[101X
   
@@ -94,10 +137,10 @@
     [4X[28X[ 1, [ ve, s1, s2 ] ][128X[104X
   [4X[32X[104X
   
-  [33X[0;0Ywhere  the  first  entry,  [10X1[110X,  indicates  a nearest-neighbor edge, [10Xve[110X is the
-  position  of the Schwarz triangle associated with the cell-graph edge vertex
-  in  [23XT_{\Delta^+}(\Gamma)[123X,  and  [10Xs1[110X,  [10Xs2[110X  are  the  positions  of the Schwarz
-  triangles associated with the cell-graph edges in [23XT_{\Delta^+}(\Gamma)[123X.[133X
+  [33X[0;0Ywhere  the  first  entry,  [10X1[110X,  indicates  a nearest-neighbor edge, [10Xve=[w,gi][110X
+  specifies  the cell-graph edge vertex with [10Xgi[110X the position of the element in
+  [23XT_{G^+}(G_w^+)[123X,  and  [10Xs1[110X,  [10Xs2[110X  are  the  positions  of the Schwarz triangles
+  associated with the cell-graph edges in [23XT_{\Delta^+}(\Gamma)[123X.[133X
   
   [1X4.2-2 TessellationModelGraph[101X
   
