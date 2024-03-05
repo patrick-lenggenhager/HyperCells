@@ -13,6 +13,9 @@ supercells using `TGSuperCellModelGraph`.
 - Add a change log (this file).
 - Add link to getting-started guide to README.md and to the website.
 
+## Changed
+- Update references: add published versions, DOIs etc.
+
 ## Fixed
 - Fix return type given in the documentation of `AddOrientedNNNEdgesToTessellationModelGraph`.
 
