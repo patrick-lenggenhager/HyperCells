@@ -1,6 +1,10 @@
 # The GAP package HyperCells
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10222599.svg)](https://doi.org/10.5281/zenodo.10222599)
+**Warning**: Note the potential breaking changes in version 0.9.1-beta if edge tags are
+explicitly referred to. The edge tag format for nearest-neighbor edges constructed using
+`TGCellModelGraph`, `TessellationModelGraph`, and `KagomeModelGraph` has been changed from
+`[ 1, [ gi, s1, s2 ] ]` to `[ 1, [ [ w, gi ], s1, s2 ] ]`.
 
 HyperCells is a [GAP](https://www.gap-system.org/) package that allows
 constructing primitive cells and supercells of hyperbolic lattices based on
