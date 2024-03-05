@@ -35,12 +35,13 @@
 #!   center = w,
 #!   type = <type>,
 #!   vertices = [ [ w1, gi1 ], [ w2, gi2 ], ... ],
-#!   edges = [ [ v1, v2, s, gam ], ... ],
+#!   edges = [ [ v1, v2, tag, gam ], ... ],
 #!   faces = [ [ [ e1, o1 ], [ e2, o2 ], ... ], ... ],
 #!   boundary = [ [ d1, d2, e, b, m, gam ], ... ]
 #! )
 #! @EndLog
-#! See the corresponding references above for details.
+#! See the corresponding references above and the discussion of `tag` in
+#! <Ref Sect='Section_TGCellModelGraph'/> for details.
 #!
 
 DeclareCategory( "IsTGCellModelGraphObj", IsObject );
@@ -66,6 +67,40 @@ DeclareCategory( "IsTGCellModelGraphObj", IsObject );
 #! of generators of the proper triangle group and for the translations expressed
 #! as elements of the finitely presented group.
 
+#! As shown in <Ref Sect='Section_TGCellModelGraph'/>, additional information about the
+#! edges is given by edge tags. The edge tags depend on the particular model type, but
+#! follow the basic structure
+#!   @BeginLog
+#! [ n, root ]
+#!   @EndLog
+#! where `n` specifies the range of the edge, i.e., `1` for nearest-neighbors (based on
+#! the cell graph), `2` for next-nearest-neighbors, and so on, and `root` specifies how
+#! the edge was constructed.
+#! For `n=1`, `root` takes the form
+#!   @BeginLog
+#! [ [ w, gi ], s1, s2 ]
+#!   @EndLog
+#! where `gi` is the position of the element $\delta$ in $T_{G^+}(G_w^+)$ characterizing the
+#! cell-graph edge vertex the edge roots in, and `s1`, `s2` are the positions of the
+#! Schwarz triangles $g_1,g_2$ associated with the cell-graph edges in $T_{\Delta^+}(\Gamma)$.
+#! We can obtain $\delta$ as follows:
+#!   @BeginLog
+#! GetRightTransversal( TGCellMSWPs( GetTGCell( model ) ) )[w][gi]
+#!   @EndLog
+#! and $g_1$:
+#!   @BeginLog
+#! GetRightTransversal( TGCellPointGroup( GetTGCell( model ) ) )[s1]
+#!   @EndLog
+#! For `n=2`, on the other hand, edges are constructed based on faces, and as such `root`
+#!   takes the form
+#!   @BeginLog
+#! [ f, e1, e2 ]
+#!   @EndLog
+#! where `f` is the position of the face characterizing the edge in the list of faces
+#! `CellFaces(model)`, and `e1`, `e2` are the positions of the nearest-neighbor
+#! edges that together connect the same vertices as the next-nearest-neighbor edge
+#! in the list of edges `CellEdges(model)`.
+
 
 #! @Description
 #!   Constructs the model graph derived from the `TGCellGraph` (see
@@ -86,10 +121,10 @@ DeclareCategory( "IsTGCellModelGraphObj", IsObject );
 #!   @BeginLog
 #! [ 1, [ ve, s1, s2 ] ]
 #!   @EndLog
-#!   where the first entry, `1`, indicates a nearest-neighbor edge, `ve` is the position
-#!   of the Schwarz triangle associated with the cell-graph edge vertex in
-#!   $T_{\Delta^+}(\Gamma)$, and `s1`, `s2` are the positions of the Schwarz triangles
-#!   associated with the cell-graph edges in $T_{\Delta^+}(\Gamma)$.
+#!   where the first entry, `1`, indicates a nearest-neighbor edge, `ve=[w,gi]` specifies
+#!   the cell-graph edge vertex with `gi` the position of the element in $T_{G^+}(G_w^+)$,
+#!   and `s1`, `s2` are the positions of the Schwarz triangles associated with the
+#!   cell-graph edges in $T_{\Delta^+}(\Gamma)$.
 #! @Arguments cellgraph,vfs,efs,ffs
 #! @Returns the model graph as `TGCellModelGraph` object
 #! (see <Ref Sect='Section_TGCellModelGraph'/>).

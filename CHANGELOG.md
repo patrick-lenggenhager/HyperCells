@@ -18,6 +18,7 @@ supercells using `TGSuperCellModelGraph`.
 
 ## Fixed
 - Fix return type given in the documentation of `AddOrientedNNNEdgesToTessellationModelGraph`.
+- Fix edge tag format for nearest-neighbor edges.
 
 
 ## [0.9.0-beta] - 2023-11-29
