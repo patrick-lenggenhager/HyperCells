@@ -275,7 +275,7 @@ function(cg, vfs, efs, ffs)
                             fi;
                         od;
                         e1 := [ eadj[1][1], eadj[2][1],
-                            [ 1, [ fcvs[ve][2], eadj[1][3], eadj[2][3] ] ]
+                            [ 1, [ fcvs[ve], eadj[1][3], eadj[2][3] ] ]
                         ];
                         # reversed edge
                         e2 := [ e1[2], e1[1],
@@ -302,7 +302,7 @@ function(cg, vfs, efs, ffs)
                             Position(verts, fcvs[(((ve-1)-1) mod Length(fcvs)) + 1]),
                             Position(verts, fcvs[(((ve+1)-1) mod Length(fcvs)) + 1]),
                             [ 1, [
-                                CellVertices(cg)[vf][2],
+                                CellVertices(cg)[vf],
                                 fcfs[(((ve-1)-1) mod Length(fcvs)) + 1],
                                 fcfs[(((ve+1)-1) mod Length(fcvs)) + 1]
                             ]]
