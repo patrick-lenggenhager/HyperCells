@@ -50,6 +50,7 @@ SourceRepository := rec(
     Type := "git",
     URL := "https://github.com/patrick-lenggenhager/HyperCells",
 ),
+GithubWWW       := ~.SourceRepository.URL,
 IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
 PackageWWWHome  := "https://patrick-lenggenhager.github.io/HyperCells/",
 PackageInfoURL  := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
