@@ -427,3 +427,717 @@ function(sequence)
 
     return true;
 end );
+
+
+# Type TGQuotientSequencesAdjacencyMatrix
+DeclareRepresentation("IsTGQuotientSequencesAdjacencyMatrixComponentRep", IsComponentObjectRep,
+	[ "signature", "boundByGenus", "lstTGQuotients", "lstMirrorSymmetries", "sparse", "adjMatrix" ]
+);
+
+
+InstallMethod( \=, [
+    IsTGQuotientSequencesAdjacencyMatrixObj and IsTGQuotientSequencesAdjacencyMatrixComponentRep,
+    IsTGQuotientSequencesAdjacencyMatrixObj and IsTGQuotientSequencesAdjacencyMatrixComponentRep ], 
+function(tgQSAdjMat1, tgQSAdjMat2)
+	return 	Signature(tgQSAdjMat1) = Signature(tgQSAdjMat2) and
+		BoundByGenus(tgQSAdjMat1) = BoundByGenus(tgQSAdjMat2) and
+		GetListTGQuotients(tgQSAdjMat1) = GetListTGQuotients(tgQSAdjMat2) and
+		MirrorSymmetries(tgQSAdjMat1) = MirrorSymmetries(tgQSAdjMat2) and
+		AdjacencyMatrix(tgQSAdjMat1) = AdjacencyMatrix(tgQSAdjMat2);
+end );
+
+
+
+InstallMethod( Signature, [ IsTGQuotientSequencesAdjacencyMatrixObj and IsTGQuotientSequencesAdjacencyMatrixComponentRep ], 
+function(tgQSAdjMat)
+	return tgQSAdjMat!.signature;
+end );
+
+InstallMethod( BoundByGenus, [ IsTGQuotientSequencesAdjacencyMatrixObj and IsTGQuotientSequencesAdjacencyMatrixComponentRep ], 
+function(tgQSAdjMat)
+	return tgQSAdjMat!.boundByGenus;
+end );
+
+InstallMethod( GetListTGQuotients, [ IsTGQuotientSequencesAdjacencyMatrixObj and IsTGQuotientSequencesAdjacencyMatrixComponentRep ], 
+function(tgQSAdjMat)
+	return tgQSAdjMat!.lstTGQuotients;
+end );
+
+InstallMethod( MirrorSymmetries, [ IsTGQuotientSequencesAdjacencyMatrixObj and IsTGQuotientSequencesAdjacencyMatrixComponentRep ], 
+function(tgQSAdjMat)
+	return tgQSAdjMat!.lstMirrorSymmetries;
+end );
+
+InstallMethod( IsSparse, [ IsTGQuotientSequencesAdjacencyMatrixObj and IsTGQuotientSequencesAdjacencyMatrixComponentRep ], 
+function(tgQSAdjMat)
+	return tgQSAdjMat!.sparse;
+end );
+
+InstallMethod( AdjacencyMatrix, [ IsTGQuotientSequencesAdjacencyMatrixObj and IsTGQuotientSequencesAdjacencyMatrixComponentRep ], 
+function(tgQSAdjMat)
+	return tgQSAdjMat!.adjMatrix;
+end );
+
+
+
+InstallMethod( PrintString, [ IsTGQuotientSequencesAdjacencyMatrixObj and IsTGQuotientSequencesAdjacencyMatrixComponentRep ], 
+function(tgQSAdjMat)
+	return Concatenation( "TGQuotientSequencesAdjacencyMatrix( ", 
+		PrintString(Signature(tgQSAdjMat)), ", ",
+		"boundByGenus = ", PrintString(BoundByGenus(tgQSAdjMat)), ", ",
+		"ListTGQuotients = ", PrintString(GetListTGQuotients(tgQSAdjMat)), ", ",
+		"MirrorSymmetries = ", PrintString(MirrorSymmetries(tgQSAdjMat)), ", ",
+		"sparse = ", PrintString(IsSparse(tgQSAdjMat)), ", ",
+		"adjMatrix = ", PrintString(AdjacencyMatrix(tgQSAdjMat)), 
+	")" );
+end );
+
+InstallMethod( PrintObj, [ IsTGQuotientSequencesAdjacencyMatrixObj and IsTGQuotientSequencesAdjacencyMatrixComponentRep ], 
+function(tgQSAdjMat)
+	Print(PrintString(tgQSAdjMat));
+end );
+
+
+# Saves translation groups in cache
+cachedGroup@ := MemoizePosIntFunction(function(conderIndex)
+	local tgANDQuot;
+	tgANDQuot := ValueOption("tgANDQuot");
+	return AsTGSubgroup(TGTranslationGroup(tgANDQuot[1], tgANDQuot[2]));
+end);
+
+# Takes a list of integers and returns a new integer of concatenated integers in the list.
+toIndex@ := function(IndexLst)
+	return Int(JoinStringsWithSeparator(List(IndexLst, x -> String(x)),""));
+end;
+
+InstallGlobalFunction( TGQuotientSequencesAdjacencyMatrix,
+function(tg)
+	local signature, conderIndexLst, boundByGenus, lenConder, adjMat, i, j, k, l, 
+         Quot1, Quot2, genus1, genus2, switch1, switch2, GAMMA1, GAMMA2, sparse, F, 
+         D, DELTA, a, b, c, embDDELTA, rels, relsfull, G, Gplus, mspLst, tempRecNames;
+
+	# Raising errors in input:
+	# ------------------------
+
+	if not IsProperTriangleGroupObj(tg) then
+		Error("The first argument must be a ProperTriangleGroup object.");
+		return fail;
+	fi;
+
+	# ---------------
+    	# Needed objects:
+    	# ---------------
+
+	signature := Signature(tg);
+	conderIndexLst := ListTGQuotients(signature);
+	
+	# ---------
+    	# Options :
+    	# ---------
+
+	# upper bound of triangle group quotients genus
+	boundByGenus := ValueOption("boundByGenus");
+	if boundByGenus = fail then
+		boundByGenus := 102; # Max. in Conder's list 101.
+	elif not IsPosInt(boundByGenus) then
+		Error(StringFormatted("boundByGenus {} is not a positive integer.", boundByGenus));
+	        return fail;
+	elif boundByGenus > 102 then
+		Print(StringFormatted("boundByGenus {} exceeded the upper bound 102, the default value 102 was used instead.", boundByGenus));
+		boundByGenus := 102; # Max. in Conder's list 101.
+	fi;
+
+	# condition for sparse rep. of adjacency matrix
+    	sparse := ValueOption("sparse");
+    	if sparse = fail then
+    		sparse := false;
+    	elif not IsBool(sparse) then
+		Error(StringFormatted("The option sparse {} is not valid. It must be a boolean.", sparse));
+		return fail;
+    	fi;
+	
+	# -----------
+	# Initialize:
+	# -----------
+	
+	# restrict list of quotients according to boundByGenus
+	conderIndexLst := Filtered(conderIndexLst, x -> x[1] < boundByGenus);
+        lenConder := Length(conderIndexLst);
+
+	# obj.s for mirror symmetry property (msp) of quotients:
+	# proper triangle group
+	D := FpGroup(tg); 
+	
+	# (full) triangle group and reflection generators
+	DELTA := FpGroup(TriangleGroup(signature));
+	a := DELTA.1;; b := DELTA.2;; c := DELTA.3;
+
+	# embedding homomorphism of D in DELTA
+	embDDELTA := GroupHomomorphismByImagesNC(D, DELTA, 
+			GeneratorsOfGroup(D), [a*b, b*c, c*a]);	
+
+	# initialize binary list of mirror symmetries
+	mspLst := [1];
+
+	# ---------------------------
+	# Construct adjacency matrix:
+	# ---------------------------
+	
+        if sparse then 
+		adjMat := rec(); # adjacency matrix predecessor (will be converted to nested list in the end)
+		for j in [2..Length(conderIndexLst)] do
+			
+			# Quot2: quotient with translation group to be compared with the 
+			# translation group of quotient Quot1
+			Quot2 := TGQuotient(conderIndexLst[j]);
+			genus2 := TGQuotientGenus(Quot2);
+
+			# translation group of Quot2
+			GAMMA2 := cachedGroup@(toIndex@(Concatenation(signature,conderIndexLst[j])) : tgANDQuot := [tg, Quot2]);
+
+
+			# Quotient mirror symmetry:
+			# -----------------------------------------------
+			# Check if quotient is mirror symmetric
+
+			# point group
+			rels := TGQuotientRelators(tg, Quot2);
+ 			Gplus := D / rels;
+
+			# full point group
+			relsfull := List(rels, r -> Image(embDDELTA, r));
+			G := DELTA / relsfull;
+
+			# Get mirror symmetry property:
+			if not Order(G) = 2 * Order(Gplus) then
+				Add(mspLst, 0);
+			else
+				Add(mspLst, 1);
+			fi;
+			# ------------------------------------------------
+		
+			# Tomas code
+			for k in [1..(j - 1)] do
+
+				i := j - k;
+
+				# Quot1: quotient with translation group to be compared with the 
+				# translation group of quotient Quot2
+				Quot1 := TGQuotient(conderIndexLst[i]);
+				genus1 := TGQuotientGenus(Quot1);
+				
+				# check Rieman-Hurwitz formula 
+				if IsInt((genus2 - 1)/(genus1 - 1)) and genus2 > genus1 then
+
+					switch2 := 0;
+					for l in [(i + 1)..(j - 1)] do
+
+						# get already present record names
+						tempRecNames := RecNames(adjMat);
+						
+						# check if the entry already exists
+						if String([i, l]) in tempRecNames and String([l, j]) in tempRecNames then
+							switch2 := 1; 
+							adjMat.(String([i, j])) := 1;
+							break;
+						fi;
+					od;
+
+					if switch2 = 0 then
+						
+						# translation group of Quot1
+						GAMMA1 := cachedGroup@(toIndex@(Concatenation(signature,conderIndexLst[i])) : tgANDQuot := [tg, Quot1]);
+						
+						# check normal subgroup relation
+						switch1 := IsSubset(GAMMA1, GAMMA2); # since GAMMA1 is a group IsSubset suffices
+						if switch1 = true then
+							adjMat.(String([i, j])) := 1;
+						fi;
+					fi;
+				fi;
+			od;
+	 	od;
+		# reformat record into a nested list of the form [ [[rowIdx, colIdx], entry], ... ]
+		adjMat := SortedList(List(RecNames(adjMat), item -> [EvalString(item),adjMat.(item)]));
+        else
+        	adjMat := NullMat(lenConder, lenConder); 
+		for j in [2..Length(conderIndexLst)] do
+	
+			# Quot2: quotient with translation group to be compared with the 
+			# translation group of quotient Quot1
+			Quot2 := TGQuotient(conderIndexLst[j]);
+			genus2 := TGQuotientGenus(Quot2);
+			GAMMA2 := cachedGroup@(toIndex@(Concatenation(signature,conderIndexLst[j])) : tgANDQuot := [tg, Quot2]);
+
+
+			# Quotient mirror symmetry:
+			# -----------------------------------------------
+			# Check if quotient is mirror symmetric
+
+			# point group
+			rels := TGQuotientRelators(tg, Quot2);
+ 			Gplus := D / rels;
+
+			# full point group
+			relsfull := List(rels, r -> Image(embDDELTA, r));
+			G := DELTA / relsfull;
+
+			# Get mirror symmetry property:
+			if not Order(G) = 2 * Order(Gplus) then
+				Add(mspLst, 0);
+			else
+				Add(mspLst, 1);
+			fi;
+			# ------------------------------------------------
+		        
+			# Tomas code
+			for k in [1..(j - 1)] do
+
+				i := j - k;
+
+				# Quot1: quotient with translation group to be compared with the 
+				# translation group of quotient Quot2
+				Quot1 := TGQuotient(conderIndexLst[i]);
+				genus1 := TGQuotientGenus(Quot1);
+
+				# check Rieman-Hurwitz formula 
+				if IsInt((genus2 - 1)/(genus1 - 1)) and genus2 > genus1 then
+
+					switch2 := 0;
+					for l in [(i + 1)..(j - 1)] do
+						
+						# check if the entry already exists
+						if adjMat[i, l] = 1 and adjMat[l, j] = 1 then
+							switch2 := 1; 
+							adjMat[i, j] := 1;
+							break;
+						fi;
+					od;
+
+					if switch2 = 0 then
+						
+						# translation group of Quot1
+						GAMMA1 := cachedGroup@(toIndex@(Concatenation(signature,conderIndexLst[i])) : tgANDQuot := [tg, Quot1]);
+
+						# check normal subgroup relation
+						switch1 := IsSubset(GAMMA1, GAMMA2); # since GAMMA1 is a group IsSubset suffices
+						if switch1 = true then
+							adjMat[i, j] := 1;
+						fi;
+					fi;
+				fi;
+			od;
+	 	od;
+	 fi;
+    
+	F := NewFamily( "TGQuotientSequencesAdjacencyMatrix", IsTGQuotientSequencesAdjacencyMatrixObj );
+    	return Objectify( NewType( F, IsTGQuotientSequencesAdjacencyMatrixObj and IsTGQuotientSequencesAdjacencyMatrixComponentRep ), rec(
+		signature := MakeImmutable(signature),
+		boundByGenus := MakeImmutable(boundByGenus),
+		lstTGQuotients := MakeImmutable(conderIndexLst),
+		lstMirrorSymmetries := MakeImmutable(mspLst),
+		sparse := MakeImmutable(sparse),
+		adjMatrix := MakeImmutable(adjMat)
+		));
+
+end );
+
+# Takes a matrix and replaces each entry 
+# by its sign: +/- 1 for non-zero entries, 0 otherwise.
+signMatrix@ := function(mat)
+	return List(mat, row -> List(row, entry -> SignInt(entry)));
+end;
+
+# Transposes a sparse matrix.
+sparseMatTranspose@ := function(matSparse)
+	return SortedList(List(matSparse, entry -> [Reversed(entry[1]),entry[2]]));
+end;
+
+# Multiplies two sparse matrices. (Not optimized)
+sparseMatMultiply@ := function(mat1, mat2)
+	local mat2T, matNew, i, j, entry1, entry2, rowIdx, colIdx, temp1, temp2, sum, signed;
+
+	# --------
+	# Options:
+	# --------		
+
+	# option signed: if signed is true each entry in the 
+	# sparse matrix will be replaced by its sign: +/- 1 
+	# for non-zero integers 0 otherwise.
+    	signed := ValueOption("signed");
+    	if signed = fail or signed = false then
+    		signed := 0;
+    	elif not IsBool(signed) then
+		Error(StringFormatted("The option signed {} is not valid. It must be a boolean.", signed));
+		return fail;
+	else
+		signed := 1;
+    	fi;
+
+        mat2T := sparseMatTranspose@(mat2); 
+	matNew :=  rec(); # new matrix predecessor (will be converted to nested list in the end)
+        for i in [1..Length(mat1)] do
+
+	    rowIdx := mat1[i,1][1]; # get row of matrix mat1
+            for j in [1..Length(mat2T)] do
+		
+                colIdx := mat2T[j,1][1]; # corresponds to row of matrix mat2
+		if not String([rowIdx, colIdx]) in RecNames(matNew) then
+
+		    temp1 := i;; temp2 := j;; sum := 0;
+                    while temp1 <= Length(mat1) and mat1[temp1,1][1] = rowIdx and temp2 <= Length(mat2T) and mat2T[temp2,1][1] = colIdx do
+              		
+			# multiplication conditions
+                        if mat1[temp1,1][2] < mat2T[temp2,1][2] then
+                            temp1 := temp1 + 1;
+                        elif mat1[temp1,1][2] > mat2T[temp2,1][2] then
+ 			    temp2 := temp2 + 1;
+                        else
+			     sum := sum + mat1[temp1,2]*mat2T[temp2,2];; temp1 := temp1 + 1;; temp2 := temp2 + 1;;
+                        fi;
+
+			if temp1 > Length(mat1) or temp2 > Length(mat2T) then
+				break;
+			fi;
+ 		    od;
+                    if not sum = 0 then
+			matNew.(String([rowIdx, colIdx])) := sum/AbsoluteValue(sum)^signed ;
+		    fi;
+		fi;
+	    od;
+	od;
+	# reformat record into a nested list of the form [ [[rowIdx, colIdx], entry], ... ]
+	return SortedList(List(RecNames(matNew), item -> [EvalString(item),matNew.(item)]));
+end;
+
+# Subtracts sparse matrix mat2 from mat1. (Not optimized)
+sparseMatSubtract@ := function(mat1, mat2)
+	local idx1, idx2, difference, matNew;
+
+	idx1 := 1;; idx2 := 1;; matNew :=  rec(); # new matrix predecessor (will be converted to nested list in the end)
+	while idx1 <= Length(mat1) and idx2 <= Length(mat2) do
+
+		# subtraction conditions for non-empty entries at matching positions in mat1 and mat2
+		if mat1[idx1,1][1] > mat2[idx2,1][1] or (mat1[idx1,1][1] = mat2[idx2,1][1] and mat1[idx1,1][2] > mat2[idx2,1][2]) then
+
+			matNew.(String(mat2[idx2,1])) := - mat2[idx2,2];
+			idx2 := idx2 + 1;
+	
+		elif mat1[idx1,1][1] < mat2[idx2,1][1] or (mat1[idx1,1][1] = mat2[idx2,1][1] and mat1[idx1,1][2] < mat2[idx2,1][2])  then
+
+			matNew.(String(mat1[idx1,1])) := mat1[idx1,2];
+			idx1 := idx1 + 1;
+			
+		else
+			difference := mat1[idx1,2] - mat2[idx2,2];
+			if not difference = 0 then
+				matNew.(String(mat1[idx1,1])) := difference;
+			fi;
+			idx1 := idx1 + 1;
+			idx2 := idx2 + 1;
+		fi;
+	od;
+
+	# if the above conditions are exhausted, trivial subtraction operations for
+	# non-empty entries at non-matching positions in mat1 and mat2 are performed
+        while idx1 <= Length(mat1) do
+        	matNew.(String(mat1[idx1,1])) := mat1[idx1,2];
+		idx1 := idx1 + 1;
+ 	od;
+
+        while idx2 <= Length(mat2) do
+		matNew.(String(mat2[idx2,1])) := -mat2[idx2,2];
+		idx2 := idx2 + 1;
+ 	od;
+	
+	# reformat record into a nested list of the form [ [[rowIdx, colIdx], entry], ... ]
+	return SortedList(List(RecNames(matNew), item -> [EvalString(item),matNew.(item)]));
+end;
+
+
+InstallMethod( NearestNeighborAdjacencyMatrix, [ IsTGQuotientSequencesAdjacencyMatrixObj and IsTGQuotientSequencesAdjacencyMatrixComponentRep ], 
+function(tgQSAdjMat)
+	local adjMat, NNadjMat;
+	
+	# get the adjacency matrix
+	adjMat := AdjacencyMatrix(tgQSAdjMat);
+
+	# check for sparsity and subtract the signed matrix 2nd matrix power of adjMat from adjMat
+	if IsSparse(tgQSAdjMat) then	
+		NNadjMat := sparseMatSubtract@(adjMat,sparseMatMultiply@(adjMat,adjMat : signed := true));
+	else 
+		NNadjMat := adjMat - signMatrix@(adjMat*adjMat);
+	fi;
+	return NNadjMat;
+end );
+
+# Depth First Search
+dfs@ := function(quotient, adjLst, idxLst, visited) 
+    local i, newIdxLst, maxIdx;
+
+    visited[quotient] := true; 
+    for i in [1..Length(adjLst[quotient])] do 
+         
+        if not visited[adjLst[quotient][i]] then 
+            dfs@(adjLst[quotient][i], adjLst, idxLst, visited);
+	fi;
+	
+	newIdxLst := [];
+	Append(newIdxLst, [quotient]);
+	Append(newIdxLst, idxLst[adjLst[quotient][i]]);
+	maxIdx := PositionMaximum([Length(idxLst[quotient]), Length(newIdxLst)]);
+        idxLst[quotient] := [idxLst[quotient], newIdxLst][maxIdx];
+   od;
+end;
+
+
+InstallMethod( LongestSequence, [ IsTGQuotientSequencesAdjacencyMatrixObj and IsTGQuotientSequencesAdjacencyMatrixComponentRep ], 
+function(tgQSAdjMat)
+	local adjMat, NNadjMat, quotient, lstTGQuotients, sparse, adjLst, idxLst, 
+	 visited, N, i, j, entry, mspLst, nonMirrorSymmetric;
+
+	# Needed objects:
+	# ---------------
+
+	adjMat := NearestNeighborAdjacencyMatrix(tgQSAdjMat); 
+	lstTGQuotients := GetListTGQuotients(tgQSAdjMat); 
+	mspLst := MirrorSymmetries(tgQSAdjMat);
+	sparse := IsSparse(tgQSAdjMat);
+	N := Length(lstTGQuotients);
+
+	# --------
+	# Options:
+	# --------
+
+	# starting quotient of longest quotient sequence
+    	quotient := ValueOption("quotient");
+    	if quotient = fail then
+    		quotient := 0;
+    	elif not (IsPosInt(quotient) or IsList(quotient)) then
+        	Error(StringFormatted("Invalid quotient specification: {}", quotient));
+        	return fail;
+    	fi;
+
+	if IsList(quotient) then
+		if not quotient in lstTGQuotients then
+			Error(StringFormatted("Quotient {} is not an element in {}.", quotient, lstTGQuotients));
+        		return fail;
+		else
+			quotient := Position(GetListTGQuotients(tgQSAdjMat), quotient);
+		fi;
+	elif not quotient <= Length(lstTGQuotients) and not quotient = 0 then
+		Error(StringFormatted("Quotient {} exceeds the number of elements {} in the list of quotient.", quotient, Length(lstTGQuotients)));
+        	return fail;	
+	fi;
+
+	# if to include quotient without mirror symmetries
+   	nonMirrorSymmetric := ValueOption("nonMirrorSymmetric");
+    	if nonMirrorSymmetric = fail or nonMirrorSymmetric = false then
+    		nonMirrorSymmetric := false;
+    	elif not IsBool(nonMirrorSymmetric) then
+        	Error(StringFormatted("The option nonMirrorSymmetric {} is not a boolean.", nonMirrorSymmetric));
+        	return fail;
+    	fi;
+
+	# if starting quotient has no mirror symmetries but nonMirrorSymmetric is false, i.e., only
+	# quotients having mirror symmetries are included, an error will be raised
+	if not nonMirrorSymmetric and not quotient = 0 then
+		if mspLst[quotient] = 0 then
+			Error("This quotinet does not have mirror symmetries.\n");
+			Print("Set option nonMirrorSymmetric to true if you want to include quotients without mirror symmetries.");
+			return fail;
+		fi;
+	fi;	
+
+	# -----------------------------
+	# Restructure adjacency matrix:
+	# -----------------------------
+	# Note: the use of SSortedList enables easy removal of list entries in the next code section
+	#       when option nonMirrorSymmetric is applied (i.e., ideal for the function RemoveSet)
+	
+	if not sparse then
+		# change dense matrix to a sparse matrix: ordered list of lists
+		# each list represents a row, with entries representing a column index of
+		# a non-zero entry (all non-zero entries are ones) 
+		adjLst := List(adjMat, row -> SSortedList(Positions(row, 1)));
+	else
+		# as above for dense matrices, i.e., change to another sparse representation 
+		adjLst := List([1..N], item -> SSortedList([])); 
+		for entry in adjMat do
+			Add(adjLst[entry[1,1]], entry[1,2]);
+		od;
+	fi; 
+
+	# -----------------------------
+	# Apply option mirrorSymmetric:
+	# -----------------------------
+
+	# TODO: optimize
+	if not nonMirrorSymmetric then
+		for i in [1..N] do
+			for j in [1..N] do
+				if mspLst[i] = 0 then
+					adjLst[i] := SSortedList([]);
+					break;
+				elif mspLst[j] = 0 then
+					RemoveSet(adjLst[i], j);
+				fi;
+			od;
+		od;
+	fi;		
+
+	# -------------------
+	# Depth First Search:
+	# -------------------
+
+    	idxLst := List([1..N], item -> [item]);
+    	visited := List([1..N], item -> false);
+
+    	# Call DFS for every unvisited vertex 
+    	for i in [1..N] do
+            	if not visited[i] then 
+            		dfs@(i, adjLst, idxLst, visited);
+		fi;
+	od;
+	
+	if quotient = 0 then
+		return lstTGQuotients{idxLst[PositionMaximum(List(idxLst, item -> Length(item)))]};
+	else 
+		return lstTGQuotients{idxLst[quotient]};
+	fi;
+end );
+
+
+InstallMethod( Export, [  IsTGQuotientSequencesAdjacencyMatrixObj, IsOutputTextStream ],
+function(tgQSAdjMat, output)
+
+    SetPrintFormattingStatus(output, false);
+    
+	# version
+	AppendTo(output, "HyperCells HCQS version 1.0");
+	AppendTo(output, "\n");
+
+    # write: triangle group, genus bound, list of quotients
+	AppendTo(output, Signature(tgQSAdjMat));
+	AppendTo(output, "\n");
+	AppendTo(output, BoundByGenus(tgQSAdjMat));
+	AppendTo(output, "\n");
+	AppendTo(output, GetListTGQuotients(tgQSAdjMat));
+	AppendTo(output, "\n");
+	AppendTo(output, MirrorSymmetries(tgQSAdjMat));
+	AppendTo(output, "\n");
+	AppendTo(output, IsSparse(tgQSAdjMat));
+	AppendTo(output, "\n");
+
+    # write: adjacency matrix
+	AppendTo(output, AdjacencyMatrix(tgQSAdjMat));
+end );
+
+InstallMethod( Export, [ IsTGQuotientSequencesAdjacencyMatrixObj, IsString ],
+function(tgQSAdjMat, path)
+    local output;
+
+    # open file
+    output := OutputTextFile(path, false);
+
+    Export(tgQSAdjMat, output);
+
+    # close file
+    CloseStream(output);
+end );
+
+
+InstallMethod( ExportString, [ IsTGQuotientSequencesAdjacencyMatrixObj ],
+function(tgQSAdjMat)
+	local str, output;
+
+	# open string stream
+	str := "";
+	output := OutputTextString(str, false);
+	
+	# export to stream
+	Export(tgQSAdjMat, output);
+
+	# close
+	CloseStream(output);
+
+	# return
+	return str;
+end );
+
+
+
+InstallGlobalFunction( ImportTGQuotientSequencesAdjacencyMatrix,
+function(input)
+    local version, signature, boundByGenus, conderIndexLst, mspLst, 
+     sparse, adjMat, F;
+
+	# check arguments
+	if not IsInputTextStream(input) then
+		Error("The first argument must be an input text stream.");
+		return fail;
+	fi;
+
+	# version
+	version := ReadAllLine(input);
+
+    	signature := EvalString(ReadAllLine(input));
+	boundByGenus := EvalString(ReadAllLine(input));
+	conderIndexLst := EvalString(ReadAllLine(input));
+	mspLst := EvalString(ReadAllLine(input));
+	sparse := EvalString(ReadAllLine(input));
+	adjMat := EvalString(ReadAllLine(input));
+	
+
+	F := NewFamily( "TGQuotientSequencesAdjacencyMatrix", IsTGQuotientSequencesAdjacencyMatrixObj );
+    	return Objectify( NewType( F, IsTGQuotientSequencesAdjacencyMatrixObj and IsTGQuotientSequencesAdjacencyMatrixComponentRep ), rec(
+		signature := MakeImmutable(signature),
+		boundByGenus := MakeImmutable(boundByGenus),
+		lstTGQuotients := MakeImmutable(conderIndexLst),
+		lstMirrorSymmetries := MakeImmutable(mspLst),
+		sparse := MakeImmutable(sparse),
+		adjMatrix := MakeImmutable(adjMat)
+	));
+end );
+
+
+InstallGlobalFunction( ImportTGQuotientSequencesAdjacencyMatrixFromFile,
+function(path)
+	local input, tgQSAdjMat;
+
+	# open input stream
+	input := InputTextFile(path);
+
+	# import
+	tgQSAdjMat := CallFuncList(ImportTGQuotientSequencesAdjacencyMatrix, [input]);
+
+	# close stream
+	CloseStream(input);
+
+	return tgQSAdjMat;
+end );
+
+
+InstallGlobalFunction( ImportTGQuotientSequencesAdjacencyMatrixFromString,
+function(string)
+	local input, tgQSAdjMat;
+
+	# check arguments
+	if not IsString(string) then
+		Error("The first argument must be a string.");
+		return fail;
+	fi;
+
+	# open string stream
+	input := InputTextString(string);
+	
+	# import
+	tgQSAdjMat := CallFuncList(ImportTGQuotientSequencesAdjacencyMatrix, [input]);
+
+	# close stream
+	CloseStream(input);
+
+	return tgQSAdjMat;
+end );
+
+
