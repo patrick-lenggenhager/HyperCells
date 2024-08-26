@@ -28,7 +28,6 @@ jobs:
         gap-branch:
           - stable-4.11
           - stable-4.12
-          - master
     steps:
       - uses: actions/checkout@v3
       - uses: gap-actions/setup-gap@v2
@@ -51,7 +50,7 @@ jobs:
         with:
           use-latex: 'true'
       - name: 'Upload documentation'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: manual
           path: ./doc/manual.pdf
