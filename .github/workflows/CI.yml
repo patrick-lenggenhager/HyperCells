@@ -7,6 +7,7 @@ on:
       - master
       - main
   pull_request:
+  workflow_dispatch:
 
 # the `concurrency` settings ensure that not too many CI jobs run in parallel
 concurrency:
