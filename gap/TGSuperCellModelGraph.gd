@@ -73,6 +73,19 @@ DeclareCategory( "IsTGSuperCellModelGraphObj", IsObject );
 #!   in general. Usually, the representatives are automatically chosen and arbitrary,
 #!   but they can be explicitly passed if desired.
 
+#! In all of those functions, the option `simplify`, which takes a non-negative
+#! integer as argument, can be used to specify the level of simplification of words
+#! in the translation group, both for the translation generators expressed in terms
+#! of generators of the proper triangle group and for the translations expressed
+#! as elements of the finitely presented group. The additional option
+#! `simplifyMethod`, which takes a string, can be used to specify the method of simplification. 
+#! By default `simplifyMethod` is set to `"BruteForce"`. If the package kbmag 
+#! (see kbmag reference manual <URL Text="kbmag Reference Manual ">https://docs.gap-system.org/pkg/kbmag/doc/chap0_mj.html</URL>)
+#! is loaded it is possible to set `simplifyMethod` to `"KnuthBendix"`, such that the 
+#! Knuth-Bendix completion algorithm is used in the simplification. This method uses the available space in cache, 
+#! which can be flushed by calling `FlushCaches` 
+#! (see section Mutability and Copying in the <URL Text="GAP Reference Manual ">https://docs.gap-system.org/doc/ref/chap0_mj.html</URL>).
+
 #! @Description
 #!   Constructs the supercell model graph obtained from extending the model <A>model</A>
 #!   given as a `TGCellModelGraph` object (see <Ref Sect='Section_TGCellModelGraph'/>)
