@@ -3589,7 +3589,6 @@ g6*g1^-1*g10*g7^-1, g6*g1^-1*g10*g7^-1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,\
 , 1, 1, 1, 1 ]\n[ ]"
 #@fi
 
-
 # Lieb
 gap> model := LiebModelGraph(cg : simplify := 0);;
 gap> sc := TGCellSymmetric(tg, TGQuotient([ 5, 1 ]), 3);;
