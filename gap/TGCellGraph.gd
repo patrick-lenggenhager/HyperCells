@@ -62,7 +62,14 @@ DeclareCategory( "IsTGCellGraphObj", IsObject );
 #!   both for the translation generators expressed in terms of generators of the
 #!   proper triangle group and for the translations expressed as elements of the
 #!   finitely presented group
-#!   `FpGroup(TGCellTranslationGroup(GetTGCell(`<A>cellgraph</A>`)))`.
+#!   `FpGroup(TGCellTranslationGroup(GetTGCell(`<A>cellgraph</A>`)))`. The additional option
+#!   `simplifyMethod`, which takes a string, can be used to specify the method of simplification. 
+#!   By default `simplifyMethod` is set to `"BruteForce"`. If the package kbmag 
+#!   (see kbmag reference manual <URL Text="kbmag Reference Manual ">https://docs.gap-system.org/pkg/kbmag/doc/chap0_mj.html</URL>)
+#!   is loaded it is possible to set `simplifyMethod` to `"KnuthBendix"`, such that the 
+#!   Knuth-Bendix completion algorithm is used in the simplification. This method uses the available space in cache, 
+#!   which can be flushed by calling `FlushCaches` 
+#!   (see section Mutability and Copying in the <URL Text="GAP Reference Manual ">https://docs.gap-system.org/doc/ref/chap0_mj.html</URL>). 
 #! @Arguments tg,quotient,center[,GAMgens[,TDGAM[,TGGw]]]
 #! @Returns cell graph as `TGCellGraph` object (see <Ref Sect='Section_TGCellGraph'/>).
 DeclareGlobalFunction( "TGCellGraph" );

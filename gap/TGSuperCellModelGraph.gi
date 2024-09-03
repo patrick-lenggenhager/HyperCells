@@ -276,18 +276,18 @@ function(model, sc)
 			# initial vertex in translated pc
 			v1 := Position(verts, Concatenation(ucverts[e[1]], [i1])); # label
 			d1 := TGCellDecomposition@(sc, w1, d10 * eta);
-			gam1 := SimplifyWord@(FpGroup(TGCellTranslationGroup(sc)), Image(FpIsomorphism(TGCellTranslationGroup(sc)), d1.gam), simplify);
+			gam1 := SimplifyWord@(FpGroup(TGCellTranslationGroup(sc)), Image(FpIsomorphism(TGCellTranslationGroup(sc)), d1.gam), simplify : simplifyMethod := ValueOption("simplifyMethod"));
 
 			# target vertex
 			eta2 := gam0 * eta; # target pc
 			i2 := PositionCanonical(QGAMs, eta2); # same as position in TGAM0GAM
 			v2 := Position(verts, Concatenation(ucverts[e[2]], [i2])); # label
 			d2 := TGCellDecomposition@(sc, w2, d20 * eta2);
-			gam2 := SimplifyWord@(FpGroup(TGCellTranslationGroup(sc)), Image(FpIsomorphism(TGCellTranslationGroup(sc)), d2.gam), simplify);
+			gam2 := SimplifyWord@(FpGroup(TGCellTranslationGroup(sc)), Image(FpIsomorphism(TGCellTranslationGroup(sc)), d2.gam), simplify : simplifyMethod := ValueOption("simplifyMethod"));
 
 			# translation in supercell
 			# assuming d1 = r1 * g1 is in pc, d2 = r2 * g2 * gam
-			gam := SimplifyWord@(FpGroup(TGCellTranslationGroup(sc)), gam2 * gam1^-1, simplify);
+			gam := SimplifyWord@(FpGroup(TGCellTranslationGroup(sc)), gam2 * gam1^-1, simplify : simplifyMethod := ValueOption("simplifyMethod"));
 
 			# edge
 			Append(edges, [ [ v1, v2, e{[1..3]}, gam ] ]);
@@ -444,7 +444,7 @@ function(model, scquotient, args...)
 			v2 := Position(verts, Concatenation(ucverts[e[2]], [i2])); # label
 
 			# translation in supercell
-			gam := SimplifyWord@(fpGAM, Image(isofpGAM, TGAMs[i2]^-1*eta2), simplify);
+			gam := SimplifyWord@(fpGAM, Image(isofpGAM, TGAMs[i2]^-1*eta2), simplify : simplifyMethod := ValueOption("simplifyMethod"));
 
 			# edge
 			Append(edges, [ [ v1, v2, e{[1..3]}, gam ] ]);
@@ -569,7 +569,7 @@ function(cellembed)
 		# construct images of generators under homomorphism GAM -> GAM0
 		GAMgens := GeneratorsOfGroup(FpGroup(GAM));
 		if simplify > 0 then
-			imgs := List(GAMgens, g -> SimplifyWord@(FpGroup(GAM0), Image(FpIsomorphism(GAM0), PreImagesRepresentative(FpIsomorphism(GAM), g)), simplify));
+			imgs := List(GAMgens, g -> SimplifyWord@(FpGroup(GAM0), Image(FpIsomorphism(GAM0), PreImagesRepresentative(FpIsomorphism(GAM), g)), simplify : simplifyMethod := ValueOption("simplifyMethod")));
 		else
 			imgs := List(GAMgens, g -> Image(FpIsomorphism(GAM0), PreImagesRepresentative(FpIsomorphism(GAM), g)));
 		fi;

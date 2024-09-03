@@ -191,7 +191,7 @@ function(cg, vfs, efs, ffs)
                     gam2 := e2[4]^(-e2[2]); # from edge vertex to vertex 2, i.e., outgoing
 
                     Append(edges, [[ e1[1], e2[1], [ 1, [ CellVertices(cg)[ve], e1[3], e2[3] ] ], 
-                        SimplifyWord@(FpGroup(TGCellTranslationGroup(GetTGCell(cg))), gam2 * gam1, simplify)
+                        SimplifyWord@(FpGroup(TGCellTranslationGroup(GetTGCell(cg))), gam2 * gam1, simplify : simplifyMethod := ValueOption("simplifyMethod"))
                     ]]);
                 od;
             fi;
@@ -436,7 +436,7 @@ function(model)
 
                 # simplify
                 gam := SimplifyWord@(FpGroup(TGCellTranslationGroup(GetTGCell(model))),
-                    gam, simplify);
+                    gam, simplify : simplifyMethod := ValueOption("simplifyMethod"));
 
                 # append NNN edge in the form
                 # `[ v1, v2, [ 2, [ f, e1, e2 ] ], gam ]`, where `v1` and `v2` are

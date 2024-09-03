@@ -11,9 +11,42 @@ ListProduct@ := function(list)
     return p;
 end;
 
+# Helper function for SimplifyWord@, keep track of multiple
+# function calls (both multiple functions and a single function which calls this
+# function multiple times) for the same group used in SimplifyWord@
+# in order to make sure that the potential warning message is printed
+# only once per considered ID.
+SimplifyMethodMessenger@ := MemoizePosIntFunction(function(ID)
+	local simplifyMethod, notAvailableMethods;
+
+	# intitialize
+    	notAvailableMethods := ["KnuthBendix"];
+  
+	# get option
+	simplifyMethod := ValueOption("simplifyMethod");
+
+	if simplifyMethod in notAvailableMethods then
+		Print(StringFormatted("#WARNING: It seems that the package kbmag is not available and thus the specified method {} is not installed.\n", simplifyMethod));
+		Print("The brute-force method will be used instead.\n");
+		return 1;
+	else
+		Print(StringFormatted("#WARNING: The simplify method {} is not known.\n", simplifyMethod));
+		Print("The brute-force method will be used instead.\n");
+		return 2;
+	fi;
+end );
+
 # Brute-force simplification of a word w in group G with a maximal word length of lmax.
 SimplifyWord@ := function(G, w, lmax)
-    local lw, gens, l, tuple, w2;
+    local lw, gens, l, tuple, w2, ID, simplifyMethod, availableMethods;
+
+    # Intitialize:
+    # ------------
+    availableMethods := ["BruteForce"];
+
+    # --------------
+    # Preliminaries:
+    # --------------
 
     if IsOne(w) then
         return One(G);
@@ -30,6 +63,34 @@ SimplifyWord@ := function(G, w, lmax)
     # generators and inverses
     gens := Concatenation(GeneratorsOfGroup(G), List(GeneratorsOfGroup(G), g -> g^-1));
 
+    # --------------------------------
+    # Check for option simplifyMethod:
+    # -------------------------------- 
+    # (simplifyMethod KnuthBendix available in Internal_kbmagExtension.g)
+    simplifyMethod := ValueOption("simplifyMethod");
+	
+    if simplifyMethod = fail then
+	simplifyMethod := "BruteForce";
+    fi;
+
+    # Construct ID:
+    # -------------
+    # for memoize function in SimplifyMethodMessenger@, (string to positive integer)
+    ID := AbsInt(CrcString(JoinStringsWithSeparator([String(gens), String(RelatorsOfFpGroup(G))], String(simplifyMethod))));
+
+    # Check for user input:
+    # ---------------------
+    
+    if not simplifyMethod in availableMethods then
+	SimplifyMethodMessenger@(ID : simplifyMethod := simplifyMethod);
+    fi;
+
+    # ----------------------------
+    # Perform word simplification:
+    # ----------------------------
+
+    # Brute-force method:
+    # -------------------
     for l in [1 .. Minimum(lw-1, lmax)] do
         # generate all words of length l and check equivalence
         for tuple in IteratorOfCartesianProduct(List([1 .. l], i -> gens)) do

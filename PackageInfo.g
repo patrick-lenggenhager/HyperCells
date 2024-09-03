@@ -85,7 +85,7 @@ PackageDoc := rec(
 Dependencies := rec(
   GAP := ">= 4.11",
   NeededOtherPackages := [ ],
-  SuggestedOtherPackages := [ ],
+  SuggestedOtherPackages := [ ["kbmag", ">= 1.5.10"] ],
   ExternalConditions := [ ],
 ),
 
@@ -93,8 +93,6 @@ AvailabilityTest := ReturnTrue,
 
 TestFile := "tst/testall.g",
 
-Keywords := [ "hyperbolic lattices", "triangle groups" ],
-
+Keywords := [ "hyperbolic lattices", "triangle groups" ]
+ 
 ));
-
-

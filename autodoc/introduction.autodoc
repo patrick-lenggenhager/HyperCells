@@ -162,3 +162,98 @@ which is returned as an object of category `TGSuperCellModelGraph`
 (see <Ref Sect='Section_TGSuperCellModelGraph'/>) and can be exported using the
 <Ref Oper='Export' Label='for TGSuperCellModelGraph, String'/> operation, producing
 a file in the format described in <Ref Sect='Section_FileFormatTGSuperCellModelGraph'/>.
+
+
+@Section Simplify extension (optional)
+@SectionLabel SimplifyExtension
+
+The HyperCells package has an integrated word simplification procedure for a selection of
+functions. Two methods are available: a default brute-force method,
+and a method based on the Knuth-Bendix completion algorithm. The latter can only be used provided the 
+<URL Text="kbmag">https://gap-packages.github.io/kbmag/doc/chap0_mj.html</URL>
+package (verion 1.5.10+) is available. 
+
+The default configuration of the kbmag package allows HyperCells to simplify 
+words in groups with a maximal number of generators of 127. However, this limit 
+can manually be extended up to 65535. The corresponding adjustments are laid out in a 
+README file in the kbmag package and can be found in the folder containing GAP: 
+“…/gap/gap-`&lt; version &gt;`/pkg/kbmag/standalone”, with the following instructions:
+
+
+@BeginExampleSession
+NEW in Version 2.3: It is now possible to use kbmag with more than the
+previous default number of 127 generators. To use up to 65535 generators,
+before making the package, edit the file "defs.h" in the lib directory,
+and change the two lines:
+
+#define MAXGEN MAXCHAR /* maximum number of generators */
+typedef char gen; /* for generators of monoids and groups */
+
+to
+
+#define MAXGEN MAXUSHORT /* maximum number of generators */
+typedef unsigned short gen; /* for generators of monoids and groups */
+@EndExampleSession
+
+Once these changes are made, kbmag needs to be recompiled. This can be done in the
+terminal, where in the kbmag directory one needs to execute the command `make clean` and afterwards
+`make`.
+
+If these changes are not made while using the Knuth-Bendix completion algorithm based simplification 
+and unit cells compactified on Rieman surfaces with genus exceeding 63 are used, the procedure 
+will not be excecuted and a warning will be printed in GAP:
+
+@BeginExampleSession
+#WARNING: maximal number of genartors have been exceeded; non-simplified words 
+will be used. Please follow the instructions in the chapter Introduction section
+Simplify extension (optional) in the HyperCells reference manual.
+@EndExampleSession
+
+Let us look at an example, provided kbmag is installed. We can apply the Knuth-Bendix method
+by using the option `simplifyMethod` specifying the method of simplification, which we can set
+to `"KnuthBendix"` (the default is `"BruteForce"`):
+
+@BeginExampleSession
+gap> scmodel := TGSuperCellModelGraph( model, sc : simplify := 4*3, 
+>       simplifyMethod := "KnuthBendix");
+#WARNING: system is not confluent, so reductions may not be to normal form.
+TGSuperCellModelGraph(
+    primitive cell = TGCell( ProperTriangleGroup(2, 8, 8),
+        [ x^2, x*y*z, x*z*y, y^3*z^-1 ] ),
+    supercell = TGCell( ProperTriangleGroup(2, 8, 8),
+        [ x^2, x*y*z, x*z*y, y^-8 ] ),
+    cell embedding = TGCellEmbedding(
+        primitive cell = TGCellTranslationGroup( < g1, g2, g3, g4 |
+            g2*g1^-1*g4^-1*g3*g2^-1*g1*g4*g3^-1 > ),
+        supercell = TGCellTranslationGroup( < g1, g2, g3, g4, g5, g6 |
+            g6*g4*g2*g1*g3*g5*g3^-1*g2^-1*g6^-1*g5^-1*g1^-1*g4^-1 > ),
+        transversal = [ <identity ...>, (x^-1*y^-1)^4*x^-1 ],
+        embedding = [ g1, g2, g3, g4, g5, g6 ] -> [ g1^-1*g4^-1, ... ]
+    ),
+    center = 3,
+    type = [ "TESS", [ 8, 8 ], [ "VEF", [ [ 3 ], [ 1 ], [ 2 ] ] ] ],
+    vertices = [ [ 3, 1, 1 ], [ 3, 1, 2 ] ],
+    edges = [ [ 1, 2, [ 1, 1, [ 1, [ 1, 1, 5 ] ] ], <identity ...> ], ... ],
+    faces = [ ]
+)
+@EndExampleSession
+
+where we have set the option `simplify` to twice the number of generators (or four times the genus) 
+in the associated translation group. A set of equations, denoted as rewriting rules, 
+will be constructed in the Knuth-Bendix method. In contrast to the brute-force method,
+the meaning of the option `simplify` is slightly adjusted. `simplify` now specifies the 
+maximal length of those rewriting rules. Specifically, the left- and right- hand sides are maximally 
+`simplify` and 2*(`simplify` + 1) long, respectively. If `simplify` is smaller than twice the 
+number of generators in the associated translation group, `simplify` will default back to twice 
+the number of generators, instead. 
+ 
+Note that in general, the system will not be confluent, i.e., the simplification might not
+yield the optimal solution. Nontheless, the application of the Knuth-Bendix method will still
+be able to simplify some words, however, shorter words might be available. 
+
+
+
+
+
+
+

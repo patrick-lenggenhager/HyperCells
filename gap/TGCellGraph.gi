@@ -362,7 +362,7 @@ function(tg, quotient, center, args...)
 				gamtfp := Image(FpIsomorphism(GAMMA), gamt);
 
 				if simplify then
-					gamtfp := SimplifyWord@(FpGroup(GAMMA), gamtfp, swordlength);
+					gamtfp := SimplifyWord@(FpGroup(GAMMA), gamtfp, swordlength : simplifyMethod := ValueOption("simplifyMethod"));
 				fi;
 				
 				if not IsOne(gamtfp) then
@@ -390,7 +390,7 @@ function(tg, quotient, center, args...)
 			gaml := gam2*gam1^-1;
 
 			if simplify then
-				gaml := SimplifyWord@(FpGroup(GAMMA), gaml, swordlength);
+				gaml := SimplifyWord@(FpGroup(GAMMA), gaml, swordlength : simplifyMethod := ValueOption("simplifyMethod"));
 			fi;
 
 			Append(edges, [e]);
@@ -504,7 +504,7 @@ function(tg, quotient, center, args...)
 			elif gamsym^-1 in gens then
 				return gens[Position(gens, gamsym^-1)]^-1;
 			elif simplify then
-				return SimplifyWord@(fpGAMsym, gamsym, swordlength);
+				return SimplifyWord@(fpGAMsym, gamsym, swordlength : simplifyMethod := ValueOption("simplifyMethod"));
 			else
 				return gamsym;
 			fi;
