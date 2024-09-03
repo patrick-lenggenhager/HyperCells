@@ -805,6 +805,7 @@ y ...> ], [ 29, 11, [ 1, 19 ], <identity ...> ], [ 34, 21, [ 1, 20 ], <identity 
  ], [ 20, -1 ] ], [ [ 41, 1 ], [ 37, -1 ], [ 44, 1 ], [ 40, -1 ], [ 47, 1 ], [ 35, -1 ], [ 42, 1 ], [ 38, -1 ], [ 45, \
 1 ], [ 33, -1 ], [ 48, 1 ], [ 36, -1 ], [ 43, 1 ], [ 39, -1 ], [ 46, 1 ], [ 34, -1 ] ] ] )
 #@else
+gap> FlushCaches();
 gap> lmg := LiebModelGraph(cg : simplify := 5, simplifyMethod := "KnuthBendix");
 #WARNING: It seems that the package kbmag is not available and thus \
 the specif\
