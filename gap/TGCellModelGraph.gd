@@ -20,7 +20,7 @@
 #! - <Ref Oper='CellCenter' Label='for TGCellModelGraph'/>:
 #!   the cell center of the model graph
 #! - <Ref Oper='ModelType' Label='for TGCellModelGraph'/>:
-#!   identifier of the type of model, e.g., tessellation, kagome etc.
+#!   identifier of the type of model, e.g., tessellation, kagome, Lieb etc.
 #! - <Ref Oper='CellVertices' Label='for TGCellModelGraph'/>:
 #!   the vertices of the model graph, i.e., the sites of the tight-binding model
 #! - <Ref Oper='CellEdges' Label='for TGCellModelGraph'/>:
@@ -60,6 +60,8 @@ DeclareCategory( "IsTGCellModelGraphObj", IsObject );
 #!   constructs a tessellation graph from a cell graph of a triangle group.
 #! - <Ref Func='KagomeModelGraph'/>:
 #!   constructs a kagome graph from a cell graph of a triangle group.
+#! - <Ref Func='LiebModelGraph'/>:
+#!   constructs a Lieb graph from a cell graph of a triangle group.
 
 #! In all of those functions, the option `simplify`, which takes a non-negative
 #! integer as argument, can be used to specify the level of simplification of words
@@ -150,7 +152,7 @@ DeclareGlobalFunction( "TGCellModelGraph" );
 #!   @EndLog
 #!   for the $\{p,q\}$ tessellation and to
 #!   @BeginLog
-#! [ "TESS", [ p, q ], [ "VEF", [ [ 3 ], [ 1 ], [ 2 ] ] ] ]
+#! [ "TESS", [ q, p ], [ "VEF", [ [ 3 ], [ 1 ], [ 2 ] ] ] ]
 #!   @EndLog
 #!   for the $\{q,p\}$ tessellation.
 #!   The edge tags are given in the same format as in <Ref Func='TGCellModelGraph'/>.
@@ -193,6 +195,21 @@ DeclareGlobalFunction( "AddOrientedNNNEdgesToTessellationModelGraph" );
 #! @Returns the model graph as `TGCellModelGraph` object
 #! (see <Ref Sect='Section_TGCellModelGraph'/>).
 DeclareGlobalFunction( "KagomeModelGraph" );
+
+#! @Description
+#!   Constructs the ${p,q}$-Lieb model graph derived from the `TGCellGraph`
+#!   (see <Ref Sect='Section_TGCellGraph'/>) <A>cellgraph</A> of the triangle group
+#!   $(2,q,p)$ associated with <A>cellgraph</A>.
+#!   
+#!   The model type is set to
+#!   @BeginLog
+#! [ "LIEB", p, [ "VEF", [ [ 1, 2 ], [  ], [ 3 ] ] ] ]
+#!   @EndLog
+#!   The edge tags are given in the same format as in <Ref Func='TGCellModelGraph'/>.
+#! @Arguments cellgraph
+#! @Returns the model graph as `TGCellModelGraph` object
+#! (see <Ref Sect='Section_TGCellModelGraph'/>).
+DeclareGlobalFunction( "LiebModelGraph" );
 
 
 #!
@@ -251,8 +268,12 @@ DeclareOperation( "GetTGCell", [ IsTGCellModelGraphObj ] );
 #!     group. The model type is given as
 #!     @BeginLog
 #! [ "KAGOME", p, [ "VEF", [ [ 1 ], [ 2 ], [ 2, 3 ] ] ] ]
+#!   - **Lieb graph**: Lieb model graph derived from a cell graph of a triangle
+#!     group. The model type is given as
+#!     @BeginLog
+#! [ "LIEB", [ p, q ], [ "VEF", [ [ 1, 2 ], [  ], [ 3 ] ] ] ]
 #!     @EndLog
-#!     See <Ref Func='KagomeModelGraph'/> for details.
+#!     See <Ref Func='LiebModelGraph'/> for details.
 #! @Arguments model
 #! @Label for TGCellModelGraph
 DeclareOperation( "ModelType", [ IsTGCellModelGraphObj ] );
@@ -263,6 +284,7 @@ DeclareOperation( "ModelType", [ IsTGCellModelGraphObj ] );
 #!   - **Derived graph**: `"derived-model&lt;[vfs,efs,ffs]&gt;"`
 #!   - **Tessellation graph**: `"{p,q}-tess"`
 #!   - **Kagome graph**: `"p-kagome"`
+#!   - **Lieb graph**: `"{p,q}-Lieb"`
 #! @Arguments model
 #! @Label for TGCellModelGraph
 DeclareOperation( "ModelName", [ IsTGCellModelGraphObj ] );
