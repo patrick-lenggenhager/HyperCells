@@ -807,10 +807,6 @@ y ...> ], [ 29, 11, [ 1, 19 ], <identity ...> ], [ 34, 21, [ 1, 20 ], <identity 
 #@else
 gap> FlushCaches();
 gap> lmg := LiebModelGraph(cg : simplify := 5, simplifyMethod := "KnuthBendix");
-#WARNING: It seems that the package kbmag is not available and thus \
-the specif\
-ied method KnuthBendix is not installed.
-The brute-force method will be used instead.
 TGCellModelGraph( TGCell( ProperTriangleGroup(2, 3, 8), [ x^2, y^3, x*y*z, z*y*x*z*y^-1*z^-1*x*z ] ), center = 3, type\
  = [ "LIEB", [ 8, 3 ], [ "VEF", [ [ 1, 2 ], [ ], [ 3 ] ] ] ], vertices = [ [ 1, 1 ], [ 1, 2 ], [ 1, 3 ], [ 1, 4 ], [ 1\
 , 5 ], [ 1, 6 ], [ 1, 7 ], [ 1, 8 ], [ 1, 9 ], [ 1, 10 ], [ 1, 11 ], [ 1, 12 ], [ 1, 13 ], [ 1, 14 ], [ 1, 15 ], [ 1, \
