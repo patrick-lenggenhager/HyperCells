@@ -198,7 +198,7 @@ function(cg, vfs, efs, ffs)
         od;
     else
         edges := List(Filtered(CellEdges(cg), e -> CellVertices(cg)[e[1]][1] in vfs and CellVertices(cg)[e[2]][1] in vfs),
-            e -> [ e[1], e[2], [ 1, e[3] ], e[4] ]
+            e -> [ Position(verts, CellVertices(cg)[e[1]]), Position(verts, CellVertices(cg)[e[2]]), [ 1, e[3] ], e[4] ]
         );
     fi;
 
@@ -330,7 +330,8 @@ function(cg, vfs, efs, ffs)
                     fi;
                 od;
             else # original edges
-                fes := List(Filtered(fces, e -> CellVertices(cg)[e[1][1]][1] in vfs and CellVertices(cg)[e[1][2]][1] in vfs), e -> [ Position(gedges, [ e[1][1], e[1][2], [ 1, e[1][3] ] ]), e[2] ]);
+                fes := List(Filtered(fces, e -> CellVertices(cg)[e[1][1]][1] in vfs and CellVertices(cg)[e[1][2]][1] in vfs),
+                    e -> [ Position(gedges, [ Position(verts, CellVertices(cg)[e[1][1]]), Position(verts, CellVertices(cg)[e[1][2]]), [ 1, e[1][3] ] ]), e[2] ]);
                 # TODO: correct orientation
             fi;
 
