@@ -268,6 +268,8 @@ DeclareOperation( "GetTGCell", [ IsTGCellModelGraphObj ] );
 #!     group. The model type is given as
 #!     @BeginLog
 #! [ "KAGOME", p, [ "VEF", [ [ 1 ], [ 2 ], [ 2, 3 ] ] ] ]
+#!     @EndLog
+#!     See <Ref Func='KagomeModelGraph'/> for details.
 #!   - **Lieb graph**: Lieb model graph derived from a cell graph of a triangle
 #!     group. The model type is given as
 #!     @BeginLog
