@@ -37,6 +37,10 @@ ReadPackage( "HyperCells", "gap/TGSuperCellModelGraph.gd");
 ReadPackage( "HyperCells", "gap/TGQuotientSequences.gd");
 #!
 #!
+#! @Chapter Hyperbolic lattice symmetries
+ReadPackage( "HyperCells", "gap/PGMatrix.gd");
+#!
+#!
 #! @Chapter File Formats
 #!
 #!
