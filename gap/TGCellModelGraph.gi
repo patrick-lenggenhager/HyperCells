@@ -480,8 +480,8 @@ function(cellgraph)
 end );
 
 InstallGlobalFunction(LiebModelGraph,
-function(cellgraph)
-    local signature, model, pq;
+function(cellgraph, args...)
+    local signature, model, pq, dual;
 
     # check arguments
     if not IsTGCellGraphObj(cellgraph) then
@@ -496,8 +496,19 @@ function(cellgraph)
         return fail;
     fi;
 
-    model := TGCellModelGraph(cellgraph, [ 1, 2 ], [  ], [ 3 ]);
-    pq := signature{[3,2]};
+    if Length(args) > 0 and IsBool(args[1]) then
+        dual := args[1];
+    else
+        dual := false;
+    fi;
+
+    if dual then
+    	model := TGCellModelGraph(cellgraph, [ 1, 3 ], [  ], [ 2 ]);
+    	pq := signature{[2,3]};
+    else
+    	model := TGCellModelGraph(cellgraph, [ 1, 2 ], [  ], [ 3 ]);
+    	pq := signature{[3,2]};
+    fi;
 
     model!.type := MakeImmutable([ "LIEB", [ pq[1], pq[2] ], model!.type ]);
     return model;
