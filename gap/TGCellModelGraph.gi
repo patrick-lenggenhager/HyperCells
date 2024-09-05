@@ -75,6 +75,8 @@ function(model)
         return StringFormatted("{{{1},{2}}}-tess", type[2][1], type[2][2]);
     elif Length(type) = 3 and type[1] = "KAGOME" then
         return StringFormatted("{1}-kagome", type[2]);
+    elif Length(type) = 3 and type[1] = "LIEB" then
+        return StringFormatted("{{{1},{2}}}-Lieb", type[2][1], type[2][2]);
     else
         return StringFormatted("model<{1}>",
             ReplacedString(ReplacedString(PrintString(type), " ", ""))
@@ -476,6 +478,43 @@ function(cellgraph)
     model!.type := MakeImmutable([ "KAGOME", p, model!.type ]);
     return model;
 end );
+
+InstallGlobalFunction(LiebModelGraph,
+function(cellgraph, args...)
+    local signature, model, pq, dual;
+
+    # check arguments
+    if not IsTGCellGraphObj(cellgraph) then
+        Error("The first argument must be a TGCellGraph object.");
+        return fail;
+    fi;
+
+    signature := Signature(GetProperTriangleGroup(cellgraph));
+
+    if not signature[1] = 2 then
+        Error(StringFormatted("The cell graph with signature {} is not compatible with a regular {p,q}-tessellation.", signature));
+        return fail;
+    fi;
+
+    if Length(args) > 0 and IsBool(args[1]) then
+        dual := args[1];
+    else
+        dual := false;
+    fi;
+
+    if dual then
+    	model := TGCellModelGraph(cellgraph, [ 1, 3 ], [  ], [ 2 ]);
+    	pq := signature{[2,3]};
+    else
+    	model := TGCellModelGraph(cellgraph, [ 1, 2 ], [  ], [ 3 ]);
+    	pq := signature{[3,2]};
+    fi;
+
+    model!.type := MakeImmutable([ "LIEB", [ pq[1], pq[2] ], model!.type ]);
+    return model;
+
+end );
+
 
 InstallMethod( Export, [ IsTGCellModelGraphObj, IsOutputTextStream ],
 function(model, output)
