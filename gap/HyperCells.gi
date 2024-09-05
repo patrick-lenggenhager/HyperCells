@@ -15,6 +15,7 @@ ReadPackage( "HyperCells", "gap/TGCellGraph.gi");
 ReadPackage( "HyperCells", "gap/TGCellModelGraph.gi");
 ReadPackage( "HyperCells", "gap/TGSuperCellModelGraph.gi");
 ReadPackage( "HyperCells", "gap/TGQuotientSequences.gi");
+ReadPackage( "HyperCells", "gap/PGMatrix.gi");
 
 #
 # Extensions
