@@ -748,68 +748,6 @@ signMatrix@ := function(mat)
 	return List(mat, row -> List(row, entry -> SignInt(entry)));
 end;
 
-# Transposes a sparse matrix.
-sparseMatTranspose@ := function(matSparse)
-	return SortedList(List(matSparse, entry -> [Reversed(entry[1]),entry[2]]));
-end;
-
-# Multiplies two sparse matrices. (Not optimized)
-sparseMatMultiply@ := function(mat1, mat2)
-	local mat2T, matNew, i, j, entry1, entry2, rowIdx, colIdx, temp1, temp2, sum, signed;
-
-	# --------
-	# Options:
-	# --------		
-
-	# option signed: if signed is true each entry in the 
-	# sparse matrix will be replaced by its sign: +/- 1 
-	# for non-zero integers 0 otherwise.
-    	signed := ValueOption("signed");
-    	if signed = fail or signed = false then
-    		signed := 0;
-    	elif not IsBool(signed) then
-		Error(StringFormatted("The option signed {} is not valid. It must be a boolean.", signed));
-		return fail;
-	else
-		signed := 1;
-    	fi;
-
-        mat2T := sparseMatTranspose@(mat2); 
-	matNew :=  rec(); # new matrix predecessor (will be converted to nested list in the end)
-        for i in [1..Length(mat1)] do
-
-	    rowIdx := mat1[i,1][1]; # get row of matrix mat1
-            for j in [1..Length(mat2T)] do
-		
-                colIdx := mat2T[j,1][1]; # corresponds to row of matrix mat2
-		if not String([rowIdx, colIdx]) in RecNames(matNew) then
-
-		    temp1 := i;; temp2 := j;; sum := 0;
-                    while temp1 <= Length(mat1) and mat1[temp1,1][1] = rowIdx and temp2 <= Length(mat2T) and mat2T[temp2,1][1] = colIdx do
-              		
-			# multiplication conditions
-                        if mat1[temp1,1][2] < mat2T[temp2,1][2] then
-                            temp1 := temp1 + 1;
-                        elif mat1[temp1,1][2] > mat2T[temp2,1][2] then
- 			    temp2 := temp2 + 1;
-                        else
-			     sum := sum + mat1[temp1,2]*mat2T[temp2,2];; temp1 := temp1 + 1;; temp2 := temp2 + 1;;
-                        fi;
-
-			if temp1 > Length(mat1) or temp2 > Length(mat2T) then
-				break;
-			fi;
- 		    od;
-                    if not sum = 0 then
-			matNew.(String([rowIdx, colIdx])) := sum/AbsoluteValue(sum)^signed ;
-		    fi;
-		fi;
-	    od;
-	od;
-	# reformat record into a nested list of the form [ [[rowIdx, colIdx], entry], ... ]
-	return SortedList(List(RecNames(matNew), item -> [EvalString(item),matNew.(item)]));
-end;
-
 # Subtracts sparse matrix mat2 from mat1. (Not optimized)
 sparseMatSubtract@ := function(mat1, mat2)
 	local idx1, idx2, difference, matNew;
