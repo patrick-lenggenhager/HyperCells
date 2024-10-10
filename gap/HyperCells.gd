@@ -37,7 +37,7 @@ ReadPackage( "HyperCells", "gap/TGSuperCellModelGraph.gd");
 ReadPackage( "HyperCells", "gap/TGQuotientSequences.gd");
 #!
 #!
-#! @Chapter Hyperbolic lattice symmetries
+#! @Chapter Representations of point groups
 ReadPackage( "HyperCells", "gap/PGMatrix.gd");
 #!
 #!
