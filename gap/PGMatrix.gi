@@ -1,120 +1,90 @@
-IsPGMatrix@ := function(pgMatrix)
-   local signature, quotient, PGMLst, item, itemLen;
-    
-    # check dimensions
-    if not Length(pgMatrix) = 3 then
-	return false;
-    fi;
-     
-    # get entries
-    signature := pgMatrix[1];
-    quotient := pgMatrix[2];
-    PGMLst := pgMatrix[3];
+# Type PGMatrixElements
+DeclareRepresentation("IsPGMatrixElementsComponentRep", IsComponentObjectRep,
+	[ "signature", "quotient", "sparse", "elements" ]
+);
 
-    # check signature
-    if not IsTGSignature@(signature) then
-	return false;
-    fi;
 
-    if not quotient in ListTGQuotients(signature) then
-        return false;
-    fi;
+InstallMethod( \=, [
+    IsPGMatrixElementsObj and IsPGMatrixElementsComponentRep,
+    IsPGMatrixElementsObj and IsPGMatrixElementsComponentRep ], 
+function(pgMatElements1, pgMatElements2)
+	return  Signature(pgMatElements1) = Signature(pgMatElements2) and
+		TGQuotientName(pgMatElements1) = TGQuotientName(pgMatElements2) and
+		GetElements(pgMatElements1) = GetElements(pgMatElements2);
+end );
 
-    # check list of point-group matrices
-    if not IsList(PGMLst) then
-	return false;
-    else
-	# iterate over list of tuples
-        for item in PGMLst do
-	    itemLen := Length(item);
-	    
-	    # check dimensions
-	    if not itemLen = 2 then
-		return false;
 
-	    # check if first entry is a string
-	    elif not IsString(item[1]) then
-		return false;
+InstallMethod( Signature, [ IsPGMatrixElementsObj and IsPGMatrixElementsComponentRep ],
+function(pgMatElements)
+	return pgMatElements!.signature;
+end );
 
-	    # check if second entry is a list
-	    elif not IsList(item[2]) then
-		return false;
-	    fi;
-	od;
-    fi;
+InstallMethod( TGQuotientName, [ IsPGMatrixElementsObj and IsPGMatrixElementsComponentRep ], 
+function(pgMatElements)
+	return pgMatElements!.quotient;
+end );
 
-    return true;
+InstallMethod( IsSparse, [ IsPGMatrixElementsObj and IsPGMatrixElementsComponentRep ], 
+function(pgMatElements)
+	return pgMatElements!.sparse;
+end );
+
+InstallMethod( GetElements, [ IsPGMatrixElementsObj and IsPGMatrixElementsComponentRep ], 
+function(pgMatElements)
+	return pgMatElements!.elements;
+end );
+
+
+InstallMethod( PrintString, [ IsPGMatrixElementsObj and IsPGMatrixElementsComponentRep ], 
+function(pgMatElements)
+	return Concatenation( "PGMatrixElements( ", 
+		"signature = ",PrintString(Signature(pgMatElements)), ", ",
+		"quotient = ", PrintString(TGQuotientName(pgMatElements)), ", ",
+		"sparse = ", PrintString(IsSparse(pgMatElements)), ", ",
+		"elements = ", PrintString(GetElements(pgMatElements)), 
+	")" );
+end );
+
+InstallMethod( PrintObj, [ IsPGMatrixElementsObj and IsPGMatrixElementsComponentRep ], 
+function(pgMatElements)
+	Print(PrintString(pgMatElements));
+end );
+
+constructTGGroups@ := function(fulltg, tg)
+    local D, gensD, DELTA, a, b, c, symmetries, embDDELTA;
+
+    D := FpGroup(tg);
+    gensD := GeneratorsOfGroup(D);
+
+    # full triangle group to get the reflection op.'s
+    DELTA := FpGroup(fulltg);
+    a := DELTA.1;; b := DELTA.2;; c := DELTA.3;
+    symmetries := [a, b, c];
+
+    # --------------------    
+    # Construct embedding:
+    # --------------------
+
+    # embedding homomorphism of D in DELTA, (NC function version due to infinite groups)
+    embDDELTA := GroupHomomorphismByImagesNC(D, DELTA, gensD, [a*b, b*c, c*a]);
 	
+    return [D, DELTA, embDDELTA, symmetries];
 end;
 
 
-InstallGlobalFunction( PGMatrix,
-function(symmetries, fulltgFp, cell, quotient)
-    local tg, sparse, signature, D, DELTA, gensD, a, b, c,
-     x, y, z, embDDELTA, G, Gplus, rels, relsfull, cellGamma, GAMMA, fpGAMMA,
-     gensGamma, gensGammaABC, gensGammaFp, homDeltaG, kernDeltaG, isoGamma, PGMRawLst,
-     PGMatrixRaw, transOp, trans1, trans2, tempGroup, homtemp, PGMLst, lst, symmetry,
-     matInt, i, j, entry, row, symNames, idn;
+InstallGlobalFunction( PGMatrixElements,
+function(tgquotient)
+    local signature, sparse, quotient, D, DELTA, symmetries, embDDELTA, G, rels,
+     relsfull, cellGamma, GAMMA, fpGAMMA, gensGamma, gensGammaABC, gensGammaFp, 
+     homDeltaG, kernDeltaG, isoGamma, PGMRawLst, PGMatrixRaw, transOp, trans1, 
+     trans2, tempGroup, homtemp, PGMLst, lst, symmetry, matInt, item, i, j, entry, 
+     row, symNames, idn, F, tgFpObjs, cell, tg, fulltg, Gplus;
 
-    # Check arguments, fulltgFp and cell:
-    # -----------------------------------
-    
-    # check argument quotient
-    if not IsFpGroup(fulltgFp) then
-        Error("The second argument must be a free group.");
-        return fail;
-    fi;
-
-    # check argument quotient
-    if not IsTGCellObj(cell)  then
-        Error("The third argument must be a TGCell object.");
-        return fail;
-    fi;
-
-    # ---------------
-    # Needed objects:
+    # Check argument:
     # ---------------
 
-    tg := GetProperTriangleGroup(cell); 
-    signature := Signature(tg);
-
-    # ------------------------
-    # Check argument quotient:
-    # ------------------------
-
-    if not IsList(quotient) and not IsInt(quotient) then
-        Error("The forth argument must be a list or an positive integer.");
-        return fail;
-    elif IsInt(quotient) then
-	if quotient <= Length(ListTGQuotients(signature)) then
-	    quotient := ListTGQuotients(signature)[quotient];
-	else
-	    Error(StringFormatted("The forth argument must be a positive integer equal or smaller than {}.", Length(ListTGQuotients(signature))));
-            return fail;
-	fi;
-    elif not quotient in ListTGQuotients(signature) then
-	Error(StringFormatted("The forth argument {} is not an avialable quotient of this proper triangle group.", quotient));
-        return fail;
-    fi;
-
-    # --------------------------
-    # Check argument symmetries:
-    # --------------------------
-
-    # check formating, 
-    # and prepare for further checks
-    symNames := ValueOption("symNames");
-    if IsString(symNames) = false and IsList(symmetries) = false then
-	symmetries := [symmetries];
-    elif IsString(symNames) = true and IsList(symmetries) = false then
-	symmetries := [symmetries];
-	symNames := [symNames];
-    fi;
-
-    # check generating set
-    idn := fulltgFp.1*fulltgFp.1^-1;
-    if not SizeBlist(List(symmetries, item -> idn = item*item^-1)) = Length(symmetries) then
-        Error("The symmetries must be words in the group specified in the second argument.");
+    if not IsTGQuotientObj(tgquotient) then
+        Error("The argument must be a TGQuotient object.");
         return fail;
     fi;
 
@@ -122,21 +92,6 @@ function(symmetries, fulltgFp, cell, quotient)
     # Check options:
     # --------------
 
-    # option symmetry names
-    if symNames = fail then
-    	symNames := List(symmetries, item -> String(item));
-    elif not IsList(symNames) then
-	Error(StringFormatted("The option symNames {} is not valid. It must be a list.", symNames));
-	return fail;
-    elif not Length(symNames) = Length(symmetries) then
-	Error(StringFormatted("The length of option symNames {} must be of equivalent length than symmetries {}.", symNames, symmetries));
-	return fail;
-    elif not SizeBlist(List(symNames, item -> IsString(item))) = Length(symmetries)  then
-        Error(StringFormatted("The option symNames {} is not valid. It must be a list of strings.", symNames));
-	return fail;
-    fi;
-
-    # option sparsity
     sparse := ValueOption("sparse");
     if sparse = fail then
     	sparse := false;
@@ -145,24 +100,22 @@ function(symmetries, fulltgFp, cell, quotient)
 	return fail;
     fi;
 
-    # ----------------------------------
-    # (More) needed objects, (cachable):
-    # ----------------------------------
+    # ---------------
+    # Needed objects:
+    # ---------------
 
-    # get proper triangle group
-    D := FpGroup(tg);
-    gensD := GeneratorsOfGroup(D);
+    signature := TriangleGroupSignature(tgquotient);
+    fulltg := TriangleGroup(signature);; tg := ProperTriangleGroup(signature);
+    cell := TGCell(tg, tgquotient);
 
-    # full triangle group to get the reflection op.'s
-    DELTA := fulltgFp;
-    a := DELTA.1;; b := DELTA.2;; c := DELTA.3;
+    # --------------------------------------------------
+    # Construct groups, symmetry elements and embedding:
+    # -------------------------------------------------- 
 
-    # get the rotation op.'s as composition of reflection op.'s
-    x := a*b;; y := b*c;; z := c*a;
-
-    # embedding homomorphism of D in DELTA, (NC function version due to infinite groups)
-    embDDELTA := GroupHomomorphismByImagesNC(D, DELTA, gensD, [a*b, b*c, c*a]);
-                
+    tgFpObjs := constructTGGroups@(fulltg, tg);
+    D := tgFpObjs[1];; DELTA := tgFpObjs[2];; embDDELTA := tgFpObjs[3];
+    symmetries := tgFpObjs[4];
+	
     # -------------------------------
     # Construct (proper) point group:
     # -------------------------------
@@ -201,7 +154,7 @@ function(symmetries, fulltgFp, cell, quotient)
 
     # get transation op.'s in terms of reflection op.'s
     # Note: I explicilty want these gnerators (in x, y, z) s.t. the 
-    # reassignement of GAMMA in terms of a, b, c  stays consistent.
+    # reassignement of GAMMA in terms of a, b, c stays consistent.
     gensGammaABC := List(gensGamma, g -> Image(embDDELTA, g));
 
     # construct the translation group in terms of a, b, c
@@ -216,14 +169,14 @@ function(symmetries, fulltgFp, cell, quotient)
     # ------------------------------------------------------------------
 
     PGMRawLst := []; 
-    for i in [1..Length(symmetries)] do
+    for item in symmetries do
 	PGMatrixRaw := []; # PG-matrix in terms of translation generators
 	for transOp in gensGammaABC do
 		trans1 := Image(isoGamma, transOp); # or use GeneratorsOfGroup(FpGroup(cellGamma))
-		trans2 := Image(isoGamma, symmetries[i]^-1*transOp*symmetries[i]); # legit since Gamma is a normal subgroup
+		trans2 := Image(isoGamma, item^-1*transOp*item); # legit since Gamma is a normal subgroup
 		Add(PGMatrixRaw, [trans1,  trans2]);
 	 od;
-	Add(PGMRawLst, [symNames[i], PGMatrixRaw]);
+	Add(PGMRawLst, [String(item), PGMatrixRaw]);
     od;
             
     # -------------------------------------------------
@@ -262,102 +215,218 @@ function(symmetries, fulltgFp, cell, quotient)
 	 Add(PGMLst, [PGMatrixRaw[1], matInt]);
         od;
     fi;
- return [signature, quotient, PGMLst];
+
+    F := NewFamily( "PGMatrixElements", IsPGMatrixElementsObj );
+    return Objectify( NewType( F, IsPGMatrixElementsObj and IsPGMatrixElementsComponentRep ), rec(
+	    signature := MakeImmutable(signature),
+	    quotient := MakeImmutable(TGQuotientName(tgquotient)),
+	    sparse := MakeImmutable(sparse),
+	    elements := MakeImmutable(PGMLst)
+	    ));
 end );
 
 
-InstallGlobalFunction( ExportPGMatrixStream,
+
+# Type PGMatrix
+DeclareRepresentation("IsPGMatrixComponentRep", IsComponentObjectRep,
+	[ "PGMatrixElements", "PGMatrices" ]
+);
+
+InstallMethod( \=, [
+    IsPGMatrixObj and IsPGMatrixComponentRep,
+    IsPGMatrixObj and IsPGMatrixComponentRep ], 
+function(pgMatrix1, pgMatrix2)
+	return 	GetPGMatrixElements(pgMatrix1) = GetPGMatrixElements(pgMatrix2) and
+		Matrices(pgMatrix1) = Matrices(pgMatrix2);
+end );
+
+
+InstallMethod( GetPGMatrixElements, [ IsPGMatrixObj and IsPGMatrixComponentRep ], 
+function(pgMat)
+	return pgMat!.pgMatElements;
+end );
+
+InstallMethod( Matrices, [ IsPGMatrixObj and IsPGMatrixComponentRep ], 
+function(pgMat)
+	return pgMat!.pgMatrices;
+end );
+
+
+InstallMethod( PrintString, [ IsPGMatrixObj and IsPGMatrixComponentRep ], 
+function(pgMat)
+	return Concatenation( "PGMatrix( ", 
+		PrintString(GetPGMatrixElements(pgMat)), ", ",
+		"matrices = ", PrintString(Matrices(pgMat)), 
+	")" );
+end );
+
+
+
+InstallGlobalFunction( PGMatrix,
+function(symmetries, fulltg, tg, pgMatElements)	
+    local tgFpObjs, D, DELTA, embDDELTA, idnD, idnDELTA, elements, 
+     elementsRec, i, item, PGMatLst, PGMatRaw, signature, symNames, 
+     symmetriesDeconstructed, F;
+
+    # Check first argument:
+    # ---------------------
+
+    if not IsPGMatrixElementsObj(pgMatElements) then
+        Error("The first argument must be a PGMatrixElements object.");
+        return fail;
+    fi;
+
+    # -------------------
+    # Get needed objects:
+    # -------------------
+   
+    signature := Signature(pgMatElements);
+
+    # Get symmetries (generators of (full) triangle group), 
+    # tg, fulltg as FpGroups D, DELTA, respectively and
+    # embedding homomorphism of D in DELTA embDDELTA
+    tgFpObjs := constructTGGroups@(fulltg, tg);
+    D := tgFpObjs[1];; DELTA := tgFpObjs[2];; embDDELTA := tgFpObjs[3];       
+	
+    # ---------------------------------
+    # Check option second argument:
+    # ---------------------------------   
+
+    # check the format of symmetries, and prepare for further checks
+    symNames := ValueOption("symNames");
+    if IsString(symNames) = false and IsList(symmetries) = false then
+	symmetries := [symmetries];
+    elif IsString(symNames) = true and IsList(symmetries) = false then
+	symmetries := [symmetries];
+	symNames := [symNames];
+    fi;
+
+    # symmetry names
+    if symNames = fail then
+    	symNames := List(symmetries, item -> String(item));
+    elif not IsList(symNames) then
+	Error(StringFormatted("The option symNames {} is not valid. It must be a list.", symNames));
+	return fail;
+    elif not Length(symNames) = Length(symmetries) then
+	Error(StringFormatted("The length of option symNames {} must be of equivalent length than symmetries {}.", symNames, symmetries));
+	return fail;
+    elif not SizeBlist(List(symNames, item -> IsString(item))) = Length(symmetries)  then
+        Error(StringFormatted("The option symNames {} is not valid. It must be a list of strings.", symNames));
+	return fail;
+    fi;
+
+    # check generating set
+    idnD := D.1*D.1^-1;
+    idnDELTA := DELTA.1*DELTA.1^-1;
+    if not SizeBlist(List(symmetries, w -> idnD = w*w^-1 or idnDELTA = w*w^-1 )) = Length(symmetries) then
+        Error("The symmetries must be elements of the (proper) triangle group.");
+        return fail;
+    fi;
+
+    # --------------------------
+    # Rewrite symmetry elements:
+    # --------------------------
+    # If an element in the list symmetries is an element
+    # of the proper triangle group get the image of this
+    # element in the triangle group, through the
+    # embedding homomorphism. Additionally, deconstruct
+    # all elements into their constituents (generators).
+
+    symmetriesDeconstructed := [];
+    for item in symmetries do 
+	if idnD = item*item^-1 then
+	   item := Image(embDDELTA, item);
+	fi;
+	# deconstruct the word into an ordered list of generators
+	item := List([1..Length(item)], g -> Subword(item, g, g));
+	Append(symmetriesDeconstructed, [item]);
+    od;
+
+    # ------------------------------------------
+    # Perform the needed matrix multiplications:
+    # ------------------------------------------
+
+    # record of point-group matrices a, b, c
+    elements := GetElements(pgMatElements);
+    elementsRec := rec( a := elements[1, 2], b := elements[2, 2], c := elements[3, 2] );  
+
+    PGMatLst := [];
+    if IsSparse(pgMatElements) then
+        for i in [1..Length(symmetriesDeconstructed)] do 
+            PGMatRaw := [];
+            for item in symmetriesDeconstructed[i] do       
+           	Append(PGMatRaw, [elementsRec.(String(item))]);
+            od;
+            Append(PGMatLst, [[symNames[i], Iterated(PGMatRaw, sparseMatMultiply@)]]);
+	od;
+    else
+        for i in [1..Length(symmetriesDeconstructed)] do 
+            PGMatRaw := [];
+            for item in symmetriesDeconstructed[i] do       
+           	Append(PGMatRaw, [elementsRec.(String(item))]);
+            od;
+            Append(PGMatLst, [[symNames[i], Product(PGMatRaw)]]);
+	od;
+    fi;
+    F := NewFamily( "PGMatrix", IsPGMatrixObj );
+    return Objectify( NewType( F, IsPGMatrixObj and IsPGMatrixComponentRep ), rec(
+	    pgMatElements := pgMatElements,
+	    pgMatrices := MakeImmutable(PGMatLst)
+	    )); 
+end );
+
+
+InstallMethod( Export, [  IsPGMatrixObj, IsOutputTextStream ],
 function(pgMatrix, output)
-	local pgMat, item;
-	
-	# Check input:
-	# ------------
+    local pgMElement;
+    
+    pgMElement := GetPGMatrixElements(pgMatrix);
 
-	if not IsPGMatrix@(pgMatrix) then
-		Error("the format of the first argument does not match a PGMatrix.");
-		return fail;
-	fi;
+    SetPrintFormattingStatus(output, false);
+    
+    # version
+	AppendTo(output, "HyperCells HCPGM version 1.0");
+	AppendTo(output, "\n");
 
-	if not IsOutputTextStream(output) then
-		Error("the provided stream is not a valid output text stream.");
-		return fail;
-	fi;
+    # write: triangle group, genus bound, list of quotients
+	AppendTo(output, Signature(pgMElement));
+	AppendTo(output, "\n");
+	AppendTo(output, TGQuotientName(pgMElement));
+	AppendTo(output, "\n");
+	AppendTo(output, IsSparse(pgMElement));
+	AppendTo(output, "\n");
+	AppendTo(output, GetElements(pgMElement));
+	AppendTo(output, "\n");
 
-	# -----------------
-	# Proceed as usual:
-	# -----------------
-
-	SetPrintFormattingStatus(output, false);
-
-	if NestingDepthA(pgMatrix) = 2 then
-		for item in pgMatrix do
-			AppendTo(output, item);
-			AppendTo(output, "  \n");
-		od;
-	else
-	   	for pgMat in pgMatrix do
-			for item in pgMat do
-				AppendTo(output, item);
-				AppendTo(output, "  \n");
-			 od;
-			AppendTo(output, "\n\n");
-		od;
-	fi;
-
+    # write: adjacency matrix
+	AppendTo(output, Matrices(pgMatrix));
 end );
 
 
-InstallGlobalFunction( ExportPGMatrix,
+InstallMethod( Export, [ IsPGMatrixObj, IsString ],
 function(pgMatrix, path)
-	local output;
+    local output;
 
-	# Check input:
-	# ------------
+    # open file
+    output := OutputTextFile(path, false);
 
-	if not IsPGMatrix@(pgMatrix) then
-		Error("the format of the first argument does not match a PGMatrix.");
-		return fail;
-	fi;
+    Export(pgMatrix, output);
 
-	if not IsString(path) then
-		Error(StringFormatted("the path {} must be a string.", path));
-		return fail;
-	fi;
-
-	# -----------------
-	# Proceed as usual:
-	# -----------------
-	
-	output := OutputTextFile(path, false);
-
-	ExportPGMatrixStream(pgMatrix, output);
-
-	CloseStream(output);
+    # close file
+    CloseStream(output);
 end );
 
 
-InstallGlobalFunction( ExportPGMatrixString,
+InstallMethod( ExportString, [ IsPGMatrixObj ],
 function(pgMatrix)
 	local str, output;
-
-	# Check input:
-	# ------------
-
-	if not IsPGMatrix@(pgMatrix) then
-		Error("the format of the first argument does not match a PGMatrix.");
-		return fail;
-	fi;
-
-	# -----------------
-	# Proceed as usual:
-	# -----------------
 
 	# open string stream
 	str := "";
 	output := OutputTextString(str, false);
 	
 	# export to stream
-	ExportPGMatrixStream(pgMatrix, output);
+	Export(pgMatrix, output);
 
 	# close
 	CloseStream(output);
@@ -367,27 +436,40 @@ function(pgMatrix)
 end );
 
 
+
 InstallGlobalFunction( ImportPGMatrix,
 function(input)
-	local pgMatrix, signature, quotient, pgMatrices;
-	
+    local version, signature, quotient, elements, sparse, 
+     pgMatElements, pgMatLst, F1, F2;
+
 	# check arguments
 	if not IsInputTextStream(input) then
 		Error("The first argument must be an input text stream.");
 		return fail;
 	fi;
 
-	pgMatrix := [];
+	# version
+	version := ReadAllLine(input);
 
-	signature := EvalString(ReadAllLine(input));
+    	signature := EvalString(ReadAllLine(input));
 	quotient := EvalString(ReadAllLine(input));
-	pgMatrices := EvalString(ReadAllLine(input));
-
-	Add(pgMatrix, signature);
-	Add(pgMatrix, quotient);
-	Add(pgMatrix, pgMatrices);
+	sparse := EvalString(ReadAllLine(input));
+	elements := EvalString(ReadAllLine(input));
+	pgMatLst := EvalString(ReadAllLine(input));
 	
-	return pgMatrix;
+	F1 := NewFamily( "PGMatrixElements", IsPGMatrixElementsObj );
+	pgMatElements := Objectify( NewType( F1, IsPGMatrixElementsObj and IsPGMatrixElementsComponentRep ), rec(
+	    	signature := MakeImmutable(signature),
+	    	quotient := MakeImmutable(quotient),
+	    	sparse := MakeImmutable(sparse),
+	    	elements := MakeImmutable(elements)
+		));
+
+	F2 := NewFamily( "PGMatrix", IsPGMatrixObj );
+    	return Objectify( NewType( F2, IsPGMatrixObj and IsPGMatrixComponentRep ), rec(
+		pgMatElements := pgMatElements ,
+		pgMatrices := MakeImmutable(pgMatLst)
+	));
 end );
 
 
