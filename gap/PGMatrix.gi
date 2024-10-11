@@ -268,11 +268,22 @@ function(symmetries, fulltg, tg, pgMatElements)
      elementsRec, i, item, PGMatLst, PGMatRaw, signature, symNames, 
      symmetriesDeconstructed, F;
 
-    # Check first argument:
-    # ---------------------
+    # Check arguments:
+    # ----------------
+
+
+    if not IsTriangleGroupObj(fulltg) then
+        Error("The second argument must be a TriangleGroup object.");
+        return fail;
+    fi;
+
+    if not IsProperTriangleGroupObj(tg) then
+        Error("The third argument must be a ProperTriangeGroup object.");
+        return fail;
+    fi;
 
     if not IsPGMatrixElementsObj(pgMatElements) then
-        Error("The first argument must be a PGMatrixElements object.");
+        Error("The forth argument must be a PGMatrixElements object.");
         return fail;
     fi;
 
