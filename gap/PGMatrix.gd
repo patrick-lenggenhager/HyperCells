@@ -2,9 +2,8 @@
 #!
 #! @Chapter Representations of point groups
 
-#!
+
 #! @Section Point-group matrices
-#! @SectionLabel PGMatrix
 #!
 #! Point-group matrices are representations of group elements in the point group $G\cong\Delta/\Gamma$. 
 #! These matrices can efficiently be constructed. Given any symmetry `g` in the point group $G$ and a
@@ -12,7 +11,9 @@
 #! point-group matrix can be determined through set of the symmetry transformed elements $g \gamma_i g^{-1}$.
 #! Point-group matrices enable the conduction of symmetry analysis on any given (supercell) model graph.
 #!
-#! 
+#! @Section PGMatrixElements
+#! @SectionLabel PGMatrixElements
+#!
 #!   - <Ref Oper='Signature' Label='for PGMatrixElements' />:
 #!     signature of the underlying triangle group
 #!   - <Ref Oper='TGQuotientName' Label='for PGMatrixElements' />:
@@ -84,7 +85,9 @@ DeclareOperation( "IsSparse", [ IsPGMatrixElementsObj ] );
 DeclareOperation( "GetElements", [ IsPGMatrixElementsObj ] );
 
 
-
+#! @Section PGMatrix
+#! @SectionLabel PGMatrix
+#!
 #!   - <Ref Oper='GetPGMatrixElements' Label='for PGMatrix' />:
 #!    	point-group matrices corresponding to representations of the (full) triangle group 
 #!      generators `a`, `b`, `c` as a `PGMatrixElements` object
