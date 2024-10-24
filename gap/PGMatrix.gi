@@ -1,6 +1,6 @@
 # Type PGMatricesOfGenerators
 DeclareRepresentation("IsPGMatricesOfGeneratorsComponentRep", IsComponentObjectRep,
-	[ "fulltg", "tg", "tgquotient", "sparse", "GeneratorNames", "PGMatricesRec" ]
+	[ "fulltg", "tg", "tgquotient", "sparse", "generatorNames", "pgMatricesRec" ]
 );
 
 
@@ -13,16 +13,6 @@ function(pgMatsGs1, pgMatsGs2)
 		GetTGQuotient(pgMatsGs1) = GetTGQuotient(pgMatsGs2) and
 		PGMatricesRec(pgMatsGs1) = PGMatricesRec(pgMatsGs2);
 end );
-
-
-# This should only be used internally for the test files !!!
-syntacticEqualPGMatricesOfGeneratorsObjs@ := function(pgMatsGs1, pgMatsGs2)
-	return  Signature(GetTriangleGroup(pgMatsGs1)) = Signature(GetTriangleGroup(pgMatsGs2)) and
-		Signature(GetProperTriangleGroup(pgMatsGs1)) = Signature(GetProperTriangleGroup(pgMatsGs2)) and
-		GetTGQuotient(pgMatsGs1) = GetTGQuotient(pgMatsGs2) and
-		PGMatricesRec(pgMatsGs1) = PGMatricesRec(pgMatsGs2);
-end;
-
 
 InstallMethod( Signature, [ IsPGMatricesOfGeneratorsObj and IsPGMatricesOfGeneratorsComponentRep ],
 function(pgMatsGs)
@@ -56,12 +46,12 @@ end );
 
 InstallMethod( GeneratorNames, [ IsPGMatricesOfGeneratorsObj and IsPGMatricesOfGeneratorsComponentRep ], 
 function(pgMatsGs)
-	return pgMatsGs!.GeneratorNames;
+	return pgMatsGs!.generatorNames;
 end );
 
 InstallMethod( PGMatricesRec, [ IsPGMatricesOfGeneratorsObj and IsPGMatricesOfGeneratorsComponentRep ], 
 function(pgMatsGs)
-	return pgMatsGs!.PGMatsRec;
+	return pgMatsGs!.pgMatsRec;
 end );
 
 
@@ -72,8 +62,8 @@ function(pgMatsGs)
 		PrintString(GetProperTriangleGroup(pgMatsGs)), ", ",
 		PrintString(GetTGQuotient(pgMatsGs)), ", ",
 		"sparse = ", PrintString(IsSparse(pgMatsGs)), ", ",
-		"GeneratorNames = ", PrintString(GeneratorNames(pgMatsGs)),  ", ",
-		"PGMatricesRec = ", PrintString(PGMatricesRec(pgMatsGs)), 
+		"generatorNames = ", PrintString(GeneratorNames(pgMatsGs)),  ", ",
+		"pgMatricesRec = ", PrintString(PGMatricesRec(pgMatsGs)), 
 	")" );
 end );
 
@@ -83,35 +73,13 @@ function(pgMatsGs)
 end );
 
 
-constructTGFpAndEmb@ := function(fulltg, tg)
-    local D, gensD, DELTA, a, b, c, symmetries, embDDELTA;
-
-    D := FpGroup(tg);
-    gensD := GeneratorsOfGroup(D);
-
-    # full triangle group to get the reflection op.'s
-    DELTA := FpGroup(fulltg);
-    a := DELTA.1;; b := DELTA.2;; c := DELTA.3;
-    symmetries := [a, b, c];
-
-    # --------------------    
-    # Construct embedding:
-    # --------------------
-
-    # embedding homomorphism of D in DELTA, (NC function version due to infinite groups)
-    embDDELTA := GroupHomomorphismByImagesNC(D, DELTA, gensD, [a*b, b*c, c*a]);
-	
-    return [D, DELTA, embDDELTA, symmetries];
-end;
-
-
 InstallGlobalFunction( PGMatricesOfGenerators,
 function(fulltg, tg, tgquotient)
     local signature, sparse, quotient, D, DELTA, symmetries, embDDELTA, G, rels,
      relsfull, cellGamma, GAMMA, fpGAMMA, gensGamma, gensGammaABC, gensGammaFp, 
      homDeltaG, kernDeltaG, isoGamma, PGMRawLst, PGMatrixRaw, transOp, trans1, 
      trans2, tempGroup, homtemp, PGMLst, lst, symmetry, matInt, item, i, j, entry, 
-     row, symNames, idn, F, tgFpObjs, cell, Gplus, PGMatsRec;
+     row, symNames, idn, F, tgFpObjs, cell, Gplus, pgMatsRec;
 
     # Check argument:
     # ---------------
@@ -264,7 +232,7 @@ function(fulltg, tg, tgquotient)
     fi;
 
     # construct record
-    PGMatsRec := rec( a := PGMLst[1, 2], b := PGMLst[2, 2], c := PGMLst[3, 2] );
+    pgMatsRec := rec( a := PGMLst[1, 2], b := PGMLst[2, 2], c := PGMLst[3, 2] );
     
     F := NewFamily( "PGMatricesOfGenerators", IsPGMatricesOfGeneratorsObj );
     return Objectify( NewType( F, IsPGMatricesOfGeneratorsObj and IsPGMatricesOfGeneratorsComponentRep ), rec(
@@ -272,8 +240,8 @@ function(fulltg, tg, tgquotient)
 	    tg := tg,
 	    tgquotient := tgquotient,
 	    sparse := MakeImmutable(sparse),
-	    GeneratorNames := MakeImmutable(SortedList(RecNames(PGMatsRec))),
-	    PGMatsRec := MakeImmutable(PGMatsRec)
+	    generatorNames := MakeImmutable(SortedList(RecNames(pgMatsRec))),
+	    pgMatsRec := MakeImmutable(pgMatsRec)
 	    ));
 end );
 
@@ -352,7 +320,7 @@ end );
 
 # Type PGMatrices
 DeclareRepresentation("IsPGMatricesComponentRep", IsComponentObjectRep,
-	[ "PGMatricesOfGenerators", "SymmetryNames", "PGMatricesRec" ]
+	[ "PGMatricesOfGenerators", "symmetryNames", "pgMatricesRec" ]
 );
 
 InstallMethod( \=, [
@@ -365,14 +333,6 @@ function(pgMats1, pgMats2)
 end );
 
 
-# This should only be used internally for the test files !!!
-syntacticEqualPGMatricesObjs@ := function(pgMats1, pgMats2)
-	return  syntacticEqualPGMatricesOfGeneratorsObjs@(GetPGMatricesOfGenerators(pgMats1), GetPGMatricesOfGenerators(pgMats2)) and
-		SymmetryNames(pgMats1) = SymmetryNames(pgMats2) and
-		PGMatricesRec(pgMats1) = PGMatricesRec(pgMats2);
-end;
-
-
 InstallMethod( GetPGMatricesOfGenerators, [ IsPGMatricesObj and IsPGMatricesComponentRep ], 
 function(pgMats)
 	return pgMats!.pgMatsGs;
@@ -380,12 +340,12 @@ end );
 
 InstallMethod( SymmetryNames, [ IsPGMatricesObj and IsPGMatricesComponentRep ], 
 function(pgMats)
-	return pgMats!.SymmetryNames;
+	return pgMats!.symmetryNames;
 end );
 
 InstallMethod( PGMatricesRec, [ IsPGMatricesObj and IsPGMatricesComponentRep ], 
 function(pgMats)
-	return pgMats!.PGMatsRec;
+	return pgMats!.pgMatsRec;
 end );
 
 
@@ -393,8 +353,8 @@ InstallMethod( PrintString, [ IsPGMatricesObj and IsPGMatricesComponentRep ],
 function(pgMats)
 	return Concatenation( "PGMatrices( ", 
 		PrintString(GetPGMatricesOfGenerators(pgMats)), ", ",
-		"SymmetryNames = ", PrintString(SymmetryNames(pgMats)), ", ",
-		"PGMatricesRec = ", PrintString(PGMatricesRec(pgMats)), 
+		"symmetryNames = ", PrintString(SymmetryNames(pgMats)), ", ",
+		"pgMatricesRec = ", PrintString(PGMatricesRec(pgMats)), 
 	")" );
 end );
 
@@ -403,7 +363,7 @@ end );
 InstallGlobalFunction( PGMatrices,
 function(symmetries, pgMatsGs)	
     local fulltg, tg, tgFpObjs, D, DELTA, embDDELTA, elementsRec,
-     i, item, PGMatsRec, PGMatRaw, signature, symNames, 
+     i, item, pgMatsRec, PGMatRaw, signature, symNames, 
      symmetriesDeconstructed, F;
 
     # Check second argument:
@@ -487,14 +447,14 @@ function(symmetries, pgMatsGs)
     # record of point-group matrices a, b, c
     elementsRec := PGMatricesRec(pgMatsGs); 
 
-    PGMatsRec := rec();
+    pgMatsRec := rec();
     if IsSparse(pgMatsGs) then
         for i in [1..Length(symmetriesDeconstructed)] do 
             PGMatRaw := [];
             for item in symmetriesDeconstructed[i] do       
            	Append(PGMatRaw, [elementsRec.(String(item))]);
             od;
-            PGMatsRec.(symNames[i]) := Iterated(PGMatRaw, sparseMatMultiply@);
+            pgMatsRec.(symNames[i]) := Iterated(PGMatRaw, sparseMatMultiply@);
 	od;
     else
         for i in [1..Length(symmetriesDeconstructed)] do 
@@ -502,15 +462,15 @@ function(symmetries, pgMatsGs)
             for item in symmetriesDeconstructed[i] do       
            	Append(PGMatRaw, [elementsRec.(String(item))]);
             od;
-            PGMatsRec.(symNames[i]) := Product(PGMatRaw);
+            pgMatsRec.(symNames[i]) := Product(PGMatRaw);
 	od;
     fi;
 
     F := NewFamily( "PGMatrices", IsPGMatricesObj );
     return Objectify( NewType( F, IsPGMatricesObj and IsPGMatricesComponentRep ), rec(
 	    pgMatsGs := pgMatsGs,
-	    SymmetryNames := MakeImmutable(SortedList(RecNames(PGMatsRec))),		
-	    PGMatsRec := MakeImmutable(PGMatsRec)
+	    symmetryNames := MakeImmutable(SortedList(RecNames(pgMatsRec))),		
+	    pgMatsRec := MakeImmutable(pgMatsRec)
 	    )); 
 end );
 
@@ -584,7 +544,7 @@ InstallGlobalFunction( ImportPGMatrices,
 function(input)
     local version, signature, quotientInfo, elements, sparse, 
      pgMatsGs, pgMatGsLst, pgMatSymsLst, fulltg, tg, tgquotient, F1, F2,
-     GeneratorNames, SymmetryNames, i, str, PGMatGsRec, PGMatSymsRec;
+     generatorNames, symmetryNames, i, str, PGMatGsRec, PGMatSymsRec;
 
 	# Check arguments:
 	# ----------------
@@ -634,17 +594,17 @@ function(input)
 	# ------------------------------------------	
 
 	PGMatGsRec := rec();
-	GeneratorNames := List(pgMatGsLst{[1..3]}{[1]}, x -> x[1]);
+	generatorNames := List(pgMatGsLst{[1..3]}{[1]}, x -> x[1]);
 	for i in [1..3] do
-		str := GeneratorNames[i];
-		PGMatGsRec!.(GeneratorNames[i]) := pgMatGsLst[i, 2];
+		str := generatorNames[i];
+		PGMatGsRec!.(generatorNames[i]) := pgMatGsLst[i, 2];
 	od;
 
 	PGMatSymsRec := rec();
-	SymmetryNames := List(pgMatSymsLst{[1..Length(pgMatSymsLst)]}{[1]}, x -> x[1]);
+	symmetryNames := List(pgMatSymsLst{[1..Length(pgMatSymsLst)]}{[1]}, x -> x[1]);
 	for i in [1..Length(pgMatSymsLst)] do
-		str := SymmetryNames[i];
-		PGMatSymsRec!.(SymmetryNames[i]) := pgMatSymsLst[i, 2];
+		str := symmetryNames[i];
+		PGMatSymsRec!.(symmetryNames[i]) := pgMatSymsLst[i, 2];
 	od;
 
 	# --------------------------------
@@ -657,15 +617,15 @@ function(input)
 	   	tg := tg,
 	    	tgquotient := tgquotient,
 	    	sparse := MakeImmutable(sparse),
-	    	GeneratorNames := MakeImmutable(SortedList(GeneratorNames)),
-	    	PGMatsRec := MakeImmutable(PGMatGsRec)
+	    	generatorNames := MakeImmutable(SortedList(generatorNames)),
+	    	pgMatsRec := MakeImmutable(PGMatGsRec)
 	    ));
 
 	F2 := NewFamily( "PGMatrices", IsPGMatricesObj );
     	return Objectify( NewType( F2, IsPGMatricesObj and IsPGMatricesComponentRep ), rec(
 		pgMatsGs := pgMatsGs,
-		SymmetryNames := MakeImmutable(SortedList(SymmetryNames)),	
-		PGMatsRec := MakeImmutable(PGMatSymsRec)
+		symmetryNames := MakeImmutable(SortedList(symmetryNames)),	
+		pgMatsRec := MakeImmutable(PGMatSymsRec)
 	));
 end );
 
