@@ -1,56 +1,89 @@
-# Type PGMatrixElements
-DeclareRepresentation("IsPGMatrixElementsComponentRep", IsComponentObjectRep,
-	[ "signature", "quotient", "sparse", "elements" ]
+# Type PGMatricesOfGenerators
+DeclareRepresentation("IsPGMatricesOfGeneratorsComponentRep", IsComponentObjectRep,
+	[ "fulltg", "tg", "tgquotient", "sparse", "GeneratorNames", "PGMatricesRec" ]
 );
 
 
 InstallMethod( \=, [
-    IsPGMatrixElementsObj and IsPGMatrixElementsComponentRep,
-    IsPGMatrixElementsObj and IsPGMatrixElementsComponentRep ], 
-function(pgMatElements1, pgMatElements2)
-	return  Signature(pgMatElements1) = Signature(pgMatElements2) and
-		TGQuotientName(pgMatElements1) = TGQuotientName(pgMatElements2) and
-		GetElements(pgMatElements1) = GetElements(pgMatElements2);
+    IsPGMatricesOfGeneratorsObj and IsPGMatricesOfGeneratorsComponentRep,
+    IsPGMatricesOfGeneratorsObj and IsPGMatricesOfGeneratorsComponentRep ], 
+function(pgMatsGs1, pgMatsGs2)
+	return  GetTriangleGroup(pgMatsGs1) = GetTriangleGroup(pgMatsGs2) and
+		GetProperTriangleGroup(pgMatsGs1) = GetProperTriangleGroup(pgMatsGs2) and
+		GetTGQuotient(pgMatsGs1) = GetTGQuotient(pgMatsGs2) and
+		PGMatricesRec(pgMatsGs1) = PGMatricesRec(pgMatsGs2);
 end );
 
 
-InstallMethod( Signature, [ IsPGMatrixElementsObj and IsPGMatrixElementsComponentRep ],
-function(pgMatElements)
-	return pgMatElements!.signature;
+# This should only be used internally for the test files !!!
+syntacticEqualPGMatricesOfGeneratorsObjs@ := function(pgMatsGs1, pgMatsGs2)
+	return  Signature(GetTriangleGroup(pgMatsGs1)) = Signature(GetTriangleGroup(pgMatsGs2)) and
+		Signature(GetProperTriangleGroup(pgMatsGs1)) = Signature(GetProperTriangleGroup(pgMatsGs2)) and
+		GetTGQuotient(pgMatsGs1) = GetTGQuotient(pgMatsGs2) and
+		PGMatricesRec(pgMatsGs1) = PGMatricesRec(pgMatsGs2);
+end;
+
+
+InstallMethod( Signature, [ IsPGMatricesOfGeneratorsObj and IsPGMatricesOfGeneratorsComponentRep ],
+function(pgMatsGs)
+	return Signature(pgMatsGs!.fulltg);
 end );
 
-InstallMethod( TGQuotientName, [ IsPGMatrixElementsObj and IsPGMatrixElementsComponentRep ], 
-function(pgMatElements)
-	return pgMatElements!.quotient;
+InstallMethod( GetTriangleGroup, [ IsPGMatricesOfGeneratorsObj and IsPGMatricesOfGeneratorsComponentRep ], 
+function(pgMatsGs)
+	return pgMatsGs!.fulltg;
 end );
 
-InstallMethod( IsSparse, [ IsPGMatrixElementsObj and IsPGMatrixElementsComponentRep ], 
-function(pgMatElements)
-	return pgMatElements!.sparse;
+InstallMethod( GetProperTriangleGroup, [ IsPGMatricesOfGeneratorsObj and IsPGMatricesOfGeneratorsComponentRep ], 
+function(pgMatsGs)
+	return pgMatsGs!.tg;
 end );
 
-InstallMethod( GetElements, [ IsPGMatrixElementsObj and IsPGMatrixElementsComponentRep ], 
-function(pgMatElements)
-	return pgMatElements!.elements;
+InstallMethod( TGQuotientName, [ IsPGMatricesOfGeneratorsObj and IsPGMatricesOfGeneratorsComponentRep ], 
+function(pgMatsGs)
+	return TGQuotientName(pgMatsGs!.tgquotient);
+end );
+
+InstallMethod( GetTGQuotient, [ IsPGMatricesOfGeneratorsObj and IsPGMatricesOfGeneratorsComponentRep ], 
+function(pgMatsGs)
+	return pgMatsGs!.tgquotient;
+end );
+
+InstallMethod( IsSparse, [ IsPGMatricesOfGeneratorsObj and IsPGMatricesOfGeneratorsComponentRep ], 
+function(pgMatsGs)
+	return pgMatsGs!.sparse;
+end );
+
+InstallMethod( GeneratorNames, [ IsPGMatricesOfGeneratorsObj and IsPGMatricesOfGeneratorsComponentRep ], 
+function(pgMatsGs)
+	return pgMatsGs!.GeneratorNames;
+end );
+
+InstallMethod( PGMatricesRec, [ IsPGMatricesOfGeneratorsObj and IsPGMatricesOfGeneratorsComponentRep ], 
+function(pgMatsGs)
+	return pgMatsGs!.PGMatsRec;
 end );
 
 
-InstallMethod( PrintString, [ IsPGMatrixElementsObj and IsPGMatrixElementsComponentRep ], 
-function(pgMatElements)
-	return Concatenation( "PGMatrixElements( ", 
-		"signature = ",PrintString(Signature(pgMatElements)), ", ",
-		"quotient = ", PrintString(TGQuotientName(pgMatElements)), ", ",
-		"sparse = ", PrintString(IsSparse(pgMatElements)), ", ",
-		"elements = ", PrintString(GetElements(pgMatElements)), 
+InstallMethod( PrintString, [ IsPGMatricesOfGeneratorsObj and IsPGMatricesOfGeneratorsComponentRep ], 
+function(pgMatsGs)
+	return Concatenation( "PGMatricesOfGenerators( ", 
+		PrintString(GetTriangleGroup(pgMatsGs)), ", ",
+		PrintString(GetProperTriangleGroup(pgMatsGs)), ", ",
+		PrintString(GetTGQuotient(pgMatsGs)), ", ",
+		"sparse = ", PrintString(IsSparse(pgMatsGs)), ", ",
+		"GeneratorNames = ", PrintString(GeneratorNames(pgMatsGs)),  ", ",
+		"PGMatricesRec = ", PrintString(PGMatricesRec(pgMatsGs)), 
 	")" );
 end );
 
-InstallMethod( PrintObj, [ IsPGMatrixElementsObj and IsPGMatrixElementsComponentRep ], 
-function(pgMatElements)
-	Print(PrintString(pgMatElements));
+InstallMethod( PrintObj, [ IsPGMatricesOfGeneratorsObj and IsPGMatricesOfGeneratorsComponentRep ], 
+function(pgMatsGs)
+	Print(PrintString(pgMatsGs));
 end );
 
-constructTGGroups@ := function(fulltg, tg)
+
+constructTGFpAndEmb@ := function(fulltg, tg)
     local D, gensD, DELTA, a, b, c, symmetries, embDDELTA;
 
     D := FpGroup(tg);
@@ -72,19 +105,34 @@ constructTGGroups@ := function(fulltg, tg)
 end;
 
 
-InstallGlobalFunction( PGMatrixElements,
-function(tgquotient)
+InstallGlobalFunction( PGMatricesOfGenerators,
+function(fulltg, tg, tgquotient)
     local signature, sparse, quotient, D, DELTA, symmetries, embDDELTA, G, rels,
      relsfull, cellGamma, GAMMA, fpGAMMA, gensGamma, gensGammaABC, gensGammaFp, 
      homDeltaG, kernDeltaG, isoGamma, PGMRawLst, PGMatrixRaw, transOp, trans1, 
      trans2, tempGroup, homtemp, PGMLst, lst, symmetry, matInt, item, i, j, entry, 
-     row, symNames, idn, F, tgFpObjs, cell, tg, fulltg, Gplus;
+     row, symNames, idn, F, tgFpObjs, cell, Gplus, PGMatsRec;
 
     # Check argument:
     # ---------------
 
+    if not IsTriangleGroupObj(fulltg) then
+        Error("The first argument must be a TriangleGroup object.");
+        return fail;
+    fi;
+
+    if not IsProperTriangleGroupObj(tg) then
+        Error("The second argument must be a ProperTriangeGroup object.");
+        return fail;
+    fi;
+
     if not IsTGQuotientObj(tgquotient) then
-        Error("The argument must be a TGQuotient object.");
+        Error("The third argument must be a TGQuotient object.");
+        return fail;
+    fi;
+
+    if not  Signature(fulltg) = Signature(tg) or not  Signature(tg) = TriangleGroupSignature(tgquotient) then
+        Error("The agruments must have the same signatures.");
         return fail;
     fi;
 
@@ -105,14 +153,13 @@ function(tgquotient)
     # ---------------
 
     signature := TriangleGroupSignature(tgquotient);
-    fulltg := TriangleGroup(signature);; tg := ProperTriangleGroup(signature);
     cell := TGCell(tg, tgquotient);
 
     # --------------------------------------------------
     # Construct groups, symmetry elements and embedding:
     # -------------------------------------------------- 
 
-    tgFpObjs := constructTGGroups@(fulltg, tg);
+    tgFpObjs := constructTGFpAndEmb@(fulltg, tg);
     D := tgFpObjs[1];; DELTA := tgFpObjs[2];; embDDELTA := tgFpObjs[3];
     symmetries := tgFpObjs[4];
 	
@@ -164,9 +211,9 @@ function(tgquotient)
     fpGAMMA := Image(isoGamma);
     gensGammaFp := GeneratorsOfGroup(fpGAMMA);
 
-    # ------------------------------------------------------------------
-    # Raw: point-group matrix entries in terms of tranlation generators:
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------
+    # Raw: point-group matrix entries in terms of translation generators:
+    # -------------------------------------------------------------------
 
     PGMRawLst := []; 
     for item in symmetries do
@@ -216,74 +263,154 @@ function(tgquotient)
         od;
     fi;
 
-    F := NewFamily( "PGMatrixElements", IsPGMatrixElementsObj );
-    return Objectify( NewType( F, IsPGMatrixElementsObj and IsPGMatrixElementsComponentRep ), rec(
-	    signature := MakeImmutable(signature),
-	    quotient := MakeImmutable(TGQuotientName(tgquotient)),
+    # construct record
+    PGMatsRec := rec( a := PGMLst[1, 2], b := PGMLst[2, 2], c := PGMLst[3, 2] );
+    
+    F := NewFamily( "PGMatricesOfGenerators", IsPGMatricesOfGeneratorsObj );
+    return Objectify( NewType( F, IsPGMatricesOfGeneratorsObj and IsPGMatricesOfGeneratorsComponentRep ), rec(
+	    fulltg := fulltg,
+	    tg := tg,
+	    tgquotient := tgquotient,
 	    sparse := MakeImmutable(sparse),
-	    elements := MakeImmutable(PGMLst)
+	    GeneratorNames := MakeImmutable(SortedList(RecNames(PGMatsRec))),
+	    PGMatsRec := MakeImmutable(PGMatsRec)
 	    ));
 end );
 
 
+InstallMethod( EvaluatePGMatrix, [ IsElementOfFpGroup, IsPGMatricesOfGeneratorsObj and IsPGMatricesOfGeneratorsComponentRep ],
+function(symmetry, pgMatsGs)	
+    local fulltg, tg, tgFpObjs, D, DELTA, embDDELTA, 
+     elementsRec, item, PGMat, PGMatRaw, signature, 
+     symmetriesDeconstructed;
 
-# Type PGMatrix
-DeclareRepresentation("IsPGMatrixComponentRep", IsComponentObjectRep,
-	[ "PGMatrixElements", "PGMatrices" ]
+    # Get needed objects:
+    # -------------------
+   
+    signature := Signature(pgMatsGs);
+
+    # Get symmetries (generators of (full) triangle group), 
+    # tg, fulltg as FpGroups D, DELTA, respectively and
+    # embedding homomorphism of D in DELTA embDDELTA
+    fulltg := GetTriangleGroup(pgMatsGs);
+    tg := GetProperTriangleGroup(pgMatsGs);
+    tgFpObjs := constructTGFpAndEmb@(fulltg, tg);
+    D := tgFpObjs[1];; DELTA := tgFpObjs[2];; embDDELTA := tgFpObjs[3];       
+	
+    # ---------------
+    # Check symmetry:
+    # ---------------   
+
+    # check generating set
+    if not (symmetry in D or symmetry in DELTA) then
+        Error("The symmetry must be an element of the (proper) triangle group used in the construction of the PGMatricesOfGenerators object.");
+        return fail;
+    fi;
+
+    # -------------------------
+    # Rewrite symmetry element:
+    # -------------------------
+    # If the symmetry is an element of the
+    # proper triangle group get the image of the
+    # symmetry in the triangle group, through the
+    # embedding homomorphism. Additionally, deconstruct
+    # the symmetry into its constituents (generators).
+
+    item := symmetry;
+    symmetriesDeconstructed := [];
+    if item in D then
+	item := Image(embDDELTA, item);
+    fi;
+    # deconstruct the word into an ordered list of generators
+    symmetriesDeconstructed := List([1..Length(item)], g -> Subword(item, g, g));
+   
+    # ------------------------------------------
+    # Perform the needed matrix multiplications:
+    # ------------------------------------------
+
+    # record of point-group matrices a, b, c
+    elementsRec := PGMatricesRec(pgMatsGs); 
+
+    if IsSparse(pgMatsGs) then
+        PGMatRaw := [];
+        for item in symmetriesDeconstructed do       
+           Append(PGMatRaw, [elementsRec.(String(item))]);
+        od;
+        PGMat := Iterated(PGMatRaw, sparseMatMultiply@);
+    else
+        PGMatRaw := [];
+        for item in symmetriesDeconstructed do       
+            Append(PGMatRaw, [elementsRec.(String(item))]);
+        od;
+        PGMat := Product(PGMatRaw);
+    fi;
+
+    return PGMat;
+end );
+
+
+
+# Type PGMatrices
+DeclareRepresentation("IsPGMatricesComponentRep", IsComponentObjectRep,
+	[ "PGMatricesOfGenerators", "SymmetryNames", "PGMatricesRec" ]
 );
 
 InstallMethod( \=, [
-    IsPGMatrixObj and IsPGMatrixComponentRep,
-    IsPGMatrixObj and IsPGMatrixComponentRep ], 
-function(pgMatrix1, pgMatrix2)
-	return 	GetPGMatrixElements(pgMatrix1) = GetPGMatrixElements(pgMatrix2) and
-		Matrices(pgMatrix1) = Matrices(pgMatrix2);
+    IsPGMatricesObj and IsPGMatricesComponentRep,
+    IsPGMatricesObj and IsPGMatricesComponentRep ], 
+function(pgMats1, pgMats2)
+	return 	GetPGMatricesOfGenerators(pgMats1) = GetPGMatricesOfGenerators(pgMats2) and
+		SymmetryNames(pgMats1) = SymmetryNames(pgMats2) and
+		PGMatricesRec(pgMats1) = PGMatricesRec(pgMats2);
 end );
 
 
-InstallMethod( GetPGMatrixElements, [ IsPGMatrixObj and IsPGMatrixComponentRep ], 
-function(pgMat)
-	return pgMat!.pgMatElements;
+# This should only be used internally for the test files !!!
+syntacticEqualPGMatricesObjs@ := function(pgMats1, pgMats2)
+	return  syntacticEqualPGMatricesOfGeneratorsObjs@(GetPGMatricesOfGenerators(pgMats1), GetPGMatricesOfGenerators(pgMats2)) and
+		SymmetryNames(pgMats1) = SymmetryNames(pgMats2) and
+		PGMatricesRec(pgMats1) = PGMatricesRec(pgMats2);
+end;
+
+
+InstallMethod( GetPGMatricesOfGenerators, [ IsPGMatricesObj and IsPGMatricesComponentRep ], 
+function(pgMats)
+	return pgMats!.pgMatsGs;
 end );
 
-InstallMethod( Matrices, [ IsPGMatrixObj and IsPGMatrixComponentRep ], 
-function(pgMat)
-	return pgMat!.pgMatrices;
+InstallMethod( SymmetryNames, [ IsPGMatricesObj and IsPGMatricesComponentRep ], 
+function(pgMats)
+	return pgMats!.SymmetryNames;
+end );
+
+InstallMethod( PGMatricesRec, [ IsPGMatricesObj and IsPGMatricesComponentRep ], 
+function(pgMats)
+	return pgMats!.PGMatsRec;
 end );
 
 
-InstallMethod( PrintString, [ IsPGMatrixObj and IsPGMatrixComponentRep ], 
-function(pgMat)
-	return Concatenation( "PGMatrix( ", 
-		PrintString(GetPGMatrixElements(pgMat)), ", ",
-		"matrices = ", PrintString(Matrices(pgMat)), 
+InstallMethod( PrintString, [ IsPGMatricesObj and IsPGMatricesComponentRep ], 
+function(pgMats)
+	return Concatenation( "PGMatrices( ", 
+		PrintString(GetPGMatricesOfGenerators(pgMats)), ", ",
+		"SymmetryNames = ", PrintString(SymmetryNames(pgMats)), ", ",
+		"PGMatricesRec = ", PrintString(PGMatricesRec(pgMats)), 
 	")" );
 end );
 
 
 
-InstallGlobalFunction( PGMatrix,
-function(symmetries, fulltg, tg, pgMatElements)	
-    local tgFpObjs, D, DELTA, embDDELTA, idnD, idnDELTA, elements, 
-     elementsRec, i, item, PGMatLst, PGMatRaw, signature, symNames, 
+InstallGlobalFunction( PGMatrices,
+function(symmetries, pgMatsGs)	
+    local fulltg, tg, tgFpObjs, D, DELTA, embDDELTA, elementsRec,
+     i, item, PGMatsRec, PGMatRaw, signature, symNames, 
      symmetriesDeconstructed, F;
 
-    # Check arguments:
-    # ----------------
+    # Check second argument:
+    # ----------------------
 
-
-    if not IsTriangleGroupObj(fulltg) then
-        Error("The second argument must be a TriangleGroup object.");
-        return fail;
-    fi;
-
-    if not IsProperTriangleGroupObj(tg) then
-        Error("The third argument must be a ProperTriangeGroup object.");
-        return fail;
-    fi;
-
-    if not IsPGMatrixElementsObj(pgMatElements) then
-        Error("The forth argument must be a PGMatrixElements object.");
+    if not IsPGMatricesOfGeneratorsObj(pgMatsGs) then
+        Error("The second argument must be a PGMatricesOfGenerators object.");
         return fail;
     fi;
 
@@ -291,17 +418,19 @@ function(symmetries, fulltg, tg, pgMatElements)
     # Get needed objects:
     # -------------------
    
-    signature := Signature(pgMatElements);
+    signature := Signature(pgMatsGs);
 
     # Get symmetries (generators of (full) triangle group), 
     # tg, fulltg as FpGroups D, DELTA, respectively and
     # embedding homomorphism of D in DELTA embDDELTA
-    tgFpObjs := constructTGGroups@(fulltg, tg);
+    fulltg := GetTriangleGroup(pgMatsGs);
+    tg := GetProperTriangleGroup(pgMatsGs);
+    tgFpObjs := constructTGFpAndEmb@(fulltg, tg);
     D := tgFpObjs[1];; DELTA := tgFpObjs[2];; embDDELTA := tgFpObjs[3];       
 	
-    # ---------------------------------
-    # Check option second argument:
-    # ---------------------------------   
+    # ----------------------------------
+    # Check options and first argument:
+    # ----------------------------------  
 
     # check the format of symmetries, and prepare for further checks
     symNames := ValueOption("symNames");
@@ -327,10 +456,8 @@ function(symmetries, fulltg, tg, pgMatElements)
     fi;
 
     # check generating set
-    idnD := D.1*D.1^-1;
-    idnDELTA := DELTA.1*DELTA.1^-1;
-    if not SizeBlist(List(symmetries, w -> idnD = w*w^-1 or idnDELTA = w*w^-1 )) = Length(symmetries) then
-        Error("The symmetries must be elements of the (proper) triangle group.");
+    if not SizeBlist(List(symmetries, w -> w in D or w in DELTA )) = Length(symmetries) then
+        Error("The symmetries must be elements of the (proper) triangle group used in the construction of the PGMatricesOfGenerators object.");
         return fail;
     fi;
 
@@ -345,7 +472,7 @@ function(symmetries, fulltg, tg, pgMatElements)
 
     symmetriesDeconstructed := [];
     for item in symmetries do 
-	if idnD = item*item^-1 then
+	if item in D then
 	   item := Image(embDDELTA, item);
 	fi;
 	# deconstruct the word into an ordered list of generators
@@ -358,17 +485,16 @@ function(symmetries, fulltg, tg, pgMatElements)
     # ------------------------------------------
 
     # record of point-group matrices a, b, c
-    elements := GetElements(pgMatElements);
-    elementsRec := rec( a := elements[1, 2], b := elements[2, 2], c := elements[3, 2] );  
+    elementsRec := PGMatricesRec(pgMatsGs); 
 
-    PGMatLst := [];
-    if IsSparse(pgMatElements) then
+    PGMatsRec := rec();
+    if IsSparse(pgMatsGs) then
         for i in [1..Length(symmetriesDeconstructed)] do 
             PGMatRaw := [];
             for item in symmetriesDeconstructed[i] do       
            	Append(PGMatRaw, [elementsRec.(String(item))]);
             od;
-            Append(PGMatLst, [[symNames[i], Iterated(PGMatRaw, sparseMatMultiply@)]]);
+            PGMatsRec.(symNames[i]) := Iterated(PGMatRaw, sparseMatMultiply@);
 	od;
     else
         for i in [1..Length(symmetriesDeconstructed)] do 
@@ -376,22 +502,27 @@ function(symmetries, fulltg, tg, pgMatElements)
             for item in symmetriesDeconstructed[i] do       
            	Append(PGMatRaw, [elementsRec.(String(item))]);
             od;
-            Append(PGMatLst, [[symNames[i], Product(PGMatRaw)]]);
+            PGMatsRec.(symNames[i]) := Product(PGMatRaw);
 	od;
     fi;
-    F := NewFamily( "PGMatrix", IsPGMatrixObj );
-    return Objectify( NewType( F, IsPGMatrixObj and IsPGMatrixComponentRep ), rec(
-	    pgMatElements := pgMatElements,
-	    pgMatrices := MakeImmutable(PGMatLst)
+
+    F := NewFamily( "PGMatrices", IsPGMatricesObj );
+    return Objectify( NewType( F, IsPGMatricesObj and IsPGMatricesComponentRep ), rec(
+	    pgMatsGs := pgMatsGs,
+	    SymmetryNames := MakeImmutable(SortedList(RecNames(PGMatsRec))),		
+	    PGMatsRec := MakeImmutable(PGMatsRec)
 	    )); 
 end );
 
 
-InstallMethod( Export, [  IsPGMatrixObj, IsOutputTextStream ],
-function(pgMatrix, output)
-    local pgMElement;
+InstallMethod( Export, [  IsPGMatricesObj, IsOutputTextStream ],
+function(pgMats, output)
+    local pgMatGs, pgMatGsRec, pgMatSymsRec, tgquotient;
     
-    pgMElement := GetPGMatrixElements(pgMatrix);
+    pgMatGs := GetPGMatricesOfGenerators(pgMats);
+    tgquotient := GetTGQuotient(pgMatGs);
+    pgMatGsRec := PGMatricesRec(pgMatGs);
+    pgMatSymsRec := PGMatricesRec(pgMats);
 
     SetPrintFormattingStatus(output, false);
     
@@ -400,36 +531,38 @@ function(pgMatrix, output)
 	AppendTo(output, "\n");
 
     # write: triangle group, genus bound, list of quotients
-	AppendTo(output, Signature(pgMElement));
+	AppendTo(output, Signature(pgMatGs));
 	AppendTo(output, "\n");
-	AppendTo(output, TGQuotientName(pgMElement));
+	AppendTo(output, [TGQuotientName(pgMatGs), TGQuotientOrder(tgquotient), TGQuotientGenus(tgquotient), TGQuotientActionType(tgquotient), TGQuotientRelators(tgquotient)]);
 	AppendTo(output, "\n");
-	AppendTo(output, IsSparse(pgMElement));
-	AppendTo(output, "\n");
-	AppendTo(output, GetElements(pgMElement));
+	AppendTo(output, IsSparse(pgMatGs));
 	AppendTo(output, "\n");
 
-    # write: adjacency matrix
-	AppendTo(output, Matrices(pgMatrix));
+    # write: point-group matrices of generators
+	AppendTo(output, List(GeneratorNames(pgMatGs), item -> [item, pgMatGsRec.(item)]));
+	AppendTo(output, "\n");
+
+    # write: point-group matrices of symmetries
+	AppendTo(output, List(SymmetryNames(pgMats), item -> [item, pgMatSymsRec.(item)]));
 end );
 
 
-InstallMethod( Export, [ IsPGMatrixObj, IsString ],
-function(pgMatrix, path)
+InstallMethod( Export, [ IsPGMatricesObj, IsString ],
+function(pgMats, path)
     local output;
 
     # open file
     output := OutputTextFile(path, false);
 
-    Export(pgMatrix, output);
+    Export(pgMats, output);
 
     # close file
     CloseStream(output);
 end );
 
 
-InstallMethod( ExportString, [ IsPGMatrixObj ],
-function(pgMatrix)
+InstallMethod( ExportString, [ IsPGMatricesObj ],
+function(pgMats)
 	local str, output;
 
 	# open string stream
@@ -437,7 +570,7 @@ function(pgMatrix)
 	output := OutputTextString(str, false);
 	
 	# export to stream
-	Export(pgMatrix, output);
+	Export(pgMats, output);
 
 	# close
 	CloseStream(output);
@@ -447,63 +580,116 @@ function(pgMatrix)
 end );
 
 
-
-InstallGlobalFunction( ImportPGMatrix,
+InstallGlobalFunction( ImportPGMatrices,
 function(input)
-    local version, signature, quotient, elements, sparse, 
-     pgMatElements, pgMatLst, F1, F2;
+    local version, signature, quotientInfo, elements, sparse, 
+     pgMatsGs, pgMatGsLst, pgMatSymsLst, fulltg, tg, tgquotient, F1, F2,
+     GeneratorNames, SymmetryNames, i, str, PGMatGsRec, PGMatSymsRec;
 
-	# check arguments
+	# Check arguments:
+	# ----------------
+
 	if not IsInputTextStream(input) then
 		Error("The first argument must be an input text stream.");
 		return fail;
 	fi;
 
+	# --------------
+	# Get all infos:
+	# --------------
+
 	# version
 	version := ReadAllLine(input);
 
     	signature := EvalString(ReadAllLine(input));
-	quotient := EvalString(ReadAllLine(input));
+	quotientInfo := EvalString(ReadAllLine(input));
 	sparse := EvalString(ReadAllLine(input));
-	elements := EvalString(ReadAllLine(input));
-	pgMatLst := EvalString(ReadAllLine(input));
-	
-	F1 := NewFamily( "PGMatrixElements", IsPGMatrixElementsObj );
-	pgMatElements := Objectify( NewType( F1, IsPGMatrixElementsObj and IsPGMatrixElementsComponentRep ), rec(
-	    	signature := MakeImmutable(signature),
-	    	quotient := MakeImmutable(quotient),
-	    	sparse := MakeImmutable(sparse),
-	    	elements := MakeImmutable(elements)
-		));
+	pgMatGsLst := EvalString(ReadAllLine(input));
+	pgMatSymsLst := EvalString(ReadAllLine(input));
 
-	F2 := NewFamily( "PGMatrix", IsPGMatrixObj );
-    	return Objectify( NewType( F2, IsPGMatrixObj and IsPGMatrixComponentRep ), rec(
-		pgMatElements := pgMatElements ,
-		pgMatrices := MakeImmutable(pgMatLst)
+	# -----------------------------------------
+	# Construct fulltg, tg, tgquotient objects:
+	# -----------------------------------------
+
+	# construct proper-, triangle group
+	tg := ProperTriangleGroup(signature);
+	fulltg := TriangleGroup(signature);
+
+   	# construct tgquotient
+	tgquotient := Objectify( NewType(
+		NewFamily( "TGQuotient", IsTGQuotientObj ),
+		IsTGQuotientObj and IsTGQuotientComponentRep),
+		rec(
+			name := quotientInfo[1],
+            		triangle := MakeImmutable(signature), 
+            		order := quotientInfo[2],
+            		genus := quotientInfo[3],
+            		action := quotientInfo[4],
+            		relators := quotientInfo[5]
+		)
+	);
+
+	# ------------------------------------------
+	# Construct records of point-group matrices:
+	# ------------------------------------------	
+
+	PGMatGsRec := rec();
+	GeneratorNames := List(pgMatGsLst{[1..3]}{[1]}, x -> x[1]);
+	for i in [1..3] do
+		str := GeneratorNames[i];
+		PGMatGsRec!.(GeneratorNames[i]) := pgMatGsLst[i, 2];
+	od;
+
+	PGMatSymsRec := rec();
+	SymmetryNames := List(pgMatSymsLst{[1..Length(pgMatSymsLst)]}{[1]}, x -> x[1]);
+	for i in [1..Length(pgMatSymsLst)] do
+		str := SymmetryNames[i];
+		PGMatSymsRec!.(SymmetryNames[i]) := pgMatSymsLst[i, 2];
+	od;
+
+	# --------------------------------
+	# Construct the PGMatrices object:
+	# --------------------------------
+
+	F1 := NewFamily( "PGMatricesOfGenerators", IsPGMatricesOfGeneratorsObj );
+	pgMatsGs := Objectify( NewType( F1, IsPGMatricesOfGeneratorsObj and IsPGMatricesOfGeneratorsComponentRep ), rec(
+		fulltg := fulltg,
+	   	tg := tg,
+	    	tgquotient := tgquotient,
+	    	sparse := MakeImmutable(sparse),
+	    	GeneratorNames := MakeImmutable(SortedList(GeneratorNames)),
+	    	PGMatsRec := MakeImmutable(PGMatGsRec)
+	    ));
+
+	F2 := NewFamily( "PGMatrices", IsPGMatricesObj );
+    	return Objectify( NewType( F2, IsPGMatricesObj and IsPGMatricesComponentRep ), rec(
+		pgMatsGs := pgMatsGs,
+		SymmetryNames := MakeImmutable(SortedList(SymmetryNames)),	
+		PGMatsRec := MakeImmutable(PGMatSymsRec)
 	));
 end );
 
 
-InstallGlobalFunction( ImportPGMatrixFromFile,
+InstallGlobalFunction( ImportPGMatricesFromFile,
 function(path)
-	local input, pgMatrix;
+	local input, pgMatrices;
 
 	# open input stream
 	input := InputTextFile(path);
 
 	# import
-	pgMatrix := CallFuncList(ImportPGMatrix, [input]);
+	pgMatrices := CallFuncList(ImportPGMatrices, [input]);
 
 	# close stream
 	CloseStream(input);
 
-	return pgMatrix;
+	return pgMatrices;
 end );
 
 
-InstallGlobalFunction( ImportPGMatrixFromString,
+InstallGlobalFunction( ImportPGMatricesFromString,
 function(string)
-	local input, pgMatrix;
+	local input, pgMatrices;
 
 	# check arguments
 	if not IsString(string) then
@@ -515,10 +701,10 @@ function(string)
 	input := InputTextString(string);
 	
 	# import
-	pgMatrix := CallFuncList(ImportPGMatrix, [input]);
+	pgMatrices := CallFuncList(ImportPGMatrices, [input]);
 
 	# close stream
 	CloseStream(input);
 
-	return pgMatrix;
+	return pgMatrices;
 end );
