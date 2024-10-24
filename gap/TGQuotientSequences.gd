@@ -52,6 +52,7 @@ DeclareGlobalFunction( "IsTGQuotientSequence" );
 #!     adjacency matrix of normal subgroup relation between consecutive translation groups of corresponding quotients
 #!   - <Ref Oper='LongestSequence' Label='for TGQuotientSequencesAdjacencyMatrix' />:
 #!     list of longest sequence of quotient groups 
+#!
 #!   and is printed in the form
 #!   @BeginLog
 #!   TGQuotientSequencesAdjacencyMatrix( 
@@ -67,7 +68,7 @@ DeclareGlobalFunction( "IsTGQuotientSequence" );
 DeclareCategory( "IsTGQuotientSequencesAdjacencyMatrixObj", IsObject );
 
 #! @Description
-#!   Construct the adjacency matrix for the triangle group <A>tg</A> ($\Delta^+$), given as `ProperTriangleGroup` object (see
+#!   Construct the adjacency matrix for the triangle group <A>tg</A> ($\Delta^+$), given as a `ProperTriangleGroup` object (see
 #!   <Ref Sect="Section_TriangleGroups"/>), for available quotients from the library, i.e., Conder’s list.
 #!
 #!   The option `boundByGenus`, an upper bound, can be passed, which takes a positive integer below 102, limiting the number of 
@@ -78,7 +79,7 @@ DeclareCategory( "IsTGQuotientSequencesAdjacencyMatrixObj", IsObject );
 #!   is the corresponding matrix entry at position `rowIdx` and `colIdx`, which represent indices of the matrix 
 #!   rows and columns, respectively. The default is false.
 #!
-#!   This function saves constrcuted translation groups in cache, which can be flushed
+#!   This function saves constructed translation groups in cache, which can be flushed
 #!   by calling `FlushCaches` (see section Mutability and Copying in the <URL Text="GAP Reference Manual ">https://docs.gap-system.org/doc/ref/chap0_mj.html</URL>).
 #! @Arguments tg
 #! @Returns adjacency matrix as `TGQuotientSequencesAdjacencyMatrix` object.
@@ -119,7 +120,7 @@ DeclareOperation( "MirrorSymmetries", [ IsTGQuotientSequencesAdjacencyMatrixObj 
 DeclareOperation( "IsSparse", [ IsTGQuotientSequencesAdjacencyMatrixObj ] );
 
 #! @Description
-#!   returns the adjacency matrix of dimension `BoundByGenus(<A>tgQSAdjMat</A>)` x `BoundByGenus(<A>tgQSAdjMat</A>)`.  
+#!   returns the adjacency matrix of dimension `Length(GetListTGQuotients(<A>tgQSAdjMat</A>))` x `Length(GetListTGQuotients(<A>tgQSAdjMat</A>))`.  
 #!   If `IsSparse(<A>tgQSAdjMat</A>)` is true, the adjacency matrix will be sparsely represented `[ [ [ rowIdx, colIdx ], entry ], ... ]`, 
 #!   where `entry` is the corresponding matrix entry at position `rowIdx` and `colIdx`, which represent indices of the matrix
 #!   rows and columns, respectively.
@@ -129,7 +130,7 @@ DeclareOperation( "AdjacencyMatrix", [ IsTGQuotientSequencesAdjacencyMatrixObj ]
 
 #! @Description
 #!   returns the adjacency matrix of the normal subgroup relation between consecutive translation groups of corresponding quotients,
-#!   with dimensions `BoundByGenus(<A>tgQSAdjMat</A>)` x `BoundByGenus(<A>tgQSAdjMat</A>)`.  
+#!   with dimensions `Length(GetListTGQuotients(<A>tgQSAdjMat</A>))` x `Length(GetListTGQuotients(<A>tgQSAdjMat</A>))`.  
 #!   If `IsSparse(<A>tgQSAdjMat</A>)` is true, the adjacency matrix will be sparsely represented `[ [ [ rowIdx, colIdx ], entry ], ... ]`,
 #!   where `entry` is the corresponding matrix entry at position `rowIdx` and `colIdx`, which represent indices of the matrix
 #!   rows and columns, respectively.
