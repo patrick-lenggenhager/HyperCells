@@ -1,5 +1,27 @@
 gap> START_TEST("HyperCells: PGMatrix.tst");
 
+
+# Define needed functions:
+# ------------------------
+
+# This should only be used internally for this test file !!!
+gap> syntacticEqualPGMatricesOfGeneratorsObjs@ := function(pgMatsGs1, pgMatsGs2)
+>       return  Signature(GetTriangleGroup(pgMatsGs1)) = Signature(GetTriangleGroup(pgMatsGs2)) and
+>               Signature(GetProperTriangleGroup(pgMatsGs1)) = Signature(GetProperTriangleGroup(pgMatsGs2)) and
+>               GetTGQuotient(pgMatsGs1) = GetTGQuotient(pgMatsGs2) and
+>               PGMatricesRec(pgMatsGs1) = PGMatricesRec(pgMatsGs2);
+> end;;
+
+# This should only be used internally for this test file !!!
+gap> syntacticEqualPGMatricesObjs@ := function(pgMats1, pgMats2)
+>       return  syntacticEqualPGMatricesOfGeneratorsObjs@(GetPGMatricesOfGenerators(pgMats1), GetPGMatricesOfGenerators(pgMats2)) and
+>               SymmetryNames(pgMats1) = SymmetryNames(pgMats2) and
+>               PGMatricesRec(pgMats1) = PGMatricesRec(pgMats2);
+> end;;
+
+# Start tests:
+# ------------
+
 # Triangle group (2,8,8)
 gap> fulltg := TriangleGroup( [ 2, 8, 8 ] );;
 gap> tg := ProperTriangleGroup( [ 2, 8, 8 ] );;
@@ -13,8 +35,8 @@ gap> symNames := ["A", "B", "C", "X", "Y", "Z"];;
 
 gap> pgMatGs := PGMatricesOfGenerators(fulltg, tg, qpc);
 PGMatricesOfGenerators( TriangleGroup(2, 8, 8), ProperTriangleGroup(2, 8, 8), TGQuotient([ 2, 6 ], [ 2, 8, 8 ], 8, 2, \
-Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^3 * z^-1 ]), sparse = false, GeneratorNames = [ "a", "b", "c" \
-], PGMatricesRec = rec( a := [ [ 0, 1, 0, 0 ], [ 1, 0, 0, 0 ], [ -1, -1, -1, 0 ], [ 0, 0, 0, 1 ] ], b := [ [ 0, -1, 0,\
+Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^3 * z^-1 ]), sparse = false, generatorNames = [ "a", "b", "c" \
+], pgMatricesRec = rec( a := [ [ 0, 1, 0, 0 ], [ 1, 0, 0, 0 ], [ -1, -1, -1, 0 ], [ 0, 0, 0, 1 ] ], b := [ [ 0, -1, 0,\
  0 ], [ -1, 0, 0, 0 ], [ 1, 1, 1, 0 ], [ 0, 0, 0, -1 ] ], c := [ [ -1, 0, 0, 0 ], [ 1, 1, 1, 1 ], [ 0, 0, 0, -1 ], [ 0\
 , 0, -1, 0 ] ] ))
 
@@ -39,44 +61,44 @@ rec( a := [ [ 0, 1, 0, 0 ], [ 1, 0, 0, 0 ], [ -1, -1, -1, 0 ], [ 0, 0, 0, 1 ] ],
 # Test single symmetry
 gap> pgMat := PGMatrices(symmetries[1], pgMatGs);
 PGMatrices( PGMatricesOfGenerators( TriangleGroup(2, 8, 8), ProperTriangleGroup(2, 8, 8), TGQuotient([ 2, 6 ], [ 2, 8,\
- 8 ], 8, 2, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^3 * z^-1 ]), sparse = false, GeneratorNames = [ "a\
-", "b", "c" ], PGMatricesRec = rec( a := [ [ 0, 1, 0, 0 ], [ 1, 0, 0, 0 ], [ -1, -1, -1, 0 ], [ 0, 0, 0, 1 ] ], b := [\
+ 8 ], 8, 2, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^3 * z^-1 ]), sparse = false, generatorNames = [ "a\
+", "b", "c" ], pgMatricesRec = rec( a := [ [ 0, 1, 0, 0 ], [ 1, 0, 0, 0 ], [ -1, -1, -1, 0 ], [ 0, 0, 0, 1 ] ], b := [\
  [ 0, -1, 0, 0 ], [ -1, 0, 0, 0 ], [ 1, 1, 1, 0 ], [ 0, 0, 0, -1 ] ], c := [ [ -1, 0, 0, 0 ], [ 1, 1, 1, 1 ], [ 0, 0, \
-0, -1 ], [ 0, 0, -1, 0 ] ] )), SymmetryNames = [ "a" ], PGMatricesRec = rec( a := [ [ 0, 1, 0, 0 ], [ 1, 0, 0, 0 ], [ \
+0, -1 ], [ 0, 0, -1, 0 ] ] )), symmetryNames = [ "a" ], pgMatricesRec = rec( a := [ [ 0, 1, 0, 0 ], [ 1, 0, 0, 0 ], [ \
 -1, -1, -1, 0 ], [ 0, 0, 0, 1 ] ] ))
 gap> pgMat := PGMatrices(symmetries[1], pgMatGs : symNames := symNames[1]);
 PGMatrices( PGMatricesOfGenerators( TriangleGroup(2, 8, 8), ProperTriangleGroup(2, 8, 8), TGQuotient([ 2, 6 ], [ 2, 8,\
- 8 ], 8, 2, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^3 * z^-1 ]), sparse = false, GeneratorNames = [ "a\
-", "b", "c" ], PGMatricesRec = rec( a := [ [ 0, 1, 0, 0 ], [ 1, 0, 0, 0 ], [ -1, -1, -1, 0 ], [ 0, 0, 0, 1 ] ], b := [\
+ 8 ], 8, 2, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^3 * z^-1 ]), sparse = false, generatorNames = [ "a\
+", "b", "c" ], pgMatricesRec = rec( a := [ [ 0, 1, 0, 0 ], [ 1, 0, 0, 0 ], [ -1, -1, -1, 0 ], [ 0, 0, 0, 1 ] ], b := [\
  [ 0, -1, 0, 0 ], [ -1, 0, 0, 0 ], [ 1, 1, 1, 0 ], [ 0, 0, 0, -1 ] ], c := [ [ -1, 0, 0, 0 ], [ 1, 1, 1, 1 ], [ 0, 0, \
-0, -1 ], [ 0, 0, -1, 0 ] ] )), SymmetryNames = [ "A" ], PGMatricesRec = rec( A := [ [ 0, 1, 0, 0 ], [ 1, 0, 0, 0 ], [ \
+0, -1 ], [ 0, 0, -1, 0 ] ] )), symmetryNames = [ "A" ], pgMatricesRec = rec( A := [ [ 0, 1, 0, 0 ], [ 1, 0, 0, 0 ], [ \
 -1, -1, -1, 0 ], [ 0, 0, 0, 1 ] ] ))
 
 # Test list of symmetries
 gap> pgMat := PGMatrices(symmetries, pgMatGs);
 PGMatrices( PGMatricesOfGenerators( TriangleGroup(2, 8, 8), ProperTriangleGroup(2, 8, 8), TGQuotient([ 2, 6 ], [ 2, 8,\
- 8 ], 8, 2, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^3 * z^-1 ]), sparse = false, GeneratorNames = [ "a\
-", "b", "c" ], PGMatricesRec = rec( a := [ [ 0, 1, 0, 0 ], [ 1, 0, 0, 0 ], [ -1, -1, -1, 0 ], [ 0, 0, 0, 1 ] ], b := [\
+ 8 ], 8, 2, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^3 * z^-1 ]), sparse = false, generatorNames = [ "a\
+", "b", "c" ], pgMatricesRec = rec( a := [ [ 0, 1, 0, 0 ], [ 1, 0, 0, 0 ], [ -1, -1, -1, 0 ], [ 0, 0, 0, 1 ] ], b := [\
  [ 0, -1, 0, 0 ], [ -1, 0, 0, 0 ], [ 1, 1, 1, 0 ], [ 0, 0, 0, -1 ] ], c := [ [ -1, 0, 0, 0 ], [ 1, 1, 1, 1 ], [ 0, 0, \
-0, -1 ], [ 0, 0, -1, 0 ] ] )), SymmetryNames = [ "a", "b", "c", "x", "y", "z" ], PGMatricesRec = rec( a := [ [ 0, 1, 0\
+0, -1 ], [ 0, 0, -1, 0 ] ] )), symmetryNames = [ "a", "b", "c", "x", "y", "z" ], pgMatricesRec = rec( a := [ [ 0, 1, 0\
 , 0 ], [ 1, 0, 0, 0 ], [ -1, -1, -1, 0 ], [ 0, 0, 0, 1 ] ], b := [ [ 0, -1, 0, 0 ], [ -1, 0, 0, 0 ], [ 1, 1, 1, 0 ], [\
  0, 0, 0, -1 ] ], c := [ [ -1, 0, 0, 0 ], [ 1, 1, 1, 1 ], [ 0, 0, 0, -1 ], [ 0, 0, -1, 0 ] ], x := [ [ -1, 0, 0, 0 ], \
 [ 0, -1, 0, 0 ], [ 0, 0, -1, 0 ], [ 0, 0, 0, -1 ] ], y := [ [ -1, -1, -1, -1 ], [ 1, 0, 0, 0 ], [ 0, 1, 1, 0 ], [ 0, 0\
 , 1, 0 ] ], z := [ [ 0, -1, 0, 0 ], [ 0, 0, -1, 1 ], [ 0, 0, 0, -1 ], [ 1, 1, 1, 0 ] ] ))
 gap> pgMat := PGMatrices(symmetries, pgMatGs : symNames := symNames);
 PGMatrices( PGMatricesOfGenerators( TriangleGroup(2, 8, 8), ProperTriangleGroup(2, 8, 8), TGQuotient([ 2, 6 ], [ 2, 8,\
- 8 ], 8, 2, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^3 * z^-1 ]), sparse = false, GeneratorNames = [ "a\
-", "b", "c" ], PGMatricesRec = rec( a := [ [ 0, 1, 0, 0 ], [ 1, 0, 0, 0 ], [ -1, -1, -1, 0 ], [ 0, 0, 0, 1 ] ], b := [\
+ 8 ], 8, 2, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^3 * z^-1 ]), sparse = false, generatorNames = [ "a\
+", "b", "c" ], pgMatricesRec = rec( a := [ [ 0, 1, 0, 0 ], [ 1, 0, 0, 0 ], [ -1, -1, -1, 0 ], [ 0, 0, 0, 1 ] ], b := [\
  [ 0, -1, 0, 0 ], [ -1, 0, 0, 0 ], [ 1, 1, 1, 0 ], [ 0, 0, 0, -1 ] ], c := [ [ -1, 0, 0, 0 ], [ 1, 1, 1, 1 ], [ 0, 0, \
-0, -1 ], [ 0, 0, -1, 0 ] ] )), SymmetryNames = [ "A", "B", "C", "X", "Y", "Z" ], PGMatricesRec = rec( A := [ [ 0, 1, 0\
+0, -1 ], [ 0, 0, -1, 0 ] ] )), symmetryNames = [ "A", "B", "C", "X", "Y", "Z" ], pgMatricesRec = rec( A := [ [ 0, 1, 0\
 , 0 ], [ 1, 0, 0, 0 ], [ -1, -1, -1, 0 ], [ 0, 0, 0, 1 ] ], B := [ [ 0, -1, 0, 0 ], [ -1, 0, 0, 0 ], [ 1, 1, 1, 0 ], [\
  0, 0, 0, -1 ] ], C := [ [ -1, 0, 0, 0 ], [ 1, 1, 1, 1 ], [ 0, 0, 0, -1 ], [ 0, 0, -1, 0 ] ], X := [ [ -1, 0, 0, 0 ], \
 [ 0, -1, 0, 0 ], [ 0, 0, -1, 0 ], [ 0, 0, 0, -1 ] ], Y := [ [ -1, -1, -1, -1 ], [ 1, 0, 0, 0 ], [ 0, 1, 1, 0 ], [ 0, 0\
 , 1, 0 ] ], Z := [ [ 0, -1, 0, 0 ], [ 0, 0, -1, 1 ], [ 0, 0, 0, -1 ], [ 1, 1, 1, 0 ] ] ))
 gap> GetPGMatricesOfGenerators(pgMat);
 PGMatricesOfGenerators( TriangleGroup(2, 8, 8), ProperTriangleGroup(2, 8, 8), TGQuotient([ 2, 6 ], [ 2, 8, 8 ], 8, 2, \
-Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^3 * z^-1 ]), sparse = false, GeneratorNames = [ "a", "b", "c" \
-], PGMatricesRec = rec( a := [ [ 0, 1, 0, 0 ], [ 1, 0, 0, 0 ], [ -1, -1, -1, 0 ], [ 0, 0, 0, 1 ] ], b := [ [ 0, -1, 0,\
+Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^3 * z^-1 ]), sparse = false, generatorNames = [ "a", "b", "c" \
+], pgMatricesRec = rec( a := [ [ 0, 1, 0, 0 ], [ 1, 0, 0, 0 ], [ -1, -1, -1, 0 ], [ 0, 0, 0, 1 ] ], b := [ [ 0, -1, 0,\
  0 ], [ -1, 0, 0, 0 ], [ 1, 1, 1, 0 ], [ 0, 0, 0, -1 ] ], c := [ [ -1, 0, 0, 0 ], [ 1, 1, 1, 1 ], [ 0, 0, 0, -1 ], [ 0\
 , 0, -1, 0 ] ] ))
 gap> PGMatricesRec(pgMat);
@@ -91,8 +113,8 @@ rec( A := [ [ 0, 1, 0, 0 ], [ 1, 0, 0, 0 ], [ -1, -1, -1, 0 ], [ 0, 0, 0, 1 ] ],
 # sparse
 gap> pgMatGs := PGMatricesOfGenerators(fulltg, tg, qpc : sparse := true);
 PGMatricesOfGenerators( TriangleGroup(2, 8, 8), ProperTriangleGroup(2, 8, 8), TGQuotient([ 2, 6 ], [ 2, 8, 8 ], 8, 2, \
-Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^3 * z^-1 ]), sparse = true, GeneratorNames = [ "a", "b", "c" ]\
-, PGMatricesRec = rec( a := [ [ [ 1, 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 1 ], -1 ], [ [ 3, 2 ], -1 ], [ [ 3, 3 ], -1 ], \
+Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^3 * z^-1 ]), sparse = true, generatorNames = [ "a", "b", "c" ]\
+, pgMatricesRec = rec( a := [ [ [ 1, 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 1 ], -1 ], [ [ 3, 2 ], -1 ], [ [ 3, 3 ], -1 ], \
 [ [ 4, 4 ], 1 ] ], b := [ [ [ 1, 2 ], -1 ], [ [ 2, 1 ], -1 ], [ [ 3, 1 ], 1 ], [ [ 3, 2 ], 1 ], [ [ 3, 3 ], 1 ], [ [ 4\
 , 4 ], -1 ] ], c := [ [ [ 1, 1 ], -1 ], [ [ 2, 1 ], 1 ], [ [ 2, 2 ], 1 ], [ [ 2, 3 ], 1 ], [ [ 2, 4 ], 1 ], [ [ 3, 4 ]\
 , -1 ], [ [ 4, 3 ], -1 ] ] ))
@@ -118,29 +140,29 @@ rec( a := [ [ [ 1, 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 1 ], -1 ], [ [ 3, 2 ], -1 ]
 gap> # Test single symmetry
 gap> pgMat := PGMatrices(symmetries[1], pgMatGs);
 PGMatrices( PGMatricesOfGenerators( TriangleGroup(2, 8, 8), ProperTriangleGroup(2, 8, 8), TGQuotient([ 2, 6 ], [ 2, 8,\
- 8 ], 8, 2, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^3 * z^-1 ]), sparse = true, GeneratorNames = [ "a"\
-, "b", "c" ], PGMatricesRec = rec( a := [ [ [ 1, 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 1 ], -1 ], [ [ 3, 2 ], -1 ], [ [ 3,\
+ 8 ], 8, 2, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^3 * z^-1 ]), sparse = true, generatorNames = [ "a"\
+, "b", "c" ], pgMatricesRec = rec( a := [ [ [ 1, 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 1 ], -1 ], [ [ 3, 2 ], -1 ], [ [ 3,\
  3 ], -1 ], [ [ 4, 4 ], 1 ] ], b := [ [ [ 1, 2 ], -1 ], [ [ 2, 1 ], -1 ], [ [ 3, 1 ], 1 ], [ [ 3, 2 ], 1 ], [ [ 3, 3 ]\
 , 1 ], [ [ 4, 4 ], -1 ] ], c := [ [ [ 1, 1 ], -1 ], [ [ 2, 1 ], 1 ], [ [ 2, 2 ], 1 ], [ [ 2, 3 ], 1 ], [ [ 2, 4 ], 1 ]\
-, [ [ 3, 4 ], -1 ], [ [ 4, 3 ], -1 ] ] )), SymmetryNames = [ "a" ], PGMatricesRec = rec( a := [ [ [ 1, 2 ], 1 ], [ [ 2\
+, [ [ 3, 4 ], -1 ], [ [ 4, 3 ], -1 ] ] )), symmetryNames = [ "a" ], pgMatricesRec = rec( a := [ [ [ 1, 2 ], 1 ], [ [ 2\
 , 1 ], 1 ], [ [ 3, 1 ], -1 ], [ [ 3, 2 ], -1 ], [ [ 3, 3 ], -1 ], [ [ 4, 4 ], 1 ] ] ))
 gap> pgMat := PGMatrices(symmetries[1], pgMatGs : symNames := symNames[1]);
 PGMatrices( PGMatricesOfGenerators( TriangleGroup(2, 8, 8), ProperTriangleGroup(2, 8, 8), TGQuotient([ 2, 6 ], [ 2, 8,\
- 8 ], 8, 2, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^3 * z^-1 ]), sparse = true, GeneratorNames = [ "a"\
-, "b", "c" ], PGMatricesRec = rec( a := [ [ [ 1, 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 1 ], -1 ], [ [ 3, 2 ], -1 ], [ [ 3,\
+ 8 ], 8, 2, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^3 * z^-1 ]), sparse = true, generatorNames = [ "a"\
+, "b", "c" ], pgMatricesRec = rec( a := [ [ [ 1, 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 1 ], -1 ], [ [ 3, 2 ], -1 ], [ [ 3,\
  3 ], -1 ], [ [ 4, 4 ], 1 ] ], b := [ [ [ 1, 2 ], -1 ], [ [ 2, 1 ], -1 ], [ [ 3, 1 ], 1 ], [ [ 3, 2 ], 1 ], [ [ 3, 3 ]\
 , 1 ], [ [ 4, 4 ], -1 ] ], c := [ [ [ 1, 1 ], -1 ], [ [ 2, 1 ], 1 ], [ [ 2, 2 ], 1 ], [ [ 2, 3 ], 1 ], [ [ 2, 4 ], 1 ]\
-, [ [ 3, 4 ], -1 ], [ [ 4, 3 ], -1 ] ] )), SymmetryNames = [ "A" ], PGMatricesRec = rec( A := [ [ [ 1, 2 ], 1 ], [ [ 2\
+, [ [ 3, 4 ], -1 ], [ [ 4, 3 ], -1 ] ] )), symmetryNames = [ "A" ], pgMatricesRec = rec( A := [ [ [ 1, 2 ], 1 ], [ [ 2\
 , 1 ], 1 ], [ [ 3, 1 ], -1 ], [ [ 3, 2 ], -1 ], [ [ 3, 3 ], -1 ], [ [ 4, 4 ], 1 ] ] ))
 
 gap> # Test list of symmetries
 gap> pgMat := PGMatrices(symmetries, pgMatGs);
 PGMatrices( PGMatricesOfGenerators( TriangleGroup(2, 8, 8), ProperTriangleGroup(2, 8, 8), TGQuotient([ 2, 6 ], [ 2, 8,\
- 8 ], 8, 2, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^3 * z^-1 ]), sparse = true, GeneratorNames = [ "a"\
-, "b", "c" ], PGMatricesRec = rec( a := [ [ [ 1, 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 1 ], -1 ], [ [ 3, 2 ], -1 ], [ [ 3,\
+ 8 ], 8, 2, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^3 * z^-1 ]), sparse = true, generatorNames = [ "a"\
+, "b", "c" ], pgMatricesRec = rec( a := [ [ [ 1, 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 1 ], -1 ], [ [ 3, 2 ], -1 ], [ [ 3,\
  3 ], -1 ], [ [ 4, 4 ], 1 ] ], b := [ [ [ 1, 2 ], -1 ], [ [ 2, 1 ], -1 ], [ [ 3, 1 ], 1 ], [ [ 3, 2 ], 1 ], [ [ 3, 3 ]\
 , 1 ], [ [ 4, 4 ], -1 ] ], c := [ [ [ 1, 1 ], -1 ], [ [ 2, 1 ], 1 ], [ [ 2, 2 ], 1 ], [ [ 2, 3 ], 1 ], [ [ 2, 4 ], 1 ]\
-, [ [ 3, 4 ], -1 ], [ [ 4, 3 ], -1 ] ] )), SymmetryNames = [ "a", "b", "c", "x", "y", "z" ], PGMatricesRec = rec( a :=\
+, [ [ 3, 4 ], -1 ], [ [ 4, 3 ], -1 ] ] )), symmetryNames = [ "a", "b", "c", "x", "y", "z" ], pgMatricesRec = rec( a :=\
  [ [ [ 1, 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 1 ], -1 ], [ [ 3, 2 ], -1 ], [ [ 3, 3 ], -1 ], [ [ 4, 4 ], 1 ] ], b := [ [\
  [ 1, 2 ], -1 ], [ [ 2, 1 ], -1 ], [ [ 3, 1 ], 1 ], [ [ 3, 2 ], 1 ], [ [ 3, 3 ], 1 ], [ [ 4, 4 ], -1 ] ], c := [ [ [ 1\
 , 1 ], -1 ], [ [ 2, 1 ], 1 ], [ [ 2, 2 ], 1 ], [ [ 2, 3 ], 1 ], [ [ 2, 4 ], 1 ], [ [ 3, 4 ], -1 ], [ [ 4, 3 ], -1 ] ],\
@@ -150,11 +172,11 @@ y := [ [ [ 1, 1 ], -1 ], [ [ 1, 2 ], -1 ], [ [ 1, 3 ], -1 ], [ [ 1, 4 ], -1 ], [
 ], -1 ], [ [ 2, 3 ], -1 ], [ [ 2, 4 ], 1 ], [ [ 3, 4 ], -1 ], [ [ 4, 1 ], 1 ], [ [ 4, 2 ], 1 ], [ [ 4, 3 ], 1 ] ] ))
 gap> pgMat := PGMatrices(symmetries, pgMatGs : symNames := symNames);
 PGMatrices( PGMatricesOfGenerators( TriangleGroup(2, 8, 8), ProperTriangleGroup(2, 8, 8), TGQuotient([ 2, 6 ], [ 2, 8,\
- 8 ], 8, 2, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^3 * z^-1 ]), sparse = true, GeneratorNames = [ "a"\
-, "b", "c" ], PGMatricesRec = rec( a := [ [ [ 1, 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 1 ], -1 ], [ [ 3, 2 ], -1 ], [ [ 3,\
+ 8 ], 8, 2, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^3 * z^-1 ]), sparse = true, generatorNames = [ "a"\
+, "b", "c" ], pgMatricesRec = rec( a := [ [ [ 1, 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 1 ], -1 ], [ [ 3, 2 ], -1 ], [ [ 3,\
  3 ], -1 ], [ [ 4, 4 ], 1 ] ], b := [ [ [ 1, 2 ], -1 ], [ [ 2, 1 ], -1 ], [ [ 3, 1 ], 1 ], [ [ 3, 2 ], 1 ], [ [ 3, 3 ]\
 , 1 ], [ [ 4, 4 ], -1 ] ], c := [ [ [ 1, 1 ], -1 ], [ [ 2, 1 ], 1 ], [ [ 2, 2 ], 1 ], [ [ 2, 3 ], 1 ], [ [ 2, 4 ], 1 ]\
-, [ [ 3, 4 ], -1 ], [ [ 4, 3 ], -1 ] ] )), SymmetryNames = [ "A", "B", "C", "X", "Y", "Z" ], PGMatricesRec = rec( A :=\
+, [ [ 3, 4 ], -1 ], [ [ 4, 3 ], -1 ] ] )), symmetryNames = [ "A", "B", "C", "X", "Y", "Z" ], pgMatricesRec = rec( A :=\
  [ [ [ 1, 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 1 ], -1 ], [ [ 3, 2 ], -1 ], [ [ 3, 3 ], -1 ], [ [ 4, 4 ], 1 ] ], B := [ [\
  [ 1, 2 ], -1 ], [ [ 2, 1 ], -1 ], [ [ 3, 1 ], 1 ], [ [ 3, 2 ], 1 ], [ [ 3, 3 ], 1 ], [ [ 4, 4 ], -1 ] ], C := [ [ [ 1\
 , 1 ], -1 ], [ [ 2, 1 ], 1 ], [ [ 2, 2 ], 1 ], [ [ 2, 3 ], 1 ], [ [ 2, 4 ], 1 ], [ [ 3, 4 ], -1 ], [ [ 4, 3 ], -1 ] ],\
@@ -164,8 +186,8 @@ Y := [ [ [ 1, 1 ], -1 ], [ [ 1, 2 ], -1 ], [ [ 1, 3 ], -1 ], [ [ 1, 4 ], -1 ], [
 ], -1 ], [ [ 2, 3 ], -1 ], [ [ 2, 4 ], 1 ], [ [ 3, 4 ], -1 ], [ [ 4, 1 ], 1 ], [ [ 4, 2 ], 1 ], [ [ 4, 3 ], 1 ] ] ))
 gap> GetPGMatricesOfGenerators(pgMat);
 PGMatricesOfGenerators( TriangleGroup(2, 8, 8), ProperTriangleGroup(2, 8, 8), TGQuotient([ 2, 6 ], [ 2, 8, 8 ], 8, 2, \
-Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^3 * z^-1 ]), sparse = true, GeneratorNames = [ "a", "b", "c" ]\
-, PGMatricesRec = rec( a := [ [ [ 1, 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 1 ], -1 ], [ [ 3, 2 ], -1 ], [ [ 3, 3 ], -1 ], \
+Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^3 * z^-1 ]), sparse = true, generatorNames = [ "a", "b", "c" ]\
+, pgMatricesRec = rec( a := [ [ [ 1, 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 1 ], -1 ], [ [ 3, 2 ], -1 ], [ [ 3, 3 ], -1 ], \
 [ [ 4, 4 ], 1 ] ], b := [ [ [ 1, 2 ], -1 ], [ [ 2, 1 ], -1 ], [ [ 3, 1 ], 1 ], [ [ 3, 2 ], 1 ], [ [ 3, 3 ], 1 ], [ [ 4\
 , 4 ], -1 ] ], c := [ [ [ 1, 1 ], -1 ], [ [ 2, 1 ], 1 ], [ [ 2, 2 ], 1 ], [ [ 2, 3 ], 1 ], [ [ 2, 4 ], 1 ], [ [ 3, 4 ]\
 , -1 ], [ [ 4, 3 ], -1 ] ] ))
@@ -207,11 +229,11 @@ true
 gap> input := InputTextString(str);;
 gap> pgMat2 := ImportPGMatrices(input);
 PGMatrices( PGMatricesOfGenerators( TriangleGroup(2, 8, 8), ProperTriangleGroup(2, 8, 8), TGQuotient([ 2, 6 ], [ 2, 8,\
- 8 ], 8, 2, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^3 * z^-1 ]), sparse = true, GeneratorNames = [ "a"\
-, "b", "c" ], PGMatricesRec = rec( a := [ [ [ 1, 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 1 ], -1 ], [ [ 3, 2 ], -1 ], [ [ 3,\
+ 8 ], 8, 2, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^3 * z^-1 ]), sparse = true, generatorNames = [ "a"\
+, "b", "c" ], pgMatricesRec = rec( a := [ [ [ 1, 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 1 ], -1 ], [ [ 3, 2 ], -1 ], [ [ 3,\
  3 ], -1 ], [ [ 4, 4 ], 1 ] ], b := [ [ [ 1, 2 ], -1 ], [ [ 2, 1 ], -1 ], [ [ 3, 1 ], 1 ], [ [ 3, 2 ], 1 ], [ [ 3, 3 ]\
 , 1 ], [ [ 4, 4 ], -1 ] ], c := [ [ [ 1, 1 ], -1 ], [ [ 2, 1 ], 1 ], [ [ 2, 2 ], 1 ], [ [ 2, 3 ], 1 ], [ [ 2, 4 ], 1 ]\
-, [ [ 3, 4 ], -1 ], [ [ 4, 3 ], -1 ] ] )), SymmetryNames = [ "A", "B", "C", "X", "Y", "Z" ], PGMatricesRec = rec( A :=\
+, [ [ 3, 4 ], -1 ], [ [ 4, 3 ], -1 ] ] )), symmetryNames = [ "A", "B", "C", "X", "Y", "Z" ], pgMatricesRec = rec( A :=\
  [ [ [ 1, 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 1 ], -1 ], [ [ 3, 2 ], -1 ], [ [ 3, 3 ], -1 ], [ [ 4, 4 ], 1 ] ], B := [ [\
  [ 1, 2 ], -1 ], [ [ 2, 1 ], -1 ], [ [ 3, 1 ], 1 ], [ [ 3, 2 ], 1 ], [ [ 3, 3 ], 1 ], [ [ 4, 4 ], -1 ] ], C := [ [ [ 1\
 , 1 ], -1 ], [ [ 2, 1 ], 1 ], [ [ 2, 2 ], 1 ], [ [ 2, 3 ], 1 ], [ [ 2, 4 ], 1 ], [ [ 3, 4 ], -1 ], [ [ 4, 3 ], -1 ] ],\
@@ -221,7 +243,7 @@ Y := [ [ [ 1, 1 ], -1 ], [ [ 1, 2 ], -1 ], [ [ 1, 3 ], -1 ], [ [ 1, 4 ], -1 ], [
 ], -1 ], [ [ 2, 3 ], -1 ], [ [ 2, 4 ], 1 ], [ [ 3, 4 ], -1 ], [ [ 4, 1 ], 1 ], [ [ 4, 2 ], 1 ], [ [ 4, 3 ], 1 ] ] ))
 gap> pgMat2 = pgMat;
 false
-gap> syntacticEqualPGMatricesObjs@HyperCells(pgMat2, pgMat);
+gap> syntacticEqualPGMatricesObjs@(pgMat2, pgMat);
 true
 
 
@@ -231,8 +253,8 @@ gap> qsc := TGQuotient( [3, 11] );;
 
 gap> pgMatGs := PGMatricesOfGenerators(fulltg, tg, qsc);
 PGMatricesOfGenerators( TriangleGroup(2, 8, 8), ProperTriangleGroup(2, 8, 8), TGQuotient([ 3, 11 ], [ 2, 8, 8 ], 16, 3\
-, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^-8 ]), sparse = false, GeneratorNames = [ "a", "b", "c" ], P\
-GMatricesRec = rec( a := [ [ 0, 1, 0, 0, 0, 0 ], [ 1, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 1, 0, 0 ], [ 0, 0, 1, 0, 0, 0 ], [ 0\
+, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^-8 ]), sparse = false, generatorNames = [ "a", "b", "c" ], p\
+gMatricesRec = rec( a := [ [ 0, 1, 0, 0, 0, 0 ], [ 1, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 1, 0, 0 ], [ 0, 0, 1, 0, 0, 0 ], [ 0\
 , 0, 0, 0, 0, 1 ], [ 0, 0, 0, 0, 1, 0 ] ], b := [ [ 0, -1, 0, 0, 0, 0 ], [ -1, 0, 0, 0, 0, 0 ], [ 0, 0, 0, -1, 0, 0 ],\
  [ 0, 0, -1, 0, 0, 0 ], [ 0, 0, 0, 0, 0, -1 ], [ 0, 0, 0, 0, -1, 0 ] ], c := [ [ -1, 0, 0, 0, 0, 0 ], [ 0, 0, -1, 0, 0\
 , 0 ], [ 0, -1, 0, 0, 0, 0 ], [ 0, 0, 0, 0, -1, 0 ], [ 0, 0, 0, -1, 0, 0 ], [ 0, 1, 1, 0, 0, 1 ] ] ))
@@ -260,33 +282,33 @@ rec( a := [ [ 0, 1, 0, 0, 0, 0 ], [ 1, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 1, 0, 0 ], [ 
 # Test single symmetry
 gap> pgMat := PGMatrices(symmetries[1], pgMatGs);
 PGMatrices( PGMatricesOfGenerators( TriangleGroup(2, 8, 8), ProperTriangleGroup(2, 8, 8), TGQuotient([ 3, 11 ], [ 2, 8\
-, 8 ], 16, 3, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^-8 ]), sparse = false, GeneratorNames = [ "a", "\
-b", "c" ], PGMatricesRec = rec( a := [ [ 0, 1, 0, 0, 0, 0 ], [ 1, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 1, 0, 0 ], [ 0, 0, 1, 0,\
+, 8 ], 16, 3, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^-8 ]), sparse = false, generatorNames = [ "a", "\
+b", "c" ], pgMatricesRec = rec( a := [ [ 0, 1, 0, 0, 0, 0 ], [ 1, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 1, 0, 0 ], [ 0, 0, 1, 0,\
  0, 0 ], [ 0, 0, 0, 0, 0, 1 ], [ 0, 0, 0, 0, 1, 0 ] ], b := [ [ 0, -1, 0, 0, 0, 0 ], [ -1, 0, 0, 0, 0, 0 ], [ 0, 0, 0,\
  -1, 0, 0 ], [ 0, 0, -1, 0, 0, 0 ], [ 0, 0, 0, 0, 0, -1 ], [ 0, 0, 0, 0, -1, 0 ] ], c := [ [ -1, 0, 0, 0, 0, 0 ], [ 0,\
- 0, -1, 0, 0, 0 ], [ 0, -1, 0, 0, 0, 0 ], [ 0, 0, 0, 0, -1, 0 ], [ 0, 0, 0, -1, 0, 0 ], [ 0, 1, 1, 0, 0, 1 ] ] )), Sym\
-metryNames = [ "a" ], PGMatricesRec = rec( a := [ [ 0, 1, 0, 0, 0, 0 ], [ 1, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 1, 0, 0 ], [ \
+ 0, -1, 0, 0, 0 ], [ 0, -1, 0, 0, 0, 0 ], [ 0, 0, 0, 0, -1, 0 ], [ 0, 0, 0, -1, 0, 0 ], [ 0, 1, 1, 0, 0, 1 ] ] )), sym\
+metryNames = [ "a" ], pgMatricesRec = rec( a := [ [ 0, 1, 0, 0, 0, 0 ], [ 1, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 1, 0, 0 ], [ \
 0, 0, 1, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 1 ], [ 0, 0, 0, 0, 1, 0 ] ] ))
 gap> pgMat := PGMatrices(symmetries[1], pgMatGs : symNames := symNames[1]);
 PGMatrices( PGMatricesOfGenerators( TriangleGroup(2, 8, 8), ProperTriangleGroup(2, 8, 8), TGQuotient([ 3, 11 ], [ 2, 8\
-, 8 ], 16, 3, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^-8 ]), sparse = false, GeneratorNames = [ "a", "\
-b", "c" ], PGMatricesRec = rec( a := [ [ 0, 1, 0, 0, 0, 0 ], [ 1, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 1, 0, 0 ], [ 0, 0, 1, 0,\
+, 8 ], 16, 3, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^-8 ]), sparse = false, generatorNames = [ "a", "\
+b", "c" ], pgMatricesRec = rec( a := [ [ 0, 1, 0, 0, 0, 0 ], [ 1, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 1, 0, 0 ], [ 0, 0, 1, 0,\
  0, 0 ], [ 0, 0, 0, 0, 0, 1 ], [ 0, 0, 0, 0, 1, 0 ] ], b := [ [ 0, -1, 0, 0, 0, 0 ], [ -1, 0, 0, 0, 0, 0 ], [ 0, 0, 0,\
  -1, 0, 0 ], [ 0, 0, -1, 0, 0, 0 ], [ 0, 0, 0, 0, 0, -1 ], [ 0, 0, 0, 0, -1, 0 ] ], c := [ [ -1, 0, 0, 0, 0, 0 ], [ 0,\
- 0, -1, 0, 0, 0 ], [ 0, -1, 0, 0, 0, 0 ], [ 0, 0, 0, 0, -1, 0 ], [ 0, 0, 0, -1, 0, 0 ], [ 0, 1, 1, 0, 0, 1 ] ] )), Sym\
-metryNames = [ "A" ], PGMatricesRec = rec( A := [ [ 0, 1, 0, 0, 0, 0 ], [ 1, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 1, 0, 0 ], [ \
+ 0, -1, 0, 0, 0 ], [ 0, -1, 0, 0, 0, 0 ], [ 0, 0, 0, 0, -1, 0 ], [ 0, 0, 0, -1, 0, 0 ], [ 0, 1, 1, 0, 0, 1 ] ] )), sym\
+metryNames = [ "A" ], pgMatricesRec = rec( A := [ [ 0, 1, 0, 0, 0, 0 ], [ 1, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 1, 0, 0 ], [ \
 0, 0, 1, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 1 ], [ 0, 0, 0, 0, 1, 0 ] ] ))
 
 
 # Test list of symmetries
 gap> pgMat := PGMatrices(symmetries, pgMatGs);
 PGMatrices( PGMatricesOfGenerators( TriangleGroup(2, 8, 8), ProperTriangleGroup(2, 8, 8), TGQuotient([ 3, 11 ], [ 2, 8\
-, 8 ], 16, 3, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^-8 ]), sparse = false, GeneratorNames = [ "a", "\
-b", "c" ], PGMatricesRec = rec( a := [ [ 0, 1, 0, 0, 0, 0 ], [ 1, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 1, 0, 0 ], [ 0, 0, 1, 0,\
+, 8 ], 16, 3, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^-8 ]), sparse = false, generatorNames = [ "a", "\
+b", "c" ], pgMatricesRec = rec( a := [ [ 0, 1, 0, 0, 0, 0 ], [ 1, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 1, 0, 0 ], [ 0, 0, 1, 0,\
  0, 0 ], [ 0, 0, 0, 0, 0, 1 ], [ 0, 0, 0, 0, 1, 0 ] ], b := [ [ 0, -1, 0, 0, 0, 0 ], [ -1, 0, 0, 0, 0, 0 ], [ 0, 0, 0,\
  -1, 0, 0 ], [ 0, 0, -1, 0, 0, 0 ], [ 0, 0, 0, 0, 0, -1 ], [ 0, 0, 0, 0, -1, 0 ] ], c := [ [ -1, 0, 0, 0, 0, 0 ], [ 0,\
- 0, -1, 0, 0, 0 ], [ 0, -1, 0, 0, 0, 0 ], [ 0, 0, 0, 0, -1, 0 ], [ 0, 0, 0, -1, 0, 0 ], [ 0, 1, 1, 0, 0, 1 ] ] )), Sym\
-metryNames = [ "a", "b", "c", "x", "y", "z" ], PGMatricesRec = rec( a := [ [ 0, 1, 0, 0, 0, 0 ], [ 1, 0, 0, 0, 0, 0 ],\
+ 0, -1, 0, 0, 0 ], [ 0, -1, 0, 0, 0, 0 ], [ 0, 0, 0, 0, -1, 0 ], [ 0, 0, 0, -1, 0, 0 ], [ 0, 1, 1, 0, 0, 1 ] ] )), sym\
+metryNames = [ "a", "b", "c", "x", "y", "z" ], pgMatricesRec = rec( a := [ [ 0, 1, 0, 0, 0, 0 ], [ 1, 0, 0, 0, 0, 0 ],\
  [ 0, 0, 0, 1, 0, 0 ], [ 0, 0, 1, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 1 ], [ 0, 0, 0, 0, 1, 0 ] ], b := [ [ 0, -1, 0, 0, 0, 0 \
 ], [ -1, 0, 0, 0, 0, 0 ], [ 0, 0, 0, -1, 0, 0 ], [ 0, 0, -1, 0, 0, 0 ], [ 0, 0, 0, 0, 0, -1 ], [ 0, 0, 0, 0, -1, 0 ] ]\
 , c := [ [ -1, 0, 0, 0, 0, 0 ], [ 0, 0, -1, 0, 0, 0 ], [ 0, -1, 0, 0, 0, 0 ], [ 0, 0, 0, 0, -1, 0 ], [ 0, 0, 0, -1, 0,\
@@ -296,12 +318,12 @@ metryNames = [ "a", "b", "c", "x", "y", "z" ], PGMatricesRec = rec( a := [ [ 0, 
 , 0, 0, -1, 0, 0 ], [ -1, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, -1 ], [ 0, 0, -1, 0, 0, 0 ], [ 1, 0, 0, 1, 1, 0 ] ] ))
 gap> pgMat := PGMatrices(symmetries, pgMatGs : symNames := symNames);
 PGMatrices( PGMatricesOfGenerators( TriangleGroup(2, 8, 8), ProperTriangleGroup(2, 8, 8), TGQuotient([ 3, 11 ], [ 2, 8\
-, 8 ], 16, 3, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^-8 ]), sparse = false, GeneratorNames = [ "a", "\
-b", "c" ], PGMatricesRec = rec( a := [ [ 0, 1, 0, 0, 0, 0 ], [ 1, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 1, 0, 0 ], [ 0, 0, 1, 0,\
+, 8 ], 16, 3, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^-8 ]), sparse = false, generatorNames = [ "a", "\
+b", "c" ], pgMatricesRec = rec( a := [ [ 0, 1, 0, 0, 0, 0 ], [ 1, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 1, 0, 0 ], [ 0, 0, 1, 0,\
  0, 0 ], [ 0, 0, 0, 0, 0, 1 ], [ 0, 0, 0, 0, 1, 0 ] ], b := [ [ 0, -1, 0, 0, 0, 0 ], [ -1, 0, 0, 0, 0, 0 ], [ 0, 0, 0,\
  -1, 0, 0 ], [ 0, 0, -1, 0, 0, 0 ], [ 0, 0, 0, 0, 0, -1 ], [ 0, 0, 0, 0, -1, 0 ] ], c := [ [ -1, 0, 0, 0, 0, 0 ], [ 0,\
- 0, -1, 0, 0, 0 ], [ 0, -1, 0, 0, 0, 0 ], [ 0, 0, 0, 0, -1, 0 ], [ 0, 0, 0, -1, 0, 0 ], [ 0, 1, 1, 0, 0, 1 ] ] )), Sym\
-metryNames = [ "A", "B", "C", "X", "Y", "Z" ], PGMatricesRec = rec( A := [ [ 0, 1, 0, 0, 0, 0 ], [ 1, 0, 0, 0, 0, 0 ],\
+ 0, -1, 0, 0, 0 ], [ 0, -1, 0, 0, 0, 0 ], [ 0, 0, 0, 0, -1, 0 ], [ 0, 0, 0, -1, 0, 0 ], [ 0, 1, 1, 0, 0, 1 ] ] )), sym\
+metryNames = [ "A", "B", "C", "X", "Y", "Z" ], pgMatricesRec = rec( A := [ [ 0, 1, 0, 0, 0, 0 ], [ 1, 0, 0, 0, 0, 0 ],\
  [ 0, 0, 0, 1, 0, 0 ], [ 0, 0, 1, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 1 ], [ 0, 0, 0, 0, 1, 0 ] ], B := [ [ 0, -1, 0, 0, 0, 0 \
 ], [ -1, 0, 0, 0, 0, 0 ], [ 0, 0, 0, -1, 0, 0 ], [ 0, 0, -1, 0, 0, 0 ], [ 0, 0, 0, 0, 0, -1 ], [ 0, 0, 0, 0, -1, 0 ] ]\
 , C := [ [ -1, 0, 0, 0, 0, 0 ], [ 0, 0, -1, 0, 0, 0 ], [ 0, -1, 0, 0, 0, 0 ], [ 0, 0, 0, 0, -1, 0 ], [ 0, 0, 0, -1, 0,\
@@ -311,8 +333,8 @@ metryNames = [ "A", "B", "C", "X", "Y", "Z" ], PGMatricesRec = rec( A := [ [ 0, 
 , 0, 0, -1, 0, 0 ], [ -1, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, -1 ], [ 0, 0, -1, 0, 0, 0 ], [ 1, 0, 0, 1, 1, 0 ] ] ))
 gap> GetPGMatricesOfGenerators(pgMat);
 PGMatricesOfGenerators( TriangleGroup(2, 8, 8), ProperTriangleGroup(2, 8, 8), TGQuotient([ 3, 11 ], [ 2, 8, 8 ], 16, 3\
-, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^-8 ]), sparse = false, GeneratorNames = [ "a", "b", "c" ], P\
-GMatricesRec = rec( a := [ [ 0, 1, 0, 0, 0, 0 ], [ 1, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 1, 0, 0 ], [ 0, 0, 1, 0, 0, 0 ], [ 0\
+, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^-8 ]), sparse = false, generatorNames = [ "a", "b", "c" ], p\
+gMatricesRec = rec( a := [ [ 0, 1, 0, 0, 0, 0 ], [ 1, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 1, 0, 0 ], [ 0, 0, 1, 0, 0, 0 ], [ 0\
 , 0, 0, 0, 0, 1 ], [ 0, 0, 0, 0, 1, 0 ] ], b := [ [ 0, -1, 0, 0, 0, 0 ], [ -1, 0, 0, 0, 0, 0 ], [ 0, 0, 0, -1, 0, 0 ],\
  [ 0, 0, -1, 0, 0, 0 ], [ 0, 0, 0, 0, 0, -1 ], [ 0, 0, 0, 0, -1, 0 ] ], c := [ [ -1, 0, 0, 0, 0, 0 ], [ 0, 0, -1, 0, 0\
 , 0 ], [ 0, -1, 0, 0, 0, 0 ], [ 0, 0, 0, 0, -1, 0 ], [ 0, 0, 0, -1, 0, 0 ], [ 0, 1, 1, 0, 0, 1 ] ] ))
@@ -334,7 +356,7 @@ rec( A := [ [ 0, 1, 0, 0, 0, 0 ], [ 1, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 1, 0, 0 ], [ 
 # sparse
 gap> pgMatGs := PGMatricesOfGenerators(fulltg, tg, qsc : sparse := true);
 PGMatricesOfGenerators( TriangleGroup(2, 8, 8), ProperTriangleGroup(2, 8, 8), TGQuotient([ 3, 11 ], [ 2, 8, 8 ], 16, 3\
-, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^-8 ]), sparse = true, GeneratorNames = [ "a", "b", "c" ], PG\
+, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^-8 ]), sparse = true, generatorNames = [ "a", "b", "c" ], pg\
 MatricesRec = rec( a := [ [ [ 1, 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 4 ], 1 ], [ [ 4, 3 ], 1 ], [ [ 5, 6 ], 1 ], [ [ 6, \
 5 ], 1 ] ], b := [ [ [ 1, 2 ], -1 ], [ [ 2, 1 ], -1 ], [ [ 3, 4 ], -1 ], [ [ 4, 3 ], -1 ], [ [ 5, 6 ], -1 ], [ [ 6, 5 \
 ], -1 ] ], c := [ [ [ 1, 1 ], -1 ], [ [ 2, 3 ], -1 ], [ [ 3, 2 ], -1 ], [ [ 4, 5 ], -1 ], [ [ 5, 4 ], -1 ], [ [ 6, 2 ]\
@@ -362,29 +384,29 @@ rec( a := [ [ [ 1, 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 4 ], 1 ], [ [ 4, 3 ], 1 ], 
 # Test single symmetry
 gap> pgMat := PGMatrices(symmetries[1], pgMatGs);
 PGMatrices( PGMatricesOfGenerators( TriangleGroup(2, 8, 8), ProperTriangleGroup(2, 8, 8), TGQuotient([ 3, 11 ], [ 2, 8\
-, 8 ], 16, 3, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^-8 ]), sparse = true, GeneratorNames = [ "a", "b\
-", "c" ], PGMatricesRec = rec( a := [ [ [ 1, 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 4 ], 1 ], [ [ 4, 3 ], 1 ], [ [ 5, 6 ], \
+, 8 ], 16, 3, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^-8 ]), sparse = true, generatorNames = [ "a", "b\
+", "c" ], pgMatricesRec = rec( a := [ [ [ 1, 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 4 ], 1 ], [ [ 4, 3 ], 1 ], [ [ 5, 6 ], \
 1 ], [ [ 6, 5 ], 1 ] ], b := [ [ [ 1, 2 ], -1 ], [ [ 2, 1 ], -1 ], [ [ 3, 4 ], -1 ], [ [ 4, 3 ], -1 ], [ [ 5, 6 ], -1 \
 ], [ [ 6, 5 ], -1 ] ], c := [ [ [ 1, 1 ], -1 ], [ [ 2, 3 ], -1 ], [ [ 3, 2 ], -1 ], [ [ 4, 5 ], -1 ], [ [ 5, 4 ], -1 ]\
-, [ [ 6, 2 ], 1 ], [ [ 6, 3 ], 1 ], [ [ 6, 6 ], 1 ] ] )), SymmetryNames = [ "a" ], PGMatricesRec = rec( a := [ [ [ 1, \
+, [ [ 6, 2 ], 1 ], [ [ 6, 3 ], 1 ], [ [ 6, 6 ], 1 ] ] )), symmetryNames = [ "a" ], pgMatricesRec = rec( a := [ [ [ 1, \
 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 4 ], 1 ], [ [ 4, 3 ], 1 ], [ [ 5, 6 ], 1 ], [ [ 6, 5 ], 1 ] ] ))
 gap> pgMat := PGMatrices(symmetries[1], pgMatGs : symNames := symNames[1]);
 PGMatrices( PGMatricesOfGenerators( TriangleGroup(2, 8, 8), ProperTriangleGroup(2, 8, 8), TGQuotient([ 3, 11 ], [ 2, 8\
-, 8 ], 16, 3, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^-8 ]), sparse = true, GeneratorNames = [ "a", "b\
-", "c" ], PGMatricesRec = rec( a := [ [ [ 1, 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 4 ], 1 ], [ [ 4, 3 ], 1 ], [ [ 5, 6 ], \
+, 8 ], 16, 3, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^-8 ]), sparse = true, generatorNames = [ "a", "b\
+", "c" ], pgMatricesRec = rec( a := [ [ [ 1, 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 4 ], 1 ], [ [ 4, 3 ], 1 ], [ [ 5, 6 ], \
 1 ], [ [ 6, 5 ], 1 ] ], b := [ [ [ 1, 2 ], -1 ], [ [ 2, 1 ], -1 ], [ [ 3, 4 ], -1 ], [ [ 4, 3 ], -1 ], [ [ 5, 6 ], -1 \
 ], [ [ 6, 5 ], -1 ] ], c := [ [ [ 1, 1 ], -1 ], [ [ 2, 3 ], -1 ], [ [ 3, 2 ], -1 ], [ [ 4, 5 ], -1 ], [ [ 5, 4 ], -1 ]\
-, [ [ 6, 2 ], 1 ], [ [ 6, 3 ], 1 ], [ [ 6, 6 ], 1 ] ] )), SymmetryNames = [ "A" ], PGMatricesRec = rec( A := [ [ [ 1, \
+, [ [ 6, 2 ], 1 ], [ [ 6, 3 ], 1 ], [ [ 6, 6 ], 1 ] ] )), symmetryNames = [ "A" ], pgMatricesRec = rec( A := [ [ [ 1, \
 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 4 ], 1 ], [ [ 4, 3 ], 1 ], [ [ 5, 6 ], 1 ], [ [ 6, 5 ], 1 ] ] ))
 
 # Test list of symmetries
 gap> pgMat := PGMatrices(symmetries, pgMatGs);
 PGMatrices( PGMatricesOfGenerators( TriangleGroup(2, 8, 8), ProperTriangleGroup(2, 8, 8), TGQuotient([ 3, 11 ], [ 2, 8\
-, 8 ], 16, 3, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^-8 ]), sparse = true, GeneratorNames = [ "a", "b\
-", "c" ], PGMatricesRec = rec( a := [ [ [ 1, 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 4 ], 1 ], [ [ 4, 3 ], 1 ], [ [ 5, 6 ], \
+, 8 ], 16, 3, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^-8 ]), sparse = true, generatorNames = [ "a", "b\
+", "c" ], pgMatricesRec = rec( a := [ [ [ 1, 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 4 ], 1 ], [ [ 4, 3 ], 1 ], [ [ 5, 6 ], \
 1 ], [ [ 6, 5 ], 1 ] ], b := [ [ [ 1, 2 ], -1 ], [ [ 2, 1 ], -1 ], [ [ 3, 4 ], -1 ], [ [ 4, 3 ], -1 ], [ [ 5, 6 ], -1 \
 ], [ [ 6, 5 ], -1 ] ], c := [ [ [ 1, 1 ], -1 ], [ [ 2, 3 ], -1 ], [ [ 3, 2 ], -1 ], [ [ 4, 5 ], -1 ], [ [ 5, 4 ], -1 ]\
-, [ [ 6, 2 ], 1 ], [ [ 6, 3 ], 1 ], [ [ 6, 6 ], 1 ] ] )), SymmetryNames = [ "a", "b", "c", "x", "y", "z" ], PGMatrices\
+, [ [ 6, 2 ], 1 ], [ [ 6, 3 ], 1 ], [ [ 6, 6 ], 1 ] ] )), symmetryNames = [ "a", "b", "c", "x", "y", "z" ], pgMatrices\
 Rec = rec( a := [ [ [ 1, 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 4 ], 1 ], [ [ 4, 3 ], 1 ], [ [ 5, 6 ], 1 ], [ [ 6, 5 ], 1 ]\
  ], b := [ [ [ 1, 2 ], -1 ], [ [ 2, 1 ], -1 ], [ [ 3, 4 ], -1 ], [ [ 4, 3 ], -1 ], [ [ 5, 6 ], -1 ], [ [ 6, 5 ], -1 ] \
 ], c := [ [ [ 1, 1 ], -1 ], [ [ 2, 3 ], -1 ], [ [ 3, 2 ], -1 ], [ [ 4, 5 ], -1 ], [ [ 5, 4 ], -1 ], [ [ 6, 2 ], 1 ], [\
@@ -394,11 +416,11 @@ Rec = rec( a := [ [ [ 1, 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 4 ], 1 ], [ [ 4, 3 ],
  -1 ], [ [ 4, 6 ], -1 ], [ [ 5, 3 ], -1 ], [ [ 6, 1 ], 1 ], [ [ 6, 4 ], 1 ], [ [ 6, 5 ], 1 ] ] ))
 gap> pgMat := PGMatrices(symmetries, pgMatGs : symNames := symNames);
 PGMatrices( PGMatricesOfGenerators( TriangleGroup(2, 8, 8), ProperTriangleGroup(2, 8, 8), TGQuotient([ 3, 11 ], [ 2, 8\
-, 8 ], 16, 3, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^-8 ]), sparse = true, GeneratorNames = [ "a", "b\
-", "c" ], PGMatricesRec = rec( a := [ [ [ 1, 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 4 ], 1 ], [ [ 4, 3 ], 1 ], [ [ 5, 6 ], \
+, 8 ], 16, 3, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^-8 ]), sparse = true, generatorNames = [ "a", "b\
+", "c" ], pgMatricesRec = rec( a := [ [ [ 1, 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 4 ], 1 ], [ [ 4, 3 ], 1 ], [ [ 5, 6 ], \
 1 ], [ [ 6, 5 ], 1 ] ], b := [ [ [ 1, 2 ], -1 ], [ [ 2, 1 ], -1 ], [ [ 3, 4 ], -1 ], [ [ 4, 3 ], -1 ], [ [ 5, 6 ], -1 \
 ], [ [ 6, 5 ], -1 ] ], c := [ [ [ 1, 1 ], -1 ], [ [ 2, 3 ], -1 ], [ [ 3, 2 ], -1 ], [ [ 4, 5 ], -1 ], [ [ 5, 4 ], -1 ]\
-, [ [ 6, 2 ], 1 ], [ [ 6, 3 ], 1 ], [ [ 6, 6 ], 1 ] ] )), SymmetryNames = [ "A", "B", "C", "X", "Y", "Z" ], PGMatrices\
+, [ [ 6, 2 ], 1 ], [ [ 6, 3 ], 1 ], [ [ 6, 6 ], 1 ] ] )), symmetryNames = [ "A", "B", "C", "X", "Y", "Z" ], pgMatrices\
 Rec = rec( A := [ [ [ 1, 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 4 ], 1 ], [ [ 4, 3 ], 1 ], [ [ 5, 6 ], 1 ], [ [ 6, 5 ], 1 ]\
  ], B := [ [ [ 1, 2 ], -1 ], [ [ 2, 1 ], -1 ], [ [ 3, 4 ], -1 ], [ [ 4, 3 ], -1 ], [ [ 5, 6 ], -1 ], [ [ 6, 5 ], -1 ] \
 ], C := [ [ [ 1, 1 ], -1 ], [ [ 2, 3 ], -1 ], [ [ 3, 2 ], -1 ], [ [ 4, 5 ], -1 ], [ [ 5, 4 ], -1 ], [ [ 6, 2 ], 1 ], [\
@@ -408,7 +430,7 @@ Rec = rec( A := [ [ [ 1, 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 4 ], 1 ], [ [ 4, 3 ],
  -1 ], [ [ 4, 6 ], -1 ], [ [ 5, 3 ], -1 ], [ [ 6, 1 ], 1 ], [ [ 6, 4 ], 1 ], [ [ 6, 5 ], 1 ] ] ))
 gap> GetPGMatricesOfGenerators(pgMat);
 PGMatricesOfGenerators( TriangleGroup(2, 8, 8), ProperTriangleGroup(2, 8, 8), TGQuotient([ 3, 11 ], [ 2, 8, 8 ], 16, 3\
-, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^-8 ]), sparse = true, GeneratorNames = [ "a", "b", "c" ], PG\
+, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^-8 ]), sparse = true, generatorNames = [ "a", "b", "c" ], pg\
 MatricesRec = rec( a := [ [ [ 1, 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 4 ], 1 ], [ [ 4, 3 ], 1 ], [ [ 5, 6 ], 1 ], [ [ 6, \
 5 ], 1 ] ], b := [ [ [ 1, 2 ], -1 ], [ [ 2, 1 ], -1 ], [ [ 3, 4 ], -1 ], [ [ 4, 3 ], -1 ], [ [ 5, 6 ], -1 ], [ [ 6, 5 \
 ], -1 ] ], c := [ [ [ 1, 1 ], -1 ], [ [ 2, 3 ], -1 ], [ [ 3, 2 ], -1 ], [ [ 4, 5 ], -1 ], [ [ 5, 4 ], -1 ], [ [ 6, 2 ]\
@@ -448,11 +470,11 @@ true
 gap> input := InputTextString(str);;
 gap> pgMat2 := ImportPGMatrices(input);
 PGMatrices( PGMatricesOfGenerators( TriangleGroup(2, 8, 8), ProperTriangleGroup(2, 8, 8), TGQuotient([ 3, 11 ], [ 2, 8\
-, 8 ], 16, 3, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^-8 ]), sparse = true, GeneratorNames = [ "a", "b\
-", "c" ], PGMatricesRec = rec( a := [ [ [ 1, 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 4 ], 1 ], [ [ 4, 3 ], 1 ], [ [ 5, 6 ], \
+, 8 ], 16, 3, Action reflexible [m,n], [ x^2, x * y * z, x * z * y, y^-8 ]), sparse = true, generatorNames = [ "a", "b\
+", "c" ], pgMatricesRec = rec( a := [ [ [ 1, 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 4 ], 1 ], [ [ 4, 3 ], 1 ], [ [ 5, 6 ], \
 1 ], [ [ 6, 5 ], 1 ] ], b := [ [ [ 1, 2 ], -1 ], [ [ 2, 1 ], -1 ], [ [ 3, 4 ], -1 ], [ [ 4, 3 ], -1 ], [ [ 5, 6 ], -1 \
 ], [ [ 6, 5 ], -1 ] ], c := [ [ [ 1, 1 ], -1 ], [ [ 2, 3 ], -1 ], [ [ 3, 2 ], -1 ], [ [ 4, 5 ], -1 ], [ [ 5, 4 ], -1 ]\
-, [ [ 6, 2 ], 1 ], [ [ 6, 3 ], 1 ], [ [ 6, 6 ], 1 ] ] )), SymmetryNames = [ "A", "B", "C", "X", "Y", "Z" ], PGMatrices\
+, [ [ 6, 2 ], 1 ], [ [ 6, 3 ], 1 ], [ [ 6, 6 ], 1 ] ] )), symmetryNames = [ "A", "B", "C", "X", "Y", "Z" ], pgMatrices\
 Rec = rec( A := [ [ [ 1, 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 4 ], 1 ], [ [ 4, 3 ], 1 ], [ [ 5, 6 ], 1 ], [ [ 6, 5 ], 1 ]\
  ], B := [ [ [ 1, 2 ], -1 ], [ [ 2, 1 ], -1 ], [ [ 3, 4 ], -1 ], [ [ 4, 3 ], -1 ], [ [ 5, 6 ], -1 ], [ [ 6, 5 ], -1 ] \
 ], C := [ [ [ 1, 1 ], -1 ], [ [ 2, 3 ], -1 ], [ [ 3, 2 ], -1 ], [ [ 4, 5 ], -1 ], [ [ 5, 4 ], -1 ], [ [ 6, 2 ], 1 ], [\
@@ -462,7 +484,7 @@ Rec = rec( A := [ [ [ 1, 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 4 ], 1 ], [ [ 4, 3 ],
  -1 ], [ [ 4, 6 ], -1 ], [ [ 5, 3 ], -1 ], [ [ 6, 1 ], 1 ], [ [ 6, 4 ], 1 ], [ [ 6, 5 ], 1 ] ] ))
 gap> pgMat2 = pgMat;
 false
-gap> syntacticEqualPGMatricesObjs@HyperCells(pgMat2, pgMat);
+gap> syntacticEqualPGMatricesObjs@(pgMat2, pgMat);
 true
 
 gap> STOP_TEST("PGMatrix.tst");
