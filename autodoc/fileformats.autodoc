@@ -433,7 +433,7 @@ In addition, the following file formats are introduced by the HyperCells package
 - **HyperCell adjacency matrix** (`*.hcqs`) for storing the adjacency matrices, i.e.,
    `TGQuotientSequencesAdjacencyMatrix` objects (see <Ref Sect='Section_TGQuotientSequencesAdjacencyMatrix'/>)
 - **HyperCell point-group matrix** (`*.hcpgm`) for storing the point-group matrices, i.e.,
-   `PGMatrix` objects (see <Ref Sect='Section_PGMatrix'/>)
+   `PGMatrix` objects (see <Ref Sect='Section_PGMatrices'/>)
 
 These file formats are described in detail below.
 
@@ -459,7 +459,7 @@ triangle group $\Delta(r,q,p)$. The third line specifies the upper bound for tri
 than `&lt;boundByGenus&gt;`, and the forth line, `&lt;quotients&gt;`, the corresponding list of triangle group quotients 
 considered.
 
-Line fifth, `&lt;mirror symmetries&gt;`, specifies
+Line five, `&lt;mirror symmetries&gt;`, specifies
 an ordered binary list of ones and zeros, 1 if quotients in `&lt;quotients&gt;` have mirror symmetries 0 otherwise.
 
 The sixth line `&lt;sparse&gt;` specifies if line seven, the adjacency matrix `&lt;adjacency matrix&gt;`, is sparsly
@@ -533,25 +533,23 @@ The basic file structure of a HyperCell point-group matrix file is as follows
 @BeginLogSession
 HyperCells HCPGM version 1.0
 [ <r>, <q>, <p> ]
-[ <genus>, <number> ]
+<quotient>
 <sparse>
 <abcPGMats>
 <symPGMats>
 @EndLogSession
 
 The first line specifies the file format and its version. The second line gives the signature $(r,q,p)$ of the underlying 
-triangle group $\Delta(r,q,p)$. The third line givees the triangle group quotient for quotients from the library, i.e., Conder’s list,
-`number` is a running index over all triangle groups for the given `genus`.
-
-The forth line `&lt;sparse&gt;` specifies if line five and six, the lists of point-group matrices `&lt;abcPGMats&gt;` and `&lt;symPGMats&gt;`,
-respectively, are sparsly represented `true`, or dense `false`.
+triangle group $\Delta(r,q,p)$ and the third line gives the triangle group quotient. The forth line `&lt;sparse&gt;` specifies
+if line five and six, the lists of point-group matrices `&lt;abcPGMats&gt;` and `&lt;symPGMats&gt;`, respectively, are 
+sparsly represented `true`, or dense `false`.
 
 The full file structure of a HyperCell adjacency matrix file thus is as follows:
 
 @BeginLogSession
 HyperCells HCPGM version 1.0
 [ <r>, <q>, <p> ]
-[ <genus>, <number> ]
+[ <quotientName>, <order>, <genus>, <actionType>, <rels> ]
 <sparse>
 [ [ "a", <pgMatA> ], [ "b", <pgMatB> ], [ "c", <pgMatC> ] ]
 [ [ <sym1>, <pgMat1> ], [ <sym2>, <pgMat2> ], ... ]
@@ -564,7 +562,7 @@ $\Delta^+(2,8,8)$:
 @BeginLogSession
 HyperCells HCPGM version 1.0
 [ 2, 8, 8 ]
-[ 2, 6 ]
+[ [ 2, 6 ], 8, 2, "Action reflexible [m,n]", "[ x^2, x * y * z, x * z * y, y^3 * z^-1 ]" ]
 false
 [ [ "a", [ [ 0, 1, 0, 0 ], [ 1, 0, 0, 0 ], [ -1, -1, -1, 0 ], [ 0, 0, 0, 1 ] ] ], 
   [ "b", [ [ 0, -1, 0, 0 ], [ -1, 0, 0, 0 ], [ 1, 1, 1, 0 ], [ 0, 0, 0, -1 ] ] ], 
@@ -581,7 +579,7 @@ $\Delta^+(2,8,8)$:
 @BeginLogSession
 HyperCells HCPGM version 1.0
 [ 2, 8, 8 ]
-[ 2, 6 ]
+[ [ 2, 6 ], 8, 2, "Action reflexible [m,n]", "[ x^2, x * y * z, x * z * y, y^3 * z^-1 ]" ]
 true
 [ [ "a", [ [ [ 1, 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 1 ], -1 ], 
 	   [ [ 3, 2 ], -1 ], [ [ 3, 3 ], -1 ], [ [ 4, 4 ], 1 ] ] ],
