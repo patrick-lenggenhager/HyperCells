@@ -404,3 +404,24 @@ sparseMatMultiply@ := function(mat1, mat2)
 	# reformat record into a nested list of the form [ [[rowIdx, colIdx], entry], ... ]
 	return SortedList(List(RecNames(matNew), item -> [EvalString(item),matNew.(item)]));
 end;
+
+constructTGFpAndEmb@ := function(fulltg, tg)
+    local D, gensD, DELTA, a, b, c, symmetries, embDDELTA;
+
+    D := FpGroup(tg);
+    gensD := GeneratorsOfGroup(D);
+
+    # full triangle group to get the reflection op.'s
+    DELTA := FpGroup(fulltg);
+    a := DELTA.1;; b := DELTA.2;; c := DELTA.3;
+    symmetries := [a, b, c];
+
+    # --------------------    
+    # Construct embedding:
+    # --------------------
+
+    # embedding homomorphism of D in DELTA, (NC function version due to infinite groups)
+    embDDELTA := GroupHomomorphismByImagesNC(D, DELTA, gensD, [a*b, b*c, c*a]);
+	
+    return [D, DELTA, embDDELTA, symmetries];
+end;
