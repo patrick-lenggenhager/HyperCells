@@ -48,15 +48,15 @@ DeclareCategory( "IsPGMatricesOfGeneratorsObj", IsObject );
 
 
 #! @Description
-#!   Constructs three point-group matrices for the generators `a`, `b` and `c` of the triangle group $\Delta$
+#!   Constructs the point-group matrices for the generators `a`, `b` and `c` of the triangle group $\Delta$
 #!   specified by the `TriangleGroup` object <A>fulltg</A> (see <Ref Sect="Section_TriangleGroups"/>), which 
-#!   form representations of the point group $G\cong\Delta/\Gamma$ specified by the triangle group quotient 
-#!   <A>tgquotient</A> a `TGQuotient` object (see <Ref Sect="TGQuotient"/>). They are constructed through the
+#!   define a representation of the point group $G\cong\Delta/\Gamma$ specified by the triangle group quotient 
+#!   <A>tgquotient</A>, a `TGQuotient` object (see <Ref Sect="TGQuotient"/>). They are constructed through the
 #!   use of the embedding homomorphism from the proper triangle group $\Delta^+$ to the triangle group $\Delta$, 
 #!   where the former is specified by the `ProperTriangleGroup` object <A>tg</A> (see <Ref Sect="Section_TriangleGroups"/>).
 #!
 #!   The option `sparse`, which takes a boolean, can be used to generate a sparse 
-#!   representation of the point-group matrices. If `sparse` is `true` the point-group matrices are of the
+#!   representation of the point-group matrices. If `sparse` is `true`, the point-group matrices are of the
 #!   form `[ [ [ rowIdx, colIdx ], entry ], ... ]`, where `entry` is the corresponding matrix element at
 #!   position `rowIdx` and `colIdx`, which represent indices of the matrix rows and columns, 
 #!   respectively. The default is `false`.
@@ -161,7 +161,7 @@ DeclareCategory( "IsPGMatricesObj", IsObject );
 #!   or the reflection generators `x`, `y`, `z` of the proper triangle group $\Delta^+$, specified by the 
 #!   `TriangleGroup` object `fulltg` and `ProperTriangleGroup` object `tg`, respectively 
 #!   (see <Ref Sect="Section_TriangleGroups"/>). Each point-group matrix is constructed through a sequence of
-#!   matrix multiplication of the point-group matrices in <A>pgMatsGs</A>, i.e., the point-group matrices of
+#!   matrix multiplications of the point-group matrices in <A>pgMatsGs</A>, i.e., the point-group matrices of
 #!   the generators `a`, `b` and `c` of $\Delta$, which form representations of the point group previously 
 #!   specified by a corresponding triangle group quotient, `fulltg` and `tg`. The sequences are specified by the corresponding 
 #!   words in <A>symmetries</A>.
