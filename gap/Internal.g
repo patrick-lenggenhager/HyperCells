@@ -192,6 +192,32 @@ end;
 
 # PARSING TOOLS
 
+# global generators 
+global_DELTA@ := 0;
+global_a@ := 0;
+global_b@ := 0;
+global_c@ := 0;
+
+EvalDELTAString@ := function(str, DELTA)
+    local newstr;
+
+    global_DELTA@ := DELTA;
+    global_a@ := DELTA.1;
+    global_b@ := DELTA.2;
+    global_c@ := DELTA.3;
+
+    newstr := str;
+    newstr := ReplacedString(newstr, "a", "glo_a@");
+    newstr := ReplacedString(newstr, "b", "glo_b@");
+    newstr := ReplacedString(newstr, "c", "glo_c@");
+    newstr := ReplacedString(newstr, " 1", " One(global_DELTA@)");
+    newstr := ReplacedString(newstr, "@", "@HyperCells");
+    newstr := ReplacedString(newstr, "glo_", "global_");
+
+    return EvalString(newstr);
+end;
+
+
 # global generators
 global_D@ := 0;
 global_x@ := 0;
