@@ -432,8 +432,8 @@ HyperCells HCS version 1.0
 In addition, the following file formats are introduced by the HyperCells package:
 - **HyperCell adjacency matrix** (`*.hcqs`) for storing the adjacency matrices, i.e.,
    `TGQuotientSequencesAdjacencyMatrix` objects (see <Ref Sect='Section_TGQuotientSequencesAdjacencyMatrix'/>)
-- **HyperCell point-group matrix** (`*.hcpgm`) for storing the point-group matrices, i.e.,
-   `PGMatrix` objects (see <Ref Sect='Section_PGMatrices'/>)
+- **HyperCell point-group matrices** (`*.hcpgm`) for storing the point-group matrices, i.e.,
+   `PGMatrices` objects (see <Ref Sect='Section_PGMatrices'/>)
 
 These file formats are described in detail below.
 
@@ -524,10 +524,10 @@ true
 @EndLogSession
 
 
-@Subsection HyperCell point-group matrix (*.hcpgm)
-@SubsectionLabel FileFormatPGMatrix
+@Subsection HyperCell point-group matrices (*.hcpgm)
+@SubsectionLabel FileFormatPGMatrices
 
-The basic file structure of a HyperCell point-group matrix file is as follows
+The basic file structure of a HyperCell point-group matrices file is as follows
 (with placeholders marked by `&lt;...&gt;`):
 
 @BeginLogSession
@@ -541,10 +541,10 @@ HyperCells HCPGM version 1.0
 
 The first line specifies the file format and its version. The second line gives the signature $(r,q,p)$ of the underlying 
 triangle group $\Delta(r,q,p)$ and the third line gives the triangle group quotient. The forth line `&lt;sparse&gt;` specifies
-if line five and six, the lists of point-group matrices `&lt;abcPGMats&gt;` and `&lt;symPGMats&gt;`, respectively, are 
+if line five and six containing the point-group matrices `&lt;abcPGMats&gt;` and `&lt;symPGMats&gt;`, respectively, are 
 sparsly represented `true`, or dense `false`.
 
-The full file structure of a HyperCell adjacency matrix file thus is as follows:
+The full file structure of a HyperCell point-group matrices file thus is as follows:
 
 @BeginLogSession
 HyperCells HCPGM version 1.0
@@ -552,34 +552,43 @@ HyperCells HCPGM version 1.0
 [ <quotientName>, <order>, <genus>, <actionType>, <rels> ]
 <sparse>
 [ [ "a", <pgMatA> ], [ "b", <pgMatB> ], [ "c", <pgMatC> ] ]
-[ [ <sym1>, <pgMat1> ], [ <sym2>, <pgMat2> ], ... ]
+[ [ [ <symName1>, <sym1> ], <pgMat1> ], [ [ <symName2>, <sym2> ], <pgMat2> ], 
+    ... ]
 @EndLogSession
 
 A complete example for the point-group matrices for the 
 $\Delta(2,8,8)$ triangle group and triangle group quotient `T2.6` with symmetry elements
 `a`, `b`, `c` as generators of $\Delta(2,8,8)$ and `x`, `y`, `z` as generators of
-$\Delta^+(2,8,8)$:
+$\Delta^+(2,8,8)$ which we choose to denote as `"X"`, `"Y"`, `"Z"`:
 @BeginLogSession
 HyperCells HCPGM version 1.0
 [ 2, 8, 8 ]
-[ [ 2, 6 ], 8, 2, "Action reflexible [m,n]", "[ x^2, x * y * z, x * z * y, y^3 * z^-1 ]" ]
+[ [ 2, 6 ], 8, 2, "Action reflexible [m,n]", 
+  "[ x^2, x * y * z, x * z * y, y^3 * z^-1 ]" ]
 false
-[ [ "a", [ [ 0, 1, 0, 0 ], [ 1, 0, 0, 0 ], [ -1, -1, -1, 0 ], [ 0, 0, 0, 1 ] ] ], 
-  [ "b", [ [ 0, -1, 0, 0 ], [ -1, 0, 0, 0 ], [ 1, 1, 1, 0 ], [ 0, 0, 0, -1 ] ] ], 
-  [ "c", [ [ -1, 0, 0, 0 ], [ 1, 1, 1, 1 ], [ 0, 0, 0, -1 ], [ 0, 0, -1, 0 ] ] ] ]
-[ [ "x", [ [ -1, 0, 0, 0 ], [ 0, -1, 0, 0 ], [ 0, 0, -1, 0 ], [ 0, 0, 0, -1 ] ] ], 
-  [ "y", [ [ -1, -1, -1, -1 ], [ 1, 0, 0, 0 ], [ 0, 1, 1, 0 ], [ 0, 0, 1, 0 ] ] ], 
-  [ "z", [ [ 0, -1, 0, 0 ], [ 0, 0, -1, 1 ], [ 0, 0, 0, -1 ], [ 1, 1, 1, 0 ] ] ] ]
+[ [ "a", 
+    [ [ 0, 1, 0, 0 ], [ 1, 0, 0, 0 ], [ -1, -1, -1, 0 ], [ 0, 0, 0, 1 ] ] ], 
+  [ "b",
+    [ [ 0, -1, 0, 0 ], [ -1, 0, 0, 0 ], [ 1, 1, 1, 0 ], [ 0, 0, 0, -1 ] ] ], 
+  [ "c", 
+    [ [ -1, 0, 0, 0 ], [ 1, 1, 1, 1 ], [ 0, 0, 0, -1 ], [ 0, 0, -1, 0 ] ] ] ]
+[ [ [ "X", "x" ], 
+    [ [ -1, 0, 0, 0 ], [ 0, -1, 0, 0 ], [ 0, 0, -1, 0 ], [ 0, 0, 0, -1 ] ] ], 
+  [ [ "Y", "y" ], 
+    [ [ -1, -1, -1, -1 ], [ 1, 0, 0, 0 ], [ 0, 1, 1, 0 ], [ 0, 0, 1, 0 ] ] ], 
+  [ [ "Z", "z" ],
+    [ [ 0, -1, 0, 0 ], [ 0, 0, -1, 1 ], [ 0, 0, 0, -1 ], [ 1, 1, 1, 0 ] ] ] ]
 @EndLogSession
 
 A complete example for a sparse representation of the point-group matrices for the 
 $\Delta(2,8,8)$ triangle group and triangle group quotient `T2.6` with symmetry elements
 `a`, `b`, `c` as generators of $\Delta(2,8,8)$ and `x`, `y`, `z` as generators of
-$\Delta^+(2,8,8)$:
+$\Delta^+(2,8,8)$ which we choose to denote as `"X"`, `"Y"`, `"Z"`:
 @BeginLogSession
 HyperCells HCPGM version 1.0
 [ 2, 8, 8 ]
-[ [ 2, 6 ], 8, 2, "Action reflexible [m,n]", "[ x^2, x * y * z, x * z * y, y^3 * z^-1 ]" ]
+[ [ 2, 6 ], 8, 2, "Action reflexible [m,n]", 
+  "[ x^2, x * y * z, x * z * y, y^3 * z^-1 ]" ]
 true
 [ [ "a", [ [ [ 1, 2 ], 1 ], [ [ 2, 1 ], 1 ], [ [ 3, 1 ], -1 ], 
 	   [ [ 3, 2 ], -1 ], [ [ 3, 3 ], -1 ], [ [ 4, 4 ], 1 ] ] ],
@@ -588,13 +597,13 @@ true
   [ "c", [ [ [ 1, 1 ], -1 ], [ [ 2, 1 ], 1 ], [ [ 2, 2 ], 1 ], 
 	   [ [ 2, 3 ], 1 ], [ [ 2, 4 ], 1 ], [ [ 3, 4 ], -1 ], 
 	   [ [4, 3 ], -1 ] ] ] ]
-[ [ "x", [ [ [ 1, 1 ], -1 ], [ [ 2, 2 ], -1 ], [ [ 3, 1 ], -1 ], 
+[ [ [ "X", "x" ], [ [ [ 1, 1 ], -1 ], [ [ 2, 2 ], -1 ], [ [ 3, 1 ], -1 ], 
            [ [ 3, 2 ], -1 ], [ [ 3, 3 ], -1 ], [ [ 4, 4 ], -1 ] ] ], 
-  [ "y", [ [ [ 1, 1 ], -1 ], [ [ 1, 2 ], -1 ], [ [ 1, 3 ], -1 ], 
+  [ [ "Y", "y" ], [ [ [ 1, 1 ], -1 ], [ [ 1, 2 ], -1 ], [ [ 1, 3 ], -1 ], 
 	   [ [ 1, 4 ], -1 ], [ [ 2, 1 ], 1 ], [ [ 3, 1 ], 1 ], 
 	   [ [ 3, 2 ], 1 ], [ [ 3, 3 ], 1 ], [ [ 3, 4 ], -1 ], 
 	   [ [ 4, 3 ], 1 ] ] ], 
-  [ "z", [ [ [ 1, 2 ], -1 ], [ [ 2, 1 ], -1 ], [ [ 2, 2 ], -1 ],
+  [ [ "Z", "z" ], [ [ [ 1, 2 ], -1 ], [ [ 2, 1 ], -1 ], [ [ 2, 2 ], -1 ],
 	   [ [ 2, 3 ], -1 ], [ [ 2, 4 ], 1 ], [ [ 3, 4 ], -1 ], 
            [ [ 4, 1 ], 1 ], [ [ 4, 2 ], 1 ], [ [ 4, 3 ], 1 ] ] ] ]
 @EndLogSession
