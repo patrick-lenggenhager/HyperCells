@@ -8,7 +8,7 @@
 #! Point-group matrices are representations of group elements in the point group $G\cong\Delta/\Gamma$. 
 #! These matrices can efficiently be constructed. Given any symmetry `g` in the point group $G$ and a
 #! set `I` of all translation generators $\gamma_i$ of the translation group $\Gamma$, a corresponding
-#! point-group matrix can be determined through set of the symmetry transformed elements $g \gamma_i g^{-1}$.
+#! point-group matrix can be determined through the set of the symmetry transformed elements $g \gamma_i g^{-1}$ <Cite Key='Chen:2023'/>.
 #! Point-group matrices enable the conduction of symmetry analysis on any given (supercell) model graph.
 #!
 #! @Section PGMatricesOfGenerators
@@ -25,9 +25,9 @@
 #!   - <Ref Oper='GetTGQuotient' Label='for PGMatricesOfGenerators' />:
 #!     the triangle group quotient
 #!   - <Ref Oper='IsSparse' Label='for PGMatricesOfGenerators' />:
-#!     boolean, if true the adjacency matrix is sparsely represented
-#!   - <Ref Oper='GeneratorNames' Label='for PGMatricesOfGenerators' />:
-#!     list of names denoting the triangle group generators `a`, `b` and `c`
+#!     boolean, if true the point-group matrices are sparsely represented
+#!   - <Ref Oper='TGGenerators' Label='for PGMatricesOfGenerators' />:
+#!     list of triangle group generators `a`, `b` and `c`
 #!   - <Ref Oper='PGMatricesRec' Label='for PGMatricesOfGenerators' />:
 #!     record of three point-group matrices for the generators `a`, `b` and `c`
 #!     of the triangle group $\Delta$
@@ -39,8 +39,8 @@
 #!      ProperTriangleGroup(...),
 #!      TGQuotient(...),
 #!      sparse = bool,
-#!      GeneratorNames = [ "a", "b", "c" ],
-#!      PGMatricesRec = rec( a := pgMatA, b := pgMatB, c := pgMatC )
+#!      generators = [ a, b, c ],
+#!      pgMatricesRec = rec( a := pgMatA, b := pgMatB, c := pgMatC )
 #!    )
 #!   @EndLog
 
@@ -108,16 +108,16 @@ DeclareOperation( "GetTGQuotient", [ IsPGMatricesOfGeneratorsObj ] );
 DeclareOperation( "IsSparse", [ IsPGMatricesOfGeneratorsObj ] );
 
 #! @Description
-#!   returns the names of the triangle group generators on which the `PGMatricesOfGenerators` <A>pgMatsGs</A> 
+#!   returns the triangle group generators on which the `PGMatricesOfGenerators` <A>pgMatsGs</A> 
 #!   is based.
 #! @Arguments pgMatsGs
 #! @Label for PGMatricesOfGenerators
-DeclareOperation( "GeneratorNames", [ IsPGMatricesOfGeneratorsObj ] );
+DeclareOperation( "TGGenerators", [ IsPGMatricesOfGeneratorsObj ] );
 
 #! @Description
 #!   returns a `record` (see chapter Records in the <URL Text="GAP Reference Manual ">https://docs.gap-system.org/doc/ref/chap0_mj.html</URL>) 
-#!   of three point-group matrices for the triangle group generators. Each component is of the form  `GeneratorName := pgMat`,
-#!   where `GeneratorName` is a string `"a"`, `"b"` or `"c"` denoting one of the generators of the triangle group 
+#!   of three point-group matrices for the triangle group generators. Each component is of the form  `"tgGenerator" := pgMat`,
+#!   where `"tgGenerator"` is a string `"a"`, `"b"` or `"c"` denoting one of the generators of the triangle group 
 #!   and `pgMat` the corresponding point-group matrix.
 #! @Arguments pgMatsGs
 #! @Label for PGMatricesOfGenerators
@@ -137,6 +137,8 @@ DeclareOperation( "EvaluatePGMatrix", [ IsElementOfFpGroup, IsPGMatricesOfGenera
 #!   - <Ref Oper='GetPGMatricesOfGenerators' Label='for PGMatrices' />:
 #!     a `PGMatricesOfGenerators` object for the point-group matrices corresponding 
 #!     of the (full) triangle group generators `a`, `b` and `c`
+#!   - <Ref Oper='Symmetries' Label='for PGMatrices' />:
+#!     list of symmetry elements given as words in the triangle group $\Delta$ or proper triangle group $\Delta^+$
 #!   - <Ref Oper='SymmetryNames' Label='for PGMatrices' />:
 #!     list of names denoting the symmetry elements
 #!   - <Ref Oper='PGMatricesRec' Label='for PGMatrices' />:
@@ -147,8 +149,9 @@ DeclareOperation( "EvaluatePGMatrix", [ IsElementOfFpGroup, IsPGMatricesOfGenera
 #!   @BeginLog
 #!    PGMatrices(
 #!      PGMatricesOfGenerators( ... ), 
-#!      SymmetryNames = [ "symName1", "symName2", ... ],
-#!      PGMatricesRec = rec( symName1 := pgMat1, symName2 := pgMat2, ... )
+#!      symmetries = [ sym1, sym2, ... ],
+#!      symmetryNames = [ "symName1", "symName2", ... ],
+#!      pgMatricesRec = rec( symName1 := pgMat1, symName2 := pgMat2, ... )
 #!    )
 #!   @EndLog
 
@@ -189,6 +192,13 @@ DeclareGlobalFunction( "PGMatrices" );
 DeclareOperation( "GetPGMatricesOfGenerators", [ IsPGMatricesObj ] );
 
 #! @Description
+#!   returns the symmetry elements of the (proper) triangle group on which the `PGMatrices` <A>pgMats</A> 
+#!   is based.
+#! @Arguments pgMats
+#! @Label for PGMatrices
+DeclareOperation( "Symmetries", [ IsPGMatricesObj ] );
+
+#! @Description
 #!   returns the names of the symmetry elements of the (proper) triangle group on which the `PGMatrices` <A>pgMats</A> 
 #!   is based.
 #! @Arguments pgMats
@@ -213,7 +223,7 @@ DeclareOperation( "PGMatricesRec", [ IsPGMatricesObj ] );
 #! @GroupTitle Exporting PGMatrices Objects
 #!
 #! @Description
-#!   Export the point-group matrices `PGMatrices` <A>pgMats</A> to the `OutputTextStream`  
+#!   Export point-group matrices `PGMatrices` <A>pgMats</A> to the `OutputTextStream`  
 #!   <A>output-stream</A>
 #! @Arguments pgMats, output-stream
 #! @Label for PGMatrices, OutputTextStream
@@ -226,7 +236,7 @@ DeclareOperation( "Export", [ IsPGMatricesObj, IsOutputTextStream ] );
 DeclareOperation( "Export", [ IsPGMatricesObj, IsString ] );
 #!
 #! @Description
-#!   Alternatively, the point-group matrix can be exported to a string.
+#!   Alternatively, point-group matrices can be exported to a string.
 #! @Arguments pgMats
 #! @Label for PGMatrices
 DeclareOperation( "ExportString", [ IsPGMatricesObj ] );
@@ -238,22 +248,25 @@ DeclareOperation( "ExportString", [ IsPGMatricesObj ] );
 #! @GroupTitle Importing PGMatrices Objects
 #!
 #! @Description
-#!   Import a point-group matrix from the `InputTextStream` <A>input-stream</A>
-#! @Arguments input-stream
+#!   Import point-group matrices from the `InputTextStream` <A>input-stream</A>
+#! @Arguments input-stream[, fulltg, tg]
 #! @Returns point-group matrices as a `PGMatrices` object
 #! (see <Ref Sect='Section_PGMatrices'/>).
 DeclareGlobalFunction( "ImportPGMatrices" );
 #!
 #! @Description
 #!   or from the file at the path given by the string <A>path</A>.
-#! @Arguments path
+#! @Arguments path[, fulltg, tg]
 #! @Returns point-group matrices as a `PGMatrices` object
 #! (see <Ref Sect='Section_PGMatrices'/>).
 DeclareGlobalFunction( "ImportPGMatricesFromFile" );
 #!
 #! @Description
-#!   Alterantively, the point-group matrix can be imported from the string <A>string</A>.
-#! @Arguments string
+#!   Alterantively, point-group matrices can be imported from the string <A>string</A>.
+#!   Optionally, the triangle group and the proper triangle group can be given as a TriangleGroup
+#!   object <A>fulltg</A> and a ProperTriangleGroup object <A>tg</A>, respectively, 
+#!   (see <Ref Sect="Section_TriangleGroups"/>).
+#! @Arguments string[, fulltg, tg]
 #! @Returns point-group matrices as a `PGMatrices` object
 #! (see <Ref Sect='Section_PGMatrices'/>).
 DeclareGlobalFunction( "ImportPGMatricesFromString" );
